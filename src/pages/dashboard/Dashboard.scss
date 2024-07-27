@@ -1,0 +1,248 @@
+#dashboard {
+  margin-top: 1.4rem;
+
+  .analyse {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+
+    .growth {
+
+      h3 {
+        margin-left: 0.6rem;
+        font-size: 1rem;
+      }
+
+      .progress {
+        position: relative;
+        width: 92px;
+        height: 92px;
+        border-radius: 50%;
+
+        .percentage {
+          position: absolute;
+          top: -3px;
+          left: -1px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          width: 100%;
+        }
+      }
+
+      svg {
+        width: 7rem;
+        height: 7rem;
+
+        circle {
+          fill: none;
+          stroke-width: 10;
+          stroke-linecap: round;
+          transform: translate(5px, 5px);
+        }
+      }
+    }
+
+    .sales {
+      svg {
+        circle {
+          stroke: var(--color-success);
+          stroke-dashoffset: -30;
+          stroke-dasharray: 200;
+        }
+      }
+    }
+
+    .visits {
+      svg {
+        circle {
+          stroke: var(--color-danger);
+          stroke-dashoffset: -30;
+          stroke-dasharray: 200;
+        }
+      }
+    }
+
+    .searches {
+      svg {
+        circle {
+          stroke: var(--color-primary);
+          stroke-dashoffset: -30;
+          stroke-dasharray: 200;
+        }
+      }
+    }
+  }
+
+  .analyse > div {
+    background-color: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    margin-top: 1rem;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: none;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .new-users {
+    margin-top: 1.3rem;
+
+    .user-list {
+      background-color: var(--color-white);
+      padding: var(--card-padding);
+      border-radius: var(--card-border-radius);
+      margin-top: 1rem;
+      box-shadow: var(--box-shadow);
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 1.4rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        box-shadow: none;
+      }
+
+      .user {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 5rem;
+          height: 5rem;
+          margin-bottom: 0.4rem;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+  .recent-orders {
+    margin-top: 1.3rem;
+
+    h2 {
+      margin-bottom: 0.8rem;
+    }
+
+    table {
+      background-color: var(--color-white);
+      width: 100%;
+      padding: var(--card-padding);
+      text-align: center;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--card-border-radius);
+      transition: all 0.3s ease;
+
+      &:hover {
+        box-shadow: none;
+      }
+
+      tbody {
+        td {
+          height: 2.8rem;
+          border-bottom: 1px solid var(--color-light);
+          color: var(--color-dark-variant);
+        }
+
+        tr:last-child {
+          td {
+            border: none;
+          }
+        }
+
+      }
+    }
+
+    a {
+      text-align: center;
+      display: block;
+      margin: 1rem auto;
+      color: var(--color-primary);
+    }
+
+  }
+}
+
+@media screen and (max-width: 1200px) {
+
+  #dashboard {
+    .analyse{
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .new-users {
+      .user-list {
+        .user{
+          flex-basis: 40%;
+        }
+      }
+    }
+
+    .recent-orders {
+      width: 94%;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 2rem 0 0 0.8rem;
+
+      table{
+        width: 83vw;
+
+        thead {
+
+          tr {
+            th:first-child, th:first-child {
+              display: none;
+            }
+          }
+        }
+
+        tbody {
+          tr {
+            td:last-child, td:first-child{
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  #dashboard {
+    .new-users {
+      .user-list {
+        .user{
+          flex-basis: 35%;
+        }
+      }
+    }
+    .recent-orders{
+      position: relative;
+      margin: 3rem 0 0 0;
+      width: 100%;
+    }
+
+    table{
+      width: 100%;
+      margin: 0;
+    }
+  }
+
+}

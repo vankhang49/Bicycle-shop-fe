@@ -1,0 +1,192 @@
+#create-product {
+  margin-top: 1.4rem;
+
+  .content-element {
+    background-color: var(--color-white);
+    border-radius: var(--card-border-radius);
+    margin-top: 1rem;
+    box-shadow: var(--box-shadow);
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+
+    .form-title {
+      width: 100%;
+      text-align: center;
+      padding: 16px;
+      background-color: var(--color-primary);
+      border-radius: 10px 10px 0 0;
+      p {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--color-white);
+      }
+    }
+    .form-operation {
+      height: auto;
+      width: 60%;
+
+      .form-element {
+        margin: 10px 0;
+        width: 100%;
+
+        label {
+          font-size: 16px;
+          font-weight: 600;
+          color: #1c1c1c;
+          margin-top: 20px;
+          display: block;
+        }
+
+        input, select, textarea {
+          width: 100%;
+          height: 50px;
+          margin: auto;
+          border-radius: 10px;
+          outline: none;
+          border: 1px solid #c4bdbd;
+          padding-left: 20px;
+          font-size: 16px;
+        }
+
+        input::file-selector-button {
+          font-weight: bold;
+          color: dodgerblue;
+          padding: 0.5em;
+          border: none;
+          background: transparent;
+          border-radius: 3px;
+        }
+
+        .image-input {
+          input[type="file"] {
+            padding: 10px;
+          }
+        }
+
+        .img-list {
+          width: 100%;
+          height: auto;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          align-items: flex-start;
+          padding: 10px 0;
+          position: relative;
+
+          .img-element {
+            width: 20%;
+            position: relative;
+            margin-right: 10px;
+            img {
+              width: 100%;
+              height: auto;
+              border-radius: 10px;
+            }
+
+            .remove-img{
+              position: absolute;
+              right: -10px;
+              border-radius: 50%;
+              color: var(--color-danger);
+              top: -5px;
+              background-color: var(--color-white);
+              padding: 0.4em 0.6em;
+            }
+          }
+        }
+
+        .validate-error {
+          color: #da1010;
+          font-size: 14px;
+        }
+
+        .price-of-product {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+
+          .row-pricing {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            span {
+              color: #433e3e;
+              font-size: 16px;
+              font-weight: 600;
+              padding: 20px 0 0 0;
+            }
+
+            button {
+              width: 30px;
+              height: 30px;
+              margin: 10px;
+            }
+          }
+
+          .form-label-child {
+            width: 45%;
+            margin: 5px 0 5px 15px;
+            padding: 10px;
+          }
+        }
+        .btn-add-price{
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          width: 100%;
+          button {
+            width: 30px;
+            height: 30px;
+            margin: 10px;
+          }
+        }
+      }
+
+      .form-pricing {
+        overflow-y: auto;
+        max-height: 300px;
+
+        &::-webkit-scrollbar {
+          width: 5px;
+          height: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: #7e7979;
+        }
+
+        &::-webkit-scrollbar-track {
+          background-color: #ccc;
+        }
+      }
+
+      .btn-submit {
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        button {
+          width: 140px;
+          height: 50px;
+          background-color: var(--color-primary);
+          color: var(--color-white);
+          border-radius: 10px;
+          font-size: 20px;
+          font-weight: 600;
+          left: 25%;
+        }
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .form-operation {
+        width: 100%;
+      }
+    }
+  }
+}

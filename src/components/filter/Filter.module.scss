@@ -1,0 +1,237 @@
+.sidebar {
+  position: relative;
+  display: block;
+  min-width: 230px;
+  max-width: 250px;
+  border: none;
+  background-color: rgba(193, 189, 189, 0.11);
+  border-radius: 15px;
+
+  .asideFilter {
+
+    .heading {
+      padding: 10px 10px;
+      border-bottom: 1px solid #f3f3f3;
+      border-top: 1px solid #f3f3f3;
+      margin-bottom: 10px;
+
+      .titleHead {
+        margin: 0;
+        text-transform: uppercase;
+        color: #000;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      p {
+        color: #000;
+        font-size: 14px;
+        margin-bottom: 0;
+      }
+    }
+
+    .asideHiddenMobile {
+
+      .filterContainer {
+        margin-bottom: 30px;
+
+        .filterContainers {
+          padding: 0 10px;
+
+          .filterContainerSelectedFilter {
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+
+            .filterContainerSelectedFilterHeader {
+              margin-bottom: 5px;
+              display: flex;
+              justify-content: space-between;
+
+              .selectedFilterHeaderTitle {
+                color: #0d85e2;
+                font-weight: 600;
+                font-size: 16px;
+              }
+
+              a {
+                font-size: 12px;
+              }
+            }
+
+            .clearFix {
+
+            }
+
+            .selectedFilterList {
+
+              ul {
+                list-style: none inside;
+                display: flex;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+
+                .selectedFilterItem {
+                  padding: 10px 10px;
+                  background-color: #ffffff;
+                  border: 1px solid #dddbdb;
+                  border-radius: 10px;
+                  position: relative;
+                  margin: 5px;
+                  font-size: 12px;
+
+                  .buttonCancel {
+                    position: absolute;
+                    top: -15px;
+                    right: -8px;
+                    border-radius: 50%;
+                    padding: 5px;
+                    color: #d80a0a;
+                    cursor: pointer;
+                    font-size: 16px;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .asideItem {
+          border-bottom: 1px solid #f3f3f3;
+          padding: 10px;
+
+          .asideTitle {
+
+            h2 {
+              color: #000;
+              font-size: 14px;
+              font-weight: 600;
+              margin: 0 0 15px;
+            }
+
+          }
+
+          .filterGroup {
+            margin-bottom: 5px;
+
+            ul {
+              max-height: 140px;
+              overflow-y: auto;
+
+              &::-webkit-scrollbar {
+                width: 5px;
+                height: 5px;
+              }
+
+              &::-webkit-scrollbar-thumb {
+                background-color: #7e7979;
+              }
+
+              &::-webkit-scrollbar-track {
+                background-color: #ccc;
+              }
+            }
+
+          }
+
+          .fieldSearch {
+            margin-bottom: 10px;
+
+            input {
+              width: calc(100% - 40px);
+              min-height: 30px;
+              border: 1px solid #e5e5e5;
+              border-radius: 0;
+            }
+
+            .inputGroupBtn {
+              position: relative;
+              white-space: nowrap;
+              padding: 0;
+              vertical-align: middle;
+              margin: 0;
+              button {
+                color: #fff;
+                background-color: #0d85e2;
+                min-height: 30px;
+                width: 40px;
+                border: 1px solid #9e9a9a;
+                svg {
+                  width: 20px;
+                  height: 20px;
+                  fill: #fff;
+
+                }
+              }
+            }
+          }
+
+          .filterVendor {
+
+            .filterItem {
+              margin: 0;
+              cursor: pointer;
+              line-height: 2.5em;
+
+             *{
+               color: #6f6f6f;
+               cursor: pointer;
+               font-size: 1em;
+               font-weight: normal;
+             }
+
+              label[for] {
+                cursor: pointer;
+              }
+            }
+
+            .filterItemCheckBox {
+
+              input {
+                //display: none;
+
+                &:checked+.fa:before {
+                  border-color: #0d85e2;
+                  background: #0d85e2;
+                  content: "";
+                  margin-right: 5px;
+                  border-radius: 2px;
+                  font-size: 18px;
+                  line-height: 40px;
+                  position: absolute;
+                  top: -13px;
+                  height: 15px !important;
+                  width: 15px;
+                }
+
+                &:checked+.fa:after {
+                  font-family: 'FontAwesome', serif;
+                  content: "\f00c";
+                  color: #fff;
+                  position: absolute;
+                  width: 15px;
+                  height: 15px;
+                  line-height: 15px;
+                  top: -13px;
+                  font-size: 12px;
+                  left: 2px;
+                }
+              }
+
+              input[type=checkbox] {
+                line-height: normal;
+              }
+
+              .fa {
+                margin-right: 5px;
+                width: 14px;
+                position: relative;
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+}

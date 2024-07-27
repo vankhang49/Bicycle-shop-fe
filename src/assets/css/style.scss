@@ -1,0 +1,191 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  color: #111;
+  line-height: 1.15;
+  background-color: #ffffff;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  color: black;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+.content {
+  width: 90%;
+  position: relative;
+  left: 5%;
+  margin-bottom: 5%;
+}
+
+/*************/
+.content-body {
+  display: flex;
+
+  .product-list {
+    width: 80%;
+    .products{
+      padding: 20px;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      li{
+        position: relative;
+        width: 25%;
+        flex-basis: 25%;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-bottom: 30px;
+        .product-item {
+          border-radius: 25px;
+
+          .delete-item {
+            position: absolute;
+            top: -3%;
+            right: 2%;
+
+            .delete-btn {
+              border-radius: 50%;
+              background-color: #f5eded;
+              color: #332d2d;
+              padding: 0 10px;
+              font-weight: 500;
+              font-size: 24px;
+            }
+            .delete-btn:hover {
+              border: #e01717 1px solid;
+              color: #e01717;
+            }
+          }
+        }
+        .products-top{
+          position: relative;
+          overflow: hidden;
+          justify-content: center;
+          align-items: center;
+          .product-thumb{
+            display: block;
+            background-color: white;
+            border-radius: 25px 25px 0 0;
+            img{
+              max-width: 100%;
+              aspect-ratio: 1/1;
+              height: auto;
+              display: block;
+              border-radius: 25px 25px 0 0;
+            }
+          }
+          .buy-now {
+            font-size: medium;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+            background-color: #446084;
+            color: #fff;
+            padding: 10px 0;
+            position: absolute;
+            bottom: -36px;
+            width: 100%;
+            transition: 0.25s ease-in-out;
+            opacity: 0.8;
+          }
+        }
+        .product-info{
+          padding: 10px;
+          background-color: #f1efef;
+          min-height: 150px;
+          max-height: 200px;
+          display: flex;
+          justify-content: flex-start;
+          flex-direction: column;
+          border-radius: 0 0 25px 25px;
+          .product-code {
+            color: green;
+            font-size: 15px;
+          }
+          a {
+            display: flex;
+            text-decoration: none;
+            align-items: flex-end;
+            height: 25px;
+          }
+          .product-name {
+            font-size: 18px;
+            text-transform: uppercase;
+            color: #797777;
+            width: 100%;
+            height: 40px;
+          }
+
+          div {
+            .product-price{
+              color: #ff0000;
+              font-size: 16px;
+            }
+            .product-price-old{
+              color: #5e5a5a;
+              font-size: 15px;
+              text-decoration: line-through;
+            }
+          }
+          .edit-item {
+            .button {
+              display: block;
+            }
+          }
+        }
+      }
+      li:hover {
+        .products-top{
+          img {
+            filter: opacity(80%);
+          }
+          .buy-now{
+            bottom: 0;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.content-button {
+  background-color: transparent;
+  border: 1px solid #35f517;
+  padding: 8px 20px;
+  color: #35f517;
+  border-radius: 20px;
+  margin-top: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  white-space: nowrap;
+  position: relative;
+  left: 25%;
+}
+.content-button-red {
+  border: 1px solid #e55203;
+  color: #e55203;
+}
+.content-button:not(.open):hover {
+  background: #35f517;
+  color: white;
+}
+.content-button-red:not(.open):hover{
+  background: #e55203;
+  color: white;
+}

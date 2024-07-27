@@ -1,0 +1,435 @@
+* {
+  box-sizing:border-box;
+}
+
+#modal-container {
+  min-height:100%;
+  height:100%;
+  background-size:cover;
+  font-family:helvetica neue, helvetica, arial, sans-serif;
+  font-weight:200;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, .8) top center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  .modal-background {
+    .modal {
+      transform: scale(0);
+      animation: zoomIn .5s .8s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+    }
+  }
+}
+
+.modal-background {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+
+  .modal {
+    background: white;
+    padding: 50px;
+    display: inline-block;
+    border-radius: 3px;
+    font-weight: 300;
+    position: relative;
+
+    .head-modal {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    .head-modal img {
+      width: 100px;
+      height: auto;
+    }
+
+    h2 {
+      font-size: 25px;
+      line-height: 25px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 22px;
+    }
+
+    .modal-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      border-radius: 3px;
+
+      rect {
+        stroke: #fff;
+        stroke-width: 2px;
+        stroke-dasharray: 778;
+        stroke-dashoffset: 778;
+      }
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-footer .btn-accept {
+      background-color: transparent;
+      border: 1px solid #e01717;
+      padding: 8px 20px;
+      color: #da1010;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+      white-space: nowrap;
+      position: relative;
+      margin-right: 20px;
+    }
+
+    .modal-footer .btn-cancel {
+      border: 1px solid #0e4dea;
+      color: #0e23b9;
+    }
+  }
+}
+
+
+@keyframes unfoldIn {
+  0% {
+    transform:scaleY(.005) scaleX(0);
+  }
+  50% {
+    transform:scaleY(.005) scaleX(1);
+  }
+  100% {
+    transform:scaleY(1) scaleX(1);
+  }
+}
+
+@keyframes unfoldOut {
+  0% {
+    transform:scaleY(1) scaleX(1);
+  }
+  50% {
+    transform:scaleY(.005) scaleX(1);
+  }
+  100% {
+    transform:scaleY(.005) scaleX(0);
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    transform:scale(0);
+  }
+  100% {
+    transform:scale(1);
+  }
+}
+
+@keyframes zoomOut {
+  0% {
+    transform:scale(1);
+  }
+  100% {
+    transform:scale(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    background:rgba(0,0,0,.0);
+  }
+  100% {
+    background:rgba(0,0,0,.7);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    background:rgba(0,0,0,.7);
+  }
+  100% {
+    background:rgba(0,0,0,.0);
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+    transform:scale(.8) translateY(1000px);
+    opacity:0;
+  }
+  100% {
+    transform:scale(1) translateY(0px);
+    opacity:1;
+  }
+}
+
+@keyframes scaleDown {
+  0% {
+    transform:scale(1) translateY(0px);
+    opacity:1;
+  }
+  100% {
+    transform:scale(.8) translateY(1000px);
+    opacity:0;
+  }
+}
+
+@keyframes scaleBack {
+  0% {
+    transform:scale(1);
+  }
+  100% {
+    transform:scale(.85);
+  }
+}
+
+@keyframes scaleForward {
+  0% {
+    transform:scale(.85);
+  }
+  100% {
+    transform:scale(1);
+  }
+}
+
+@keyframes quickScaleDown {
+  0% {
+    transform:scale(1);
+  }
+  99.9% {
+    transform:scale(1);
+  }
+  100% {
+    transform:scale(0);
+  }
+}
+
+@keyframes slideUpLarge {
+  0% {
+    transform:translateY(0%);
+  }
+  100% {
+    transform:translateY(-100%);
+  }
+}
+
+@keyframes slideDownLarge {
+  0% {
+    transform:translateY(-100%);
+  }
+  100% {
+    transform:translateY(0%);
+  }
+}
+
+@keyframes moveUp {
+  0% {
+    transform:translateY(150px);
+  }
+  100% {
+    transform:translateY(0);
+  }
+}
+
+@keyframes moveDown {
+  0% {
+    transform:translateY(0px);
+  }
+  100% {
+    transform:translateY(150px);
+  }
+}
+
+@keyframes blowUpContent {
+  0% {
+    transform:scale(1);
+    opacity:1;
+  }
+  99.9% {
+    transform:scale(2);
+    opacity:0;
+  }
+  100% {
+    transform:scale(0);
+  }
+}
+
+@keyframes blowUpContentTwo {
+  0% {
+    transform:scale(2);
+    opacity:0;
+  }
+  100% {
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+@keyframes blowUpModal {
+  0% {
+    transform:scale(0);
+  }
+  100% {
+    transform:scale(1);
+  }
+}
+
+@keyframes blowUpModalTwo {
+  0% {
+    transform:scale(1);
+    opacity:1;
+  }
+  100% {
+    transform:scale(0);
+    opacity:0;
+  }
+}
+
+@keyframes roadRunnerIn {
+  0% {
+    transform:translateX(-1500px) skewX(30deg) scaleX(1.3);
+  }
+  70% {
+    transform:translateX(30px) skewX(0deg) scaleX(.9);
+  }
+  100% {
+    transform:translateX(0px) skewX(0deg) scaleX(1);
+  }
+}
+
+@keyframes roadRunnerOut {
+  0% {
+    transform:translateX(0px) skewX(0deg) scaleX(1);
+  }
+  30% {
+    transform:translateX(-30px) skewX(-5deg) scaleX(.9);
+  }
+  100% {
+    transform:translateX(1500px) skewX(30deg) scaleX(1.3);
+  }
+}
+
+@keyframes sketchIn {
+  0% {
+    stroke-dashoffset: 778;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes sketchOut {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 778;
+  }
+}
+
+@keyframes modalFadeIn {
+  0% {
+    background-color:transparent;
+  }
+  100% {
+    background-color:white;
+  }
+}
+
+@keyframes modalFadeOut {
+  0% {
+    background-color:white;
+  }
+  100% {
+    background-color:transparent;
+  }
+}
+
+@keyframes modalContentFadeIn {
+  0% {
+    opacity:0;
+    top:-20px;
+  }
+  100% {
+    opacity:1;
+    top:0;
+  }
+}
+
+@keyframes modalContentFadeOut {
+  0% {
+    opacity:1;
+    top:0px;
+  }
+  100% {
+    opacity:0;
+    top:-20px;
+  }
+}
+
+@keyframes bondJamesBond {
+  0% {
+    transform:translateX(1000px);
+  }
+  80% {
+    transform:translateX(0px);
+    border-radius:75px;
+    height:75px;
+    width:75px;
+  }
+  90% {
+    border-radius:3px;
+    height:182px;
+    width:247px;
+  }
+  100% {
+    border-radius:3px;
+    height:162px;
+    width:227px;
+  }
+}
+
+@keyframes killShot {
+  0% {
+    transform:translateY(0) rotate(0deg);
+    opacity:1;
+  }
+  100% {
+    transform:translateY(300px) rotate(45deg);
+    opacity:0;
+  }
+}
+
+@keyframes fadeToRed {
+  0% {
+    background-color:rgba(black,.6);
+  }
+  100% {
+    background-color:rgba(red,.8);
+  }
+}
+
+@keyframes slowFade {
+  0% {
+    opacity:1;
+  }
+  99.9% {
+    opacity:0;
+    transform:scale(1);
+  }
+  100% {
+    transform:scale(0);
+  }
+}

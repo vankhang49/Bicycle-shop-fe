@@ -1,0 +1,217 @@
+#rightSection {
+  margin-top: 1.4rem;
+
+  .nav{
+    display: flex;
+    justify-content: end;
+    gap: 2rem;
+
+    button{
+      display: none;
+    }
+
+    .profile{
+      display: flex;
+      gap: 2rem;
+      text-align: right;
+
+      .profilePhoto{
+        width: 2.8rem;
+        height: 2.8rem;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .darkMode{
+    background-color: var(--color-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.6rem;
+    width: 4.2rem;
+    cursor: pointer;
+    border-radius: var(--border-radius-1);
+
+    svg{
+      font-size: 1.2rem;
+      width: 50%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &.active{
+        background-color: var(--color-primary);
+        color: white;
+        border-radius: var(--border-radius-1);
+      }
+    }
+  }
+
+  .userProfile{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 1rem;
+    background-color: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    img{
+      width: 11rem;
+      height: auto;
+      margin-bottom: 0.8rem;
+      border-radius: 50%;
+    }
+
+    h2{
+      margin-bottom: 0.2rem;
+    }
+
+    &:hover{
+      box-shadow: none;
+    }
+  }
+
+  .reminders{
+    margin-top: 2rem;
+
+    .header{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+
+      svg{
+        width: 1.2rem;
+        height: 1.2rem;
+        box-shadow: var(--box-shadow);
+        background-color: var(--color-white);
+        border-radius: 50%;
+      }
+    }
+
+    .notification{
+      background-color: var(--color-white);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.7rem;
+      padding: 1.4rem var(--card-padding);
+      border-radius: var(--border-radius-2);
+      box-shadow: var(--box-shadow);
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      .content{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0;
+        width: 100%;
+
+        svg {
+          width: 1.2rem;
+          height: 1.2rem;
+        }
+      }
+
+      .icon{
+        padding: 0.6rem;
+        color: var(--color-white);
+        background-color: var(--color-success);
+        border-radius: 20%;
+        display: flex;
+        svg {
+          width: 1.2rem;
+          height: 1.2rem;
+        }
+      }
+
+      &:hover{
+        box-shadow: none;
+      }
+      &.deactive .icon{
+        background-color: var(--color-danger);
+      }
+    }
+
+    .addReminder{
+      background-color: var(--color-white);
+      border: 2px dashed var(--color-primary);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      div{
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+
+        svg {
+          width: 1.6rem;
+          height: 1.6rem;
+        }
+      }
+
+      &:hover{
+        background-color: var(--color-primary);
+        color: white;
+      }
+
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #rightSection{
+    width: 94%;
+    margin: 0 auto 4rem;
+
+    .nav{
+      position: fixed;
+      top: 0;
+      left: 0;
+      align-items: center;
+      background-color: var(--color-white);
+      padding: 0 var(--padding-1);
+      height: 4.6rem;
+      width: 100%;
+      z-index: 2;
+      box-shadow: 0 1rem 1rem var(--color-light);
+      margin: 0;
+
+      .darkMode{
+        width: 4.4rem;
+        position: absolute;
+        left: 66%;
+      }
+
+      button{
+        display: inline-block;
+        background-color: transparent;
+        cursor: pointer;
+        color: var(--color-dark);
+        position: absolute;
+        left: 1rem;
+
+        svg{
+          font-size: 2rem;
+        }
+      }
+    }
+
+    .profile {
+      .info {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+export const GET_ALL_BICYCLE = "GET_ALL_BICYCLE";

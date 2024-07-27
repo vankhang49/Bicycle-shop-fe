@@ -1,0 +1,186 @@
+.content-cart {
+  //position: relative;
+  width: 90%;
+  background-color: white;
+  //left: 5%;
+  padding: 0 0 50px 10%;
+  .head-body-content {
+    text-align: center;
+    padding: 30px 20px;
+    line-height: 50px;
+    h3 {
+      color: #171616;
+    }
+    span {
+      color: #838080;
+      font-size: 20px;
+    }
+  }
+  .carts {
+    display: block;
+    width: 100%;
+    .product-cart{
+      position: relative;
+      left: 5%;
+      width: 90%;
+      height: 30%;
+      display: flex;
+      justify-content: flex-start;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #d8d8d8;
+      .products-left{
+        position: relative;
+        width: 10%;
+        margin-left: 20px;
+        .product-thumb{
+          width: 100%;
+          height: auto;
+          img {
+            width: 100%;
+          }
+        }
+      }
+      .products-right {
+        padding-left: 50px;
+        width: 85%;
+        .name {
+          display: flex;
+          justify-content: space-between;
+          text-align: center;
+          height: 33.33%;
+          a {
+            font-size: 1rem;
+          }
+          .name-product {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #9d9d07;
+          }
+        }
+        .size {
+          height: 33.33%;
+          select{
+            border-radius: 25px;
+            width: 100px;
+            height: 30px;
+            outline: none;
+          }
+        }
+        .amount-price {
+          display: flex;
+          text-align: center;
+          justify-content: space-between;
+          height: 33.33%;
+          .btn-ud {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            a {
+              position: absolute;
+              width: 30px;
+              height: 30px;
+              padding: 1px 6px;
+              border: 1px solid #d8d8d8;
+              background-color: #f1f1f1;
+              font-size: 20px;
+            }
+            #increase_button {
+              margin-left: -1px;
+            }
+            #decrease_button {
+              margin-right: -1px;
+            }
+            input {
+              text-align: center;
+              width: 40px;
+              height: 30px;
+              outline: none;
+              margin-left: 30px;
+              border: #d8d8d8 solid 1px;
+            }
+          }
+          .price {
+            position: relative;
+            left: -26%;
+            span {
+              font-size: 18px;
+              color: #db0000;
+              font-weight: 500;
+            }
+          }
+          .total-price {
+            span {
+              font-size: 18px;
+              color: #db0000;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+    .final-total-price {
+      margin-top: 40px;
+      display: block;
+      width: 90%;
+      left: 5%;
+      position: relative;
+      label{
+        display: block;
+        text-align: right;
+        font-size: 20px;
+        span{
+          display: inline-block;
+          font-size: 28px;
+        }
+      }
+    }
+    .button-price {
+      width: 90%;
+      left: 5%;
+      position: relative;
+      display: flex;
+      justify-content: flex-end;
+      button {
+        padding: 10px;
+        display: inline-block;
+        background-color: #111111;
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        height: 55px;
+        border: none;
+        margin: 10px 0 0 10px;
+        svg {
+          width: 20px;
+          fill: white;
+        }
+        a {
+          color: white;
+        }
+      }
+      button:hover {
+        background-color: #ffcc00;
+        color: #111111;
+        svg {
+          fill: #111111;
+        }
+        a {
+          color: #111111;
+        }
+      }
+      .button-yellow {
+        color: #111;
+        background-color: #ffcc00;
+      }
+      .button-yellow:hover {
+        color: white;
+        background-color: #111;
+        a {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+

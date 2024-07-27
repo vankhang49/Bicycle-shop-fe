@@ -1,0 +1,117 @@
+@mixin cart-login-fill {
+    width: 25%;
+    font-size: 20px;
+    font-weight: 600;
+    a {
+        display: flex;
+        text-align: center;
+        align-items: center;
+
+        svg {
+            width: 30px;
+            fill: white;
+        }
+    }
+}
+
+.head {
+    width: 100%;
+    position: sticky;
+    height: 100px;
+    background: url("../../assets/images/road.png") no-repeat;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    .logo {
+        width: 50%;
+        img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+        }
+    }
+    .search-bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 40px;
+        max-width: 500px;
+        padding-left: 16px;
+        border-radius: 4px;
+        .searching {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 4px;
+            font-family: "Times New Roman", sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 0 20px 0 40px;
+            box-shadow: 0 0 0 2px rgba(134, 140, 160, 0.02);
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56.966 56.966' fill='%23717790c7'%3e%3cpath d='M55.146 51.887L41.588 37.786A22.926 22.926 0 0046.984 23c0-12.682-10.318-23-23-23s-23 10.318-23 23 10.318 23 23 23c4.761 0 9.298-1.436 13.177-4.162l13.661 14.208c.571.593 1.339.92 2.162.92.779 0 1.518-.297 2.079-.837a3.004 3.004 0 00.083-4.242zM23.984 6c9.374 0 17 7.626 17 17s-7.626 17-17 17-17-7.626-17-17 7.626-17 17-17z'/%3e%3c/svg%3e");
+            background-size: 14px;
+            background-repeat: no-repeat;
+            background-position: 16px 48%;
+            outline: none;
+        }
+        .search-bar ::-moz-placeholder {
+            font-family: "Times New Roman", sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .searching::placeholder {
+            font-family: "Times New Roman", sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        button {
+            display: none;
+        }
+
+    }
+    .cart{
+        @include cart-login-fill;
+        padding-left: 100px;
+        a {
+            svg:hover{
+                fill: #efa810;
+            }
+            .amount-product {
+                color: white;
+                background-color: #dc060e;
+                font-size: 12px;
+                position: absolute;
+                padding: 5px;
+                border-radius: 50%;
+                width: 24px;
+                height: 24px;
+                margin: 0 0 20px 17px;
+            }
+        }
+    }
+    .login {
+        @include cart-login-fill;
+        a {
+            svg:hover{
+                fill: #efa810;
+            }
+        }
+        a:hover{
+            svg {
+                fill: #1044ef;
+            }
+            span {
+                color: #1044ef;
+            }
+        }
+        span {
+            margin-left: 10px;
+            font-size: 16px;
+            color: white;
+        }
+    }
+
+}

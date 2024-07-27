@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  outline: 0;
+  border: 0;
+}
+
+:root{
+  --color-primary: #6C9BCF;
+  --color-danger: #FF0060;
+  --color-success: #1B9C85;
+  --color-warning: #F7D060;
+  --color-white: #fff;
+  --color-info-dark: #7d8da1;
+  --color-dark: #363949;
+  --color-light: rgba(132, 139, 200, 0.18);
+  --color-dark-variant: #677483;
+  --color-background: #f6f6f9;
+  --color-hover: #a6bdd8;
+
+  --card-border-radius: 2rem;
+  --border-radius-1: 0.4rem;
+  --border-radius-2: 1.2rem;
+
+  --card-padding: 1.8rem;
+  --padding-1: 1.2rem;
+
+  --box-shadow: 0 2rem 3rem var(--color-light);
+}
+.dark-mode-variables {
+  --color-background: #181a1e;
+  --color-white: #202528;
+  --color-dark: #edeffd;
+  --color-dark-variant: #a3bdcc;
+  --color-light: rgba(0, 0, 0, 0.4);
+  --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+html{
+  font-size: 14px;
+}
+
+body{
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100vw;
+  height: 100vh;
+  font-size: 0.88rem;
+  user-select: none;
+  overflow-x: hidden;
+  color: var(--color-dark);
+  background-color: var(--color-background);
+}
+
+body::-webkit-scrollbar{
+  width: 5px;
+  height: 5px;
+}
+body::-webkit-scrollbar-thumb{
+  background-color: black;
+}
+body::-webkit-scrollbar-track{
+  background-color: #ccc;
+}
+
+h1{
+  font-weight: 800;
+  font-size: 1.8rem;
+}
+
+h2{
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+h3{
+  font-weight: 500;
+  font-size: 0.87rem;
+}
+
+small{
+  font-size: 0.76rem;
+}
+
+p{
+  color: var(--color-dark-variant);
+}
+
+b{
+  color: var(--color-dark);
+}

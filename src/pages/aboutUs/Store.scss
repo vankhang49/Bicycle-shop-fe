@@ -1,0 +1,265 @@
+.awe-section-7 {
+  display: block;
+  margin-bottom: 50px;
+
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    &::before {
+      display: table;
+      content: " ";
+    }
+
+  }
+  .section-store {
+
+    .store-title {
+      font-size: 29px;
+      line-height: 31px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      margin: 0 0 30px;
+      padding: 0;
+      color: #191919;
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      position: relative;
+
+      span {
+        background: #fff;
+        padding: 0 10px;
+        position: relative;
+        z-index: 2;
+      }
+    }
+
+  }
+
+  .row {
+    margin-right: -10px;
+    margin-left: -10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .store-item {
+      text-align: center;
+      margin: 0 10px 30px 10px;
+      width: 50%;
+      flex-basis: 45%;
+
+      .image {
+
+        img {
+          border: 0 none;
+          max-width: 100%;
+          height: auto;
+          vertical-align: middle;
+        }
+      }
+
+      h3 {
+        text-transform: uppercase;
+        font-size: 19px;
+        margin: 15px 0 0;
+        color: #323c3f;
+        letter-spacing: .01em;
+      }
+
+
+      a {
+        display: inline-block;
+        font-weight: bold;
+        font-size: 18px;
+        color: #45acd8;
+        text-decoration: none;
+        background: transparent;
+        transition: color .2s ease-out;
+      }
+
+      span {
+        display: block;
+        font-size: 16px;
+      }
+    }
+
+  }
+
+  .section-news {
+    padding: 40px 0;
+
+    .section-new-product-title {
+      text-align: center;
+      h2 {
+        font-size: 29px;
+        line-height: 31px;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        margin: 0;
+        padding: 0;
+        color: #191919;
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      .section-new-product-description {
+        font-size: 14px;
+        line-height: 24px;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        color: #191919;
+        padding: 0;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+      }
+    }
+
+  }
+
+  .list-blogs-link {
+    position: relative;
+
+    .owl-carousel {
+      width: 100%;
+
+      .owl-stage-outer {
+        position: relative;
+        overflow: hidden;
+        -webkit-transform: translate3d(0, 0, 0);
+
+        .owl-stage {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          width: 100%;
+          .item {
+            position: relative;
+            width: 33.33%;
+            flex-basis: 33.33%;
+            margin: 0 10px 30px 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            border: 1px solid #efe7e7;
+            transition: 0.3s ease-in-out;
+
+            .tt-blog-thumb {
+              width: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              .tt-img {
+                width: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                  img {
+                    max-width: 100%;
+                    height: auto;
+                    border: 1px solid transparent;
+                    border-radius: 10px 0 0 10px;
+                  }
+              }
+
+              .tt-title-description {
+                position: relative;
+                padding: 10px;
+                text-align: center;
+                min-height: 80px;
+                color: #777777;
+                transition: all 0.2s linear;
+
+                .tt-background {
+                  content: '';
+                  position: absolute;
+                  z-index: 0;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  display: block;
+                  background: #ffffff;
+                  transition: all 0.2s linear;
+                }
+
+                .tt-title {
+                  font-size: 16px;
+                  line-height: 30px;
+                  font-weight: 600;
+                  letter-spacing: 0.03em;
+                  font-family: "Montserrat", sans-serif;
+                  position: relative;
+                  margin: 0;
+                  color: #191919;
+
+                  h3 {
+                    color: #323c3f;
+                    letter-spacing: .01em;
+                    a {
+                      color: #191919;
+                      transition: all 0.2s linear;
+                    }
+                  }
+                }
+
+                p {
+                  position: relative;
+                  margin: 10px 0 15px 0;
+                }
+
+                .tt-meta {
+                  width: 100%;
+                  text-align: center;
+                  margin-top: 10px;
+                  font-size: 12px;
+                  color: #999999;
+                  display: flex;
+                  flex-direction: row;
+                  flex-wrap: wrap;
+                  justify-content: center;
+                  align-content: flex-start;
+                  align-items: center;
+                  position: relative;
+                }
+              }
+            }
+            &:hover {
+              transform: scale(1.05); /* Phóng to khối khi hover */
+              z-index: 3; /* Đảm bảo khối nằm trên cùng khi hover */
+            }
+          }
+        }
+
+      }
+
+
+      .brand-link {
+        color: #575454;
+        text-decoration: none;
+        background: transparent;
+        -webkit-transition: color .2s ease-out;
+        -moz-transition: color .2s ease-out;
+        transition: color .2s ease-out;
+
+        .effect-2 {
+          width: 100px;
+          height: auto;
+          padding: 20px 30px;
+          border: 1px solid #cfc5c5;
+
+          img {
+            width: 100px;
+            height: auto;
+            margin-top: 10px;
+          }
+        }
+      }
+
+    }
+  }
+}

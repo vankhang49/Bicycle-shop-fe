@@ -1,0 +1,177 @@
+.awe-section-6 {
+  margin-bottom: 50px;
+  section.section-news-one {
+    background: #45acd8;
+    padding-bottom: 40px;
+  }
+
+  .section-news {
+    padding: 40px 0;
+    .container {
+      padding-left: 10px;
+      padding-right: 10px;
+
+      .row {
+        margin-right: -10px;
+        margin-left: -10px;
+
+        .wrapper {
+          text-align: center;
+          padding-bottom: 20px;
+          h2 {
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            padding-top: 20px;
+          }
+        }
+
+        .wrapper-one {
+
+          .one {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 0;
+            a {
+              width: 90%;
+              color: #575454;
+              text-decoration: none;
+              background: transparent;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-right: 10px;
+              }
+
+              p {
+                width: calc(100% - 40px);
+                color: #fff;
+                font-size: 17px;
+                padding-top: 8px;
+                font-weight: 700;
+              }
+            }
+          }
+        }
+
+        .section-new-product-title {
+          text-align: center;
+          h2 {
+            font-size: 29px;
+            line-height: 31px;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            margin: 0;
+            padding: 0;
+            color: #191919;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+          }
+
+          .section-new-product-description {
+            font-size: 14px;
+            line-height: 24px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            color: #191919;
+            padding: 0;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+          }
+        }
+      }
+
+      .list-blogs-link {
+        position: relative;
+
+        .owl-carousel {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          width: 100%;
+
+          .item {
+            position: relative;
+            width: 33.33%;
+
+            .clearfix {
+
+              img {
+                border-radius: 50%;
+                width: 40%;
+              }
+
+              p {
+                margin: 0 0 15px 0;
+              }
+
+              p.name {
+                color: #2192d0;
+                margin-bottom: 7px;
+                line-height: 22px;
+                text-transform: none;
+                font-weight: 700;
+                font-size: 20px;
+                padding-top: 15px;
+                letter-spacing: -.01em;
+              }
+
+              p.name1 {
+                display: inline-block;
+                line-height: 20px;
+                font-family: inherit !important;
+                color: #ff636a;
+                font-size: 16px;
+                text-transform: none;
+                margin-bottom: 9px;
+              }
+
+              p.content {
+                color: #717477;
+                font-size: 18px;
+              }
+            }
+
+          }
+
+          .brand-link {
+            color: #575454;
+            text-decoration: none;
+            background: transparent;
+            -webkit-transition: color .2s ease-out;
+            -moz-transition: color .2s ease-out;
+            transition: color .2s ease-out;
+
+            .effect-2 {
+              width: 100px;
+              height: auto;
+              padding: 20px 30px;
+              border: 1px solid #cfc5c5;
+
+              img {
+                width: 100px;
+                height: auto;
+                margin-top: 10px;
+              }
+            }
+          }
+
+        }
+      }
+
+    }
+
+
+  }
+
+
+}

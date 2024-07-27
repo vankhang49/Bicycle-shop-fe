@@ -1,0 +1,227 @@
+/* RelatedProducts.module.scss */
+.content {
+  width: 100%;
+  margin-top: 20px;
+  position: relative;
+  left: 0;
+
+  .contentHeader {
+
+    p {
+      color: #1165d3;
+      padding: 20px 40px;
+      font-size: 35px;
+      font-weight: 600;
+    }
+  }
+
+  .slideshow {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    .products {
+      margin-left: 15px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      transition: transform 0.5s ease-in-out;
+      padding: 20px;
+      margin-top: 50px;
+      list-style: none;
+
+      li {
+        position: relative;
+        flex: 0 0 20%;
+        padding-right: 20px;
+        margin-bottom: 30px;
+        transition: opacity 0.5s ease-in-out;
+
+        .productsTop {
+          width: 100%;
+          position: relative;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .productThumb {
+            width: 100%;
+            display: block;
+            background-color: white;
+            border-radius: 25px 25px 0 0;
+
+            img {
+              max-width: 100%;
+              display: block;
+              border-radius: 25px 25px 0 0;
+            }
+          }
+
+        }
+
+        .productInfo {
+          padding: 10px;
+          background-color: #f1efef;
+          max-height: 180px;
+          display: flex;
+          justify-content: flex-start;
+          flex-direction: column;
+          border-radius: 0 0 25px 25px;
+
+          .productCode {
+            color: green;
+            font-size: 15px;
+          }
+
+          a {
+            display: flex;
+            text-decoration: none;
+            align-items: flex-end;
+            height: 25px;
+          }
+
+          .productName {
+            font-size: 18px;
+            text-transform: uppercase;
+            color: #797777;
+            width: 100%;
+            height: 40px;
+          }
+
+          div {
+            .productPrice {
+              color: #ff0000;
+              font-size: 16px;
+            }
+
+            .productPriceOld {
+              color: #5e5a5a;
+              font-size: 15px;
+              text-decoration: line-through;
+            }
+          }
+        }
+      }
+
+      li:hover {
+        .productsTop {
+          img {
+            filter: opacity(80%);
+          }
+        }
+      }
+    }
+
+    .prevButton, .nextButton {
+      display: none;
+      position: absolute;
+      top: 50%;
+      width: 50px;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .prevButton {
+      left: 10px;
+    }
+
+    .nextButton {
+      right: 10px;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .content {
+    .slideshow {
+      .products {
+        margin-left: 0;
+        li {
+          flex: 0 0 33.33%;
+          padding-right: 20px;
+          margin-bottom: 30px;
+
+          .productInfo {
+            .productCode {
+              color: green;
+              font-size: 13px;
+            }
+
+            .productName {
+              font-size: 13px;
+            }
+
+            div {
+              .productPrice {
+                font-size: 12px;
+              }
+
+              .productPriceOld {
+                font-size: 11px;
+              }
+            }
+          }
+
+          &:nth-child(3n+1) {
+            margin-left: 0;
+          }
+        }
+
+        &::after {
+          content: "";
+          flex: auto;
+        }
+      }
+      .prevButton, .nextButton {
+        display: block;
+      }
+
+      .prevButton {
+        left: 10px;
+        display: block;
+      }
+
+      .nextButton {
+        right: 10px;
+        display: block;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 648px) {
+  .content {
+    .slideshow {
+      .products {
+        li {
+          flex: 0 0 33.33%;
+
+          &:nth-child(3n+1) {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .content {
+    .slideshow {
+      .products {
+        li {
+          flex: 0 0 50%;
+
+          &:nth-child(3n+1) {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+#dashboard-container {
+  display: grid;
+  width: 96%;
+  margin: 0 auto;
+  gap: 1.8rem;
+  grid-template-columns: 12rem auto 23rem;
+}
+
+@media screen and (max-width: 1200px) {
+  #dashboard-container{
+    width: 95%;
+    grid-template-columns: 7rem auto 23rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #dashboard-container {
+    width: 100%;
+    grid-template-columns: 1fr;
+    padding: 0 var(--padding-1);
+  }
+}
