@@ -3,24 +3,27 @@ import {useForm} from "react-hook-form";
 import "./header.scss";
 import logo from "../../assets/images/logo-bike.png"
 import {Link, useNavigate} from "react-router-dom";
-import * as productsService from "../../core/services/ProductService";
-import {getCountProductByProductInCart} from "../../core/services/CartService";
 import * as cartService from "../../core/services/CartService";
+import { IoMenu } from "react-icons/io5";
 
 export function Header(props){
-    const [countProduct, setCountProduct] = useState(0);
+    const [countProduct, setCountProduct] = useState(props.countProduct);
+    const [isShowSidebar, setIsShowSidebar] = useState(props.closeSidebar);
     const {register, handleSubmit} = useForm({
         criteriaMode: "all"
     });
 
     useEffect(()=>{
         getCountProductFromService();
-
     }, []);
 
     useEffect(()=>{
         getCountProductFromService();
     }, [props.countProduct]);
+
+    useEffect(()=>{
+        setIsShowSidebar(props.closeSidebar);
+    }, [props.closeSidebar]);
 
     const getCountProductFromService = () => {
         const temp = cartService.getCountProductByProductInCart();
@@ -37,8 +40,19 @@ export function Header(props){
         navigate("/products/all-products", {state:{nameSearch: productName}});
     }
 
+    const handleShowSidebar = () => {
+        setIsShowSidebar((prevState) => {
+            const newState = !prevState;
+            props.parentCallback(newState);
+            return newState;
+        });
+    };
+
     return(
         <div className="head">
+            <div className="btn-menu" onClick={handleShowSidebar}>
+                <IoMenu/>
+            </div>
             <div className="logo">
                 <img src={logo} alt="logo"/>
             </div>

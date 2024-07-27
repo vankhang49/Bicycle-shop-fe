@@ -38,6 +38,7 @@
       .textBox {
         width: 40%;
         text-align: right;
+        padding-right: 40px;
 
         h3 {
           color: #f41e0a;
@@ -155,5 +156,215 @@
     background-image: radial-gradient(circle at 25% center, #bfbdbd 20%, #9c9c9c 50%);
   }
 }
+
+@media screen and (max-width: 992px) {
+  .bestSales {
+    .sale {
+      width: 100%;
+      height: 450px;
+      .sale-element {
+
+        .textBox {
+          width: 40%;
+          text-align: right;
+
+          h3 {
+            font-size: 1.2rem;
+            padding: 0;
+          }
+
+          .productName {
+            font-size: 1.3rem;
+          }
+
+          .shortDescription {
+            font-size: 1rem;
+          }
+          .price {
+            font-size: 1.1rem;
+          }
+          .buyButton {
+            button {
+              font-size: 0.9rem;
+              width: 65px;
+              height: 30px;
+
+            }
+          }
+        }
+      }
+    }
+
+    .polygon:nth-child(even) {
+      clip-path: polygon(0% 0%,
+              100% 10%,
+              100% 90%,
+              0% 100%);
+      z-index: 3;
+      .textBox {
+        text-align: left;
+        padding: 20px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bestSales {
+    .sale {
+      width: 100%;
+      height: 400px;
+      .sale-element {
+
+        .textBox {
+          width: 40%;
+          text-align: right;
+
+          h3 {
+            font-size: 1rem;
+            padding: 0;
+          }
+
+          .productName {
+            font-size: 1.2rem;
+          }
+
+          .shortDescription {
+            font-size: 0.8rem;
+          }
+          .price {
+            font-size: 0.9rem;
+          }
+          .buyButton {
+            button {
+              font-size: 0.7rem;
+              width: 60px;
+              height: 25px;
+
+            }
+          }
+        }
+      }
+    }
+
+    .polygon:nth-child(even) {
+      clip-path: polygon(0% 0%,
+              100% 10%,
+              100% 90%,
+              0% 100%);
+      z-index: 3;
+      .textBox {
+        text-align: left;
+        padding: 20px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .bestSales {
+    .sale {
+      width: 100%;
+      height: 350px;
+      .sale-element {
+
+        .textBox {
+          width: 40%;
+          text-align: right;
+
+          h3 {
+            font-size: 1rem;
+            padding: 0;
+          }
+
+          .productName {
+            font-size: 1.2rem;
+          }
+
+          .shortDescription {
+            font-size: 0.8rem;
+          }
+          .price {
+            font-size: 0.9rem;
+          }
+          .buyButton {
+            button {
+              font-size: 0.7rem;
+              width: 60px;
+              height: 25px;
+
+            }
+          }
+        }
+      }
+    }
+
+    .polygon:nth-child(even) {
+      clip-path: polygon(0% 0%,
+              100% 10%,
+              100% 90%,
+              0% 100%);
+      z-index: 3;
+      .textBox {
+        text-align: left;
+        padding: 20px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .bestSales {
+    .sale {
+      width: 100%;
+      height: 300px;
+      .sale-element {
+        width: 100%;
+        height: 100%;
+
+        .textBox {
+          width: 40%;
+          text-align: right;
+          h3 {
+            font-size: 0.7rem;
+            padding: 0;
+          }
+
+          .productName {
+            font-size: 0.8rem;
+          }
+
+          .shortDescription {
+            font-size: 0.6rem;
+          }
+          .price {
+            font-size: 0.7rem;
+          }
+          .buyButton {
+            button {
+              font-size: 0.6rem;
+              width: 50px;
+              height: 20px;
+
+            }
+          }
+        }
+      }
+    }
+
+    .polygon:nth-child(even) {
+      clip-path: polygon(0% 0%,
+              100% 10%,
+              100% 90%,
+              0% 100%);
+      z-index: 3;
+      .textBox {
+        text-align: left;
+        padding: 20px;
+      }
+    }
+  }
+}
+
 
 

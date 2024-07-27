@@ -1,12 +1,9 @@
 import {useEffect, useRef, useState} from "react";
-
-import "./slideshow.css"
+import "./slideshow.scss"
 
 import slider2 from "../../components/slideshow/images/slider_2.webp";
 import slider3 from "../../components/slideshow/images/slider_3.webp";
 import slider4 from "../../components/slideshow/images/slider_4.webp";
-import bicycleTrek from "../../assets/images/bicycleTrek.png"
-
 
 const images = [slider2, slider3, slider4];
 const delay = 3000;

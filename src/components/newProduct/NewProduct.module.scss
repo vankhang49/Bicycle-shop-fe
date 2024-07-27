@@ -82,7 +82,7 @@
 
         .productCode {
           color: green;
-          font-size: 15px;
+          font-size: 0.9rem;
         }
 
         a {
@@ -93,7 +93,8 @@
         }
 
         .productName {
-          font-size: 18px;
+          padding-bottom: 1rem;
+          font-size: 1rem;
           text-transform: uppercase;
           color: #797777;
           width: 100%;
@@ -103,12 +104,12 @@
         div {
           .productPrice {
             color: #ff0000;
-            font-size: 16px;
+            font-size: 0.9rem;
           }
 
           .productPriceOld {
             color: #5e5a5a;
-            font-size: 15px;
+            font-size: 0.8rem;
             text-decoration: line-through;
           }
         }
@@ -125,6 +126,90 @@
           bottom: 0;
           cursor: pointer;
         }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    .products {
+      li {
+        position: relative;
+        width: 20%;
+        flex-basis: 20%;
+        padding-right: 20px;
+        margin-bottom: 30px;
+
+        .productInfo {
+          .productCode {
+            color: green;
+            font-size: 13px;
+          }
+
+          .productName {
+            font-size: 13px;
+          }
+
+          div {
+            .productPrice {
+              font-size: 12px;
+            }
+
+            .productPriceOld {
+              font-size: 11px;
+            }
+          }
+        }
+
+        &:nth-child(3n+1) {
+          margin-left: 0;
+        }
+      }
+
+      &::after {
+        content: "";
+        flex: auto;
+      }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .products {
+      li {
+        position: relative;
+        width: 25%;
+        flex-basis: 25%;
+        padding-right: 20px;
+        margin-bottom: 30px;
+
+        .productInfo {
+          .productCode {
+            color: green;
+            font-size: 13px;
+          }
+
+          .productName {
+            font-size: 13px;
+          }
+
+          div {
+            .productPrice {
+              font-size: 12px;
+            }
+
+            .productPriceOld {
+              font-size: 11px;
+            }
+          }
+        }
+
+        &:nth-child(3n+1) {
+          margin-left: 0;
+        }
+      }
+
+      &::after {
+        content: "";
+        flex: auto;
       }
     }
   }
@@ -198,8 +283,6 @@
           margin-left: 0;
         }
       }
-
-
     }
   }
 }
