@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/Bicycle-shop-fe/static/css/main.7d4d992a.css",
+    "main.js": "/Bicycle-shop-fe/static/js/main.54ed3c23.js",
+    "static/js/453.9343fa5d.chunk.js": "/Bicycle-shop-fe/static/js/453.9343fa5d.chunk.js",
+    "static/media/profile-3.jpg": "/Bicycle-shop-fe/static/media/profile-3.33737d400de5083e13e9.jpg",
+    "static/media/profile-4.jpg": "/Bicycle-shop-fe/static/media/profile-4.fb6fbdfc950fa161558a.jpg",
+    "static/media/profile-1.jpg": "/Bicycle-shop-fe/static/media/profile-1.6cf5b60359a2c92c9ad9.jpg",
+    "static/media/profile-2.jpg": "/Bicycle-shop-fe/static/media/profile-2.59a85ceba24bdc6d1b9a.jpg",
+    "static/media/bike-png.png": "/Bicycle-shop-fe/static/media/bike-png.d3c4cf6ff106d8d17c94.png",
+    "static/media/bg-login-page.png": "/Bicycle-shop-fe/static/media/bg-login-page.5acdb7f66d40672212b6.png",
+    "static/media/DomaneAL2Disc_23_33083_A_Primary.jpg": "/Bicycle-shop-fe/static/media/DomaneAL2Disc_23_33083_A_Primary.95fe8fbac9415099d231.jpg",
+    "static/media/slider_3.webp": "/Bicycle-shop-fe/static/media/slider_3.06f4fdb6cf1ddfc84cac.webp",
+    "static/media/slider_2.webp": "/Bicycle-shop-fe/static/media/slider_2.acfd1e3cb30f8e049c99.webp",
+    "static/media/bike-white.png": "/Bicycle-shop-fe/static/media/bike-white.ac81598c17b3549ba7a3.png",
+    "static/media/logo-bike.png": "/Bicycle-shop-fe/static/media/logo-bike.6f047560b8561064b592.png",
+    "static/media/td-nhan-su-partime.png": "/Bicycle-shop-fe/static/media/td-nhan-su-partime.da043153a96d8ec46c67.png",
+    "static/media/slider_4.webp": "/Bicycle-shop-fe/static/media/slider_4.3811851e6c113e25b2a5.webp",
+    "static/media/bike-blue.jpg": "/Bicycle-shop-fe/static/media/bike-blue.9a45f3621648aa3c2cee.jpg",
+    "static/media/bike-yellow.jpg": "/Bicycle-shop-fe/static/media/bike-yellow.c07c86a5d37154937df5.jpg",
+    "static/media/bike-sport.jfif": "/Bicycle-shop-fe/static/media/bike-sport.4db2c5b9c3877224e01a.jfif",
+    "static/media/warning.png": "/Bicycle-shop-fe/static/media/warning.9b5e7e724c1895359290.png",
+    "static/media/bicycleStore1.jfif": "/Bicycle-shop-fe/static/media/bicycleStore1.8801a773b7cd9182359a.jfif",
+    "static/media/bicycleStore2.jfif": "/Bicycle-shop-fe/static/media/bicycleStore2.850096c723bd2c772c78.jfif",
+    "static/media/plus.png": "/Bicycle-shop-fe/static/media/plus.a7b49833c2a38881c62b.png",
+    "static/media/bg-bs.jfif": "/Bicycle-shop-fe/static/media/bg-bs.d03c7ce874f7ab895988.jfif",
+    "static/media/avatar.jpg": "/Bicycle-shop-fe/static/media/avatar.5cc011efbda13cfa68a4.jpg",
+    "static/media/engineer.jpg": "/Bicycle-shop-fe/static/media/engineer.decdc757e25072391dd4.jpg",
+    "static/media/2018_Trek_logo_word_mark_wiki_buffer.svg.png": "/Bicycle-shop-fe/static/media/2018_Trek_logo_word_mark_wiki_buffer.svg.42fd689a8f7c340df457.png",
+    "index.html": "/Bicycle-shop-fe/index.html",
+    "main.7d4d992a.css.map": "/Bicycle-shop-fe/static/css/main.7d4d992a.css.map",
+    "main.54ed3c23.js.map": "/Bicycle-shop-fe/static/js/main.54ed3c23.js.map",
+    "453.9343fa5d.chunk.js.map": "/Bicycle-shop-fe/static/js/453.9343fa5d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7d4d992a.css",
+    "static/js/main.54ed3c23.js"
+  ]
+}
