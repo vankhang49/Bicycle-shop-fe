@@ -1,16 +1,14 @@
 import "../../assets/css/style.scss"
 import "../../components/modal/modal.scss"
-import {Header} from "../../components/header/Header";
-import {NavBar} from "../../components/navbar/NavBar";
 import Modal from "../../components/modal/Modal";
-import {ButtonAddNew} from "../../components/btn-add-new/ButtonAddNew";
 import {useEffect, useState} from "react";
 import warning from "../../assets/images/warning.png";
 import * as productsService from "../../core/services/ProductService";
 import {useNavigate, useParams} from "react-router-dom";
-import FooterHome from "../../components/Footer/FooterHome";
 import {Filter} from "../../components/filter/Filter";
 import {Main} from "../../components/Main/Main";
+import { CiFilter } from "react-icons/ci";
+
 
 export function AllProduct() {
     // const products = useSelector(state => state.products);
@@ -18,12 +16,9 @@ export function AllProduct() {
     let {familyName} = useParams();
     const [brandName, setBrandName] = useState("");
     const [products, setProducts] = useState([]);
-    const [open, setOpen] = useState();
     const navigate = useNavigate();
-    const [productDelete, setProductDelete] = useState({
-        productCode: "",
-        productName: ""
-    });
+    const [isOpenFilter, setIsOpenFilter] = useState(false);
+
     // const {state} = useLocation();
     // const dispatch = useDispatch();
 
@@ -45,28 +40,32 @@ export function AllProduct() {
         navigate("/products/detail", {state: {id: productId}});
     }
 
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    const handleOpen = (productName, productCode) => {
-        setProductDelete({
-            productCode: productCode,
-            productName: productName
-        })
-        setOpen(true);
-    };
-
     const updateBrandName = (newBrandName) => {
         setBrandName(newBrandName);
     };
 
+    const handleOpenFilter = () => {
+        setIsOpenFilter(true);
+    }
+
+    const handleCloseFilter = (childData) => {
+        setIsOpenFilter(childData);
+    }
+
     return (
         <Main content={
             <div className="content">
-                <ButtonAddNew></ButtonAddNew>
+                <div className="button-show-filter">
+                    <button onClick={handleOpenFilter}><CiFilter/></button>
+                </div>
                 <div className="content-body">
-                    <Filter categoryName={categoryName} onBrandNameChange={updateBrandName}></Filter>
+                    <Filter
+                        categoryName={categoryName}
+                        onBrandNameChange={updateBrandName}
+                        isOpenFilter = {isOpenFilter}
+                        closeFilter = {handleCloseFilter}
+                    >
+                    </Filter>
                     <div className="product-list">
                         <ul className="products">
                             {products && products.map((product, index) => (
@@ -77,12 +76,6 @@ export function AllProduct() {
                                             <img src={product.productImages[0].imageUrl} alt="1"/>
                                         </a>
                                         <p className="buy-now">Mua ngay</p>
-                                    </div>
-                                    <div className="product-item">
-                                        <div className="delete-item">
-                                            <a className="delete-btn button-modal"
-                                               onClick={() => handleOpen(product.productName, product.productCode)}>X</a>
-                                        </div>
                                     </div>
                                     <div className="product-info">
                                         <span className="product-code info-element">{product.productCode}</span>
@@ -116,27 +109,6 @@ export function AllProduct() {
                         </ul>
                     </div>
                 </div>
-                <Modal isOpen={open}>
-                    <div className="head-modal">
-                        <img src={warning} alt="warning"/>
-                    </div>
-                    <div>
-                        <input id="productIdDelete" name="productIdDelete" type="hidden"/>
-                        <h2>Bạn có chắc muốn xoá sản phẩm <span id="productName">{productDelete.productName}</span>?
-                        </h2>
-                        <p>Mã sản phẩm: <span id="productId">{productDelete.productCode}</span></p>
-                        <svg className="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
-                             preserveAspectRatio="none">
-                            <rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
-                        </svg>
-                        <div className="modal-footer">
-                            <button type="button" className="btn-accept">Accept</button>
-                            <button type="button" className="btn-accept btn-cancel" onClick={handleClose}>Cancel
-                            </button>
-                        </div>
-                    </div>
-
-                </Modal>
             </div>
         }/>
     );

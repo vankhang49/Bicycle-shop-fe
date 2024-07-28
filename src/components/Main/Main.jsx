@@ -2,6 +2,7 @@ import {Header} from "../header/Header";
 import {NavBar} from "../navbar/NavBar";
 import FooterHome from "../Footer/FooterHome";
 import {useState} from "react";
+import * as cartService from "../../core/services/CartService";
 
 
 export const Main = ({ content }) => {
@@ -14,6 +15,7 @@ export const Main = ({ content }) => {
     return(
         <div className="container">
             <Header
+                countProduct={cartService.getCountProductByProductInCart()}
                 parentCallback={callbackFunction}
                 closeSidebar={isShowSidebar}
             ></Header>

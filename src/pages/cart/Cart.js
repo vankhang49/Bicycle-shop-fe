@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 import * as cartService from "../../core/services/CartService";
 import {deleteFromCart} from "../../core/services/CartService";
 import FooterHome from "../../components/Footer/FooterHome";
+import {Main} from "../../components/Main/Main";
 
 export function Cart() {
     const [cart, setCart] = useState([]);
@@ -35,10 +36,7 @@ export function Cart() {
     }
 
     return (
-        <div>
-            <div className="wrapper">
-                <Header countProduct={cartService.getCountProductByProductInCart()}></Header>
-                <NavBar></NavBar>
+        <Main content={
                 <div className="content-cart">
                     <div className="head-body-content">
                         <h3>Giỏ hàng</h3>
@@ -69,18 +67,17 @@ export function Cart() {
                                     : null}
                                     <div className="amount-price">
                                         <div className="btn-ud">
-                                            <input type="hidden"/>
-                                            <a id="decrease_button"
-                                               onClick={()=>handleChangeQuantityForPOP(item[0], --item[1])}>-</a>
+                                            <button id="decrease_button"
+                                               onClick={() => handleChangeQuantityForPOP(item[0], --item[1])}>-</button>
                                             <input type="text" className="symbol" value={item[1]}/>
-                                            <a style={{marginLeft: 70}} id="increase_button"
-                                               onClick={()=>handleChangeQuantityForPOP(item[0], ++item[1])}>+</a>
+                                            <button id="increase_button"
+                                               onClick={() => handleChangeQuantityForPOP(item[0], ++item[1])}>+</button>
                                         </div>
                                         <div className="price">
                                             <span>{item[0].price.toLocaleString()} VNĐ</span>
                                         </div>
                                         <div className="total-price">
-                                            <span>{(item[0].price*item[1]).toLocaleString()} VNĐ</span>
+                                            <span>{(item[0].price * item[1]).toLocaleString()} VNĐ</span>
                                         </div>
                                     </div>
                                 </div>
@@ -103,13 +100,11 @@ export function Cart() {
                                 <Link to={"/products"}>Tiếp tục mua hàng</Link>
                             </button>
                             <button id="pay" className="button-yellow">
-                                <Link to={"/products/pay"}>Thanh toán</Link>
+                                <Link to={"/pay"}>Thanh toán</Link>
                             </button>
                         </div>
                     </div>
                 </div>
-                <FooterHome></FooterHome>
-            </div>
-        </div>
+        }/>
     );
 }

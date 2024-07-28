@@ -19,8 +19,36 @@
         margin: 0;
         text-transform: uppercase;
         color: #000;
-        font-size: 14px;
-        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+
+        h2 {
+          font-size: 1rem;
+          font-weight: 600;
+        }
+
+        button {
+          width: 20px;
+          height: 20px;
+          border-radius: 5px;
+          border: none;
+          background: none;
+          justify-content: center;
+          align-items: center;
+          display: none;
+
+          svg {
+            font-size: 1.3rem;
+            color: #111;
+          }
+
+          &:hover {
+            border: 1px solid #111;
+          }
+        }
+
       }
 
       p {
@@ -235,3 +263,510 @@
     }
   }
 }
+
+@media screen and (max-width: 1200px) {
+  .sidebar {
+    display: block;
+    width: 200px;
+    min-width: 200px;
+    border: none;
+    height: 100%;
+
+    .asideFilter {
+      .heading {
+        .titleHead {
+          h2 {
+            font-size: 0.7rem;
+            font-weight: 600;
+          }
+
+          button {
+            display: flex;
+
+            svg {
+              font-size: 1.3rem;
+              color: #111;
+            }
+
+            &:hover {
+              border: 1px solid #111;
+            }
+          }
+        }
+
+        p {
+          color: #000;
+          font-size: 0.7rem;
+          margin-bottom: 0;
+        }
+      }
+
+      .asideHiddenMobile {
+        .filterContainer {
+          .filterContainers {
+            .filterContainerSelectedFilter {
+              .filterContainerSelectedFilterHeader {
+                .selectedFilterHeaderTitle {
+                  font-size: 0.8rem;
+                }
+
+                a {
+                  font-size: 0.7rem;
+                }
+              }
+
+              .selectedFilterList {
+
+                ul {
+
+                  .selectedFilterItem {
+                    font-size: 0.7rem;
+                  }
+                }
+              }
+            }
+          }
+
+          .asideItem {
+            .asideTitle {
+              h2 {
+                font-size: 0.8rem;
+              }
+            }
+            .fieldSearch {
+              input::placeholder {
+                font-size: 0.8rem;
+              }
+
+              .inputGroupBtn {
+
+                button {
+                  color: #fff;
+                  background-color: #0d85e2;
+                  min-height: 30px;
+                  width: 40px;
+                  border: 1px solid #9e9a9a;
+                  svg {
+                    width: 20px;
+                    height: 20px;
+                    fill: #fff;
+
+                  }
+                }
+              }
+            }
+
+            .filterVendor {
+
+              .filterItem {
+
+                *{
+                  color: #6f6f6f;
+                  cursor: pointer;
+                  font-size: 0.8rem;
+                  font-weight: normal;
+                }
+
+                label[for] {
+                  cursor: pointer;
+                }
+              }
+
+              .filterItemCheckBox {
+
+                input {
+                  //display: none;
+
+                  &:checked+.fa:before {
+                    border-color: #0d85e2;
+                    background: #0d85e2;
+                    content: "";
+                    margin-right: 5px;
+                    border-radius: 2px;
+                    font-size: 18px;
+                    line-height: 40px;
+                    position: absolute;
+                    top: -13px;
+                    height: 15px !important;
+                    width: 15px;
+                  }
+
+                  &:checked+.fa:after {
+                    font-family: 'FontAwesome', serif;
+                    content: "\f00c";
+                    color: #fff;
+                    position: absolute;
+                    width: 15px;
+                    height: 15px;
+                    line-height: 15px;
+                    top: -13px;
+                    font-size: 12px;
+                    left: 2px;
+                  }
+                }
+
+                input[type=checkbox] {
+                  line-height: normal;
+                }
+
+                .fa {
+                  margin-right: 5px;
+                  width: 14px;
+                  position: relative;
+                }
+              }
+            }
+
+          }
+        }
+      }
+    }
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .sidebar {
+    display: block;
+    width: 200px;
+    min-width: 200px;
+    border: none;
+
+    .asideFilter {
+      .heading {
+        .titleHead {
+          h2 {
+            font-size: 0.7rem;
+            font-weight: 600;
+          }
+
+          button {
+            display: flex;
+
+            svg {
+              font-size: 1.3rem;
+              color: #111;
+            }
+
+            &:hover {
+              border: 1px solid #111;
+            }
+          }
+        }
+
+        p {
+          color: #000;
+          font-size: 0.7rem;
+          margin-bottom: 0;
+        }
+      }
+
+      .asideHiddenMobile {
+        .filterContainer {
+          .filterContainers {
+            .filterContainerSelectedFilter {
+              .filterContainerSelectedFilterHeader {
+                .selectedFilterHeaderTitle {
+                  font-size: 0.8rem;
+                }
+
+                a {
+                  font-size: 0.7rem;
+                }
+              }
+
+              .selectedFilterList {
+
+                ul {
+
+                  .selectedFilterItem {
+                    font-size: 0.7rem;
+                  }
+                }
+              }
+            }
+          }
+
+          .asideItem {
+            .asideTitle {
+              h2 {
+                font-size: 0.8rem;
+              }
+            }
+            .fieldSearch {
+              input::placeholder {
+                font-size: 0.8rem;
+              }
+
+              .inputGroupBtn {
+
+                button {
+                  color: #fff;
+                  background-color: #0d85e2;
+                  min-height: 30px;
+                  width: 40px;
+                  border: 1px solid #9e9a9a;
+                  svg {
+                    width: 20px;
+                    height: 20px;
+                    fill: #fff;
+
+                  }
+                }
+              }
+            }
+
+            .filterVendor {
+
+              .filterItem {
+
+                *{
+                  color: #6f6f6f;
+                  cursor: pointer;
+                  font-size: 0.8rem;
+                  font-weight: normal;
+                }
+
+                label[for] {
+                  cursor: pointer;
+                }
+              }
+
+              .filterItemCheckBox {
+
+                input {
+                  //display: none;
+
+                  &:checked+.fa:before {
+                    border-color: #0d85e2;
+                    background: #0d85e2;
+                    content: "";
+                    margin-right: 5px;
+                    border-radius: 2px;
+                    font-size: 18px;
+                    line-height: 40px;
+                    position: absolute;
+                    top: -13px;
+                    height: 15px !important;
+                    width: 15px;
+                  }
+
+                  &:checked+.fa:after {
+                    font-family: 'FontAwesome', serif;
+                    content: "\f00c";
+                    color: #fff;
+                    position: absolute;
+                    width: 15px;
+                    height: 15px;
+                    line-height: 15px;
+                    top: -13px;
+                    font-size: 12px;
+                    left: 2px;
+                  }
+                }
+
+                input[type=checkbox] {
+                  line-height: normal;
+                }
+
+                .fa {
+                  margin-right: 5px;
+                  width: 14px;
+                  position: relative;
+                }
+              }
+            }
+
+          }
+        }
+      }
+    }
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    top: 0;
+    right: 0;
+    position: fixed;
+    height: 100vh;
+    z-index: 3;
+    display: block;
+    width: 300px;
+    border: none;
+    border-radius: 0;
+    background-color: rgb(253, 250, 250);
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: 0.3s ease-in-out;
+
+    .asideFilter {
+      .heading {
+        .titleHead {
+          h2 {
+            font-size: 0.7rem;
+            font-weight: 600;
+          }
+
+          button {
+            display: flex;
+
+            svg {
+              font-size: 1.3rem;
+              color: #111;
+            }
+
+            &:hover {
+              border: 1px solid #111;
+            }
+          }
+        }
+
+        p {
+          color: #000;
+          font-size: 0.7rem;
+          margin-bottom: 0;
+        }
+      }
+
+      .asideHiddenMobile {
+        .filterContainer {
+          .filterContainers {
+            .filterContainerSelectedFilter {
+              .filterContainerSelectedFilterHeader {
+                .selectedFilterHeaderTitle {
+                  font-size: 0.8rem;
+                }
+
+                a {
+                  font-size: 0.7rem;
+                }
+              }
+
+              .selectedFilterList {
+
+                ul {
+
+                  .selectedFilterItem {
+                    font-size: 0.7rem;
+                  }
+                }
+              }
+            }
+          }
+
+          .asideItem {
+            .asideTitle {
+              h2 {
+                font-size: 0.8rem;
+              }
+            }
+            .filterGroup {
+              ul {
+                max-height: 300px;
+                overflow-y: visible;
+              }
+
+            }
+            .fieldSearch {
+              input::placeholder {
+                font-size: 0.8rem;
+              }
+
+              .inputGroupBtn {
+
+                button {
+                  color: #fff;
+                  background-color: #0d85e2;
+                  min-height: 30px;
+                  width: 40px;
+                  border: 1px solid #9e9a9a;
+                  svg {
+                    width: 20px;
+                    height: 20px;
+                    fill: #fff;
+
+                  }
+                }
+              }
+            }
+
+            .filterVendor {
+
+              .filterItem {
+
+                *{
+                  color: #6f6f6f;
+                  cursor: pointer;
+                  font-size: 0.8rem;
+                  font-weight: normal;
+                }
+
+                label[for] {
+                  cursor: pointer;
+                }
+              }
+
+              .filterItemCheckBox {
+
+                input {
+                  //display: none;
+
+                  &:checked+.fa:before {
+                    border-color: #0d85e2;
+                    background: #0d85e2;
+                    content: "";
+                    margin-right: 5px;
+                    border-radius: 2px;
+                    font-size: 18px;
+                    line-height: 40px;
+                    position: absolute;
+                    top: -13px;
+                    height: 15px !important;
+                    width: 15px;
+                  }
+
+                  &:checked+.fa:after {
+                    font-family: 'FontAwesome', serif;
+                    content: "\f00c";
+                    color: #fff;
+                    position: absolute;
+                    width: 15px;
+                    height: 15px;
+                    line-height: 15px;
+                    top: -13px;
+                    font-size: 12px;
+                    left: 2px;
+                  }
+                }
+
+                input[type=checkbox] {
+                  line-height: normal;
+                }
+
+                .fa {
+                  margin-right: 5px;
+                  width: 14px;
+                  position: relative;
+                }
+              }
+            }
+
+          }
+        }
+      }
+    }
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+}
+

@@ -6,6 +6,7 @@ import * as productFamilyService from "../../core/services/ProductFamilyService"
 import {Link} from "react-router-dom";
 import {getAllBrandByCategoryName} from "../../core/services/BrandService";
 import * as brandService from "../../core/services/BrandService";
+import {IoCloseSharp} from "react-icons/io5";
 
 export function Filter(props) {
     const [productFamilies, setProductFamilies] = useState([]);
@@ -14,6 +15,7 @@ export function Filter(props) {
     const [brandName, setBrandName] = useState("");
     const [familyName, setFamilyName] = useState("");
     const [priceFilter, setPriceFilter] = useState("");
+    const [isOpenFilter, setIsOpenFilter] = useState(props.isOpenFilter);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,6 +28,10 @@ export function Filter(props) {
     useEffect(() => {
         props.onBrandNameChange(brandName);
     }, [brandName, props]);
+
+    useEffect(() => {
+        setIsOpenFilter(props.isOpenFilter);
+    }, [props.isOpenFilter])
 
     const getAllProductFamilies = async () => {
         const temp = await productFamilyService.getAllProductFamilies();
@@ -46,11 +52,22 @@ export function Filter(props) {
     const handleChangeFamily = (family) => {
         setFamilyName(family);
     }
+
+    const handleCloseFilter = () => {
+        setIsOpenFilter(false);
+        props.closeFilter(false);
+    }
+
     return (
-        <aside className={styles.sidebar}>
+        <aside className={isOpenFilter ? `${styles.sidebar} ${styles.active}` : `${styles.sidebar}`}>
             <div className={styles.asideFilter}>
                 <div className={styles.heading}>
-                    <h2 className={styles.titleHead}>Bộ lọc</h2>
+                    <div className={styles.titleHead}>
+                        <h2>Bộ lọc</h2>
+                        <button className={styles.close} id="close-btn" onClick={handleCloseFilter}>
+                            <IoCloseSharp/>
+                        </button>
+                    </div>
                     <p>Giúp lọc nhanh sản phẩm bạn tìm kiếm</p>
                 </div>
                 <div className={styles.asideHiddenMobile}>

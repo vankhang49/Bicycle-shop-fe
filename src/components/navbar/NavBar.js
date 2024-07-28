@@ -91,7 +91,7 @@ export function NavBar(props) {
                     </li>
                 ))}
                 <li className="dropdown">
-                    <Link className={"dropdown-thumb"} to="/products/about-us">Về chúng tôi</Link>
+                    <Link className={"dropdown-thumb"} to="/about-us">Về chúng tôi</Link>
                 </li>
             </ul>
         </div>

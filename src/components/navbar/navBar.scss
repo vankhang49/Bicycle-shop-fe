@@ -73,7 +73,25 @@
     }
   }
 }
-@media screen and (max-width: 768px) {
+
+@media screen and (max-width: 1200px) {
+  .navbar {
+    ul {
+      .dropdown {
+        .dropdown-thumb {
+          font-size: 0.8rem;
+        }
+        .dropdown-content {
+          a {
+            font-size: 0.75rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
   .navbar {
     top: 0;
     left: 0;

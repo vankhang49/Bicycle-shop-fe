@@ -1,7 +1,6 @@
 import Slideshow from "../../components/slideshow/Slideshow";
 import {BestSale} from "../../components/bestSale/BestSale";
 import {NewProduct} from "../../components/newProduct/NewProduct";
-import FooterHome from "../../components/Footer/FooterHome";
 import {Main} from "../../components/Main/Main";
 
 export function HomePage() {
@@ -12,7 +11,6 @@ export function HomePage() {
                 <Slideshow></Slideshow>
                 <BestSale></BestSale>
                 <NewProduct></NewProduct>
-                <FooterHome></FooterHome>
             </div>
         }/>
     );
