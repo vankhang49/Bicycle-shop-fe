@@ -8,7 +8,7 @@ export function Store() {
 
     return (
         <section className="awe-section-7">
-            <section className="section-store">
+            <section className="section-store reputation">
                 <div className="container">
                     <div className="store-title">
                         <span>Hệ thống cửa hàng</span>
@@ -43,7 +43,7 @@ export function Store() {
                     </div>
                 </div>
             </section>
-            <section className="section-news">
+            <section className="section-news reputation">
                 <div className="container">
                     <div className="row">
                         <div>

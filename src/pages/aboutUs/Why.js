@@ -51,7 +51,7 @@ export function Why(){
                     </div>
                 </div>
             </section>
-            <section className="section-news">
+            <section className="section-news reputation">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
@@ -115,7 +115,7 @@ export function Why(){
                     </div>
                 </div>
             </section>
-            <section className="section-news">
+            <section className="section-news reputation">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">

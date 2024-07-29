@@ -1,42 +1,42 @@
-import {Header} from "../../components/header/Header";
-import {NavBar} from "../../components/navbar/NavBar";
-import domainBike from "../../assets/images/DomaneAL2Disc_23_33083_A_Primary.jpg";
 import "./Cart.scss";
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import * as cartService from "../../core/services/CartService";
-import {deleteFromCart} from "../../core/services/CartService";
-import FooterHome from "../../components/Footer/FooterHome";
 import {Main} from "../../components/Main/Main";
 
 export function Cart() {
     const [cart, setCart] = useState([]);
+    const [isRenderHeader, setIsRenderHeader] = useState(false);
 
     useEffect(() => {
-        getCartFromService();
+        const fetchData = async () => {
+            await getCartFromService();
+        }
+        fetchData();
     }, [])
 
-    const getCartFromService = () => {
-        const temp = cartService.getCart();
+    const getCartFromService = async () => {
+        const temp = await cartService.getCart();
         setCart(Array.from(temp));
     }
 
-    const handleChangeQuantityForPOP = (cartItem, quantity) => {
-        cartService.setQuantityForPriceOfProduct(cartItem, quantity);
-        getCartFromService();
+    const handleChangeQuantityForPOP = async (cartItem, quantity) => {
+        await cartService.setQuantityForPriceOfProduct(cartItem, quantity);
+        await getCartFromService();
     }
 
     const calculateTotalPrice = () => {
         return cart.reduce((prev, item) => (item[0].price * item[1]) + prev, 0);
     }
 
-    const deleteCartItemFormCart = (cartItem) => {
-        cartService.deleteFromCart(cartItem);
-        getCartFromService();
+    const deleteCartItemFormCart = async (cartItem) => {
+        await cartService.deleteFromCart(cartItem);
+        await getCartFromService();
+        setIsRenderHeader(prev => !prev);
     }
 
     return (
-        <Main content={
+        <Main reRender={isRenderHeader} content={
                 <div className="content-cart">
                     <div className="head-body-content">
                         <h3>Giỏ hàng</h3>

@@ -1,12 +1,9 @@
-import {Header} from "../../components/header/Header";
-import {NavBar} from "../../components/navbar/NavBar";
-import bicycle from "../../assets/images/DomaneAL2Disc_23_33083_A_Primary.jpg";
 import "./pay.scss"
 import {useEffect, useState} from "react";
 import * as cartService from "../../core/services/CartService";
 import * as billService from "../../core/services/BillService";
 import {useForm} from "react-hook-form";
-import FooterHome from "../../components/Footer/FooterHome";
+import {Main} from "../../components/Main/Main";
 
 export function Pay() {
     const [cart, setCart] = useState([]);
@@ -48,9 +45,7 @@ export function Pay() {
     }
 
     return (
-        <div className="wrapper">
-            <Header></Header>
-            <NavBar></NavBar>
+        <Main content={
             <div className="content">
                 <form onSubmit={handleSubmit(onSubmit)} className="form-oder">
                     <div className="form-left">
@@ -113,7 +108,7 @@ export function Pay() {
                                 <div className="product-cart cart-oder" key={item[0].priceId}>
                                     <div className="products-left left-oder">
                                     <span className="product-thumb">
-                                        <img src={bicycle} alt="image"/>
+                                        <img src={item[0].imgColor} alt="image"/>
                                     </span>
                                     </div>
                                     <div className="products-right right-oder">
@@ -142,7 +137,7 @@ export function Pay() {
                             </div>
                             <div className="final-cost">
                                 <span>Tổng cộng:</span>
-                                <span style={{fontSize: 30, color: "red"}}>{calculateTotalPrice().toLocaleString()} VNĐ</span>
+                                <span className='final-price'>{calculateTotalPrice().toLocaleString()} VNĐ</span>
                             </div>
                             <div className="pay">
                                 <button type="submit">Thanh toán</button>
@@ -151,7 +146,6 @@ export function Pay() {
                     </div>
                 </form>
             </div>
-            <FooterHome></FooterHome>
-        </div>
+        }/>
     );
 }

@@ -14,19 +14,25 @@ export function Header(props){
     });
 
     useEffect(()=>{
-        getCountProductFromService();
+        const fetchData = async () => {
+            await getCountProductFromService();
+        }
+        fetchData();
     }, []);
 
     useEffect(()=>{
-        getCountProductFromService();
+        const fetchData = async () => {
+            await getCountProductFromService();
+        }
+        fetchData();
     }, [props.countProduct]);
 
     useEffect(()=>{
         setIsShowSidebar(props.closeSidebar);
     }, [props.closeSidebar]);
 
-    const getCountProductFromService = () => {
-        const temp = cartService.getCountProductByProductInCart();
+    const getCountProductFromService = async () => {
+        const temp = await cartService.getCountProductByProductInCart();
         setCountProduct(temp);
     }
 

@@ -26,7 +26,7 @@ export function ProductDetail() {
     const [imgElement, setImgElement] = useState(bicycle);
     const [selectedButton, setSelectedButton] = useState(null);
     const [cart, setCart] = useState(new Map());
-    const [haveElement, setHaveElement] = useState(false);
+    const [isRenderHeader, setIsRenderHeader] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -91,13 +91,16 @@ export function ProductDetail() {
 
     const handleAddToCart = async () => {
         if (pricing !== undefined && !cart.has(pricing)) {
-            cartService.addCart(pricing, amount);
+            await cartService.addCart(pricing, amount);
             await getCartFromService();
+            setIsRenderHeader(prev => !prev);
+        } else {
+            setIsRenderHeader(false);
         }
     }
 
     return (
-        <Main content={
+        <Main reRender={isRenderHeader} content={
             <div className="container">
                 <div className="content-view">
                     <div className="product-card">
