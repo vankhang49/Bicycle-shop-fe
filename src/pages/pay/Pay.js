@@ -4,16 +4,38 @@ import * as cartService from "../../core/services/CartService";
 import * as billService from "../../core/services/BillService";
 import {useForm} from "react-hook-form";
 import {Main} from "../../components/Main/Main";
+import {Link} from "react-router-dom";
+import {FaRegUserCircle} from "react-icons/fa";
+import * as authenticationService from "../../core/services/AuthenticationService";
 
 export function Pay() {
+    const isAuthenticated = !!localStorage.getItem("isAuthenticated");
     const [cart, setCart] = useState([]);
-    const {register, handleSubmit, formState: {errors}} = useForm({
+    const [user, setUser] = useState({});
+    const {register, handleSubmit, setValue, formState: {errors}} = useForm({
         criteriaMode: "all"
     });
 
     useEffect(() => {
-        getCartFromService();
-    }, [])
+        const fetchData = async () => {
+            if (isAuthenticated) {
+                await getUserInfo();
+            }
+            getCartFromService();
+        }
+        fetchData();
+    }, [isAuthenticated])
+
+    const getUserInfo = async () => {
+        const temp = await authenticationService.getYourProfile();
+        if (temp) {
+            setUser(temp);
+            setValue("customerName", temp.fullName);
+            setValue("email", temp.email);
+            setValue("phoneNumber", temp.phoneNumber);
+            setValue("address", temp.address);
+        }
+    }
 
     const getCartFromService = () => {
         const temp = cartService.getCart();
@@ -49,7 +71,13 @@ export function Pay() {
             <div className="content">
                 <form onSubmit={handleSubmit(onSubmit)} className="form-oder">
                     <div className="form-left">
-                        <h3>THÔNG TIN GIAO HÀNG</h3>
+                        <div className="left-title">
+                            <h3>THÔNG TIN GIAO HÀNG</h3>
+                            {!isAuthenticated &&
+                                <Link to='/login'><FaRegUserCircle/>Đăng nhập</Link>
+                            }
+                        </div>
+
                         <div className="element">
                             <input type="text" placeholder="Họ và tên (*)" id="customerName"
                                    {...register("customerName", {
@@ -59,7 +87,8 @@ export function Pay() {
                                            message: "Tên phải bắt đầu bằng chữ IN HOA và có thể chứa khoảng trắng và các ký tự đặc biệt!"
                                        }
                                    })}/>
-                            {errors.customerName && <p style={{color: "red", fontSize: "16px"}}>{errors.customerName.message}</p>}
+                            {errors.customerName &&
+                                <p style={{color: "red", fontSize: "16px"}}>{errors.customerName.message}</p>}
                         </div>
                         <div className="element">
                             <input type="text" placeholder="Email" id="email"
@@ -81,7 +110,8 @@ export function Pay() {
                                            message: "Số điện thoại phải bắt đầu bằng 0 hoặc +84 và kết thúc với 9 chữ số!"
                                        }
                                    })}/>
-                            {errors.phoneNumber && <p style={{color: "red", fontSize: "16px"}}>{errors.phoneNumber.message}</p>}
+                            {errors.phoneNumber &&
+                                <p style={{color: "red", fontSize: "16px"}}>{errors.phoneNumber.message}</p>}
                         </div>
                         <div className="element">
                             <input type="text" placeholder="Địa chỉ (*)" id="address"
@@ -125,7 +155,7 @@ export function Pay() {
                                                 <span>Số lượng: {item[1]}</span>
                                             </div>
                                             <div className="total-price">
-                                                <span>{(item[0].price*item[1]).toLocaleString()} VNĐ</span>
+                                                <span>{(item[0].price * item[1]).toLocaleString()} VNĐ</span>
                                             </div>
                                         </div>
                                     </div>

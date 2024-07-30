@@ -5,10 +5,20 @@ import logo from "../../assets/images/logo-bike.png"
 import {Link, useNavigate} from "react-router-dom";
 import * as cartService from "../../core/services/CartService";
 import { IoMenu } from "react-icons/io5";
+import {TiArrowSortedDown} from "react-icons/ti";
+import {FaRegUserCircle} from "react-icons/fa";
+import {IoIosLogOut} from "react-icons/io";
+import avatar from "./avatar.jpg";
+import * as authenticationService from "../../core/services/AuthenticationService";
+import {toast} from "react-toastify";
 
 export function Header(props){
     const [countProduct, setCountProduct] = useState(props.countProduct);
     const [isShowSidebar, setIsShowSidebar] = useState(props.closeSidebar);
+    const [roleName, setRoleName] = useState("");
+    const [fullName, setFullName] = useState("");
+    const [avatarUrl, setAvatarUrl] = useState("");
+    const [isShowUserMenu, setIsShowUserMenu] = useState(false);
     const {register, handleSubmit} = useForm({
         criteriaMode: "all"
     });
@@ -16,6 +26,8 @@ export function Header(props){
     useEffect(()=>{
         const fetchData = async () => {
             await getCountProductFromService();
+            await getRoleName();
+            getFullName();
         }
         fetchData();
     }, []);
@@ -38,6 +50,33 @@ export function Header(props){
 
     const navigate = useNavigate();
 
+
+    const getRoleName = async () => {
+        const role = await authenticationService.getRole();
+        if (role === 'ROLE_ADMIN') {
+            setRoleName("admin");
+        }
+        if (role === 'ROLE_WAREHOUSE') {
+            setRoleName("warehouse");
+        }
+        if (role === 'ROLE_SALESMAN') {
+            setRoleName("salesman");
+        }
+        if (role === 'ROLE_MANAGER') {
+            setRoleName("storeManager");
+        }
+    }
+
+    const getFullName = () => {
+        const fullName = localStorage.getItem('fullName')
+        setFullName(fullName);
+    }
+
+    const getAvatar = () => {
+        const avatar = localStorage.getItem('avatar')
+        setAvatarUrl(avatar)
+    }
+
     const onSubmit = (data) => {
         searchProductByName(data.nameSearch);
     }
@@ -53,6 +92,27 @@ export function Header(props){
             return newState;
         });
     };
+
+    const handleShowUserMenu = () => {
+        setIsShowUserMenu(!isShowUserMenu);
+    }
+
+    const handleLogout = async () => {
+        try {
+            const temp = authenticationService.logout();
+            toast.success(temp);
+            navigate("/login");
+            localStorage.removeItem('token');
+            localStorage.removeItem('role');
+            localStorage.removeItem('fullName');
+            localStorage.removeItem('avatar');
+            localStorage.removeItem('id');
+            localStorage.removeItem('isAuthenticated')
+            localStorage.removeItem('lastTime');
+        } catch (e) {
+            toast.error(e.message);
+        }
+    }
 
     return(
         <div className="head">
@@ -80,6 +140,8 @@ export function Header(props){
                 </Link>
             </div>
             <div className="login">
+
+                { fullName === '' &&
                 <Link to="/login">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path d="M352 96l64 0c17.7 0 32 14.3 32 32l0 256c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32 14.3-32
@@ -90,6 +152,32 @@ export function Header(props){
                     </svg>
                     <span>Đăng nhập</span>
                 </Link>
+                }
+
+                <div className="user-box show-dropdown" onClick={handleShowUserMenu}>
+                    <div className="avatar">
+                        {avatarUrl ? <img src={avatarUrl} alt="avatar"/> : <img src={avatar} alt="avatar"/>}
+                    </div>
+                    <div className="username">{fullName}</div>
+                    <TiArrowSortedDown/>
+                </div>
+                    <div className={isShowUserMenu ? "dropdown-content show" : "dropdown-content"}>
+                        <div className="user-full-name">
+                            <div className="avatar">
+                                {avatarUrl ? <img src={avatarUrl} alt="avatar"/> : <img src={avatar} alt="avatar"/>}
+                            </div>
+                            {fullName}
+                        </div>
+                        <Link to={`/dashboard/${roleName}/infor`}>
+                            <FaRegUserCircle/>
+                            Thông tin cá nhân
+                        </Link>
+                        <a onClick={handleLogout}>
+                            <IoIosLogOut/>
+                            Đăng xuất
+                        </a>
+                    </div>
+
             </div>
         </div>
     );

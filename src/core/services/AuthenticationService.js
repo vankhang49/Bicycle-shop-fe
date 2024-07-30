@@ -3,6 +3,7 @@ import {jwtDecode} from "jwt-decode";
 import axiosInstance from "../../utils/axiosInstance";
 
 const baseURL = "http://localhost:8080";
+axios.defaults.withCredentials = true;
 
 const rememberMe = {
     "remember" : false,
@@ -27,6 +28,7 @@ export const getRemember = () => {
 export const login = async (data) => {
     try {
         const response = await axios.post(`${baseURL}/api/auth/authenticate`, data)
+        console.log(response.data)
         return response.data;
     } catch (e) {
         console.log(e);
@@ -42,9 +44,10 @@ export const register = async (userData) => {
     }
 }
 
-export const getYourProfile = async (token) => {
+export const getYourProfile = async () => {
     try{
         const response = await axiosInstance.get(`get-profile`);
+        console.log(response.data)
         return response.data;
     }catch(err){
         console.log(err);
@@ -63,42 +66,45 @@ export const updatePasswordUser = async (userData, token) => {
 }
 
 /**AUTHENTICATION CHECKER */
-export const logout = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('role')
-    localStorage.removeItem('fullName')
-
+export const logout = async () => {
+    try {
+        const userId = localStorage.getItem("id");
+        const response = await axiosInstance.post(`${baseURL}/api/auth/logout?userId=${userId}`)
+        return response.data;
+    } catch (e) {
+        e.message = "Đăng xuất thất bại!";
+        throw e;
+    }
 }
 
-export const isAuthenticated = () =>{
-    const token = localStorage.getItem('token');
-    return !!token
+export const getRole = async () => {
+    try {
+        const response = await axiosInstance.get(`${baseURL}/api/auth/user-role`)
+        return response.data;
+    } catch (e) {
+        console.log(e);
+    }
 }
 
-export const isAdmin = () =>{
-    const token = localStorage.getItem('token')
-    const decodedToken = jwtDecode(token);
-    return decodedToken.roles === 'ROLE_ADMIN';
+export const isAdmin = async () =>{
+    const roleName = await getRole();
+    return roleName === 'ROLE_ADMIN';
+}
+export const isWarehouse = async () =>{
+    const roleName = await getRole();
+    return roleName === 'ROLE_WAREHOUSE';
 }
 
-export const isCustomer = () =>{
-    const token = localStorage.getItem('token')
-    const decodedToken = jwtDecode(token);
-    return decodedToken.roles === 'ROLE_CUSTOMER';
+export const isSalesMan = async () =>{
+    const roleName = await getRole();
+    return roleName === 'ROLE_SALESMAN';
 }
 
-export const isEmployee = () =>{
-    const token = localStorage.getItem('token')
-    const decodedToken = jwtDecode(token);
-    return decodedToken.roles === 'ROLE_EMPLOYEE';
-}
-
-export const isStoreManager = () =>{
-    const token = localStorage.getItem('token')
-    const decodedToken = jwtDecode(token);
-    return decodedToken.roles === 'ROLE_MANAGER';
+export const isStoreManager = async () =>{
+    const roleName = await getRole();
+    return roleName === 'ROLE_MANAGER';
 }
 
 export const adminOnly = () =>{
-    return this.isAuthenticated() && this.isAdmin();
+    return localStorage.getItem('isAuthenticated') && this.isAdmin();
 }

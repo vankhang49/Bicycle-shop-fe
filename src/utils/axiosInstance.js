@@ -5,14 +5,11 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 const axiosInstance = axios.create({
   baseURL: `${apiUrl}/api/auth`,
+  withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const accessToken = localStorage.getItem("token")
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
-    }
     return config;
   },
   (error) => {

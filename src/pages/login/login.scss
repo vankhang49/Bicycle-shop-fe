@@ -78,6 +78,14 @@
           input:not(:placeholder-shown) {
             color: #FFF;
           }
+
+          svg {
+            position: absolute;
+            top: 16px;
+            right: 10px;
+            color: #fff;
+          }
+
           .icon{
             position: absolute;
             right: 8px;
@@ -86,6 +94,30 @@
             top: 20px;
           }
         }
+
+        .popup {
+          width: 250px;
+          height: 80px;
+          border: 2px solid #a89090;
+          position: absolute;
+          top: -15%;
+          left: 10%;
+          /*display: flex;*/
+          justify-content: center;
+          align-items: center;
+          background-color: #EEEDEF;
+          display: none;
+          border-radius: 1.125rem 1.125rem 1.125rem 0;
+
+          .validate-error {
+            text-align: left;
+            padding: 10px;
+            color: #da1075;
+            font-size: 16px;
+            font-weight: 600;
+          }
+        }
+
         .forget {
           margin: -15px 0 15px;
           font-size: .9em;
@@ -116,6 +148,11 @@
           cursor: pointer;
           font-size: 1em;
           font-weight: 600;
+
+          img {
+            width: 30px;
+            height: 30px;
+          }
         }
         .register {
           font-size: .9em;
