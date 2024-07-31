@@ -4,7 +4,7 @@ import Modal from "../../components/modal/Modal";
 import {useEffect, useState} from "react";
 import warning from "../../assets/images/warning.png";
 import * as productsService from "../../core/services/ProductService";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {Filter} from "../../components/filter/Filter";
 import {Main} from "../../components/Main/Main";
 import { CiFilter } from "react-icons/ci";
@@ -37,7 +37,7 @@ export function AllProduct() {
     }
 
     const showDetailProduct = (productId) => {
-        navigate("/products/detail", {state: {id: productId}});
+        navigate("/Bicycle-shop-fe/products/detail", {state: {id: productId}});
     }
 
     const updateBrandName = (newBrandName) => {
@@ -71,37 +71,38 @@ export function AllProduct() {
                             {products && products.map((product, index) => (
                                 <li key={index}>
                                     <div className="products-top">
-                                        <a onClick={() => showDetailProduct(product.productId)}
+                                        <Link to={`/Bicycle-shop-fe/products/detail/${product.productId}`}
                                            className="product-thumb">
                                             <img src={product.productImages[0].imageUrl} alt="1"/>
-                                        </a>
+                                        </Link>
                                         <p className="buy-now">Mua ngay</p>
                                     </div>
                                     <div className="product-info">
                                         <span className="product-code info-element">{product.productCode}</span>
-                                        <a onClick={() => showDetailProduct(product.productId)}
-                                           className="product-name info-element">{product.productName}</a>
+                                        <Link to={`/Bicycle-shop-fe/products/detail/${product.productId}`}
+                                           className="product-name info-element">{product.productName}
+                                        </Link>
                                         <div>
-                                        <span className="product-price product-price-old info-element">
-                                            {product.pricingList ?
-                                                (product.pricingList.length > 1 && (product.pricingList[0].price
-                                                        !== product.pricingList[product.pricingList.length - 1].price) ?
-                                                        (product.pricingList[0].price + " - "
-                                                            + product.pricingList[product.pricingList.length - 1].price + " VNĐ")
-                                                        : (product.pricingList[0].price + " VNĐ")
-                                                ) : ""}
-                                        </span>
+                                            <span className="product-price product-price-old info-element">
+                                                {product.pricingList ?
+                                                    (product.pricingList.length > 1 && (product.pricingList[0].price
+                                                            !== product.pricingList[product.pricingList.length - 1].price) ?
+                                                            (product.pricingList[0].price + " - "
+                                                                + product.pricingList[product.pricingList.length - 1].price + " VNĐ")
+                                                            : (product.pricingList[0].price + " VNĐ")
+                                                    ) : ""}
+                                            </span>
                                         </div>
                                         <div>
-                                        <span className="product-price info-element">
-                                            {product.pricingList ?
-                                                (product.pricingList.length > 1 && (product.pricingList[0].price
-                                                        !== product.pricingList[product.pricingList.length - 1].price) ?
-                                                        (product.pricingList[0].price + " - "
-                                                            + product.pricingList[product.pricingList.length - 1].price + " VNĐ")
-                                                        : (product.pricingList[0].price + " VNĐ")
-                                                ) : ""}
-                                        </span>
+                                            <span className="product-price info-element">
+                                                {product.pricingList ?
+                                                    (product.pricingList.length > 1 && (product.pricingList[0].price
+                                                            !== product.pricingList[product.pricingList.length - 1].price) ?
+                                                            (product.pricingList[0].price + " - "
+                                                                + product.pricingList[product.pricingList.length - 1].price + " VNĐ")
+                                                            : (product.pricingList[0].price + " VNĐ")
+                                                    ) : ""}
+                                            </span>
                                         </div>
                                     </div>
                                 </li>

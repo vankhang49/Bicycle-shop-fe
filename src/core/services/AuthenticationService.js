@@ -1,8 +1,7 @@
 import axios from "axios";
-import {jwtDecode} from "jwt-decode";
 import axiosInstance from "../../utils/axiosInstance";
 
-const baseURL = "http://localhost:8080";
+const baseURL = "http://192.168.55.102:8080";
 axios.defaults.withCredentials = true;
 
 const rememberMe = {

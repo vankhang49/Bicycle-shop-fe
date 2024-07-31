@@ -174,9 +174,13 @@ export function CreateProduct() {
 
     const onSubmit = async (data) => {
         try {
+            if (data.brand === '') {
+                data.brand = null;
+            } else {
+                data.brand = JSON.parse(data.brand);
+            }
             console.log(data)
             data.productFamily = JSON.parse(data.productFamily);
-            data.brand = JSON.parse(data.brand);
             data.pricingList = data.pricingList.map(item => ({
                 ...item,
                 color: JSON.parse(item.color),
@@ -193,7 +197,7 @@ export function CreateProduct() {
                await productService.updateProduct(data);
                 toast.success("Cập nhật thành công!");
             }
-            navigate("/dashboard/products");
+            navigate("/Bicycle-shop-fe/dashboard/products");
         } catch (error) {
             toast.error(error.message);
         }

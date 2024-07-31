@@ -1,4 +1,4 @@
-
+import axiosInstance from "../../utils/axiosInstance";
 
 const cart = new Map();
 
@@ -14,10 +14,63 @@ export const setQuantityForPriceOfProduct = async (cartItem, quantity) => {
     cart.set(cartItem, quantity);
 }
 
-export const deleteFromCart = async (cartItem) => {
+export const deleteFromCartService = async (cartItem) => {
     cart.delete(cartItem);
 }
 
 export const getCountProductByProductInCart = async () => {
     return cart.size;
+}
+
+
+export const getCartFromServer = async () => {
+    try {
+        const userId = localStorage.getItem("id");
+        const temp = await axiosInstance.get(`shopping-cart?userId=${userId}`);
+        const data = temp.data;
+
+        cart.clear(); // Clear local cart before syncing
+
+        await temp.data.map(async (cartItem) => (
+            await addCart(cartItem.pricing, cartItem.quantity)
+        ));
+        return data;
+    } catch (e) {
+        return [];
+    }
+}
+
+export const saveCartToServer = async (pricing, quantity) => {
+    try {
+        const userId = localStorage.getItem("id");
+        const cartItem = {
+            "pricing" : pricing,
+            "quantity" : quantity,
+        }
+        const temp = await axiosInstance.post(`shopping-cart?userId=${userId}`, cartItem);
+        console.log(temp.data);
+        return temp.data;
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+export const deleteCartItemToServer = async (priceId) => {
+    try {
+        const userId = localStorage.getItem("id");
+        const temp = await axiosInstance.delete(`shopping-cart/delete-from-cart?priceId=${priceId}&userId=${userId}`);
+        console.log(temp.data);
+        return temp.data;
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+export const updateQuantityCartItemToServer = async (priceId, cartItem) => {
+    try {
+        const userId = localStorage.getItem("id");
+        const temp = await axiosInstance.put(`shopping-cart?userId=${userId}&priceId=${priceId}`, cartItem);
+    } catch (e) {
+        console.log(e)
+    }
 }

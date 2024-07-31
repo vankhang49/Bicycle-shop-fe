@@ -1,9 +1,8 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useForm} from "react-hook-form";
 import "./header.scss";
 import logo from "../../assets/images/logo-bike.png"
 import {Link, useNavigate} from "react-router-dom";
-import * as cartService from "../../core/services/CartService";
 import { IoMenu } from "react-icons/io5";
 import {TiArrowSortedDown} from "react-icons/ti";
 import {FaRegUserCircle} from "react-icons/fa";
@@ -11,9 +10,13 @@ import {IoIosLogOut} from "react-icons/io";
 import avatar from "./avatar.jpg";
 import * as authenticationService from "../../core/services/AuthenticationService";
 import {toast} from "react-toastify";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchCount} from "../../core/redux/actions/CartActions";
 
 export function Header(props){
-    const [countProduct, setCountProduct] = useState(props.countProduct);
+    const isAuthenticated = !!localStorage.getItem("isAuthenticated");
+    const dispatch = useDispatch();
+    const countProduct = useSelector(state => state.cart.countProduct);
     const [isShowSidebar, setIsShowSidebar] = useState(props.closeSidebar);
     const [roleName, setRoleName] = useState("");
     const [fullName, setFullName] = useState("");
@@ -23,49 +26,31 @@ export function Header(props){
         criteriaMode: "all"
     });
 
-    useEffect(()=>{
+    useEffect(() => {
+        dispatch(fetchCount()); // Fetch the count of products
+
         const fetchData = async () => {
-            await getCountProductFromService();
             await getRoleName();
             getFullName();
-        }
+            getAvatar();
+        };
         fetchData();
-    }, []);
+    }, [dispatch]);
 
-    useEffect(()=>{
-        const fetchData = async () => {
-            await getCountProductFromService();
-        }
-        fetchData();
-    }, [props.countProduct]);
-
-    useEffect(()=>{
+    useEffect(() => {
         setIsShowSidebar(props.closeSidebar);
     }, [props.closeSidebar]);
-
-    const getCountProductFromService = async () => {
-        const temp = await cartService.getCountProductByProductInCart();
-        setCountProduct(temp);
-    }
 
     const navigate = useNavigate();
 
 
     const getRoleName = async () => {
         const role = await authenticationService.getRole();
-        if (role === 'ROLE_ADMIN') {
-            setRoleName("admin");
-        }
-        if (role === 'ROLE_WAREHOUSE') {
-            setRoleName("warehouse");
-        }
-        if (role === 'ROLE_SALESMAN') {
-            setRoleName("salesman");
-        }
-        if (role === 'ROLE_MANAGER') {
-            setRoleName("storeManager");
-        }
-    }
+        if (role === 'ROLE_ADMIN') setRoleName("admin");
+        if (role === 'ROLE_WAREHOUSE') setRoleName("warehouse");
+        if (role === 'ROLE_SALESMAN') setRoleName("salesman");
+        if (role === 'ROLE_MANAGER') setRoleName("storeManager");
+    };
 
     const getFullName = () => {
         const fullName = localStorage.getItem('fullName')
@@ -82,7 +67,7 @@ export function Header(props){
     }
 
     const searchProductByName = (productName) => {
-        navigate("/products/all-products", {state:{nameSearch: productName}});
+        navigate("/Bicycle-shop-fe/products/", {state:{nameSearch: productName}});
     }
 
     const handleShowSidebar = () => {
@@ -101,14 +86,8 @@ export function Header(props){
         try {
             const temp = authenticationService.logout();
             toast.success(temp);
-            navigate("/login");
-            localStorage.removeItem('token');
-            localStorage.removeItem('role');
-            localStorage.removeItem('fullName');
-            localStorage.removeItem('avatar');
-            localStorage.removeItem('id');
-            localStorage.removeItem('isAuthenticated')
-            localStorage.removeItem('lastTime');
+            navigate("/Bicycle-shop-fe/login");
+            localStorage.clear();
         } catch (e) {
             toast.error(e.message);
         }
@@ -120,7 +99,9 @@ export function Header(props){
                 <IoMenu/>
             </div>
             <div className="logo">
+                <Link to="/Bicycle-shop-fe">
                 <img src={logo} alt="logo"/>
+                </Link>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="search-bar">
                 <input {...register("nameSearch")} type="text" className="searching"
@@ -128,7 +109,7 @@ export function Header(props){
                 <button type="submit" className="btn">Search</button>
             </form>
             <div className="cart">
-                <Link to="/cart">
+                <Link to="/Bicycle-shop-fe/cart">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                         <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6
                      50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6
@@ -141,8 +122,8 @@ export function Header(props){
             </div>
             <div className="login">
 
-                { fullName === '' &&
-                <Link to="/login">
+                { !isAuthenticated &&
+                <Link to="/Bicycle-shop-fe/login">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path d="M352 96l64 0c17.7 0 32 14.3 32 32l0 256c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32 14.3-32
                     32s14.3 32 32 32l64 0c53 0 96-43 96-96l0-256c0-53-43-96-96-96l-64 0c-17.7 0-32 14.3-32 32s14.3 32
@@ -151,16 +132,17 @@ export function Header(props){
                     45.3s32.8 12.5 45.3 0l128-128z"/>
                     </svg>
                     <span>Đăng nhập</span>
-                </Link>
-                }
-
-                <div className="user-box show-dropdown" onClick={handleShowUserMenu}>
-                    <div className="avatar">
-                        {avatarUrl ? <img src={avatarUrl} alt="avatar"/> : <img src={avatar} alt="avatar"/>}
+                </Link>}
+                {isAuthenticated &&
+                    <div className="user-box show-dropdown" onClick={handleShowUserMenu}>
+                        <div className="avatar">
+                            {avatarUrl ? <img src={avatarUrl} alt="avatar"/> : <img src={avatar} alt="avatar"/>}
+                        </div>
+                        <div className="username">{fullName}</div>
+                        <TiArrowSortedDown/>
                     </div>
-                    <div className="username">{fullName}</div>
-                    <TiArrowSortedDown/>
-                </div>
+                }
+                {isAuthenticated &&
                     <div className={isShowUserMenu ? "dropdown-content show" : "dropdown-content"}>
                         <div className="user-full-name">
                             <div className="avatar">
@@ -168,7 +150,7 @@ export function Header(props){
                             </div>
                             {fullName}
                         </div>
-                        <Link to={`/dashboard/${roleName}/infor`}>
+                        <Link to={`/Bicycle-shop-fe/dashboard/${roleName}/infor`}>
                             <FaRegUserCircle/>
                             Thông tin cá nhân
                         </Link>
@@ -177,7 +159,7 @@ export function Header(props){
                             Đăng xuất
                         </a>
                     </div>
-
+                }
             </div>
         </div>
     );

@@ -29,7 +29,7 @@ axiosInstance.interceptors.response.use(
         localStorage.removeItem('avatar');
       toast.warning("Đã hết phiên đăng nhập");
       setTimeout(() => {
-        window.location.href = '/login';
+        window.location.href = '/Bicycle-shop-fe/login';
       }, 3000);
     }else if(error.code === "ERR_NETWORK"){
 

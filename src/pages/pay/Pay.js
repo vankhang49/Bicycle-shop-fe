@@ -7,6 +7,8 @@ import {Main} from "../../components/Main/Main";
 import {Link} from "react-router-dom";
 import {FaRegUserCircle} from "react-icons/fa";
 import * as authenticationService from "../../core/services/AuthenticationService";
+import {useDispatch} from "react-redux";
+import {fetchCartFromServer, fetchCount} from "../../core/redux/actions/CartActions";
 
 export function Pay() {
     const isAuthenticated = !!localStorage.getItem("isAuthenticated");
@@ -15,6 +17,8 @@ export function Pay() {
     const {register, handleSubmit, setValue, formState: {errors}} = useForm({
         criteriaMode: "all"
     });
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -51,10 +55,12 @@ export function Pay() {
             data.billItems = changeToBillItem();
             console.log(data)
             await billService.pay(data);
+            console.log("Thêm mới thành công!");
+            dispatch(fetchCartFromServer());
+            dispatch(fetchCount());
         } catch (error) {
             console.log(error)
         }
-        console.log("Thêm mới thành công!");
     }
 
     const changeToBillItem = () => {
@@ -74,7 +80,7 @@ export function Pay() {
                         <div className="left-title">
                             <h3>THÔNG TIN GIAO HÀNG</h3>
                             {!isAuthenticated &&
-                                <Link to='/login'><FaRegUserCircle/>Đăng nhập</Link>
+                                <Link to='/Bicycle-shop-fe/login'><FaRegUserCircle/>Đăng nhập</Link>
                             }
                         </div>
 

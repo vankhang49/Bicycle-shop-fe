@@ -8,34 +8,36 @@ import {Header} from "../../components/header/Header";
 import {NavBar} from "../../components/navbar/NavBar";
 import {useEffect, useState} from "react";
 import * as productService from "../../core/services/ProductService";
-import {useLocation} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import * as pricingService from "../../core/services/PricingService";
 import * as cartService from "../../core/services/CartService";
 import {RelatedProducts} from "../../components/relatedProducts/RelatedProducts";
 import FooterHome from "../../components/Footer/FooterHome";
 import {Main} from "../../components/Main/Main";
+import {useDispatch, useSelector} from "react-redux";
+import {addToCart, fetchCartFromService, fetchCount} from "../../core/redux/actions/CartActions";
 
 export function ProductDetail() {
     const [product, setProduct] = useState({});
     const [pricing, setPricing] = useState({});
     const [pricingList, setPricingList] = useState([]);
-    const {state} = useLocation();
+    const { productId } = useParams();
     const [amount, setAmount] = useState(1);
     const [size, setSize] = useState('');
     const [color, setColor] = useState(null);
     const [imgElement, setImgElement] = useState(bicycle);
     const [selectedButton, setSelectedButton] = useState(null);
-    const [cart, setCart] = useState(new Map());
-    const [isRenderHeader, setIsRenderHeader] = useState(false);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const fetchData = async () => {
-            await getProductByProductId(state.id);
-            await getListPricing(state.id);
-            getCartFromService();
-        }
+            await getProductByProductId(productId);
+            await getListPricing(productId);
+            dispatch(fetchCartFromService()); // Fetch cart when component mounts
+        };
         fetchData();
-    }, [state.id]);
+    }, [productId, dispatch]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -55,11 +57,6 @@ export function ProductDetail() {
     const getListPricing = async (productId) => {
         const temp = await pricingService.getAllPricingByProductId(productId);
         setPricingList(temp);
-    }
-
-    const getCartFromService = () => {
-        const temp = cartService.getCart();
-        setCart(temp);
     }
 
     const changeImgUrl = (url) => {
@@ -90,17 +87,15 @@ export function ProductDetail() {
     }
 
     const handleAddToCart = async () => {
-        if (pricing !== undefined && !cart.has(pricing)) {
-            await cartService.addCart(pricing, amount);
-            await getCartFromService();
-            setIsRenderHeader(prev => !prev);
-        } else {
-            setIsRenderHeader(false);
+        if (pricing) {
+            await dispatch(addToCart(pricing, amount));
+            await dispatch(fetchCartFromService());
+            dispatch(fetchCount());
         }
     }
 
     return (
-        <Main reRender={isRenderHeader} content={
+        <Main content={
             <div className="container">
                 <div className="content-view">
                     <div className="product-card">

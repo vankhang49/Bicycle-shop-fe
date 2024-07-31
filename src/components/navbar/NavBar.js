@@ -71,12 +71,12 @@ export function NavBar(props) {
             </div>
             <ul>
                 <li className="dropdown">
-                    <Link className={"dropdown-thumb"} to="/">Trang chủ</Link>
+                    <Link className={"dropdown-thumb"} to="/Bicycle-shop-fe">Trang chủ</Link>
                 </li>
                 {categories && categories.map(category => (
                     <li className="dropdown" key={category.categoryId}>
                         <Link className={"dropdown-thumb"} key={category.categoryId}
-                              to={`/products/${category.categoryName}`}>
+                              to={`/Bicycle-shop-fe/products/${category.categoryName}`}>
                             <span>{category.categoryName}</span>
                             <button><IoIosArrowDown /></button>
                         </Link>
@@ -84,14 +84,14 @@ export function NavBar(props) {
                             {productFamilies && productFamilies.filter((family) =>
                                 family.category.categoryId === category.categoryId
                             ).map((family) => (
-                                <Link to={`/products/${category.categoryName}/${family.familyName}`}
+                                <Link to={`/Bicycle-shop-fe/products/${category.categoryName}/${family.familyName}`}
                                       key={family.familyId}>{family.familyName}</Link>
                             ))}
                         </div>
                     </li>
                 ))}
                 <li className="dropdown">
-                    <Link className={"dropdown-thumb"} to="/about-us">Về chúng tôi</Link>
+                    <Link className={"dropdown-thumb"} to="/Bicycle-shop-fe/about-us">Về chúng tôi</Link>
                 </li>
             </ul>
         </div>

@@ -60,7 +60,7 @@ export function Login() {
                         authenticationService.setDefaultRemember();
                         localStorage.removeItem("rememberMe");
                     }
-                    navigate("/");
+                    navigate("/Bicycle-shop-fe");
                     toast.success("Đăng nhập thành công!");
                 } else {
                     setLoginError(userData.message);

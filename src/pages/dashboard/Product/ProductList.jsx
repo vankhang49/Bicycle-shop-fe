@@ -1,12 +1,10 @@
 import {DashboardMain} from "../../../components/DashboardMain/DashboardMain";
-import {TiArrowSortedDown} from "react-icons/ti";
-import {TiArrowSortedUp} from "react-icons/ti";
 import {TiArrowUnsorted} from "react-icons/ti";
 import {MdOutlineModeEdit} from "react-icons/md";
 import {BiSolidShow} from "react-icons/bi";
 import {IoTrashSharp} from "react-icons/io5";
 import "./ProductList.scss";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import * as productsService from "../../../core/services/ProductService";
 import warning from "../../../assets/images/warning.png";
@@ -71,7 +69,7 @@ export function ProductList() {
                                    placeholder="Nhập nội dung tìm kiếm"/>
                             <button className="btn btn-search">Tìm kiếm</button>
                         </form>
-                        <Link to="/dashboard/products/create" className="link-move">Thêm mới sản phẩm</Link>
+                        <Link to="/Bicycle-shop-fe/dashboard/products/create" className="link-move">Thêm mới sản phẩm</Link>
                     </div>
                     <div className="box-content">
                         <p>Danh sách sản phẩm</p>
@@ -117,7 +115,7 @@ export function ProductList() {
                                         <a>
                                             <BiSolidShow fill="#3dc8d8"/>
                                         </a>
-                                        <Link to={`/dashboard/products/create/${product.productId}`}>
+                                        <Link to={`/Bicycle-shop-fe/dashboard/products/create/${product.productId}`}>
                                             <MdOutlineModeEdit fill="#00a762"/>
                                         </Link>
                                         <a>

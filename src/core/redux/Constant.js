@@ -1,1 +1,1 @@
-export const GET_ALL_BICYCLE = "GET_ALL_BICYCLE";
+export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";

@@ -7,7 +7,7 @@ export const isAuthenticated = () =>{
 }
 
 const PrivateRoute = ({ element }) => {
-  return isAuthenticated() ? element : <Navigate to="/login" />;
+  return isAuthenticated() ? element : <Navigate to="/Bicycle-shop-fe/login" />;
 };
 
 export default PrivateRoute;

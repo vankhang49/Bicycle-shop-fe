@@ -1,28 +1,32 @@
 import "./Cart.scss";
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
-import * as cartService from "../../core/services/CartService";
 import {Main} from "../../components/Main/Main";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchCount} from "../../core/redux/actions/CartActions";
+import * as cartService from "../../core/services/CartService";
 
 export function Cart() {
+    const dispatch = useDispatch();
     const [cart, setCart] = useState([]);
-    const [isRenderHeader, setIsRenderHeader] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
-            await getCartFromService();
+            await getCart();
         }
-        fetchData();
+        fetchData().then().catch(console.error);
     }, [])
 
-    const getCartFromService = async () => {
-        const temp = await cartService.getCart();
+    const getCart =  () => {
+        const temp = cartService.getCart();
         setCart(Array.from(temp));
     }
 
-    const handleChangeQuantityForPOP = async (cartItem, quantity) => {
-        await cartService.setQuantityForPriceOfProduct(cartItem, quantity);
-        await getCartFromService();
+    const handleChangeQuantityForPOP = async (pricing, newQuantity) => {
+        if (newQuantity <= 0) return;
+        await cartService.setQuantityForPriceOfProduct(pricing, newQuantity);
+        const updatedCart = cartService.getCart();
+        setCart(Array.from(updatedCart.entries()));
     }
 
     const calculateTotalPrice = () => {
@@ -30,21 +34,23 @@ export function Cart() {
     }
 
     const deleteCartItemFormCart = async (cartItem) => {
-        await cartService.deleteFromCart(cartItem);
-        await getCartFromService();
-        setIsRenderHeader(prev => !prev);
+        await cartService.deleteFromCartService(cartItem);
+        await cartService.deleteCartItemToServer(cartItem.priceId);
+        const updatedCart = cartService.getCart();
+        setCart(Array.from(updatedCart.entries()));
+        dispatch(fetchCount());
     }
 
     return (
-        <Main reRender={isRenderHeader} content={
+        <Main content={
                 <div className="content-cart">
                     <div className="head-body-content">
                         <h3>Giỏ hàng</h3>
-                        <span>Bạn có {cart.size} sản phẩm trong giỏ hàng</span>
+                        <span>Bạn có {cart.length} sản phẩm trong giỏ hàng</span>
                     </div>
                     <div className="carts">
-                        {cart.map((item) => (
-                            <div className="product-cart">
+                        {cart && cart.map((item) => (
+                            <div className="product-cart" key={item[0].priceId}>
                                 <div className="products-left">
                                 <span className="product-thumb">
                                   <img src={item[0].imgColor} alt="image"/>
@@ -52,7 +58,8 @@ export function Cart() {
                                 </div>
                                 <div className="products-right">
                                     <div className="name">
-                                        <a href="#" className="name-product">{item[0].priceName}</a>
+                                        <Link to={`/Bicycle-shop-fe/products/detail/${item[0].product.productId}`}
+                                              className="name-product">{item[0].priceName}</Link>
                                         <a onClick={()=>deleteCartItemFormCart(item[0])}>X</a>
                                     </div>
                                     { item[0].size !== '' ?
@@ -68,10 +75,10 @@ export function Cart() {
                                     <div className="amount-price">
                                         <div className="btn-ud">
                                             <button id="decrease_button"
-                                               onClick={() => handleChangeQuantityForPOP(item[0], --item[1])}>-</button>
+                                               onClick={() => handleChangeQuantityForPOP(item[0], item[1] - 1)}>-</button>
                                             <input type="text" className="symbol" value={item[1]}/>
                                             <button id="increase_button"
-                                               onClick={() => handleChangeQuantityForPOP(item[0], ++item[1])}>+</button>
+                                               onClick={() => handleChangeQuantityForPOP(item[0], item[1] + 1)}>+</button>
                                         </div>
                                         <div className="price">
                                             <span>{item[0].price.toLocaleString()} VNĐ</span>
@@ -97,10 +104,10 @@ export function Cart() {
                                     96-96h96v64c0 12.6 7.4 24.1 19 29.2s25 3 34.4-5.4l160-144c6.7-6.1 10.6-14.7
                                     10.6-23.8s-3.8-17.7-10.6-23.8l-160-144c-9.4-8.5-22.9-10.6-34.4-5.4z"/>
                                 </svg>
-                                <Link to={"/products"}>Tiếp tục mua hàng</Link>
+                                <Link to={"/Bicycle-shop-fe/products"}>Tiếp tục mua hàng</Link>
                             </button>
                             <button id="pay" className="button-yellow">
-                                <Link to={"/pay"}>Thanh toán</Link>
+                                <Link to={"/Bicycle-shop-fe/pay"}>Thanh toán</Link>
                             </button>
                         </div>
                     </div>

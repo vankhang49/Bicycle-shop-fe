@@ -16,68 +16,68 @@ import {Bills} from "../pages/dashboard/Bill/Bills";
 
 export const projectRouter = [
     {
-        path: '/',
+        path: '/Bicycle-shop-fe',
         element: <HomePage/>,
         exact: true,
     },
     {
-        path: '/products/:categoryName',
+        path: '/Bicycle-shop-fe/products/:categoryName',
         element: <AllProduct/>,
     },
     {
-        path: '/products/:categoryName/:familyName',
+        path: '/Bicycle-shop-fe/products/:categoryName/:familyName',
         element: <AllProduct/>,
     },
     {
-        path: '/products/detail',
+        path: '/Bicycle-shop-fe/products/detail/:productId',
         element: <ProductDetail/>,
     },
     {
-        path: '/products/create',
+        path: '/Bicycle-shop-fe/products/create',
         element: <CreateProduct/>,
     },
     {
-        path: '/about-us',
+        path: '/Bicycle-shop-fe/about-us',
         element: <AboutUs/>,
     },
     {
-        path: '/cart',
+        path: '/Bicycle-shop-fe/cart',
         element: <Cart/>,
     },
     {
-        path: '/pay',
+        path: '/Bicycle-shop-fe/pay',
         element: <Pay/>,
     },
     {
-        path: '/login',
+        path: '/Bicycle-shop-fe/login',
         element: <Login/>,
     },
     {
-        path: '/dashboard',
+        path: '/Bicycle-shop-fe/dashboard',
         element: <Dashboard/>,
     },
     {
-        path: '/dashboard/products',
+        path: '/Bicycle-shop-fe/dashboard/products',
         element: <ProductList/>,
     },
     {
-        path: '/dashboard/products/create',
+        path: '/Bicycle-shop-fe/dashboard/products/create',
         element: <CreateProduct/>,
     },
     {
-        path: '/dashboard/products/create/:id',
+        path: '/Bicycle-shop-fe/dashboard/products/create/:id',
         element: <CreateProduct/>,
     },
     {
-        path: '/dashboard/customers',
+        path: '/Bicycle-shop-fe/dashboard/customers',
         element: <Customer/>,
     },
     {
-        path: '/dashboard/bills',
+        path: '/Bicycle-shop-fe/dashboard/bills',
         element: <Bills/>,
     },
     {
-      path: '/dashboard/setting',
+      path: '/Bicycle-shop-fe/dashboard/setting',
       element: <Setting/>,
     },
     {

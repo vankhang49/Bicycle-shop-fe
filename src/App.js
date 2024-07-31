@@ -2,8 +2,18 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import "./assets/css/global.scss";
 import {projectRouter} from "./routes/ProjectRouter";
 import PrivateRoute from './utils/PrivateRoute';
+import {useDispatch} from "react-redux";
+import {fetchCartFromServer} from "./core/redux/actions/CartActions";
+import {useEffect} from "react";
 
 function App() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchCartFromServer());
+
+    }, [dispatch]);
+
   return (
       <Router>
           <Routes>

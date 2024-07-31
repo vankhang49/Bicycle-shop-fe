@@ -5,10 +5,9 @@ import {useEffect, useState} from "react";
 import * as cartService from "../../core/services/CartService";
 
 
-export const Main = ({ reRender, content }) => {
+export const Main = ({ content }) => {
     const [isShowSidebar, setIsShowSidebar] = useState(false);
     const [countProduct, setCountProduct] = useState(0);
-    const [cart, setCart] = useState(new Map());
 
     const callbackFunction = (childData) => {
         setIsShowSidebar(childData);
@@ -20,13 +19,6 @@ export const Main = ({ reRender, content }) => {
         }
         fetchData().then().catch();
     }, []);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            await getCountProduct();
-        };
-        fetchData().catch();
-    }, [reRender]);
 
     const getCountProduct = async () => {
         const temp = await cartService.getCountProductByProductInCart();

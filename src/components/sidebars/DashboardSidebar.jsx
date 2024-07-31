@@ -13,6 +13,7 @@ import { CiCirclePlus } from "react-icons/ci";
 import { TbLogout } from "react-icons/tb";
 import { IoCloseSharp } from "react-icons/io5";
 import { AiOutlineProduct } from "react-icons/ai";
+import { FaHome } from "react-icons/fa";
 import {Link} from "react-router-dom";
 
 export function DashboardSidebar(props) {
@@ -41,19 +42,19 @@ export function DashboardSidebar(props) {
                 </div>
             </div>
             <div className={styles.sidebar}>
-                <Link to="/dashboard">
+                <Link to="/Bicycle-shop-fe/dashboard">
                     <MdDashboard />
                     <h3>Dashboard</h3>
                 </Link>
-                <Link to="/dashboard/products">
+                <Link to="/Bicycle-shop-fe/dashboard/products">
                     <AiOutlineProduct />
                     <h3>Sản phẩm</h3>
                 </Link>
-                <Link to='/dashboard/customers'>
+                <Link to='/Bicycle-shop-fe/dashboard/customers'>
                     <TbUserSquareRounded />
                     <h3>Khách hàng</h3>
                 </Link>
-                <Link to="/dashboard/bills">
+                <Link to="/Bicycle-shop-fe/dashboard/bills">
                     <RiFilePaper2Line />
                     <h3>Đơn hàng</h3>
                 </Link>
@@ -74,9 +75,13 @@ export function DashboardSidebar(props) {
                     <PiCloudWarning />
                     <h3>Reports</h3>
                 </a>
-                <Link to='/dashboard/setting'>
+                <Link to='/Bicycle-shop-fe/dashboard/setting'>
                     <MdOutlineSettings />
                     <h3>Settings</h3>
+                </Link>
+                <Link to='/Bicycle-shop-fe'>
+                    <FaHome />
+                    <h3>Trang chủ</h3>
                 </Link>
                 <a href="#">
                     <CiCirclePlus />
