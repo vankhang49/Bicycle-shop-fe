@@ -24,13 +24,13 @@ export function ProductList() {
     useEffect(() => {
 
         const fetchProducts = async () => {
-            await getProductsList("", "", "", "", "");
+            await getProductsList("", "", "", "", "", 0, 9999999999);
         }
         fetchProducts().then().catch(console.error);
     }, []);
 
-    const getProductsList = async (page, nameSearch, familyName, categoryName, brandName) => {
-        const temp = await productsService.getAllProducts(page, nameSearch, familyName, categoryName, brandName);
+    const getProductsList = async (page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter) => {
+        const temp = await productsService.getAllProducts(page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter);
         setProducts(temp.content);
         setTotalPages(temp.totalPages)
     }

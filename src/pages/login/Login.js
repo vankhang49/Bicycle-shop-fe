@@ -7,9 +7,13 @@ import {toast} from "react-toastify";
 import {FaEye, FaEyeSlash} from "react-icons/fa";
 import spinner from "../../assets/icons/Spinner.gif";
 import FooterHome from "../../components/Footer/FooterHome";
+import {useDispatch, useSelector} from "react-redux";
+import {loginSuccess, setRemember} from "../../core/redux/actions/AuthenticationActions";
 
 export function Login() {
-    const isAuthenticated = !!localStorage.getItem("isAuthenticated");
+    const dispatch = useDispatch();
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    const rememberMe = useSelector(state => state.auth.rememberMe);
     const [openEye, setOpenEye] = useState(false);
     const navigate = useNavigate();
     const [loginError, setLoginError] = useState('');
@@ -31,13 +35,9 @@ export function Login() {
     }, [showPopupElement]);
 
     const checkRememberMe = () => {
-        let rememberMe =  JSON.parse(localStorage.getItem("rememberMe"));
-        if (rememberMe === undefined) {
-            rememberMe = authenticationService.getRemember();
-        }
-        if (rememberMe?.remember === true) {
-            setValue("email", rememberMe.email);
-            setValue("rememberMe", rememberMe.remember);
+        if (rememberMe) {
+            setValue("email", localStorage.getItem("rememberMeEmail"));
+            setValue("rememberMe", rememberMe);
         }
     }
 
@@ -49,15 +49,19 @@ export function Login() {
                 const userData = await authenticationService.login(data);
                 setIsLoading(false);
                 if (userData.token) {
+                    dispatch(loginSuccess(userData));
                     localStorage.setItem("id", userData.userId);
-                    localStorage.setItem('token', userData.token);
                     localStorage.setItem('fullName', userData.fullName);
-                    localStorage.setItem('isAuthenticated', "authenticated");
+                    localStorage.setItem('isAuthenticated', 'true');
+                    dispatch(setRemember(true));
                     localStorage.setItem('lastTime', new Date().toISOString());
                     if (remember) {
-                        authenticationService.setRemember(data.email);
+                        localStorage.setItem("rememberMe", "true")
+                        localStorage.setItem("rememberMeEmail", data.email);
+                        dispatch(setRemember(true));
                     } else {
-                        authenticationService.setDefaultRemember();
+                        localStorage.removeItem("rememberMeEmail");
+                        dispatch(setRemember(false));
                         localStorage.removeItem("rememberMe");
                     }
                     navigate("/Bicycle-shop-fe");
@@ -74,7 +78,7 @@ export function Login() {
     }
 
     if (isAuthenticated) {
-        return <Navigate to="/"/>
+        return <Navigate to="/Bicycle-shop-fe"/>
     }
 
     return (

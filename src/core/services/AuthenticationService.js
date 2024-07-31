@@ -1,28 +1,9 @@
 import axios from "axios";
 import axiosInstance from "../../utils/axiosInstance";
+import {logoutAction} from "../redux/actions/AuthenticationActions";
 
-const baseURL = "http://192.168.55.102:8080";
+const baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
-
-const rememberMe = {
-    "remember" : false,
-    "username" : ""
-}
-
-export const setRemember = (data) => {
-    rememberMe.remember = true;
-    rememberMe.username = data;
-    localStorage.setItem("rememberMe", JSON.stringify(rememberMe));
-}
-
-export const setDefaultRemember = () => {
-    rememberMe.remember = false;
-    rememberMe.username = "";
-}
-
-export const getRemember = () => {
-    return rememberMe;
-}
 
 export const login = async (data) => {
     try {
@@ -40,6 +21,15 @@ export const register = async (userData) => {
         return response.data;
     }catch(err){
         throw err;
+    }
+}
+
+export const logout = async () => {
+    try {
+        const userId = localStorage.getItem("id");
+        await axios.post(`${baseURL}/api/auth/logout?userId=${userId}`);
+    } catch (e) {
+        throw e;
     }
 }
 
@@ -65,43 +55,33 @@ export const updatePasswordUser = async (userData, token) => {
 }
 
 /**AUTHENTICATION CHECKER */
-export const logout = async () => {
-    try {
-        const userId = localStorage.getItem("id");
-        const response = await axiosInstance.post(`${baseURL}/api/auth/logout?userId=${userId}`)
-        return response.data;
-    } catch (e) {
-        e.message = "Đăng xuất thất bại!";
-        throw e;
-    }
-}
 
-export const getRole = async () => {
+export const getRoles = async () => {
     try {
         const response = await axiosInstance.get(`${baseURL}/api/auth/user-role`)
         return response.data;
     } catch (e) {
-        console.log(e);
+        return [];
     }
 }
 
 export const isAdmin = async () =>{
-    const roleName = await getRole();
-    return roleName === 'ROLE_ADMIN';
+    const roles = await getRoles();
+    return roles.some(role => role.roleName === 'ROLE_ADMIN');
 }
-export const isWarehouse = async () =>{
-    const roleName = await getRole();
-    return roleName === 'ROLE_WAREHOUSE';
+export const isCustomer = async () =>{
+    const roles = await getRoles();
+    return roles.some(role => role.roleName === 'ROLE_CUSTOMER');
 }
 
-export const isSalesMan = async () =>{
-    const roleName = await getRole();
-    return roleName === 'ROLE_SALESMAN';
+export const isEmployee = async () =>{
+    const roles = await getRoles();
+    return roles.some(role => role.roleName === 'ROLE_EMPLOYEE');
 }
 
 export const isStoreManager = async () =>{
-    const roleName = await getRole();
-    return roleName === 'ROLE_MANAGER';
+    const roles = await getRoles();
+    return roles.some(role => role.roleName === 'ROLE_MANAGER');
 }
 
 export const adminOnly = () =>{

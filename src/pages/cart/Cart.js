@@ -58,8 +58,7 @@ export function Cart() {
                                 </div>
                                 <div className="products-right">
                                     <div className="name">
-                                        <Link to={`/Bicycle-shop-fe/products/detail/${item[0].product.productId}`}
-                                              className="name-product">{item[0].priceName}</Link>
+                                        <a className="name-product">{item[0].priceName}</a>
                                         <a onClick={()=>deleteCartItemFormCart(item[0])}>X</a>
                                     </div>
                                     { item[0].size !== '' ?

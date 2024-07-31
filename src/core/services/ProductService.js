@@ -1,13 +1,14 @@
 import axios from "axios";
 
-const BASE_URL = "http://192.168.55.102:8080/api/public";
+const BASE_URL = "http://localhost:8080/api/public";
 axios.defaults.withCredentials = true;
 
-export async function getAllProducts(page, nameSearch, familyName, categoryName, brandName) {
+export async function getAllProducts(page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter) {
     try {
         const temp
             = await axios.get(`${BASE_URL}/products?page=${page}&nameSearch=${nameSearch}` +
-            `&familyName=${familyName}&categoryName=${categoryName}&brandName=${brandName}`);
+            `&familyName=${familyName}&categoryName=${categoryName}&brandName=${brandName}` +
+            `&priceBefore=${priceBefore}&priceAfter=${priceAfter}`);
         console.log(temp.data)
         return temp.data;
     } catch (e) {

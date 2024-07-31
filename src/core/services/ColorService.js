@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://192.168.55.102:8080/api/public";
+const BASE_URL = "http://localhost:8080/api/public";
 axios.defaults.withCredentials = true;
 
 export const getAllColors = async () => {

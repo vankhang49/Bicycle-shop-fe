@@ -27,7 +27,9 @@ export function Filter(props) {
 
     useEffect(() => {
         props.onBrandNameChange(brandName);
-    }, [brandName, props]);
+        props.onFamilyNameChange(familyName);
+        props.onPriceChange(priceFilter);
+    }, [brandName, familyName, priceFilter, props]);
 
     useEffect(() => {
         setIsOpenFilter(props.isOpenFilter);
@@ -181,29 +183,46 @@ export function Filter(props) {
                                 </div>
                                 <ul className={styles.filterVendor}>
                                     <li className={`${styles.filterItem} ${styles.filterItemCheckBox} ${styles.filterItemGreen}`}>
-                                        <label data-filter="california" htmlFor="filter-california"
+                                        <label data-filter="california" htmlFor="filter-below-fivehu"
                                                className={styles.california}>
-                                            <input type="checkbox" id="filter-california" onChange={()=>setPriceFilter("Giá dưới 500.000đ")}/>
+                                            <input type="checkbox" id="filter-below-fivehu"
+                                                   checked={priceFilter === "Giá dưới 500.000đ"}
+                                                   onChange={() => setPriceFilter("Giá dưới 500.000đ")}/>
                                             <i className="fa"></i>
                                             Giá dưới 500.000đ
                                         </label>
                                     </li>
 
                                     <li className={`${styles.filterItem} ${styles.filterItemCheckBox} ${styles.filterItemGreen}`}>
-                                        <label data-filter="california" htmlFor="filter-california"
+                                        <label data-filter="california" htmlFor="filter-fivehu-to-fivemi"
                                                className={styles.california}>
-                                            <input type="checkbox" id="filter-california" onChange={()=>setPriceFilter("500.000đ - 5.000.000đ")}/>
+                                            <input type="checkbox" id="filter-fivehu-to-fivemi"
+                                                   checked={priceFilter === "500.000đ - 5.000.000đ"}
+                                                   onChange={() => setPriceFilter("500.000đ - 5.000.000đ")}/>
                                             <i className="fa"></i>
                                             500.000đ - 5.000.000đ
                                         </label>
                                     </li>
 
                                     <li className={`${styles.filterItem} ${styles.filterItemCheckBox} ${styles.filterItemGreen}`}>
-                                        <label data-filter="california" htmlFor="filter-california"
+                                        <label data-filter="california" htmlFor="filter-fivebi-to-twentybi"
                                                className={styles.california}>
-                                            <input type="checkbox" id="filter-california" onChange={()=>setPriceFilter("5.000.000đ - 20.000.000đ")}/>
+                                            <input type="checkbox" id="filter-fivebi-to-twentybi"
+                                                   checked={priceFilter === "5.000.000đ - 20.000.000đ"}
+                                                   onChange={() => setPriceFilter("5.000.000đ - 20.000.000đ")}/>
                                             <i className="fa"></i>
                                             5.000.000đ - 20.000.000đ
+                                        </label>
+                                    </li>
+
+                                    <li className={`${styles.filterItem} ${styles.filterItemCheckBox} ${styles.filterItemGreen}`}>
+                                        <label data-filter="california" htmlFor="filter-more-than-fivebi"
+                                               className={styles.california}>
+                                            <input type="checkbox" id="filter-more-than-fivebi"
+                                                   checked={priceFilter === "Giá trên 20.000.000đ"}
+                                                   onChange={() => setPriceFilter("Giá trên 20.000.000đ")}/>
+                                            <i className="fa"></i>
+                                            Giá trên 20.000.000đ
                                         </label>
                                     </li>
 

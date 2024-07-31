@@ -6,17 +6,23 @@ import * as productFamilyService from "../../core/services/ProductFamilyService"
 import { IoIosArrowDown } from "react-icons/io";
 import logo from "../../assets/images/logo-bike.png";
 import { IoMdClose } from "react-icons/io";
+import * as authenticationService from "../../core/services/AuthenticationService";
 
 export function NavBar(props) {
     const [sidebarActive, setSidebarActive] = useState(props.showSidebar);
     const [categories, setCategories] = useState([]);
     const [productFamilies, setProductFamilies] = useState([]);
     const sidebarRef = useRef(null);
+    const [roles, setRoles] = useState([]);
+    const [isEmployee, setIsEmployee] = useState(false);
+    const [isManager, setIsManager] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             await getAllCategories();
             await getAllProductFamilies();
+            await isEmp();
+            await isManag();
         }
         fetchData().then().catch(console.error);
     }, [])
@@ -43,6 +49,16 @@ export function NavBar(props) {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [sidebarActive, props]);
+
+    const isEmp = async ()=> {
+        const temp = await authenticationService.isEmployee();
+        setIsEmployee(temp);
+    }
+
+    const isManag = async ()=> {
+        const temp = await authenticationService.isStoreManager();
+        setIsManager(temp);
+    }
 
     const getAllCategories = async () => {
         const temp = await categoryService.getAllCategories();
@@ -93,6 +109,11 @@ export function NavBar(props) {
                 <li className="dropdown">
                     <Link className={"dropdown-thumb"} to="/Bicycle-shop-fe/about-us">Về chúng tôi</Link>
                 </li>
+                {(isManager || isEmployee) &&
+                    <li className="dropdown">
+                        <Link className={"dropdown-thumb"} to={"/Bicycle-shop-fe/dashboard"}>Dashboard</Link>
+                    </li>
+                }
             </ul>
         </div>
     );

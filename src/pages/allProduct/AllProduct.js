@@ -13,8 +13,10 @@ import { CiFilter } from "react-icons/ci";
 export function AllProduct() {
     // const products = useSelector(state => state.products);
     let {categoryName} = useParams();
-    let {familyName} = useParams();
+    const [familyName, setFamilyName] = useState(useParams().familyName || "");
     const [brandName, setBrandName] = useState("");
+    const [priceBefore, setPriceBefore] = useState(0);
+    const [priceAfter, setPriceAfter] = useState(9999999999);
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
     const [isOpenFilter, setIsOpenFilter] = useState(false);
@@ -24,25 +26,48 @@ export function AllProduct() {
 
     useEffect(() => {
         if (categoryName === undefined) categoryName = "";
-        if (familyName === undefined) familyName = "";
         const fetchProducts = async () => {
-            await getProductsList("", "", familyName, categoryName, brandName);
+            await getProductsList("", "", familyName, categoryName, brandName, priceBefore, priceAfter);
         }
         fetchProducts().then().catch(console.error);
-    }, [categoryName, familyName, brandName]);
+    }, [categoryName, familyName, brandName, priceBefore, priceAfter]);
 
-    const getProductsList = async (page, nameSearch, familyName, categoryName, brandName) => {
-        const temp = await productsService.getAllProducts(page, nameSearch, familyName, categoryName, brandName);
+    const getProductsList = async (page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter) => {
+        const temp = await productsService.getAllProducts(page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter);
         setProducts(temp.content);
-    }
-
-    const showDetailProduct = (productId) => {
-        navigate("/Bicycle-shop-fe/products/detail", {state: {id: productId}});
     }
 
     const updateBrandName = (newBrandName) => {
         setBrandName(newBrandName);
     };
+
+    const updateFamilyName = (newFamilyName) => {
+        setFamilyName(newFamilyName);
+    }
+
+    const updatePrice = (newPrice) => {
+        switch (newPrice) {
+            case "Giá dưới 500.000đ":
+                setPriceBefore(0);
+                setPriceAfter(500000);
+                break;
+            case "500.000đ - 5.000.000đ":
+                setPriceBefore(500000);
+                setPriceAfter(5000000);
+                break;
+            case "5.000.000đ - 20.000.000đ":
+                setPriceBefore(5000000);
+                setPriceAfter(20000000);
+                break;
+            case "Giá trên 20.000.000đ":
+                setPriceBefore(20000001);
+                setPriceAfter(9999999999);
+                break;
+            default:
+                setPriceBefore(0);
+                setPriceAfter(9999999999);
+        }
+    }
 
     const handleOpenFilter = () => {
         setIsOpenFilter(true);
@@ -62,6 +87,8 @@ export function AllProduct() {
                     <Filter
                         categoryName={categoryName}
                         onBrandNameChange={updateBrandName}
+                        onFamilyNameChange={updateFamilyName}
+                        onPriceChange={updatePrice}
                         isOpenFilter = {isOpenFilter}
                         closeFilter = {handleCloseFilter}
                     >

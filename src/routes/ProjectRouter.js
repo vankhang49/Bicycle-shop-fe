@@ -21,6 +21,10 @@ export const projectRouter = [
         exact: true,
     },
     {
+        path: '/Bicycle-shop-fe/products',
+        element: <AllProduct/>,
+    },
+    {
         path: '/Bicycle-shop-fe/products/:categoryName',
         element: <AllProduct/>,
     },
