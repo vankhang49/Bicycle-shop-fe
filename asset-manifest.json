@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Bicycle-shop-fe/static/css/main.3a9385e6.css",
-    "main.js": "/Bicycle-shop-fe/static/js/main.8581de3e.js",
+    "main.css": "/Bicycle-shop-fe/static/css/main.32db98c5.css",
+    "main.js": "/Bicycle-shop-fe/static/js/main.1db58595.js",
     "static/js/453.9343fa5d.chunk.js": "/Bicycle-shop-fe/static/js/453.9343fa5d.chunk.js",
     "static/media/profile-3.jpg": "/Bicycle-shop-fe/static/media/profile-3.33737d400de5083e13e9.jpg",
     "static/media/profile-4.jpg": "/Bicycle-shop-fe/static/media/profile-4.fb6fbdfc950fa161558a.jpg",
@@ -29,12 +29,12 @@
     "static/media/engineer.jpg": "/Bicycle-shop-fe/static/media/engineer.decdc757e25072391dd4.jpg",
     "static/media/2018_Trek_logo_word_mark_wiki_buffer.svg.png": "/Bicycle-shop-fe/static/media/2018_Trek_logo_word_mark_wiki_buffer.svg.42fd689a8f7c340df457.png",
     "index.html": "/Bicycle-shop-fe/index.html",
-    "main.3a9385e6.css.map": "/Bicycle-shop-fe/static/css/main.3a9385e6.css.map",
-    "main.8581de3e.js.map": "/Bicycle-shop-fe/static/js/main.8581de3e.js.map",
+    "main.32db98c5.css.map": "/Bicycle-shop-fe/static/css/main.32db98c5.css.map",
+    "main.1db58595.js.map": "/Bicycle-shop-fe/static/js/main.1db58595.js.map",
     "453.9343fa5d.chunk.js.map": "/Bicycle-shop-fe/static/js/453.9343fa5d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3a9385e6.css",
-    "static/js/main.8581de3e.js"
+    "static/css/main.32db98c5.css",
+    "static/js/main.1db58595.js"
   ]
 }
