@@ -27,7 +27,7 @@ export const register = async (userData) => {
 export const logout = async () => {
     try {
         const userId = localStorage.getItem("id");
-        await axios.post(`${baseURL}/api/auth/logout?userId=${userId}`);
+        await axiosInstance.post(`logout?userId=${userId}`);
     } catch (e) {
         throw e;
     }
