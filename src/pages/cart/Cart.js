@@ -103,10 +103,10 @@ export function Cart() {
                                     96-96h96v64c0 12.6 7.4 24.1 19 29.2s25 3 34.4-5.4l160-144c6.7-6.1 10.6-14.7
                                     10.6-23.8s-3.8-17.7-10.6-23.8l-160-144c-9.4-8.5-22.9-10.6-34.4-5.4z"/>
                                 </svg>
-                                <Link to={"/Bicycle-shop-fe/products"}>Tiếp tục mua hàng</Link>
+                                <Link to={"/products"}>Tiếp tục mua hàng</Link>
                             </button>
                             <button id="pay" className="button-yellow">
-                                <Link to={"/Bicycle-shop-fe/pay"}>Thanh toán</Link>
+                                <Link to={"/pay"}>Thanh toán</Link>
                             </button>
                         </div>
                     </div>

@@ -87,12 +87,12 @@ export function NavBar(props) {
             </div>
             <ul>
                 <li className="dropdown">
-                    <Link className={"dropdown-thumb"} to="/Bicycle-shop-fe">Trang chủ</Link>
+                    <Link className={"dropdown-thumb"} to="/">Trang chủ</Link>
                 </li>
                 {categories && categories.map(category => (
                     <li className="dropdown" key={category.categoryId}>
                         <Link className={"dropdown-thumb"} key={category.categoryId}
-                              to={`/Bicycle-shop-fe/products/${category.categoryName}`}>
+                              to={`/products/${category.categoryName}`}>
                             <span>{category.categoryName}</span>
                             <button><IoIosArrowDown /></button>
                         </Link>
@@ -100,18 +100,18 @@ export function NavBar(props) {
                             {productFamilies && productFamilies.filter((family) =>
                                 family.category.categoryId === category.categoryId
                             ).map((family) => (
-                                <Link to={`/Bicycle-shop-fe/products/${category.categoryName}/${family.familyName}`}
+                                <Link to={`/products/${category.categoryName}/${family.familyName}`}
                                       key={family.familyId}>{family.familyName}</Link>
                             ))}
                         </div>
                     </li>
                 ))}
                 <li className="dropdown">
-                    <Link className={"dropdown-thumb"} to="/Bicycle-shop-fe/about-us">Về chúng tôi</Link>
+                    <Link className={"dropdown-thumb"} to="/about-us">Về chúng tôi</Link>
                 </li>
                 {(isManager || isEmployee) &&
                     <li className="dropdown">
-                        <Link className={"dropdown-thumb"} to={"/Bicycle-shop-fe/dashboard"}>Dashboard</Link>
+                        <Link className={"dropdown-thumb"} to={"/dashboard"}>Dashboard</Link>
                     </li>
                 }
             </ul>

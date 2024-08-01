@@ -76,7 +76,7 @@ export function Header(props){
     }
 
     const searchProductByName = (productName) => {
-        navigate("/Bicycle-shop-fe/products/", {state:{nameSearch: productName}});
+        navigate("/products/", {state:{nameSearch: productName}});
     }
 
     const handleShowSidebar = () => {
@@ -95,7 +95,7 @@ export function Header(props){
         try {
             await dispatch(logoutAction());
             toast.success("Đăng xuất thành công!");
-            navigate("/Bicycle-shop-fe/login");
+            navigate("/login");
         } catch (e) {
             toast.error(e.message);
         }
@@ -107,7 +107,7 @@ export function Header(props){
                 <IoMenu/>
             </div>
             <div className="logo">
-                <Link to="/Bicycle-shop-fe">
+                <Link to="/">
                 <img src={logo} alt="logo"/>
                 </Link>
             </div>
@@ -117,7 +117,7 @@ export function Header(props){
                 <button type="submit" className="btn">Search</button>
             </form>
             <div className="cart">
-                <Link to="/Bicycle-shop-fe/cart">
+                <Link to="/cart">
                     <IoMdCart />
                     <span className="amount-product">{countProduct}</span>
                 </Link>
@@ -125,7 +125,7 @@ export function Header(props){
             <div className="login">
 
                 { !isAuthenticated &&
-                <Link to="/Bicycle-shop-fe/login">
+                <Link to="/login">
                     <IoIosLogIn />
                     <span>Đăng nhập</span>
                 </Link>}
@@ -146,7 +146,7 @@ export function Header(props){
                             </div>
                             {fullName}
                         </div>
-                        <Link to={`/Bicycle-shop-fe/dashboard/${roleName}/infor`}>
+                        <Link to={`/my-info`}>
                             <FaRegUserCircle/>
                             Thông tin cá nhân
                         </Link>

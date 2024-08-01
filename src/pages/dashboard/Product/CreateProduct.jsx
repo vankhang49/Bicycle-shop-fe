@@ -197,7 +197,7 @@ export function CreateProduct() {
                await productService.updateProduct(data);
                 toast.success("Cập nhật thành công!");
             }
-            navigate("/Bicycle-shop-fe/dashboard/products");
+            navigate("/dashboard/products");
         } catch (error) {
             toast.error(error.message);
         }

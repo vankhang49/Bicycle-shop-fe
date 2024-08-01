@@ -9,6 +9,7 @@ import {FaRegUserCircle} from "react-icons/fa";
 import * as authenticationService from "../../core/services/AuthenticationService";
 import {useDispatch} from "react-redux";
 import {fetchCartFromServer, fetchCount} from "../../core/redux/actions/CartActions";
+import {BillModal} from "./BillModal/BillModal";
 
 export function Pay() {
     const isAuthenticated = !!localStorage.getItem("isAuthenticated");
@@ -18,6 +19,8 @@ export function Pay() {
         criteriaMode: "all"
     });
 
+    const [billData, setBillData] = useState(null);
+    const [isOpenModal, setIsOpenModal] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -54,10 +57,8 @@ export function Pay() {
         try {
             data.billItems = changeToBillItem();
             console.log(data)
-            await billService.pay(data);
-            console.log("Thêm mới thành công!");
-            dispatch(fetchCartFromServer());
-            dispatch(fetchCount());
+            setBillData(data);
+            handleOpenModal();
         } catch (error) {
             console.log(error)
         }
@@ -70,6 +71,14 @@ export function Pay() {
                 quantity: item[1]
             }
         ));
+    }
+
+    const handleOpenModal = () => {
+        setIsOpenModal(true);
+    }
+
+    const handleCloseModal = () => {
+        setIsOpenModal(false);
     }
 
     return (
@@ -181,6 +190,11 @@ export function Pay() {
                         </div>
                     </div>
                 </form>
+                <BillModal
+                    isOpen={isOpenModal}
+                    onClose={handleCloseModal}
+                    billData={billData}
+                />
             </div>
         }/>
     );

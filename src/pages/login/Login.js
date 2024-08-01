@@ -64,7 +64,7 @@ export function Login() {
                         dispatch(setRemember(false));
                         localStorage.removeItem("rememberMe");
                     }
-                    navigate("/Bicycle-shop-fe");
+                    navigate("/");
                     toast.success("Đăng nhập thành công!");
                 } else {
                     setLoginError(userData.message);
@@ -78,7 +78,7 @@ export function Login() {
     }
 
     if (isAuthenticated) {
-        return <Navigate to="/Bicycle-shop-fe"/>
+        return <Navigate to="/"/>
     }
 
     return (

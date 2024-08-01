@@ -42,19 +42,19 @@ export function DashboardSidebar(props) {
                 </div>
             </div>
             <div className={styles.sidebar}>
-                <Link to="/Bicycle-shop-fe/dashboard">
+                <Link to="/dashboard">
                     <MdDashboard />
                     <h3>Dashboard</h3>
                 </Link>
-                <Link to="/Bicycle-shop-fe/dashboard/products">
+                <Link to="/dashboard/products">
                     <AiOutlineProduct />
                     <h3>Sản phẩm</h3>
                 </Link>
-                <Link to='/Bicycle-shop-fe/dashboard/customers'>
+                <Link to='/dashboard/customers'>
                     <TbUserSquareRounded />
                     <h3>Khách hàng</h3>
                 </Link>
-                <Link to="/Bicycle-shop-fe/dashboard/bills">
+                <Link to="/dashboard/bills">
                     <RiFilePaper2Line />
                     <h3>Đơn hàng</h3>
                 </Link>
@@ -75,11 +75,11 @@ export function DashboardSidebar(props) {
                     <PiCloudWarning />
                     <h3>Reports</h3>
                 </a>
-                <Link to='/Bicycle-shop-fe/dashboard/setting'>
+                <Link to='/dashboard/setting'>
                     <MdOutlineSettings />
                     <h3>Settings</h3>
                 </Link>
-                <Link to='/Bicycle-shop-fe'>
+                <Link to=''>
                     <FaHome />
                     <h3>Trang chủ</h3>
                 </Link>

@@ -16,6 +16,7 @@ import FooterHome from "../../components/Footer/FooterHome";
 import {Main} from "../../components/Main/Main";
 import {useDispatch, useSelector} from "react-redux";
 import {addToCart, fetchCartFromService, fetchCount} from "../../core/redux/actions/CartActions";
+import {toast} from "react-toastify";
 
 export function ProductDetail() {
     const [product, setProduct] = useState({});
@@ -91,6 +92,7 @@ export function ProductDetail() {
             await dispatch(addToCart(pricing, amount));
             await dispatch(fetchCartFromService());
             dispatch(fetchCount());
+            toast.success("Đã thêm vào giỏ hàng")
         }
     }
 

@@ -1,0 +1,323 @@
+#userBill {
+  width: 100%;
+  height: auto;
+  position: relative;
+
+  .bills {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    .bill {
+      width: 80%;
+      height: auto;
+      position: relative;
+
+      .No {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        p {
+          max-width: 70px;
+          min-width: 50px;
+          padding: 10px 0;
+          font-size: 1rem;
+          font-weight: 500;
+        }
+      }
+      .product-cart{
+        position: relative;
+        width: 100%;
+        height: 30%;
+        display: flex;
+        justify-content: flex-start;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #d8d8d8;
+        .products-left{
+          position: relative;
+          width: 10%;
+          margin-left: 20px;
+          .product-thumb{
+            width: 100%;
+            height: auto;
+            img {
+              width: 100%;
+            }
+          }
+        }
+        .products-right {
+          padding-left: 50px;
+          width: 85%;
+          .name {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            a {
+              font-size: 1rem;
+            }
+            .name-product {
+              font-size: 1.2rem;
+              font-weight: 600;
+              color: #9d9d07;
+            }
+          }
+          .size {
+            select{
+              border-radius: 25px;
+              width: 100px;
+              height: 30px;
+              outline: none;
+            }
+          }
+          .amount-price {
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-content: space-between;
+            .btn-ud {
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              span {
+                font-size: 1rem;
+              }
+            }
+            .price {
+              position: relative;
+              left: -10%;
+              span {
+                font-size: 1rem;
+                color: #db0000;
+                font-weight: 500;
+              }
+            }
+            .total-price {
+              span {
+                font-size: 1.1rem;
+                color: #db0000;
+                font-weight: 500;
+              }
+            }
+          }
+        }
+      }
+      .total {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .total-cost {
+          padding: 20px 0;
+          font-size: 1rem;
+          .price-span {
+            padding: 0 10px;
+            font-size: 1.1rem;
+          }
+        }
+        .final-cost {
+          font-size: 1.1rem;
+          font-weight: 600;
+          display: flex;
+          justify-content: space-between;
+          padding: 20px 0;
+          .final-price {
+            padding: 0 10px;
+            font-size: 1.4rem;
+          }
+        }
+        .received {
+          padding: 10px 0;
+          button {
+            width: 150px;
+            height: 60px;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 1rem;
+            background-color: #f1581f;
+
+            &:hover {
+              background-color: rgba(241, 88, 31, 0.73);
+            }
+          }
+        }
+      }
+
+    }
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  #userBill {
+    .bills {
+      .bill {
+        width: 90%;
+        .No {
+          ;
+          p {
+            max-width: 40px;
+            min-width: 30px;
+          }
+        }
+        .product-cart{
+          .products-right {
+            .name {
+              a {
+                font-size: 0.9rem;
+              }
+              .name-product {
+                font-size: 0.9rem;
+                font-weight: 500;
+              }
+            }
+            .size {
+              select{
+                border-radius: 25px;
+                width: 100px;
+                height: 30px;
+                outline: none;
+              }
+            }
+            .amount-price {
+              .btn-ud {
+                span {
+                  font-size: 0.9rem;
+                }
+              }
+              .price {
+                position: relative;
+                left: -10%;
+                span {
+                  font-size: 0.8rem;
+                  color: #db0000;
+                  font-weight: 500;
+                }
+              }
+              .total-price {
+                span {
+                  font-size: 1rem;
+                  color: #db0000;
+                  font-weight: 500;
+                }
+              }
+            }
+          }
+        }
+        .total {
+          .total-cost {
+            font-size: 0.9rem;
+            .price-span {
+              padding: 0 5px;
+              font-size: 1rem;
+            }
+          }
+          .final-cost {
+            font-size: 1rem;
+            .final-price {
+              padding: 0 5px;
+              font-size: 1.1rem;
+            }
+          }
+          .received {
+            button {
+              width: 130px;
+              height: 50px;
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #userBill {
+    .bills {
+      .bill {
+        width: 95%;
+        .No {
+        ;
+          p {
+            max-width: 40px;
+            min-width: 30px;
+          }
+        }
+        .product-cart{
+          .products-right {
+            .name {
+              a {
+                font-size: 0.8rem;
+              }
+              .name-product {
+                text-align: left;
+                font-size: 0.8rem;
+                font-weight: 500;
+              }
+            }
+            .size {
+              select{
+                border-radius: 25px;
+                width: 100px;
+                height: 30px;
+                outline: none;
+              }
+            }
+            .amount-price {
+              .btn-ud {
+                span {
+                  font-size: 0.7rem;
+                }
+              }
+              .price {
+                position: relative;
+                left: 0;
+                span {
+                  font-size: 0.7rem;
+                  color: #db0000;
+                  font-weight: 500;
+                }
+              }
+              .total-price {
+                span {
+                  font-size: 0.8rem;
+                  color: #db0000;
+                  font-weight: 500;
+                }
+              }
+            }
+          }
+        }
+        .total {
+          .total-cost {
+            display: none;
+            font-size: 0.8rem;
+            .price-span {
+              padding: 0 2px;
+              font-size: 0.8rem;
+            }
+          }
+          .final-cost {
+            font-size: 0.8rem;
+            .final-price {
+              padding: 0 2px;
+              font-size: 0.9rem;
+            }
+          }
+          .received {
+            button {
+              width: 90px;
+              height: 45px;
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+}

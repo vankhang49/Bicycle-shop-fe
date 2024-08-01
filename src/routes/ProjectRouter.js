@@ -13,75 +13,85 @@ import {Customer} from "../pages/dashboard/customer/Customer";
 import {CreateProduct} from "../pages/dashboard/Product/CreateProduct";
 import {Setting} from "../pages/dashboard/Setting/Setting";
 import {Bills} from "../pages/dashboard/Bill/Bills";
+import {UserInfo} from "../pages/UserInfo/UserInfo";
+import {UserBill} from "../pages/UserInfo/UserBill/UserBill";
 
 export const projectRouter = [
     {
-        path: '/Bicycle-shop-fe',
+        path: '',
         element: <HomePage/>,
         exact: true,
     },
     {
-        path: '/Bicycle-shop-fe/products',
+        path: '/products',
         element: <AllProduct/>,
     },
     {
-        path: '/Bicycle-shop-fe/products/:categoryName',
+        path: '/products/:categoryName',
         element: <AllProduct/>,
     },
     {
-        path: '/Bicycle-shop-fe/products/:categoryName/:familyName',
+        path: '/products/:categoryName/:familyName',
         element: <AllProduct/>,
     },
     {
-        path: '/Bicycle-shop-fe/products/detail/:productId',
+        path: '/products/detail/:productId',
         element: <ProductDetail/>,
     },
     {
-        path: '/Bicycle-shop-fe/products/create',
+        path: '/products/create',
         element: <CreateProduct/>,
     },
     {
-        path: '/Bicycle-shop-fe/about-us',
+        path: '/about-us',
         element: <AboutUs/>,
     },
     {
-        path: '/Bicycle-shop-fe/cart',
+        path: '/my-info',
+        element: <UserInfo/>,
+    },
+    {
+        path: '/my-info/bill',
+        element: <UserBill/>,
+    },
+    {
+        path: '/cart',
         element: <Cart/>,
     },
     {
-        path: '/Bicycle-shop-fe/pay',
+        path: '/pay',
         element: <Pay/>,
     },
     {
-        path: '/Bicycle-shop-fe/login',
+        path: '/login',
         element: <Login/>,
     },
     {
-        path: '/Bicycle-shop-fe/dashboard',
+        path: '/dashboard',
         element: <Dashboard/>,
     },
     {
-        path: '/Bicycle-shop-fe/dashboard/products',
+        path: '/dashboard/products',
         element: <ProductList/>,
     },
     {
-        path: '/Bicycle-shop-fe/dashboard/products/create',
+        path: '/dashboard/products/create',
         element: <CreateProduct/>,
     },
     {
-        path: '/Bicycle-shop-fe/dashboard/products/create/:id',
+        path: '/dashboard/products/create/:id',
         element: <CreateProduct/>,
     },
     {
-        path: '/Bicycle-shop-fe/dashboard/customers',
+        path: '/dashboard/customers',
         element: <Customer/>,
     },
     {
-        path: '/Bicycle-shop-fe/dashboard/bills',
+        path: '/dashboard/bills',
         element: <Bills/>,
     },
     {
-      path: '/Bicycle-shop-fe/dashboard/setting',
+      path: '/dashboard/setting',
       element: <Setting/>,
     },
     {

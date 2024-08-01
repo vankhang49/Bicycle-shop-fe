@@ -69,7 +69,7 @@ export function ProductList() {
                                    placeholder="Nhập nội dung tìm kiếm"/>
                             <button className="btn btn-search">Tìm kiếm</button>
                         </form>
-                        <Link to="/Bicycle-shop-fe/dashboard/products/create" className="link-move">Thêm mới sản phẩm</Link>
+                        <Link to="/dashboard/products/create" className="link-move">Thêm mới sản phẩm</Link>
                     </div>
                     <div className="box-content">
                         <p>Danh sách sản phẩm</p>
@@ -115,7 +115,7 @@ export function ProductList() {
                                         <a>
                                             <BiSolidShow fill="#3dc8d8"/>
                                         </a>
-                                        <Link to={`/Bicycle-shop-fe/dashboard/products/create/${product.productId}`}>
+                                        <Link to={`/dashboard/products/create/${product.productId}`}>
                                             <MdOutlineModeEdit fill="#00a762"/>
                                         </Link>
                                         <a>

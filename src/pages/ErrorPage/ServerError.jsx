@@ -10,7 +10,7 @@ function ServerError(props) {
             <h2>Xin lỗi hệ thống gặp trục trặc</h2>
             <p>Xin lỗi, chúng tôi  hệ thống chúng tôi có chút vấn đề, quay lại sau nhé!</p>
             <img src={servererror} alt={servererror} />
-            <Link to="/Bicycle-shop-fe/dashboard">Quay lại trang quản lý</Link>
+            <Link to="/dashboard">Quay lại trang quản lý</Link>
             </div>
         </main>
     );

@@ -98,7 +98,7 @@ export function AllProduct() {
                             {products && products.map((product, index) => (
                                 <li key={index}>
                                     <div className="products-top">
-                                        <Link to={`/Bicycle-shop-fe/products/detail/${product.productId}`}
+                                        <Link to={`/products/detail/${product.productId}`}
                                            className="product-thumb">
                                             <img src={product.productImages[0].imageUrl} alt="1"/>
                                         </Link>
@@ -106,7 +106,7 @@ export function AllProduct() {
                                     </div>
                                     <div className="product-info">
                                         <span className="product-code info-element">{product.productCode}</span>
-                                        <Link to={`/Bicycle-shop-fe/products/detail/${product.productId}`}
+                                        <Link to={`/products/detail/${product.productId}`}
                                            className="product-name info-element">{product.productName}
                                         </Link>
                                         <div>
