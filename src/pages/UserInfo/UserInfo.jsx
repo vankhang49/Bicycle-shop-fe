@@ -185,7 +185,7 @@ export function UserInfo() {
                         }
                         <button>Chọn ảnh</button>
                     </div>
-                    <Link to="/Bicycle-shop-fe/my-info/bill" className="bill">
+                    <Link to="/my-info/bill" className="bill">
                         <div className="purchased-order">
                             <TbReport />
                         </div>

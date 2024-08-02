@@ -1,19 +1,28 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./navBar.scss";
 import {useEffect, useRef, useState} from "react";
 import * as categoryService from "../../core/services/CategoryService";
 import * as productFamilyService from "../../core/services/ProductFamilyService";
-import { IoIosArrowDown } from "react-icons/io";
+import {IoIosArrowDown, IoIosLogIn, IoIosLogOut} from "react-icons/io";
 import logo from "../../assets/images/logo-bike.png";
 import { IoMdClose } from "react-icons/io";
 import * as authenticationService from "../../core/services/AuthenticationService";
+import {useDispatch, useSelector} from "react-redux";
+import avatar from "../../assets/images/avatar.jpg";
+import {logoutAction} from "../../core/redux/actions/AuthenticationActions";
+import {toast} from "react-toastify";
 
 export function NavBar(props) {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const [sidebarActive, setSidebarActive] = useState(props.showSidebar);
     const [categories, setCategories] = useState([]);
     const [productFamilies, setProductFamilies] = useState([]);
     const sidebarRef = useRef(null);
     const [roles, setRoles] = useState([]);
+    const [fullName, setFullName] = useState("");
+    const [avatarUrl, setAvatarUrl] = useState("");
     const [isEmployee, setIsEmployee] = useState(false);
     const [isManager, setIsManager] = useState(true);
 
@@ -23,6 +32,8 @@ export function NavBar(props) {
             await getAllProductFamilies();
             await isEmp();
             await isManag();
+            getAvatar();
+            getFullName();
         }
         fetchData().then().catch(console.error);
     }, [])
@@ -60,6 +71,16 @@ export function NavBar(props) {
         setIsManager(temp);
     }
 
+    const getAvatar = () => {
+        const avatar = localStorage.getItem('avatar')
+        setAvatarUrl(avatar)
+    }
+
+    const getFullName = () => {
+        const fullName = localStorage.getItem('fullName')
+        setFullName(fullName);
+    }
+
     const getAllCategories = async () => {
         const temp = await categoryService.getAllCategories();
         setCategories(temp);
@@ -75,6 +96,16 @@ export function NavBar(props) {
         props.callBackMain(false);
     }
 
+    const handleLogout = async () => {
+        try {
+            await dispatch(logoutAction());
+            toast.success("Đăng xuất thành công!");
+            navigate("/login");
+        } catch (e) {
+            toast.error(e.message);
+        }
+    }
+
     return (
         <div ref={sidebarRef} className={sidebarActive? "navbar appear" : "navbar"}>
             <div className="sidebar-header">
@@ -85,6 +116,14 @@ export function NavBar(props) {
                     <IoMdClose />
                 </div>
             </div>
+            {isAuthenticated &&
+                <div className="user-box show-dropdown">
+                    <div className="avatar">
+                        {avatarUrl ? <img src={avatarUrl} alt="avatar"/> : <img src={avatar} alt="avatar"/>}
+                    </div>
+                    <div className="username">{fullName}</div>
+                </div>
+            }
             <ul>
                 <li className="dropdown">
                     <Link className={"dropdown-thumb"} to="/">Trang chủ</Link>
@@ -115,6 +154,11 @@ export function NavBar(props) {
                     </li>
                 }
             </ul>
+            {isAuthenticated ?
+                <a className="logout" onClick={handleLogout}><IoIosLogOut/>Đăng xuất</a>
+                :
+                <Link to="/login" className="login"><IoIosLogIn />Đăng nhập</Link>
+            }
         </div>
     );
 }

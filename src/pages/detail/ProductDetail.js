@@ -1,20 +1,12 @@
 import bicycle from "../../assets/images/DomaneAL2Disc_23_33083_A_Primary.jpg";
-import bicycleBlue from "../../assets/images/bike-blue.jpg";
-import bicycleWhite from "../../assets/images/bike-white.png";
-import bicycleYellow from "../../assets/images/bike-yellow.jpg";
-import bicycleSport from "../../assets/images/bike-sport.jfif";
 import "./detail.scss"
-import {Header} from "../../components/header/Header";
-import {NavBar} from "../../components/navbar/NavBar";
 import {useEffect, useState} from "react";
 import * as productService from "../../core/services/ProductService";
 import {useLocation, useParams} from "react-router-dom";
 import * as pricingService from "../../core/services/PricingService";
-import * as cartService from "../../core/services/CartService";
 import {RelatedProducts} from "../../components/relatedProducts/RelatedProducts";
-import FooterHome from "../../components/Footer/FooterHome";
 import {Main} from "../../components/Main/Main";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {addToCart, fetchCartFromService, fetchCount} from "../../core/redux/actions/CartActions";
 import {toast} from "react-toastify";
 
@@ -26,7 +18,7 @@ export function ProductDetail() {
     const [amount, setAmount] = useState(1);
     const [size, setSize] = useState('');
     const [color, setColor] = useState(null);
-    const [imgElement, setImgElement] = useState(bicycle);
+    const [imgElement, setImgElement] = useState(null);
     const [selectedButton, setSelectedButton] = useState(null);
 
     const dispatch = useDispatch();
@@ -53,6 +45,7 @@ export function ProductDetail() {
     const getProductByProductId = async (productId) => {
         const temp = await productService.getProductAndPricingById(productId);
         setProduct(temp);
+        setImgElement(temp.productImages[0].imageUrl);
     }
 
     const getListPricing = async (productId) => {

@@ -14,7 +14,7 @@
     width: 100%;
     position: sticky;
     height: 100px;
-    z-index: 1;
+    z-index: 2;
     background-color: #393636;
     display: flex;
     justify-content: center;
@@ -243,11 +243,19 @@
             }
         }
         .btn-menu {
-            display: block;
             color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 5%;
+            height: 50%;
+
+            svg {
+                font-size: 1.8rem;
+            }
         }
         .search-bar {
-            width: 55%;
+            width: 60%;
             height: 100%;
             max-width: 450px;
             min-width: 300px;

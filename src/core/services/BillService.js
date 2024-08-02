@@ -33,3 +33,12 @@ export const getAllBillsByUserId = async () => {
         return [];
     }
 }
+
+export const updateReceivedBill = async (billId) => {
+    try {
+        const resp = await axiosInstance.patch(`bills/receivedBill/${billId}`);
+        return resp.data;
+    } catch (e) {
+        console.log(e);
+    }
+}

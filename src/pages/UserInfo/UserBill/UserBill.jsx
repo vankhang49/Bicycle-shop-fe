@@ -2,9 +2,12 @@ import {Main} from "../../../components/Main/Main";
 import {useEffect, useState} from "react";
 import * as billService from "../../../core/services/BillService";
 import "./UserBill.scss";
+import {UpdateBillModal} from "./UpdateBillModal/UpdateBillModal";
 
 export function UserBill(props) {
     const [bills, setBills] = useState([]);
+    const [billId, setBillId] = useState(null);
+    const [isOpenModal, setIsOpenModal] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,6 +25,18 @@ export function UserBill(props) {
         return billItems.reduce((prev, item) => (item.pricing.price * item.quantity) + prev, 0);
     }
 
+    const handleOpenModal = (id) => {
+        setIsOpenModal(true);
+        setBillId(id);
+    }
+
+    const handleCloseModal = async () => {
+        setIsOpenModal(false);
+        if ( billId !== null) {
+            await getAllBillsByUser();
+            setBillId(null);
+        }
+    }
 
     return(
         <Main content={
@@ -74,14 +89,21 @@ export function UserBill(props) {
                                     <span
                                         className='final-price'>{calculateTotalPrice(item.billItems).toLocaleString()} VNĐ</span>
                                 </div>
+                                {item.paid === false &&
                                 <div className="received ">
-                                    <button type="submit">Đã nhận hàng</button>
+                                    <button type="submit" onClick={()=> handleOpenModal(item.id)}>Đã nhận hàng</button>
                                 </div>
+                                }
                             </div>
                         </div>
                     ))}
 
                 </div>
+                <UpdateBillModal
+                    isOpen={isOpenModal}
+                    onClose={handleCloseModal}
+                    billId={billId}
+                />
             </div>
         }/>
     );
