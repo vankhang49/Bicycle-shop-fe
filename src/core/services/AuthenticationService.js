@@ -59,6 +59,7 @@ export const updatePasswordUser = async (userData, token) => {
 export const getRoles = async () => {
     try {
         const response = await axiosInstance.get(`${baseURL}/api/auth/user-role`)
+        console.log(response.data)
         return response.data;
     } catch (e) {
         return [];

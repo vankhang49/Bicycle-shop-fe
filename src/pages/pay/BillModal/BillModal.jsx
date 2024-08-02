@@ -15,11 +15,14 @@ export function BillModal({isOpen, onClose, billData}) {
         console.log(billData)
         setTimeout(async () => {
             try {
-                await billService.pay(billData);
-                toast.success("Thanh toán thành công!")
-                navigate("/my-info/bill")
-                dispatch(fetchCartFromServer());
-                dispatch(fetchCount());
+                if (billData !== null) {
+                    await billService.pay(billData);
+                    toast.success("Thanh toán thành công!")
+                    navigate("/my-info/bill")
+                    dispatch(fetchCartFromServer());
+                    dispatch(fetchCount());
+                }
+                onClose();
             }catch (error) {
                 toast.error(error);
                 onClose();

@@ -79,6 +79,9 @@ export function Pay() {
 
     const handleCloseModal = () => {
         setIsOpenModal(false);
+        if (billData !== null) {
+            setBillData(null);
+        }
     }
 
     return (

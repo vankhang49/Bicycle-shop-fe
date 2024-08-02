@@ -14,9 +14,15 @@ import { TbLogout } from "react-icons/tb";
 import { IoCloseSharp } from "react-icons/io5";
 import { AiOutlineProduct } from "react-icons/ai";
 import { FaHome } from "react-icons/fa";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {logoutAction} from "../../core/redux/actions/AuthenticationActions";
+import {toast} from "react-toastify";
+import {useDispatch} from "react-redux";
 
 export function DashboardSidebar(props) {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [functionActive, setFunctionActive] = useState("");
     const [sidebarActive, setSidebarActive] = useState(props.OpenSidebar);
 
     useEffect(() => {
@@ -26,6 +32,16 @@ export function DashboardSidebar(props) {
     const handleCloseSidebar = () => {
         setSidebarActive(!sidebarActive);
         props.CloseSidebar(!sidebarActive);
+    }
+
+    const handleLogout = async () => {
+        try {
+            await dispatch(logoutAction());
+            toast.success("Đăng xuất thành công!");
+            navigate("/login");
+        } catch (e) {
+            toast.error(e.message);
+        }
     }
 
     return (
@@ -58,7 +74,7 @@ export function DashboardSidebar(props) {
                     <RiFilePaper2Line />
                     <h3>Đơn hàng</h3>
                 </Link>
-                <a href="#" className={styles.active}>
+                <a href="#" className={styles.active} >
                     <FaChartLine />
                     <h3>Analytics</h3>
                 </a>
@@ -79,15 +95,11 @@ export function DashboardSidebar(props) {
                     <MdOutlineSettings />
                     <h3>Settings</h3>
                 </Link>
-                <Link to=''>
+                <Link to='/'>
                     <FaHome />
                     <h3>Trang chủ</h3>
                 </Link>
-                <a href="#">
-                    <CiCirclePlus />
-                    <h3>New Login</h3>
-                </a>
-                <a href="#">
+                <a href="#" onClick={handleLogout}>
                     <TbLogout />
                     <h3>Logout</h3>
                 </a>

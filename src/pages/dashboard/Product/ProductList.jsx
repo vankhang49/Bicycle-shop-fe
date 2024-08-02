@@ -9,13 +9,18 @@ import {useEffect, useState} from "react";
 import * as productsService from "../../../core/services/ProductService";
 import warning from "../../../assets/images/warning.png";
 import Modal from "../../../components/modal/Modal";
+import {useForm} from "react-hook-form";
 
 export function ProductList() {
     const [products, setProducts] = useState([]);
     const [totalPages, setTotalPages] = useState({});
     const [pageNumber, setPageNumber] = useState(0);
+    const [message, setMessage] = useState(null);
     const [open, setOpen] = useState();
-    const navigate = useNavigate();
+
+    const {register, handleSubmit, setValue, formState: {errors}} = useForm({
+        criteriaMode: "all"
+    });
     const [productDelete, setProductDelete] = useState({
         productCode: "",
         productName: ""
@@ -24,13 +29,13 @@ export function ProductList() {
     useEffect(() => {
 
         const fetchProducts = async () => {
-            await getProductsList("", "", "", "", "", 0, 9999999999);
+            await getProductsList('', pageNumber);
         }
         fetchProducts().then().catch(console.error);
     }, []);
 
-    const getProductsList = async (page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter) => {
-        const temp = await productsService.getAllProducts(page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter);
+    const getProductsList = async (searchContent , page) => {
+        const temp = await productsService.getAllProductsAuth(searchContent, page);
         setProducts(temp.content);
         setTotalPages(temp.totalPages)
     }
@@ -59,13 +64,25 @@ export function ProductList() {
         return pageNoTags;
     }
 
+    const onSubmit = async (data) => {
+        try {
+            const temp = await productsService.getAllProductsAuth(data.searchContent, pageNumber);
+            setProducts(temp.content);
+            setTotalPages(temp.totalPages);
+            setMessage(null);
+        } catch (e) {
+            setProducts([]);
+            setMessage(e);
+        }
+    }
+
     return (
         <DashboardMain content={
             <main id='product'>
                 <div className="content-element">
                     <div className="header-content">
-                        <form className="form-search">
-                            <input type="text" className="search-bar"
+                        <form className="form-search" onSubmit={handleSubmit(onSubmit)}>
+                            <input type="text" className="search-bar" {...register("searchContent")}
                                    placeholder="Nhập nội dung tìm kiếm"/>
                             <button className="btn btn-search">Tìm kiếm</button>
                         </form>
@@ -126,6 +143,7 @@ export function ProductList() {
                             ))}
                             </tbody>
                         </table>
+                        {message !== null && <p>{message}</p>}
                     </div>
                     <div className="page">
                         <div className="page-box">

@@ -6,6 +6,44 @@
   grid-template-columns: 12rem auto 23rem;
 }
 
+#no-permission {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background: url("../../assets/images/not-allow.jpeg") no-repeat right center;
+
+  h1 {
+    padding: 10px;
+  }
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    width: 200px;
+    height: 60px;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: rgba(2, 2, 2, 0);
+    font-weight: 500;
+    color: var(--color-primary);
+
+    svg {
+      margin-left: 10px;
+    }
+
+    &:hover {
+      background-color: var(--color-success);
+      color: var(--color-white);
+    }
+  }
+}
+
 @media screen and (max-width: 1200px) {
   #dashboard-container{
     width: 95%;
