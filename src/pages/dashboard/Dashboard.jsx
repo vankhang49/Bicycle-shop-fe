@@ -9,7 +9,7 @@ import {DashboardMain} from "../../components/DashboardMain/DashboardMain";
 export function Dashboard() {
 
     return (
-        <DashboardMain content={
+        <DashboardMain path={'dashboard'} content={
             <main id='dashboard'>
                 <h1>Dashboard</h1>
                 {/* Analyses */}

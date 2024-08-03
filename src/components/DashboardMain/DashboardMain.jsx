@@ -7,7 +7,7 @@ import * as authenticationService from "../../core/services/AuthenticationServic
 import {Link} from "react-router-dom";
 import { RiArrowGoBackFill } from "react-icons/ri";
 
-export function DashboardMain({content}) {
+export function DashboardMain({ path ,content}) {
     const [isEmployee, setIsEmployee] = useState(false);
     const [isManager, setIsManager] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
@@ -50,7 +50,7 @@ export function DashboardMain({content}) {
     if (isEmployee || isManager || isAdmin) {
         return(
             <div id='dashboard-container'>
-                <DashboardSidebar OpenSidebar={isShowSidebar} CloseSidebar= {callbackSidebarFunction} />
+                <DashboardSidebar path = {path} OpenSidebar={isShowSidebar} CloseSidebar= {callbackSidebarFunction} />
                 {content}
                 <DashboardNavbar parentCallback={callbackNavbarFunction} CloseSidebar={closeSidebar} />
             </div>

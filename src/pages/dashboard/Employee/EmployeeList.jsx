@@ -3,21 +3,22 @@ import {TiArrowUnsorted} from "react-icons/ti";
 import {BiSolidShow} from "react-icons/bi";
 import {MdCancel, MdOutlineModeEdit} from "react-icons/md";
 import {IoTrashSharp} from "react-icons/io5";
-import "./Customer.scss";
 import {useEffect, useState} from "react";
-import * as userService from "../../../core/services/UserService";
 import {useForm} from "react-hook-form";
-import * as productsService from "../../../core/services/ProductService";
-import {UserDetailModal} from "../userDetailModal/userDetailModal";
+import * as userService from "../../../core/services/UserService";
+import "./EmployeeList.scss";
 import {DisableUserModal} from "../DisableUserModal/DisableUserModal";
 import {DeleteUserModal} from "../DeleteUserModal/DeleteUserModal";
+import {UserDetailModal} from "../userDetailModal/userDetailModal";
+import {Link} from "react-router-dom";
 
-export function Customer() {
-    const [customers, setCustomers] = useState([]);
+
+export function EmployeeList() {
+    const [employees, setEmployees] = useState([]);
     const [totalPages, setTotalPages] = useState({});
     const [pageNumber, setPageNumber] = useState(0);
+    const currentUserId = Number.parseInt(localStorage.getItem("id"));
     const [message, setMessage] = useState(null);
-
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalDisableOpen, setIsModalDisableOpen] = useState(false);
     const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
@@ -39,16 +40,24 @@ export function Customer() {
         fullName: ""
     });
 
+
     useEffect(() => {
         const fetchData = async () => {
-            await getAllCustomers('','');
+            await getAllEmployees('','');
         }
         fetchData()
     }, []);
 
-    const getAllCustomers = async (searchContent, page) => {
-        const temp = await userService.getAllCustomer(searchContent, page);
-        setCustomers(temp.content);
+    useEffect(() => {
+        const fetchData = async () => {
+            await getAllEmployees('',pageNumber);
+        }
+        fetchData()
+    }, [pageNumber]);
+
+    const getAllEmployees = async (searchContent, page) => {
+        const temp = await userService.getAllEmployee(searchContent, page);
+        setEmployees(temp.content);
         setTotalPages(temp.totalPages)
     }
 
@@ -66,12 +75,12 @@ export function Customer() {
 
     const onSubmit = async (data) => {
         try {
-            const temp = await userService.getAllCustomer(data.searchContent, pageNumber);
-            setCustomers(temp.content);
+            const temp = await userService.getAllEmployee(data.searchContent, pageNumber);
+            setEmployees(temp.content);
             setTotalPages(temp.totalPages);
             setMessage(null);
         } catch (e) {
-            setCustomers([]);
+            setEmployees([]);
             setMessage(e);
         }
     }
@@ -107,12 +116,12 @@ export function Customer() {
         setIsModalDisableOpen(false);
         setIsModalOpen(false);
         setIsModalDeleteOpen(false);
-        await userService.getAllEmployee('' , '');
+        await getAllEmployees('' , '');
     }
 
     return(
-        <DashboardMain path={'customers'} content={
-            <main id='customer'>
+        <DashboardMain path={'employees'} content={
+            <main id='employee'>
                 <div className="content-element">
                     <div className="header-content">
                         <form className="form-search" onSubmit={handleSubmit(onSubmit)}>
@@ -120,9 +129,10 @@ export function Customer() {
                                    placeholder="Nhập nội dung tìm kiếm"/>
                             <button className="btn btn-search">Tìm kiếm</button>
                         </form>
+                        <Link  to="/dashboard/employees/create" className="link-move">Thêm mới nhân viên</Link>
                     </div>
                     <div className="box-content">
-                        <p>Danh sách khách hàng</p>
+                        <p>Danh sách nhân viên</p>
                         <table className="table">
                             <thead>
                             <tr>
@@ -130,7 +140,7 @@ export function Customer() {
                                     STT
                                 </th>
                                 <th className={"customer-code"}>
-                                    <span>Mã khách hàng</span>
+                                    <span>Mã nhân viên</span>
                                     <button className="sort-button">
                                         <TiArrowUnsorted/>
                                     </button>
@@ -147,39 +157,45 @@ export function Customer() {
                                         <TiArrowUnsorted/>
                                     </button>
                                 </th>
-                                <th className={"email"}>
-                                    email
+                                <th className={"status"}>
+                                    Trạng thái
                                 </th>
                                 <th className={"phone-number"}>
-                                    số điện thoại
+                                    Số điện thoại
                                 </th>
                                 <th className={"edit-customer"}>Chỉnh sửa</th>
                             </tr>
                             </thead>
                             <tbody>
-                            {customers && customers.map((customer, index) => (
-                                <tr key={customer.userId}>
+                            {employees && employees.filter((employee) => employee.userId !== currentUserId
+                            )?.map((employee, index) => (
+                                <tr key={employee.userId}>
                                     <td className={"no"}>{index + 1}</td>
-                                    <td className={"customer-code"}>{customer.userCode}</td>
-                                    <td className={"customer-name"}>{customer.fullName}</td>
+                                    <td className={"customer-code"}>{employee.userCode}</td>
+                                    <td className={"customer-name"}>{employee.fullName}</td>
                                     <td className={"gender"}>
-                                        {customer.gender === 0 ? "Nam" : customer.gender === 1 ? "Nữ" : "Khác"}
+                                        {employee.gender === 0 ? "Nam" : employee.gender === 1 ? "Nữ" : "Khác"}
                                     </td>
-                                    <td className={"email"}>{customer.email}</td>
-                                    <td className={"phone-number"}>{customer.phoneNumber}</td>
+                                    <td className={"status"}>
+                                        {employee.enabled === true ?
+                                            <span style={{color: "green"}}>Kích hoạt</span>
+                                            : <span style={{color: "red"}}>Bất hoạt</span>
+                                        }
+                                    </td>
+                                    <td className={"phone-number"}>{employee.phoneNumber}</td>
                                     <td className={"edit-customer"}>
-                                        <a onClick={()=>openDetailModal(customers.userId)}>
+                                        <a onClick={() => openDetailModal(employee.userId)}>
                                             <BiSolidShow fill="#3dc8d8"/>
                                         </a>
-                                        <a >
+                                        <Link to={`/dashboard/employees/edit/${employee.userId}`}>
                                             <MdOutlineModeEdit fill="#00a762"/>
-                                        </a>
-                                        {customer.enabled ?
-                                            <a onClick={() => openDisableModal(customer)}>
+                                        </Link>
+                                        {employee.enabled ?
+                                            <a onClick={() => openDisableModal(employee)}>
                                                 <MdCancel fill="red"/>
                                             </a>
                                             :
-                                            <a onClick={() => openDeleteModal(customer)}>
+                                            <a onClick={() => openDeleteModal(employee)}>
                                                 <IoTrashSharp fill="red"/>
                                             </a>
                                         }
@@ -188,6 +204,7 @@ export function Customer() {
                             ))}
                             </tbody>
                         </table>
+                        {message !== null && <p>{message}</p>}
                     </div>
                     <div className="page">
                         <div className="page-box">

@@ -1,7 +1,7 @@
 import axios from "axios";
 import axiosInstance from "../../utils/axiosInstance";
 
-const BASE_URL = "http://localhost:8080/api/auth";
+const BASE_URL = "http://192.168.100.236:8080/api/auth";
 axios.defaults.withCredentials = true;
 
 export const pay = async (bill) => {
@@ -13,13 +13,14 @@ export const pay = async (bill) => {
     }
 }
 
-export const getAllBills = async (userCode, fullName, page) => {
+export const getAllBills = async (searchContent, page) => {
     try {
-        const resp = await axiosInstance.get(`bills?userCode=${userCode}&fullName=${fullName}&page=${page}`);
+        const resp = await axiosInstance.get(`bills?billCode=${searchContent}&fullName=${searchContent}&page=${page}`);
         console.log(resp.data);
         return resp.data;
     } catch (e) {
-        return [];
+        e.message = "Không có đơn hàng nào được tìm thấy!";
+        throw e;
     }
 }
 

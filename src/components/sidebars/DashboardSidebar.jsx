@@ -4,12 +4,8 @@ import styles from "./DashboardSidebar.module.scss";
 import { MdDashboard } from "react-icons/md";
 import { TbUserSquareRounded } from "react-icons/tb";
 import { RiFilePaper2Line } from "react-icons/ri";
-import { FaChartLine } from "react-icons/fa";
-import { IoTicket } from "react-icons/io5";
-import { LuListTodo } from "react-icons/lu";
 import { PiCloudWarning } from "react-icons/pi";
 import { MdOutlineSettings } from "react-icons/md";
-import { CiCirclePlus } from "react-icons/ci";
 import { TbLogout } from "react-icons/tb";
 import { IoCloseSharp } from "react-icons/io5";
 import { AiOutlineProduct } from "react-icons/ai";
@@ -24,6 +20,7 @@ export function DashboardSidebar(props) {
     const navigate = useNavigate();
     const [functionActive, setFunctionActive] = useState("");
     const [sidebarActive, setSidebarActive] = useState(props.OpenSidebar);
+    const [path, setPath] = useState(props.path);
 
     useEffect(() => {
         setSidebarActive(props.OpenSidebar);
@@ -58,40 +55,37 @@ export function DashboardSidebar(props) {
                 </div>
             </div>
             <div className={styles.sidebar}>
-                <Link to="/dashboard">
+                <Link className={path === 'dashboard' ? `${styles.active}` : ``}
+                      to="/dashboard">
                     <MdDashboard />
                     <h3>Dashboard</h3>
                 </Link>
-                <Link to="/dashboard/products">
+                <Link className={path === 'products' ? `${styles.active}` : ``}
+                    to="/dashboard/products">
                     <AiOutlineProduct />
                     <h3>Sản phẩm</h3>
                 </Link>
-                <Link to='/dashboard/customers'>
+                <Link className={path === 'employees' ? `${styles.active}` : ``}
+                    to='/dashboard/employees'>
+                    <TbUserSquareRounded />
+                    <h3>Nhân viên</h3>
+                </Link>
+                <Link className={path === 'customers' ? `${styles.active}` : ``}
+                    to='/dashboard/customers'>
                     <TbUserSquareRounded />
                     <h3>Khách hàng</h3>
                 </Link>
-                <Link to="/dashboard/bills">
+                <Link className={path === 'bills' ? `${styles.active}` : ``}
+                    to="/dashboard/bills">
                     <RiFilePaper2Line />
                     <h3>Đơn hàng</h3>
                 </Link>
-                <a href="#" className={styles.active} >
-                    <FaChartLine />
-                    <h3>Analytics</h3>
-                </a>
-                <a href="#">
-                    <IoTicket />
-                    <h3>Tickets</h3>
-                    <span className={styles.messageCount}>27</span>
-                </a>
-                <a href="#">
-                    <LuListTodo />
-                    <h3>Sale List</h3>
-                </a>
-                <a href="#">
+                <a href="#" className={path === 'reports' ? `${styles.active}` : ``}>
                     <PiCloudWarning />
                     <h3>Reports</h3>
                 </a>
-                <Link to='/dashboard/setting'>
+                <Link className={path === 'setting' ? `${styles.active}` : ``}
+                    to='/dashboard/setting'>
                     <MdOutlineSettings />
                     <h3>Settings</h3>
                 </Link>

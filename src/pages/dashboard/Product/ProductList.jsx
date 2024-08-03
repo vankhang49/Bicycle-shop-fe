@@ -77,7 +77,7 @@ export function ProductList() {
     }
 
     return (
-        <DashboardMain content={
+        <DashboardMain path={'products'} content={
             <main id='product'>
                 <div className="content-element">
                     <div className="header-content">

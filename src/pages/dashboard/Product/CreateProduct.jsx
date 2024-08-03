@@ -220,7 +220,7 @@ export function CreateProduct() {
     }
 
     return(
-        <DashboardMain content={
+        <DashboardMain path={'products'} content={
             <main id='create-product'>
                 <div className="content-element">
                     <div className="form-title">

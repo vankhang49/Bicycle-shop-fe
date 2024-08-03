@@ -4,16 +4,77 @@ import {MdOutlineModeEdit} from "react-icons/md";
 import {IoTrashSharp} from "react-icons/io5";
 import {DashboardMain} from "../../../components/DashboardMain/DashboardMain";
 import "./Bill.scss";
+import {useEffect, useState} from "react";
+import * as billService from "../../../core/services/BillService";
+import * as userService from "../../../core/services/UserService";
+import {useForm} from "react-hook-form";
 
 export function Bills() {
+    const [bills, setBills] = useState([]);
+    const [totalPages, setTotalPages] = useState({});
+    const [pageNumber, setPageNumber] = useState(0);
+    const [message, setMessage] = useState(null);
+
+    const {register, handleSubmit, setValue, formState: {errors}} = useForm({
+        criteriaMode: "all"
+    });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await getAllBills('', '');
+        }
+        fetchData();
+    }, [])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await getAllBills('', pageNumber);
+        }
+        fetchData();
+    }, [pageNumber]);
+
+
+    const getAllBills = async (searchContent, page) => {
+        try {
+            const temp = await billService.getAllBills(searchContent, page);
+            setBills(temp.content);
+            setTotalPages(temp.totalPages)
+        } catch (error) {
+            setMessage(error.message);
+        }
+    }
+
+    const handlePage = (pageNo) => {
+        setPageNumber(pageNo);
+    }
+
+    const showPageNo = () => {
+        let pageNoTags = [];
+        for (let i = 0; i < totalPages; i++) {
+            pageNoTags.push(<a key={i} className="page-a" onClick={() => handlePage(i)}>{i + 1}</a>);
+        }
+        return pageNoTags;
+    }
+
+    const onSubmit = async (data) => {
+        try {
+            const temp = await billService.getAllBills(data.searchContent, pageNumber);
+            setBills(temp.content);
+            setTotalPages(temp.totalPages);
+            setMessage(null);
+        } catch (e) {
+            setBills([]);
+            setMessage(e.message);
+        }
+    }
 
     return(
-        <DashboardMain content={
+        <DashboardMain path={'bills'} content={
             <main id='bill'>
                 <div className="content-element">
                     <div className="header-content">
-                        <form className="form-search">
-                            <input type="text" className="search-bar"
+                        <form className="form-search" onSubmit={handleSubmit(onSubmit)}>
+                            <input type="text" className="search-bar" {...register("searchContent")}
                                    placeholder="Nhập nội dung tìm kiếm"/>
                             <button className="btn btn-search">Tìm kiếm</button>
                         </form>
@@ -54,122 +115,32 @@ export function Bills() {
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td className={"no"}>1</td>
-                                <td className={"bill-code"}>KH0001</td>
-                                <td className={"customer"}>Nguyễn Văn A</td>
-                                <td className={"date-create"}>01/01/0101</td>
-                                <td className={"phone-number"}>0123456789</td>
-                                <td className={"status done"}>Đã giao hàng</td>
-                                <td className={"edit-customer"}>
-                                    <a>
-                                        <BiSolidShow fill="#3dc8d8"/>
-                                    </a>
-                                    <a>
-                                        <MdOutlineModeEdit fill="#00a762"/>
-                                    </a>
-                                    <a>
-                                        <IoTrashSharp fill="red"/>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className={"no"}>1</td>
-                                <td className={"bill-code"}>KH0001</td>
-                                <td className={"customer"}>Nguyễn Văn A</td>
-                                <td className={"date-create"}>01/01/0101</td>
-                                <td className={"phone-number"}>0123456789</td>
-                                <td className={"status"}>Đang giao</td>
-                                <td className={"edit-customer"}>
-                                    <a>
-                                        <BiSolidShow fill="#3dc8d8"/>
-                                    </a>
-                                    <a>
-                                        <MdOutlineModeEdit fill="#00a762"/>
-                                    </a>
-                                    <a>
-                                        <IoTrashSharp fill="red"/>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className={"no"}>1</td>
-                                <td className={"bill-code"}>KH0001</td>
-                                <td className={"customer"}>Nguyễn Văn A</td>
-                                <td className={"date-create"}>01/01/0101</td>
-                                <td className={"phone-number"}>0123456789</td>
-                                <td className={"status done"}>Đã giao hàng</td>
-                                <td className={"edit-customer"}>
-                                    <a>
-                                        <BiSolidShow fill="#3dc8d8"/>
-                                    </a>
-                                    <a>
-                                        <MdOutlineModeEdit fill="#00a762"/>
-                                    </a>
-                                    <a>
-                                        <IoTrashSharp fill="red"/>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className={"no"}>1</td>
-                                <td className={"bill-code"}>KH0001</td>
-                                <td className={"customer"}>Nguyễn Văn A</td>
-                                <td className={"date-create"}>01/01/0101</td>
-                                <td className={"phone-number"}>0123456789</td>
-                                <td className={"status"}>Đang giao</td>
-                                <td className={"edit-customer"}>
-                                    <a>
-                                        <BiSolidShow fill="#3dc8d8"/>
-                                    </a>
-                                    <a>
-                                        <MdOutlineModeEdit fill="#00a762"/>
-                                    </a>
-                                    <a>
-                                        <IoTrashSharp fill="red"/>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className={"no"}>1</td>
-                                <td className={"bill-code"}>KH0001</td>
-                                <td className={"customer"}>Nguyễn Văn A</td>
-                                <td className={"date-create"}>01/01/0101</td>
-                                <td className={"phone-number"}>0123456789</td>
-                                <td className={"status done"}>Đã giao hàng</td>
-                                <td className={"edit-customer"}>
-                                    <a>
-                                        <BiSolidShow fill="#3dc8d8"/>
-                                    </a>
-                                    <a>
-                                        <MdOutlineModeEdit fill="#00a762"/>
-                                    </a>
-                                    <a>
-                                        <IoTrashSharp fill="red"/>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className={"no"}>1</td>
-                                <td className={"bill-code"}>KH0001</td>
-                                <td className={"customer"}>Nguyễn Văn A</td>
-                                <td className={"date-create"}>01/01/0101</td>
-                                <td className={"phone-number"}>0123456789</td>
-                                <td className={"status"}>Đang giao</td>
-                                <td className={"edit-customer"}>
-                                    <a>
-                                        <BiSolidShow fill="#3dc8d8"/>
-                                    </a>
-                                    <a>
-                                        <MdOutlineModeEdit fill="#00a762"/>
-                                    </a>
-                                    <a>
-                                        <IoTrashSharp fill="red"/>
-                                    </a>
-                                </td>
-                            </tr>
+                            {bills && bills.map((bill, index) => (
+                                <tr key={bill.id}>
+                                    <td className={"no"}>{index + 1}</td>
+                                    <td className={"bill-code"}>{bill.billCode}</td>
+                                    <td className={"customer"}>{bill.appUser.fullName}</td>
+                                    <td className={"date-create"}>{bill.dateCreate}</td>
+                                    <td className={"phone-number"}>{bill.phoneNumber}</td>
+                                    <td className={bill.paid ? "status done" : "status"}>
+                                        {bill.paid ? "Đã giao hàng" : "Chưa giao hàng"}
+                                    </td>
+                                    <td className={"edit-customer"}>
+                                        <a>
+                                            <BiSolidShow fill="#3dc8d8"/>
+                                        </a>
+                                        <a>
+                                            <MdOutlineModeEdit fill="#00a762"/>
+                                        </a>
+                                        <a>
+                                            <IoTrashSharp fill="red"/>
+                                        </a>
+                                    </td>
+                                </tr>
+                            ))}
                             </tbody>
                         </table>
+                        {message !== null && <p>{message}</p>}
                     </div>
                     <div className="page">
                         <div className="page-box">

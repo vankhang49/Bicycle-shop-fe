@@ -146,7 +146,7 @@ export function Setting() {
     }
 
     return (
-        <DashboardMain content={
+        <DashboardMain path={'setting'} content={
             <main id='setting'>
                 <div className="content-element">
                     <div className="box-content">
