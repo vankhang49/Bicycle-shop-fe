@@ -1,7 +1,7 @@
 import axios from "axios";
 import axiosInstance from "../../utils/axiosInstance";
 
-const BASE_URL = "http://192.168.100.236:8080/api/public";
+const BASE_URL = "http://localhost:8080/api/public";
 axios.defaults.withCredentials = true;
 
 export async function getAllProducts(page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter) {

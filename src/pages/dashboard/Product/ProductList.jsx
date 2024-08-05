@@ -1,7 +1,6 @@
 import {DashboardMain} from "../../../components/DashboardMain/DashboardMain";
 import {TiArrowUnsorted} from "react-icons/ti";
 import {MdOutlineModeEdit} from "react-icons/md";
-import {BiSolidShow} from "react-icons/bi";
 import {IoTrashSharp} from "react-icons/io5";
 import "./ProductList.scss";
 import {Link, useNavigate} from "react-router-dom";
@@ -129,9 +128,6 @@ export function ProductList() {
                                     <td className={"brand"}>{product.brand.brandName}</td>
                                     <td className={"date-create"}>{product.dateCreate}</td>
                                     <td className={"edit-product"}>
-                                        <a>
-                                            <BiSolidShow fill="#3dc8d8"/>
-                                        </a>
                                         <Link to={`/dashboard/products/create/${product.productId}`}>
                                             <MdOutlineModeEdit fill="#00a762"/>
                                         </Link>

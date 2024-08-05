@@ -24,7 +24,7 @@ export const DisableUserModal = ({isOpen, onClose, userDisable, onDisableSuccess
                 </div>
                 <div className={styles.modalBody}>
                     <div className={styles.modalTitle}>
-                        <p>Bạn có chắc muốn khóa tài khóa nhân viên?</p>
+                        <p>Bạn có chắc muốn khóa tài khoản?</p>
                     </div>
                     <div className={styles.employeeCode}>
                         <label>Mã nhân viên: </label>

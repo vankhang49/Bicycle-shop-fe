@@ -1,0 +1,67 @@
+#advertisement {
+  margin-top: 1.4rem;
+
+  .content-element {
+    background-color: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    margin-top: 1rem;
+    box-shadow: var(--box-shadow);
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    .img-box {
+      width: 100%;
+      margin: 20px 0;
+      .index-edit {
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .index {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          padding: 5px;
+
+          p {
+            width: 20px;
+            font-size: 1rem;
+            color: var(--color-dark);
+            font-weight: 500;
+          }
+        }
+        .edit {
+          width: 30px;
+          height: 30px;
+          background: transparent;
+          border-radius: 50%;
+          padding: 5px 6px;
+          svg {
+            width: 20px;
+            height: 20px;
+          }
+
+          &:hover {
+            background: #ccc;
+          }
+        }
+      }
+
+
+      .img-ad {
+        width: 100%;
+        height:auto;
+        position: relative;
+
+        img {
+          width: 90%;
+          height: auto;
+        }
+      }
+    }
+  }
+}

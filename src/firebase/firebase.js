@@ -8,14 +8,14 @@ import { getAuth, signInWithCustomToken } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyA7STqVTK7td7fWtckcljcQ5sK8z40d4gQ",
-    authDomain: "imageuploaddb-4f4f5.firebaseapp.com",
-    databaseURL: "https://imageuploaddb-4f4f5-default-rtdb.firebaseio.com",
-    projectId: "imageuploaddb-4f4f5",
-    storageBucket: "imageuploaddb-4f4f5.appspot.com",
-    messagingSenderId: "471281579480",
-    appId: "1:471281579480:web:4fa4db107b8dd59d4eeead",
-    measurementId: "G-XH7MQWT1PF"
+    apiKey: "AIzaSyAKJeV28fRQeR8AF-3qVCxvd8i3dvP51fc",
+    authDomain: "bicycle-shop-de666.firebaseapp.com",
+    databaseURL: "https://bicycle-shop-de666-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "bicycle-shop-de666",
+    storageBucket: "bicycle-shop-de666.appspot.com",
+    messagingSenderId: "399909144954",
+    appId: "1:399909144954:web:618e48b6f93db3865caec3",
+    measurementId: "G-1WWX1Z33EW"
 };
 
 // Initialize Firebase

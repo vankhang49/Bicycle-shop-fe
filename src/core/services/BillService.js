@@ -1,7 +1,7 @@
 import axios from "axios";
 import axiosInstance from "../../utils/axiosInstance";
 
-const BASE_URL = "http://192.168.100.236:8080/api/auth";
+const BASE_URL = "http://localhost:8080/api/auth";
 axios.defaults.withCredentials = true;
 
 export const pay = async (bill) => {
@@ -9,7 +9,7 @@ export const pay = async (bill) => {
         const userId = localStorage.getItem("id");
         await axios.post(`${BASE_URL}/shopping-cart/pay?userId=${userId}`, bill);
     }catch (e) {
-        throw new Error("Can't not save bill!")
+        throw new Error("Lỗi, không thể thanh toán!")
     }
 }
 
@@ -24,14 +24,24 @@ export const getAllBills = async (searchContent, page) => {
     }
 }
 
-export const getAllBillsByUserId = async () => {
+export const getAllBillsByUserId = async (page) => {
     try {
         const userId = localStorage.getItem("id");
-        const resp = await axiosInstance.get(`bills/user/${userId}`);
+        const resp = await axiosInstance.get(`bills/user/${userId}?page=${page}`);
         console.log(resp.data);
         return resp.data;
     } catch (e) {
         return [];
+    }
+}
+
+export const getBillById = async (billId) => {
+    try {
+        const resp = await axiosInstance.get(`bills/${billId}`);
+        console.log(resp.data)
+        return resp.data;
+    } catch (e) {
+        throw e.response.data;
     }
 }
 

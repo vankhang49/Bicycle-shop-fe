@@ -12,6 +12,7 @@ import {UploadMultipleImage, UploadOneImage} from "../../../firebase/UploadImage
 import "./createProduct.scss";
 import Editor from "../../../components/Editer";
 import {toast} from "react-toastify";
+import { FaArrowsRotate } from "react-icons/fa6";
 
 export function CreateProduct() {
     const {id} = useParams();
@@ -76,6 +77,7 @@ export function CreateProduct() {
             setValue("deleteFlag", temp.deleteFlag);
             const pricingList = temp.pricingList.map((pricing) => ({
                 priceId: pricing.priceId,
+                priceCode: pricing.priceCode,
                 priceName: pricing.priceName,
                 price: pricing.price,
                 size: pricing.size,
@@ -148,8 +150,16 @@ export function CreateProduct() {
         setValue("productCode", code);
     }
 
-    const handleAddPricingRow = () => {
+    const randomPriceCode = async (index) => {
+        let code = "P";
+        const randomFourDigitNumber = Math.floor(1000 + Math.random() * 9000);
+        code += randomFourDigitNumber;
+        setValue(`pricingList[${index}].priceCode`, code);
+    }
+
+    const handleAddPricingRow = async () => {
         append({});
+        await randomPriceCode(fields.length);
     };
 
     const handleRemovePricingRow = (index) => {
@@ -331,6 +341,12 @@ export function CreateProduct() {
                                                     onClick={() => handleRemovePricingRow(index)}>
                                                 -
                                             </button>
+                                        </div>
+
+                                        <div className="priceCode">
+                                            <input type="text" disabled {...register(`pricingList[${index}].priceCode`)}
+                                                   placeholder={"Mã sản phẩm chi tiết"} className="form-label-child"/>
+                                            <FaArrowsRotate onClick={() => randomPriceCode(index)}/>
                                         </div>
 
                                         <input type="text" {...register(`pricingList[${index}].priceName`)}

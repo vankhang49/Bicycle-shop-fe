@@ -168,7 +168,7 @@ export function Customer() {
                                     <td className={"email"}>{customer.email}</td>
                                     <td className={"phone-number"}>{customer.phoneNumber}</td>
                                     <td className={"edit-customer"}>
-                                        <a onClick={()=>openDetailModal(customers.userId)}>
+                                        <a onClick={()=>openDetailModal(customer.userId)}>
                                             <BiSolidShow fill="#3dc8d8"/>
                                         </a>
                                         <a >

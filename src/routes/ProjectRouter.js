@@ -17,6 +17,7 @@ import {UserInfo} from "../pages/UserInfo/UserInfo";
 import {UserBill} from "../pages/UserInfo/UserBill/UserBill";
 import {EmployeeList} from "../pages/dashboard/Employee/EmployeeList";
 import {EmployeeCreate} from "../pages/dashboard/Employee/EmployeeCreate";
+import {Advertisements} from "../pages/dashboard/Advertisements/Advertisement";
 
 export const projectRouter = [
     {
@@ -99,6 +100,10 @@ export const projectRouter = [
     {
         path: '/dashboard/customers',
         element: <Customer/>,
+    },
+    {
+        path: '/dashboard/advertisements',
+        element: <Advertisements/>,
     },
     {
         path: '/dashboard/bills',

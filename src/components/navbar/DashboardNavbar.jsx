@@ -7,13 +7,43 @@ import {FaVolumeHigh} from "react-icons/fa6";
 import {CiCirclePlus} from "react-icons/ci";
 import React, {useEffect, useState} from "react";
 import styles from "./DashboardNavbar.module.scss";
+import * as authenticationService from "../../core/services/AuthenticationService";
 
 export function DashboardNavbar(props) {
+    const [fullName, setFullName] = useState("");
+    const [avatarUrl, setAvatarUrl] = useState("");
     const [isShowSidebar, setIsShowSidebar] = useState(props.CloseSidebar);
+    const [roleName, setRoleName] = useState("");
+
+    useEffect(()=> {
+        const fetchData = async () => {
+            getAvatar();
+            getFullName();
+            await getRoleName();
+        }
+        fetchData();
+    }, [])
 
     useEffect(() => {
         setIsShowSidebar(props.CloseSidebar);
     }, [props.CloseSidebar]);
+
+    const getRoleName = async () => {
+        const role = await authenticationService.getRoles();
+        if (role === 'ROLE_ADMIN') setRoleName("admin");
+        if (role === 'ROLE_EMPLOYEE') setRoleName("employee");
+        if (role === 'ROLE_MANAGER') setRoleName("storeManager");
+    };
+
+    const getFullName = () => {
+        const fullName = localStorage.getItem('fullName')
+        setFullName(fullName);
+    }
+
+    const getAvatar = () => {
+        const avatar = localStorage.getItem('avatar')
+        setAvatarUrl(avatar)
+    }
 
     const handleChangeDarkMode = () => {
         document.body.classList.toggle('dark-mode-variables');
@@ -37,12 +67,24 @@ export function DashboardNavbar(props) {
                 <div className={styles.profile}>
                     <div className={styles.info}>
                         <p>
-                            Hey, <b>Reza</b>
+                            Hey, <b>{fullName}</b>
                         </p>
-                        <small className={styles.textMuted}>Admin</small>
+                        <small className={styles.textMuted}>
+                            {roleName === "admin" ? "admin"
+                                : roleName === "employee" ? "Nhân viên"
+                                    : "Quản lý"
+                            }
+                        </small>
                     </div>
                     <div className={styles.profilePhoto}>
-                        <img src={profile1}/>
+                        {avatarUrl ? (
+                                <img src={avatarUrl} alt={'avatar'}/>
+                        )
+                        :
+                            (
+                                <img src={profile1} alt={'avatar'}/>
+                            )}
+
                     </div>
                 </div>
             </div>

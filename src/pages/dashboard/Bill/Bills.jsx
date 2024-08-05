@@ -8,6 +8,7 @@ import {useEffect, useState} from "react";
 import * as billService from "../../../core/services/BillService";
 import * as userService from "../../../core/services/UserService";
 import {useForm} from "react-hook-form";
+import {BillModal} from "../BillModal/BillModal";
 
 export function Bills() {
     const [bills, setBills] = useState([]);
@@ -18,6 +19,9 @@ export function Bills() {
     const {register, handleSubmit, setValue, formState: {errors}} = useForm({
         criteriaMode: "all"
     });
+
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [billId, setBillId] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -68,6 +72,15 @@ export function Bills() {
         }
     }
 
+    const handleOpenModal = (id) => {
+        setBillId(id);
+        setIsOpenModal(true);
+    }
+
+    const handleCloseModal = () => {
+        setIsOpenModal(false);
+    }
+
     return(
         <DashboardMain path={'bills'} content={
             <main id='bill'>
@@ -89,21 +102,12 @@ export function Bills() {
                                 </th>
                                 <th className={"bill-code"}>
                                     <span>Mã đơn hàng</span>
-                                    <button className="sort-button">
-                                        <TiArrowUnsorted/>
-                                    </button>
                                 </th>
                                 <th className={"customer"}>
                                     <span>Khách hàng</span>
-                                    <button className="sort-button">
-                                        <TiArrowUnsorted/>
-                                    </button>
                                 </th>
                                 <th className={"date-create"}>
                                     <span>Ngày</span>
-                                    <button className="sort-button">
-                                        <TiArrowUnsorted/>
-                                    </button>
                                 </th>
                                 <th className={"phone-number"}>
                                     số điện thoại
@@ -126,11 +130,8 @@ export function Bills() {
                                         {bill.paid ? "Đã giao hàng" : "Chưa giao hàng"}
                                     </td>
                                     <td className={"edit-customer"}>
-                                        <a>
+                                        <a onClick={()=>handleOpenModal(bill.id)}>
                                             <BiSolidShow fill="#3dc8d8"/>
-                                        </a>
-                                        <a>
-                                            <MdOutlineModeEdit fill="#00a762"/>
                                         </a>
                                         <a>
                                             <IoTrashSharp fill="red"/>
@@ -155,6 +156,11 @@ export function Bills() {
                         </div>
                     </div>
                 </div>
+                <BillModal
+                    isOpen={isOpenModal}
+                    onClose={handleCloseModal}
+                    billId={billId}
+                />
             </main>
         }/>
     );

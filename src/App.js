@@ -2,16 +2,19 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import "./assets/css/global.scss";
 import {projectRouter} from "./routes/ProjectRouter";
 import PrivateRoute from './utils/PrivateRoute';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {fetchCartFromServer, fetchCount} from "./core/redux/actions/CartActions";
 import {useEffect} from "react";
 
 function App() {
     const dispatch = useDispatch();
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
     useEffect(() => {
-        dispatch(fetchCartFromServer());
-        dispatch(fetchCount());
+        if (isAuthenticated) {
+            dispatch(fetchCartFromServer());
+            dispatch(fetchCount());
+        }
     }, [dispatch]);
 
   return (

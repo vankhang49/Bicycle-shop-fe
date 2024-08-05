@@ -3,22 +3,30 @@ import {useEffect, useState} from "react";
 import * as billService from "../../../core/services/BillService";
 import "./UserBill.scss";
 import {UpdateBillModal} from "./UpdateBillModal/UpdateBillModal";
+import {toast} from "react-toastify";
 
 export function UserBill(props) {
     const [bills, setBills] = useState([]);
     const [billId, setBillId] = useState(null);
+    const [pageNumber, setPageNumber] = useState(0);
     const [isOpenModal, setIsOpenModal] = useState(false);
+    const [totalPages, setTotalPages] = useState({});
 
     useEffect(() => {
         const fetchData = async () => {
-            await getAllBillsByUser();
+            await getAllBillsByUser(pageNumber);
         }
         fetchData();
-    }, []);
+    }, [pageNumber]);
 
-    const getAllBillsByUser = async () => {
-        const temp = await billService.getAllBillsByUserId();
-        setBills(temp);
+    const getAllBillsByUser = async (page) => {
+        try {
+            const temp = await billService.getAllBillsByUserId(page);
+            setBills(temp.content);
+        } catch (error) {
+            toast.error("Bạn đã đến trang cuối");
+        }
+
     }
 
     const calculateTotalPrice = (billItems) => {
@@ -36,6 +44,10 @@ export function UserBill(props) {
             await getAllBillsByUser();
             setBillId(null);
         }
+    }
+
+    const handleLoadMore = async () => {
+        setPageNumber(pageNumber + 1);
     }
 
     return(
@@ -97,6 +109,11 @@ export function UserBill(props) {
                             </div>
                         </div>
                     ))}
+                    { bills.length === 10 &&
+                    <div className="button-load-more">
+                        <button onClick={handleLoadMore}>Xem thêm</button>
+                    </div>
+                    }
 
                 </div>
                 <UpdateBillModal

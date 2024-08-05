@@ -24,6 +24,11 @@ export function Pay() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        randomBillCode();
+        setValue("dateCreate", JSON.stringify(new Date()));
+    }, [])
+
+    useEffect(() => {
         const fetchData = async () => {
             if (isAuthenticated) {
                 await getUserInfo();
@@ -84,6 +89,13 @@ export function Pay() {
         }
     }
 
+    const randomBillCode = () => {
+        let code = "B";
+        const randomFourDigitNumber = Math.floor(1000 + Math.random() * 9000);
+        code += randomFourDigitNumber;
+        setValue("billCode", code);
+    }
+
     return (
         <Main content={
             <div className="content">
@@ -95,7 +107,6 @@ export function Pay() {
                                 <Link to='/Bicycle-shop-fe/login'><FaRegUserCircle/>Đăng nhập</Link>
                             }
                         </div>
-
                         <div className="element">
                             <input type="text" placeholder="Họ và tên (*)" id="customerName"
                                    {...register("customerName", {

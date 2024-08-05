@@ -2,7 +2,7 @@ import axios from "axios";
 import axiosInstance from "../../utils/axiosInstance";
 import {logoutAction} from "../redux/actions/AuthenticationActions";
 
-const baseURL = "http://192.168.100.236:8080";
+const baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 
 export const login = async (data) => {

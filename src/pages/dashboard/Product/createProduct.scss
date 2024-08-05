@@ -129,6 +129,22 @@
             }
           }
 
+          .priceCode {
+            width: 45%;
+            position: relative;
+            margin: 0 15px 0 0;
+            input {
+              width: 100%;
+              position: relative;
+              padding: 0 10px;
+            }
+            svg {
+              position: absolute;
+              right: 0;
+              top: 25px;
+            }
+          }
+
           .form-label-child {
             width: 45%;
             margin: 5px 0 5px 15px;

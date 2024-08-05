@@ -146,6 +146,27 @@
       }
 
     }
+
+    .button-load-more {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 50px;
+
+      button {
+        background-color: #e1e1a6;
+        color: #000;
+        width: 100px;
+        height: 40px;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #f1ce1f;
+        }
+      }
+    }
   }
 
 }

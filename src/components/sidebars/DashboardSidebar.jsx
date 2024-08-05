@@ -14,10 +14,15 @@ import {Link, useNavigate} from "react-router-dom";
 import {logoutAction} from "../../core/redux/actions/AuthenticationActions";
 import {toast} from "react-toastify";
 import {useDispatch} from "react-redux";
+import { RiAdvertisementFill } from "react-icons/ri";
+import * as authenticationService from "../../core/services/AuthenticationService";
 
 export function DashboardSidebar(props) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [isEmployee, setIsEmployee] = useState(false);
+    const [isManager, setIsManager] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const [functionActive, setFunctionActive] = useState("");
     const [sidebarActive, setSidebarActive] = useState(props.OpenSidebar);
     const [path, setPath] = useState(props.path);
@@ -25,6 +30,29 @@ export function DashboardSidebar(props) {
     useEffect(() => {
         setSidebarActive(props.OpenSidebar);
     }, [props.OpenSidebar]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await getRoles();
+        }
+        fetchData();
+    }, []);
+
+    const getRoles = async () => {
+        const temp = authenticationService.getRoles();
+        (await temp).forEach(role => {
+            if (role.roleName === "ROLE_EMPLOYEE") {
+                setIsEmployee(true);
+            }
+            if (role.roleName === "ROLE_ADMIN") {
+                setIsAdmin(true);
+            }
+            if (role.roleName === "ROLE_MANAGER") {
+                setIsManager(true);
+            }
+        })
+
+    }
 
     const handleCloseSidebar = () => {
         setSidebarActive(!sidebarActive);
@@ -65,11 +93,13 @@ export function DashboardSidebar(props) {
                     <AiOutlineProduct />
                     <h3>Sản phẩm</h3>
                 </Link>
-                <Link className={path === 'employees' ? `${styles.active}` : ``}
-                    to='/dashboard/employees'>
-                    <TbUserSquareRounded />
-                    <h3>Nhân viên</h3>
-                </Link>
+                { (isAdmin || isManager) &&
+                    <Link className={path === 'employees' ? `${styles.active}` : ``}
+                        to='/dashboard/employees'>
+                        <TbUserSquareRounded />
+                        <h3>Nhân viên</h3>
+                    </Link>
+                }
                 <Link className={path === 'customers' ? `${styles.active}` : ``}
                     to='/dashboard/customers'>
                     <TbUserSquareRounded />
@@ -79,6 +109,11 @@ export function DashboardSidebar(props) {
                     to="/dashboard/bills">
                     <RiFilePaper2Line />
                     <h3>Đơn hàng</h3>
+                </Link>
+                <Link className={path === 'advertisements' ? `${styles.active}` : ``}
+                      to="/dashboard/advertisements">
+                    <RiAdvertisementFill />
+                    <h3>Quảng cáo</h3>
                 </Link>
                 <a href="#" className={path === 'reports' ? `${styles.active}` : ``}>
                     <PiCloudWarning />

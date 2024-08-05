@@ -30,8 +30,10 @@ export function NavBar(props) {
         const fetchData = async () => {
             await getAllCategories();
             await getAllProductFamilies();
-            await isEmp();
-            await isManag();
+            if (isAuthenticated) {
+                await isEmp();
+                await isManag();
+            }
             getAvatar();
             getFullName();
         }

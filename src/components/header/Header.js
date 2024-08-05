@@ -36,9 +36,11 @@ export function Header(props){
         dispatch(fetchCount()); // Fetch the count of products
 
         const fetchData = async () => {
-            await getRoleName();
-            getFullName();
-            getAvatar();
+            if (isAuthenticated) {
+                await getRoleName();
+                getFullName();
+                getAvatar();
+            }
         };
         fetchData();
     }, [dispatch]);
