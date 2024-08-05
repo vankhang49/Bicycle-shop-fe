@@ -18,6 +18,18 @@ export async function getAllProducts(page, nameSearch, familyName, categoryName,
     }
 }
 
+export const getNewProducts = async () => {
+    try {
+        const temp
+            = await axios.get(`${BASE_URL}/products/new-products`);
+        console.log(temp.data.content)
+        return temp.data.content;
+    } catch (e) {
+        console.log(e)
+        return [];
+    }
+}
+
 export const getAllProductsAuth= async (searchContent, page) => {
     try {
         const temp = await axiosInstance.get(`products?productCode=${searchContent}` +

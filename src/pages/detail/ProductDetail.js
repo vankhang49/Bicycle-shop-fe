@@ -9,6 +9,7 @@ import {Main} from "../../components/Main/Main";
 import {useDispatch} from "react-redux";
 import {addToCart, fetchCartFromService, fetchCount} from "../../core/redux/actions/CartActions";
 import {toast} from "react-toastify";
+import {fCurrency} from "../../utils/format-number";
 
 export function ProductDetail() {
     const [product, setProduct] = useState({});
@@ -35,7 +36,7 @@ export function ProductDetail() {
     useEffect(() => {
         const fetchData = async () => {
             const temp = pricingList.find(pricing =>
-                pricing.size === size && pricing.color.colorName == color
+                pricing.size === size && pricing.color.colorName === color
             );
             await setPricing(temp);
         }
@@ -65,11 +66,10 @@ export function ProductDetail() {
         setSize(size);
     }
 
-    const changeColorAndImgUrl = async (url, buttonColorName) => {
-        console.log(url)
+    const changeColorAndImgUrl = (url, buttonColorName) => {
         changeImgUrl(url);
         selectButton(buttonColorName);
-        await setColor(buttonColorName);
+        setColor(buttonColorName);
     };
 
     const changeAmount = (symbol) => {
@@ -115,29 +115,39 @@ export function ProductDetail() {
                                 </label>
                                 <label className='code'>
                                     Mã sản phẩm:
-                                    <span className="product-code">{product.productCode}</span>
+                                    <span className="product-code">
+                                        {pricing ? pricing.priceCode : product.productCode}
+                                    </span>
                                 </label>
                                 <label className='price-old'>
                                 <span className="product-price-old">
-                                    {product.pricingList &&
+                                    { pricing ?
+                                        (fCurrency(pricing.price) + " VNĐ")
+                                        :
+                                        product.pricingList &&
                                         (product.pricingList.length > 1 && (product.pricingList[0].price
                                                 !== product.pricingList[product.pricingList.length - 1].price) ?
-                                                (product.pricingList[0].price.toLocaleString("vi-VN") + " - "
-                                                    + product.pricingList[product.pricingList.length - 1].price.toLocaleString("vi-VN") + " VNĐ")
-                                                : (product.pricingList[0].price.toLocaleString("vi-VN") + " VNĐ")
-                                        )}
+                                                (fCurrency(product.pricingList[0].price) + " - "
+                                                    + fCurrency(product.pricingList[product.pricingList.length - 1].price) + " VNĐ")
+                                                : (fCurrency(product.pricingList[0].price) + " VNĐ")
+                                        )
+                                    }
                                 </span>
                                 </label>
                                 <label className='price-new'>
                                 <span className="product-price">
-                                    {product.pricingList &&
+                                    { pricing ?
+                                        (fCurrency(Math.round(pricing.price * (1 - pricing.promotion?.discount))) + " VNĐ")
+                                        :
+                                    product.pricingList &&
                                         (product.pricingList.length > 1 && (product.pricingList[0].price
                                                 !== product.pricingList[product.pricingList.length - 1].price) ?
-                                                (product.pricingList[0].price * (1 - product.pricingList[0].promotion.discount))
-                                                + "-" + (product.pricingList[product.pricingList.length - 1].price
-                                                    * (1 - product.pricingList[product.pricingList.length - 1].promotion.discount) + " VNĐ")
-                                                : ((product.pricingList[0].price * (1 - product.pricingList[0].promotion.discount)).toLocaleString("vi-VN") + " VNĐ")
-                                        )}
+                                                (fCurrency(Math.round(product.pricingList[0].price * (1 - product.pricingList[0].promotion.discount))))
+                                                + "-" + (fCurrency(Math.round(product.pricingList[product.pricingList.length - 1].price
+                                                    * (1 - product.pricingList[product.pricingList.length - 1].promotion.discount))) + " VNĐ")
+                                                : (fCurrency(Math.round(product.pricingList[0].price * (1 - product.pricingList[0].promotion.discount))) + " VNĐ")
+                                        )
+                                    }
                                 </span>
                                 </label>
                                 {product.pricingList && product.pricingList[0].size ?

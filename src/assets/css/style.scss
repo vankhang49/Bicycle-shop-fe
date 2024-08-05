@@ -58,6 +58,14 @@ a {
   display: flex;
   min-height: 100vh;
 
+  .loading {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .product-list {
     width: 80%;
     .products{
@@ -104,12 +112,18 @@ a {
             display: block;
             background-color: white;
             border-radius: 25px 25px 0 0;
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%;
+
             img{
-              max-width: 100%;
-              aspect-ratio: 1/1;
-              height: auto;
-              display: block;
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
               border-radius: 25px 25px 0 0;
+              transition: opacity 1s ease-in-out;
             }
           }
           .buy-now {
@@ -178,7 +192,7 @@ a {
       li:hover {
         .products-top{
           img {
-            filter: opacity(80%);
+            filter: opacity(100%);
           }
           .buy-now{
             bottom: 0;
@@ -189,6 +203,28 @@ a {
     }
   }
 }
+
+@keyframes slide {
+  0% { opacity: 1; }
+  20% { opacity: 0; }
+  40% { opacity: 1; }
+  60% { opacity: 0; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.product-thumb.hover img {
+  position: absolute; /* Đảm bảo ảnh nằm chồng lên nhau */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: slide 10s infinite; /* Tăng thời gian để ảnh chạy chậm hơn */
+}
+
+.product-thumb.hover img:nth-child(1) { animation-delay: 0s; }
+.product-thumb.hover img:nth-child(2) { animation-delay: 1s; } /* Thay đổi độ trễ để ảnh không chồng lên nhau */
+.product-thumb.hover img:nth-child(3) { animation-delay: 2s; }
+.product-thumb.hover img:nth-child(4) { animation-delay: 4s; }
 
 
 .content-button {

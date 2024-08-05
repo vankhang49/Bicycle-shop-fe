@@ -7,7 +7,11 @@ axios.defaults.withCredentials = true;
 
 export const login = async (data) => {
     try {
-        const response = await axios.post(`${baseURL}/api/auth/authenticate`, data)
+        const loginData = {
+            email: data.email,
+            password: data.password,
+        }
+        const response = await axios.post(`${baseURL}/api/auth/authenticate`, loginData)
         console.log(response.data)
         return response.data;
     } catch (e) {
@@ -17,7 +21,12 @@ export const login = async (data) => {
 
 export const register = async (userData) => {
     try{
-        const response = await axios.post(`${baseURL}/api/auth/register`, userData)
+        const registerData = {
+            newEmail: userData.newEmail,
+            newPassword: userData.newPassword,
+            confirmPassword: userData.confirmPassword
+        }
+        const response = await axios.post(`${baseURL}/api/auth/register`, registerData)
         return response.data;
     }catch(err){
         throw err;

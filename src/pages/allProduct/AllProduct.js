@@ -1,13 +1,13 @@
 import "../../assets/css/style.scss"
 import "../../components/modal/modal.scss"
-import Modal from "../../components/modal/Modal";
 import {useEffect, useState} from "react";
-import warning from "../../assets/images/warning.png";
 import * as productsService from "../../core/services/ProductService";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {Filter} from "../../components/filter/Filter";
 import {Main} from "../../components/Main/Main";
-import { CiFilter } from "react-icons/ci";
+import {CiFilter} from "react-icons/ci";
+import {fCurrency} from "../../utils/format-number";
+import Loading from "../../components/Loading/Loading";
 
 
 export function AllProduct() {
@@ -19,6 +19,8 @@ export function AllProduct() {
     const [priceAfter, setPriceAfter] = useState(9999999999);
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
+    const [hoveredProductIndex, setHoveredProductIndex] = useState(null);
     const [isOpenFilter, setIsOpenFilter] = useState(false);
 
     // const {state} = useLocation();
@@ -35,6 +37,9 @@ export function AllProduct() {
     const getProductsList = async (page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter) => {
         const temp = await productsService.getAllProducts(page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter);
         setProducts(temp.content);
+        setTimeout(()=> {
+            setIsLoading(false);
+        }, [2000]);
     }
 
     const updateBrandName = (newBrandName) => {
@@ -77,6 +82,14 @@ export function AllProduct() {
         setIsOpenFilter(childData);
     }
 
+    const handleMouseEnter = (index) => {
+        setHoveredProductIndex(index);
+    }
+
+    const handleMouseLeave = () => {
+        setHoveredProductIndex(null);
+    }
+
     return (
         <Main content={
             <div className="content">
@@ -89,34 +102,45 @@ export function AllProduct() {
                         onBrandNameChange={updateBrandName}
                         onFamilyNameChange={updateFamilyName}
                         onPriceChange={updatePrice}
-                        isOpenFilter = {isOpenFilter}
-                        closeFilter = {handleCloseFilter}
+                        isOpenFilter={isOpenFilter}
+                        closeFilter={handleCloseFilter}
                     >
                     </Filter>
+                    {isLoading ? (
+                       <div className="loading">
+                           <Loading/>
+                       </div>
+                    ) : (
                     <div className="product-list">
                         <ul className="products">
                             {products && products.map((product, index) => (
-                                <li key={index}>
+                                <li key={index} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}>
                                     <div className="products-top">
                                         <Link to={`/products/detail/${product.productId}`}
-                                           className="product-thumb">
-                                            <img src={product.productImages[0].imageUrl} alt="1"/>
+                                              className={`product-thumb ${hoveredProductIndex === index ? 'hover' : ''}`}>
+                                            {hoveredProductIndex === index ? (
+                                                    product.productImages.map((image, idx) => (
+                                                        <img key={idx} src={image.imageUrl} alt={`product-image-${idx}`} />
+                                                    ))
+                                            ) : (
+                                                <img src={product.productImages[0].imageUrl} alt="1" onLoad={() => setIsLoading(false)} />
+                                            )}
                                         </Link>
                                         <p className="buy-now">Mua ngay</p>
                                     </div>
                                     <div className="product-info">
                                         <span className="product-code info-element">{product.productCode}</span>
                                         <Link to={`/products/detail/${product.productId}`}
-                                           className="product-name info-element">{product.productName}
+                                              className="product-name info-element">{product.productName}
                                         </Link>
                                         <div>
                                             <span className="product-price product-price-old info-element">
                                                 {product.pricingList ?
                                                     (product.pricingList.length > 1 && (product.pricingList[0].price
                                                             !== product.pricingList[product.pricingList.length - 1].price) ?
-                                                            (product.pricingList[0].price + " - "
-                                                                + product.pricingList[product.pricingList.length - 1].price + " VNĐ")
-                                                            : (product.pricingList[0].price + " VNĐ")
+                                                            (fCurrency(product.pricingList[0].price) + " - "
+                                                                + fCurrency(product.pricingList[product.pricingList.length - 1].price) + " VNĐ")
+                                                            : (fCurrency(product.pricingList[0].price) + " VNĐ")
                                                     ) : ""}
                                             </span>
                                         </div>
@@ -125,9 +149,9 @@ export function AllProduct() {
                                                 {product.pricingList ?
                                                     (product.pricingList.length > 1 && (product.pricingList[0].price
                                                             !== product.pricingList[product.pricingList.length - 1].price) ?
-                                                            (product.pricingList[0].price + " - "
-                                                                + product.pricingList[product.pricingList.length - 1].price + " VNĐ")
-                                                            : (product.pricingList[0].price + " VNĐ")
+                                                            (fCurrency(Math.round((product.pricingList[0].price * (1 - product.pricingList[0].promotion.discount)))) + " - "
+                                                                + (fCurrency(Math.round(product.pricingList[product.pricingList.length - 1].price * (1 - product.pricingList[product.pricingList.length - 1].promotion.discount)))) + " VNĐ")
+                                                            : (fCurrency(Math.round((product.pricingList[0].price * (1 - product.pricingList[0].promotion.discount))))  + " VNĐ")
                                                     ) : ""}
                                             </span>
                                         </div>
@@ -136,6 +160,7 @@ export function AllProduct() {
                             ))}
                         </ul>
                     </div>
+                        )}
                 </div>
             </div>
         }/>
