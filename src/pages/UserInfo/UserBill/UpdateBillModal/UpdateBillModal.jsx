@@ -10,7 +10,6 @@ import * as billService from "../../../../core/services/BillService";
 export function UpdateBillModal({isOpen, onClose, billId}) {
 
     useEffect(() => {
-        console.log(billId)
         setTimeout(async () => {
             try {
                 if (billId !== null) {
@@ -39,7 +38,6 @@ export function UpdateBillModal({isOpen, onClose, billId}) {
                     <div className={styles.wait}>Vui lòng đợi trong giây lát</div>
                 </div>
                 <div className={styles.modalFooter}>
-                    <button className={styles.acceptDelete} onClick={onClose}>Xác nhận</button>
                     <button className={styles.cancel} onClick={onClose}>Huỷ bỏ</button>
                 </div>
             </div>

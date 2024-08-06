@@ -119,12 +119,12 @@ export function NavBar(props) {
                 </div>
             </div>
             {isAuthenticated &&
-                <div className="user-box show-dropdown">
+                <Link to={"/my-info"} className="user-box show-dropdown">
                     <div className="avatar">
                         {avatarUrl ? <img src={avatarUrl} alt="avatar"/> : <img src={avatar} alt="avatar"/>}
                     </div>
                     <div className="username">{fullName}</div>
-                </div>
+                </Link>
             }
             <ul>
                 <li className="dropdown">

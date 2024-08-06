@@ -1,7 +1,7 @@
 import axios from "axios";
 import axiosInstance from "../../utils/axiosInstance";
 
-const BASE_URL = "http://192.168.55.108:8080/api/public";
+const BASE_URL = "http://localhost:8080/api/public";
 axios.defaults.withCredentials = true;
 
 export async function getAllProducts(page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter) {
@@ -34,6 +34,16 @@ export const getAllProductsAuth= async (searchContent, page) => {
     try {
         const temp = await axiosInstance.get(`products?productCode=${searchContent}` +
         `&productName=${searchContent}&brandName=${searchContent}&page=${page}`);
+        console.log(temp.data);
+        return temp.data;
+    } catch (e) {
+        throw e.response.data;
+    }
+}
+
+export const getProductByPriceId = async (priceId) => {
+    try {
+        const temp = await axiosInstance.get(`products/pricing/${priceId}`);
         console.log(temp.data);
         return temp.data;
     } catch (e) {

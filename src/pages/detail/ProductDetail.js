@@ -10,6 +10,7 @@ import {useDispatch} from "react-redux";
 import {addToCart, fetchCartFromService, fetchCount} from "../../core/redux/actions/CartActions";
 import {toast} from "react-toastify";
 import {fCurrency} from "../../utils/format-number";
+import {Rating} from "../../components/Rating/Rating";
 
 export function ProductDetail() {
     const [product, setProduct] = useState({});
@@ -203,9 +204,10 @@ export function ProductDetail() {
                         </div>
                     </div>
                     <div className="product-description">
-
+                        <div className="title"><h2>Mô tả sản phẩm</h2></div>
                         <div className="description" dangerouslySetInnerHTML={{__html: product?.content}}></div>
                     </div>
+                    <Rating productId={productId}/>
                 </div>
                 <RelatedProducts></RelatedProducts>
             </div>

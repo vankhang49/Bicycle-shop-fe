@@ -9,9 +9,10 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  (config) => {
-    return config;
-  },
+    (config) => {
+      config.headers.Authorization = `Bearer`;
+      return config;
+    },
   (error) => {
     return Promise.reject(error);
   }

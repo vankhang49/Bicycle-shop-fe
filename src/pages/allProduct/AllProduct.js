@@ -8,7 +8,7 @@ import {Main} from "../../components/Main/Main";
 import {CiFilter} from "react-icons/ci";
 import {fCurrency} from "../../utils/format-number";
 import Loading from "../../components/Loading/Loading";
-
+import spinner from "../../assets/icons/Spinner.gif";
 
 export function AllProduct() {
     // const products = useSelector(state => state.products);
@@ -22,13 +22,21 @@ export function AllProduct() {
     const [isLoading, setIsLoading] = useState(true);
     const [hoveredProductIndex, setHoveredProductIndex] = useState(null);
     const [isOpenFilter, setIsOpenFilter] = useState(false);
+    const [delay, setDelay] = useState(false);
 
     // const {state} = useLocation();
     // const dispatch = useDispatch();
 
+    useEffect(()=> {
+        setTimeout(()=>{
+            setDelay(false);
+        }, 3000)
+    }, [isLoading === false])
+
     useEffect(() => {
         if (categoryName === undefined) categoryName = "";
         const fetchProducts = async () => {
+            setDelay(true);
             await getProductsList("", "", familyName, categoryName, brandName, priceBefore, priceAfter);
         }
         fetchProducts().then().catch(console.error);
@@ -39,7 +47,7 @@ export function AllProduct() {
         setProducts(temp.content);
         setTimeout(()=> {
             setIsLoading(false);
-        }, [2000]);
+        }, 2000);
     }
 
     const updateBrandName = (newBrandName) => {
@@ -118,13 +126,17 @@ export function AllProduct() {
                                     <div className="products-top">
                                         <Link to={`/products/detail/${product.productId}`}
                                               className={`product-thumb ${hoveredProductIndex === index ? 'hover' : ''}`}>
-                                            {hoveredProductIndex === index ? (
+                                            {delay ? <img src={spinner} alt="spinner"/>
+                                            :
+                                                hoveredProductIndex === index ? (
                                                     product.productImages.map((image, idx) => (
                                                         <img key={idx} src={image.imageUrl} alt={`product-image-${idx}`} />
                                                     ))
-                                            ) : (
-                                                <img src={product.productImages[0].imageUrl} alt="1" onLoad={() => setIsLoading(false)} />
-                                            )}
+                                                ) : (
+                                                    <img src={product.productImages[0].imageUrl} alt="1" onLoad={() => setIsLoading(false)} />
+                                                )
+                                            }
+
                                         </Link>
                                         <p className="buy-now">Mua ngay</p>
                                     </div>
