@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {loginSuccess, setRemember} from "../../core/redux/actions/AuthenticationActions";
 import logo from "../../assets/images/logo-bike.png";
 
-export function Login() {
+export function Test() {
     const dispatch = useDispatch();
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const rememberMe = useSelector(state => state.auth.rememberMe);
@@ -22,7 +22,7 @@ export function Login() {
     const [isLoading, setIsLoading] = useState(false); // Add loading state
     const [isShowRegister, setIsShowRegister] = useState(false);
 
-    const {register, handleSubmit, formState: {errors}, setValue} = useForm({
+    const {register, handleSubmit, formState: {errors}, setValue, getValues} = useForm({
         criteriaMode: "all"
     });
     const [showPopupElement, setShowPopupElement] = useState(false);
@@ -142,19 +142,22 @@ export function Login() {
                                 }
                                 <div className="input-box">
                                     <i className="fa-regular fa-envelope icon"/>
-                                    <input type="text" {...register("email")}
+                                    <input type="email" {...register("email", {
+                                        required: "Email không được để trống!"
+                                    })}
                                            className="login-input"
                                            placeholder="Địa chỉ email"
                                            id="email"
                                            style={showPopupElement ? {border: "1px solid #DA1075FF"} : {}}
                                     />
                                     <label>Email</label>
-                                    {errors.email &&
-                                        <p style={{color: "red", fontSize: "16px"}}>{errors.email.message}</p>}
                                 </div>
+                                <p className={'validate'}>{errors.email ? errors.email.message : ""}</p>
                                 <div className="input-box">
                                     <i className="fa-solid fa-lock icon"/>
-                                    <input type={openEye ? "text" : "password"} {...register("password")}
+                                    <input type={openEye ? "text" : "password"} {...register("password", {
+                                        required: "Mật khẩu không được để trống!"
+                                    })}
                                            className="login-input"
                                            placeholder="Mật khẩu"
                                            id="password"
@@ -163,9 +166,8 @@ export function Login() {
                                     {openEye ? <FaEye onClick={() => setOpenEye(!openEye)}></FaEye> :
                                         <FaEyeSlash onClick={() => setOpenEye(!openEye)}></FaEyeSlash>}
                                     <label>Mật khẩu</label>
-                                    {errors.password &&
-                                        <p style={{color: "red", fontSize: "16px"}}>{errors.password.message}</p>}
                                 </div>
+                                <p className={'validate'}>{errors.password ? errors.password.message : ""}</p>
                                 <div className="forget">
                                     <label htmlFor="">
                                         <input type="checkbox" {...register("rememberMe")}/>
@@ -202,19 +204,28 @@ export function Login() {
                                 <h2>Đăng ký</h2>
                                 <div className="input-box">
                                     <i className="fa-regular fa-envelope icon"/>
-                                    <input type="text" {...register("newEmail")}
+                                    <input type="email" {...register("newEmail", {
+                                        required: "Email không được để trống!"
+                                    })}
                                            className="login-input"
                                            placeholder="Địa chỉ email"
                                            id="email"
                                            style={showPopupElement ? {border: "1px solid #DA1075FF"} : {}}
                                     />
                                     <label>Email</label>
-                                    {errors.newEmail &&
-                                        <p style={{color: "red", fontSize: "16px"}}>{errors.newEmail.message}</p>}
                                 </div>
+                                <p className={'validate'}>{errors.newEmail ? errors.newEmail.message : ""}</p>
                                 <div className="input-box">
                                     <i className="fa-solid fa-lock icon"/>
-                                    <input type={openEye ? "text" : "newPassword"} {...register("newPassword")}
+                                    <input type={openEye ? "text" : "password"} {...register("newPassword", {
+                                        required: "Mật khẩu không được để trống!",
+                                        minLength: {value: 8, message: "Mật khẩu phải từ 8 đến 50 chữ!"},
+                                        maxLength: {value: 50, message: "Mật khẩu phải từ 8 đến 50 chữ!"},
+                                        pattern: {
+                                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&/_])[A-Z][A-Za-z\d@$!%*?&]{7,49}$/,
+                                            message: "Mật khẩu phải bắt đầu bằng một chữ hoa, chứa ít nhất một chữ thường, một chữ số, ký tự đặc biệt (@$!%*?&/_), và phải dài từ 8 đến 50 ký tự!"
+                                        }
+                                    })}
                                            className="login-input"
                                            placeholder="Mật khẩu"
                                            id="password"
@@ -223,12 +234,13 @@ export function Login() {
                                     {openEye ? <FaEye onClick={() => setOpenEye(!openEye)}></FaEye> :
                                         <FaEyeSlash onClick={() => setOpenEye(!openEye)}></FaEyeSlash>}
                                     <label>Mật khẩu</label>
-                                    {errors.newPassword &&
-                                        <p style={{color: "red", fontSize: "16px"}}>{errors.newPassword.message}</p>}
                                 </div>
+                                <p className={'validate'}>{errors.newPassword ? errors.newPassword.message : ""}</p>
                                 <div className="input-box">
                                     <i className="fa-solid fa-lock icon"/>
-                                    <input type={openEye ? "text" : "password"} {...register("confirmPassword")}
+                                    <input type={openEye ? "text" : "password"} {...register("confirmPassword", {
+                                        validate: value => value === getValues('newPassword') || "Mật khẩu không trùng khớp!"
+                                    })}
                                            className="login-input"
                                            placeholder="Nhập lại mật khẩu"
                                            id="password"
@@ -238,12 +250,8 @@ export function Login() {
                                         <FaEye onClick={() => setOpenEyeConfirm(!openEyeConfirm)}></FaEye> :
                                         <FaEyeSlash onClick={() => setOpenEyeConfirm(!openEyeConfirm)}></FaEyeSlash>}
                                     <label>Xác nhận mật khẩu</label>
-                                    {errors.confirmPassword &&
-                                        <p style={{
-                                            color: "red",
-                                            fontSize: "16px"
-                                        }}>{errors.confirmPassword.message}</p>}
                                 </div>
+                                <p className={'validate'}>{errors.confirmPassword ? errors.confirmPassword.message : ""}</p>
                                 <button type={"submit"} disabled={isLoading}
                                         style={isLoading ? {background: "#ccc"} : null} className="btn bkg">
                                     {isLoading ?

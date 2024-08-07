@@ -3,13 +3,20 @@ import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import * as ratingService from "../../core/services/RatingService";
 import avatar from "../../assets/images/avatar.jpg";
+import {EditRatingModal} from "./EditRatingModal/EditRatingModal";
+import {MdModeEdit} from "react-icons/md";
+import {useForm} from "react-hook-form";
 
 export function Rating({productId}) {
+    const userId = Number.parseInt(localStorage.getItem("id"));
     const [ratings, setRatings] = useState([]);
     const [message, setMessage] = useState(null);
-    const [totalPages, setTotalPages] = useState({});
+    const [totalPages, setTotalPages] = useState(null);
+    const [totalElements, setTotalElement] = useState(null);
     const [pageNumber, setPageNumber] = useState(0);
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    const [rating, setRating] = useState(null);
+    const [isOpenEditRatingModal, setIsOpenEditRatingModal] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,6 +34,7 @@ export function Rating({productId}) {
             const temp = await ratingService.getAllRatings(productId, page, size);
             setRatings(temp.content);
             setTotalPages(temp.totalPages);
+            setTotalElement(temp.totalElements);
         } catch (error) {
             setMessage(error);
         }
@@ -37,6 +45,7 @@ export function Rating({productId}) {
             const temp = await ratingService.getAllRatingsByUserId(productId, page, size);
             setRatings(temp.content);
             setTotalPages(temp.totalPages);
+            setTotalElement(temp.totalElements);
         } catch (error) {
             setMessage(error);
         }
@@ -49,9 +58,23 @@ export function Rating({productId}) {
     const showPageNo = () => {
         let pageNoTags = [];
         for (let i = 0; i < totalPages; i++) {
-            pageNoTags.push(<a key={i} className="page-a" onClick={() => handlePage(i)}>{i + 1}</a>);
+            pageNoTags.push(<a key={i} className={styles.pageA} onClick={() => handlePage(i)}>{i + 1}</a>);
         }
         return pageNoTags;
+    }
+
+    const handleOpenEditRatingModal = (rating) => {
+        setRating(rating);
+        setIsOpenEditRatingModal(true);
+    }
+
+    const handleCloseEditRatingModal = () => {
+        setIsOpenEditRatingModal(false);
+    }
+
+    const handleReRender = async () => {
+        handleCloseEditRatingModal();
+        await getAllRatingsByUser(pageNumber, 5);
     }
 
     return(
@@ -66,25 +89,56 @@ export function Rating({productId}) {
                             <img src={rating.user.avatar ? rating.user.avatar : avatar} alt="avatar"/>
                         </div>
                         <div className={styles.elementContent}>
-                            <div className={styles.fullName}>{rating.user.fullName}</div>
-                            <div className={styles.star}>
-                                <input value="5" name="rate" id="star5" type="radio" checked={rating.star === 5}/>
-                                <label title="text" htmlFor="star5"></label>
-                                <input value="4" name="rate" id="star4" type="radio" checked={rating.star === 4}/>
-                                <label title="text" htmlFor="star4"></label>
-                                <input value="3" name="rate" id="star3" type="radio" checked={rating.star === 3}/>
-                                <label title="text" htmlFor="star3"></label>
-                                <input value="2" name="rate" id="star2" type="radio" checked={rating.star === 2}/>
-                                <label title="text" htmlFor="star2"></label>
-                                <input value="1" name="rate" id="star1" type="radio" checked={rating.star === 1}/>
-                                <label title="text" htmlFor="star1"></label>
+                            <div className={styles.fullName}>
+                                <p>{rating.user.fullName}</p>
+                                {rating.user.userId === userId &&
+                                    <a onClick={()=>handleOpenEditRatingModal(rating)}><MdModeEdit/></a>
+                                }
                             </div>
-                            <div className={styles.contentRating} dangerouslySetInnerHTML={{__html: rating?.content}}></div>
+                            <div className={styles.star}>
+                                {[5, 4, 3, 2, 1].map((star) => (
+                                    <>
+                                        <input key={star}
+                                            value={star}
+                                            disabled
+                                            name={`rate-${rating.ratingId}`}
+                                            id={`star-${rating.ratingId}-${star}`}
+                                            type="radio"
+                                            checked={rating.star === star}
+                                        />
+                                        <label
+                                            title="text"
+                                            htmlFor={`star-${rating.ratingId}-${star}`}
+                                        ></label>
+                                    </>
+                                ))}
+                            </div>
+                            <div className={styles.contentRating}
+                                 dangerouslySetInnerHTML={{__html: rating?.content}}></div>
                         </div>
                     </div>
                 ))}
+                {message !== null && <p className={styles.message}>{message}</p>}
+                <div className={styles.page}>
+                    <div className={styles.pageBox}>
+                        {pageNumber !== 0 &&
+                            <a className={styles.pageA} onClick={() => handlePage(pageNumber - 1)}>Trang trước</a>
+                        }
+                        <span>
+                                    {showPageNo()}
+                                </span>
+                        {pageNumber < (totalPages - 1) &&
+                            <a className={styles.pageA} onClick={() => handlePage(pageNumber + 1)}>Trang sau</a>
+                        }
+                    </div>
+                </div>
             </div>
-            {message !== null && <p className={styles.message}>{message}</p>}
+            <EditRatingModal
+                isOpen={isOpenEditRatingModal}
+                onClose={handleCloseEditRatingModal}
+                rating = {rating}
+                reRender = {handleReRender}
+            />
         </div>
     );
 }

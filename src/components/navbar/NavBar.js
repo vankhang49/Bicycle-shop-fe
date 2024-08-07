@@ -24,7 +24,7 @@ export function NavBar(props) {
     const [fullName, setFullName] = useState("");
     const [avatarUrl, setAvatarUrl] = useState("");
     const [isEmployee, setIsEmployee] = useState(false);
-    const [isManager, setIsManager] = useState(true);
+    const [isManager, setIsManager] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {

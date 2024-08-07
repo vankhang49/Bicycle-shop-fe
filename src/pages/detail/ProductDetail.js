@@ -101,7 +101,7 @@ export function ProductDetail() {
                   </span>
                             <div className="small-img">
                                 {product.productImages && product.productImages.map((image, index) => (
-                                    <div className="small-img-col">
+                                    <div className="small-img-col" key={image.imageId}>
                                         <img className="img-element" onMouseOver={() => changeImgUrl(image.imageUrl)}
                                              src={image.imageUrl} alt={image.imageUrl}/>
                                     </div>
@@ -209,7 +209,11 @@ export function ProductDetail() {
                     </div>
                     <Rating productId={productId}/>
                 </div>
-                <RelatedProducts></RelatedProducts>
+                <RelatedProducts
+                    product = {product}
+                    categoryName = {"Xe đạp"}
+                >
+                </RelatedProducts>
             </div>
         }/>
     );

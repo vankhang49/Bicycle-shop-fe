@@ -23,6 +23,7 @@ export function AllProduct() {
     const [hoveredProductIndex, setHoveredProductIndex] = useState(null);
     const [isOpenFilter, setIsOpenFilter] = useState(false);
     const [delay, setDelay] = useState(false);
+    const [message, setMessage] = useState(null);
 
     // const {state} = useLocation();
     // const dispatch = useDispatch();
@@ -35,6 +36,7 @@ export function AllProduct() {
 
     useEffect(() => {
         if (categoryName === undefined) categoryName = "";
+        setIsLoading(true);
         const fetchProducts = async () => {
             setDelay(true);
             await getProductsList("", "", familyName, categoryName, brandName, priceBefore, priceAfter);
@@ -43,11 +45,21 @@ export function AllProduct() {
     }, [categoryName, familyName, brandName, priceBefore, priceAfter]);
 
     const getProductsList = async (page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter) => {
-        const temp = await productsService.getAllProducts(page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter);
-        setProducts(temp.content);
-        setTimeout(()=> {
-            setIsLoading(false);
-        }, 2000);
+        try {
+            const temp = await productsService.getAllProducts(page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter);
+            setProducts(temp.content);
+            setMessage(null);
+            setTimeout(()=> {
+                setIsLoading(false);
+            }, 2000);
+        } catch (e) {
+            setProducts([]);
+            setTimeout(()=> {
+                setIsLoading(false);
+            }, 2000);
+            setMessage(e);
+        }
+
     }
 
     const updateBrandName = (newBrandName) => {
@@ -127,18 +139,27 @@ export function AllProduct() {
                                         <Link to={`/products/detail/${product.productId}`}
                                               className={`product-thumb ${hoveredProductIndex === index ? 'hover' : ''}`}>
                                             {delay ? <img src={spinner} alt="spinner"/>
-                                            :
+                                                :
                                                 hoveredProductIndex === index ? (
                                                     product.productImages.map((image, idx) => (
-                                                        <img key={idx} src={image.imageUrl} alt={`product-image-${idx}`} />
+                                                        <img key={idx} src={image.imageUrl}
+                                                             alt={`product-image-${idx}`}/>
                                                     ))
                                                 ) : (
-                                                    <img src={product.productImages[0].imageUrl} alt="1" onLoad={() => setIsLoading(false)} />
+                                                    <img src={product.productImages[0].imageUrl} alt="1"
+                                                         onLoad={() => setIsLoading(false)}/>
                                                 )
                                             }
-
                                         </Link>
+                                        { product.pricingList[0].promotion.discount > 0 &&
+                                            <span
+                                                className="promotion">{product.pricingList[0].promotion.promotionName}</span>
+                                        }
                                         <p className="buy-now">Mua ngay</p>
+                                        {index < 5 &&
+                                            <span className='label-new'></span>
+                                        }
+
                                     </div>
                                     <div className="product-info">
                                         <span className="product-code info-element">{product.productCode}</span>
@@ -170,6 +191,7 @@ export function AllProduct() {
                                     </div>
                                 </li>
                             ))}
+                            {message !== null && <p className="message">{message}</p>}
                         </ul>
                     </div>
                         )}

@@ -13,8 +13,7 @@ export async function getAllProducts(page, nameSearch, familyName, categoryName,
         console.log(temp.data)
         return temp.data;
     } catch (e) {
-        console.log(e)
-        return [];
+        throw e.response.data;
     }
 }
 
@@ -25,8 +24,18 @@ export const getNewProducts = async () => {
         console.log(temp.data.content)
         return temp.data.content;
     } catch (e) {
-        console.log(e)
-        return [];
+        throw e.response.data;
+    }
+}
+
+export const getRelatedProducts = async (categoryName) => {
+    try {
+        const temp
+            = await axios.get(`${BASE_URL}/products/related-products?categoryName=${categoryName}`);
+        console.log(temp.data.content)
+        return temp.data.content;
+    } catch (e) {
+        throw e.response.data;
     }
 }
 

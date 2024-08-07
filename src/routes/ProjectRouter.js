@@ -1,8 +1,6 @@
 import {HomePage} from "../pages/homePage/HomePage";
 import {AboutUs} from "../pages/aboutUs/AboutUs";
 import {Cart} from "../pages/cart/Cart";
-import {Login} from "../pages/login/Login";
-// import {CreateProduct} from "../pages/createProduct/CreateProduct";
 import {ProductDetail} from "../pages/detail/ProductDetail";
 import {Pay} from "../pages/pay/Pay";
 import {AllProduct} from "../pages/allProduct/AllProduct";
@@ -18,6 +16,8 @@ import {UserBill} from "../pages/UserInfo/UserBill/UserBill";
 import {EmployeeList} from "../pages/dashboard/Employee/EmployeeList";
 import {EmployeeCreate} from "../pages/dashboard/Employee/EmployeeCreate";
 import {Advertisements} from "../pages/dashboard/Advertisements/Advertisement";
+import {LoginForm} from "../pages/login/LoginForm";
+import {RegisterForm} from "../pages/login/RegisterForm";
 
 export const projectRouter = [
     {
@@ -67,7 +67,11 @@ export const projectRouter = [
     },
     {
         path: '/login',
-        element: <Login/>,
+        element: <LoginForm/>,
+    },
+    {
+        path: '/register',
+        element: <RegisterForm/>,
     },
     {
         path: '/dashboard',

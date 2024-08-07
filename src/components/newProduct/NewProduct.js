@@ -1,13 +1,12 @@
-import React, {useEffect} from 'react';
-import bikePng from "../../assets/images/bike-png.png";
+import React, {useEffect, useState} from 'react';
 import styles from "./NewProduct.module.scss";
 import * as ProductService from "../../core/services/ProductService";
 import {Link} from "react-router-dom";
 import {fCurrency} from "../../utils/format-number";
 
 export function NewProduct() {
-    const tempArr = new Array(5);
     const [newProducts, setNewProducts] = React.useState([]);
+    const [message, setMessage] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,7 +20,7 @@ export function NewProduct() {
             const temp = await ProductService.getNewProducts();
             setNewProducts(temp);
         } catch (e) {
-            console.log(e);
+            setMessage(e);
         }
     }
 
@@ -31,8 +30,7 @@ export function NewProduct() {
                 <p>New Product</p>
             </div>
             <ul className={styles.products}>
-                {newProducts ?
-                    newProducts.map((item, index) => (
+                {newProducts && newProducts.map((item, index) => (
                         <li key={item.productId}>
                             <div className={styles.productsTop}>
                                 <a className={styles.productThumb}>
@@ -72,32 +70,7 @@ export function NewProduct() {
                                 </div>
                             </div>
                         </li>
-                    ))
-                    :
-                    tempArr.map((item, index) => (
-                        <li key={index}>
-                            <div className={styles.productsTop}>
-                                <a className={styles.productThumb}>
-                                    <img src={bikePng} alt="1"/>
-                                </a>
-                                <p className={styles.buyNow}>Mua ngay</p>
-                            </div>
-                            <div className={styles.productInfo}>
-                                <span className={`${styles.productCode} ${styles.infoElement}`}>MB2006</span>
-                                <a className={`${styles.productName} ${styles.infoElement}`}>TRIK MOUTAIN BIKE SERI
-                                    6</a>
-                                <div>
-                                    <span
-                                        className={`${styles.productPrice} ${styles.productPriceOld} ${styles.infoElement}`}>25,000,000 VNĐ</span>
-                                </div>
-                                <div>
-                                    <span
-                                        className={`${styles.productPrice} ${styles.infoElement}`}>20,000,000 VNĐ</span>
-                                </div>
-                            </div>
-                        </li>
-                    ))
-                }
+                ))}
             </ul>
         </div>
     );

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {DashboardNavbar} from "../navbar/DashboardNavbar";
 import {DashboardSidebar} from "../sidebars/DashboardSidebar";
-import "../../assets/css/style.scss";
+import "../../assets/css/global.scss";
 import "./DashboardMain.scss";
 import * as authenticationService from "../../core/services/AuthenticationService";
 import {Link} from "react-router-dom";

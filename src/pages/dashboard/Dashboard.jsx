@@ -1,9 +1,5 @@
 import React, {useEffect, useState} from "react";
 import "./Dashboard.scss";
-import plus from "./plus.png";
-import profile2 from "./profile-2.jpg";
-import profile3 from "./profile-3.jpg";
-import profile4 from "./profile-4.jpg";
 import {DashboardMain} from "../../components/DashboardMain/DashboardMain";
 import * as dashboardService from "../../core/services/DashboardService";
 import {fCurrency} from "../../utils/format-number";

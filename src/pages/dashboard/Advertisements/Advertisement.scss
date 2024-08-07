@@ -1,5 +1,5 @@
 #advertisement {
-  margin-top: 1.4rem;
+  margin-top: 4rem;
 
   .content-element {
     background-color: var(--color-white);
@@ -51,7 +51,9 @@
         }
       }
 
-
+      .post-ad {
+        display: none;
+      }
       .img-ad {
         width: 100%;
         height:auto;

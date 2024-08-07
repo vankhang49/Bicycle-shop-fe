@@ -34,3 +34,12 @@ export const getAllRatingsByUserId = async (productId, page, size) => {
         throw e.response.data;
     }
 }
+
+export const updateRating = async (rating) => {
+    try {
+        const response = await axiosInstance.put(`rating`, rating);
+        return response.data;
+    } catch (e) {
+        throw e.response.data;
+    }
+}

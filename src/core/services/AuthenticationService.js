@@ -14,7 +14,7 @@ export const login = async (data) => {
         console.log(response.data)
         return response.data;
     } catch (e) {
-        console.log(e);
+        throw e.response.data.message;
     }
 }
 
@@ -25,10 +25,11 @@ export const register = async (userData) => {
             newPassword: userData.newPassword,
             confirmPassword: userData.confirmPassword
         }
+        console.log(registerData)
         const response = await axios.post(`${baseURL}/api/auth/register`, registerData)
         return response.data;
     }catch(err){
-        throw err;
+        throw err.response.data;
     }
 }
 
@@ -59,6 +60,31 @@ export const updatePasswordUser = async (userData, token) => {
         console.log(err)
         err.message = "Vui lòng nhập đúng mật khẩu!"
         throw err;
+    }
+}
+
+export const updateAvatar = async (email, avatar) => {
+    try {
+        const request = {
+            email: email,
+            avatar: avatar
+        }
+        const resp = await axiosInstance.patch(`update-image`, request);
+        console.log(resp.data);
+        return resp.data;
+    } catch (e) {
+        throw e.response.data;
+    }
+}
+
+export const updateInfo = async (userData) => {
+    try {
+        const resp = await axiosInstance.put(`update-info`, userData);
+        console.log(resp.data);
+        return resp.data;
+    } catch (e) {
+        console.log(e)
+        throw e.response.data;
     }
 }
 

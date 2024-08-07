@@ -1,5 +1,5 @@
 #dashboard {
-  margin-top: 1.4rem;
+  margin-top: 4rem;
 
   .analyse {
     display: grid;
@@ -93,11 +93,13 @@
         text-align: center;
         h1 {
           font-size: 1.4rem;
+          color: var(--color-dark);
         }
         select {
           border: 1px solid var(--color-primary);
           background-color: transparent;
           padding: 5px;
+          color: var(--color-dark);
           border-radius: var(--card-border-radius);
         }
       }

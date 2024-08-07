@@ -9,10 +9,17 @@ import { MdModeEdit } from "react-icons/md";
 import Moment from "moment";
 import {useForm} from "react-hook-form";
 import {Link} from "react-router-dom";
+import {UploadOneImage} from "../../firebase/UploadImage";
+import {toast} from "react-toastify";
+import spinner from "../../assets/icons/Spinner.gif";
 
 export function UserInfo() {
     const [userInfo, setUserInfo] = useState({});
     const [isEdit, setIsEdit] = useState(false);
+    const [isChangeAvatar, setIsChangeAvatar] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [avatarUrl, setAvatarUrl] = useState(null);
+    const [validateError, setValidateError] = useState([]);
     const {register, handleSubmit, formState: {errors}, setValue} = useForm({
         criteriaMode: "all"
     });
@@ -38,6 +45,17 @@ export function UserInfo() {
             setValue("dateOfBirth", temp.dateOfBirth);
             setValue("dateCreate", temp.dateCreate);
             setValue("roles", temp.roles);
+            setAvatarUrl(temp.avatar);
+        }
+    }
+
+    const changeAvatar = async (email, url) => {
+        try {
+            const temp = await authenticationService.updateAvatar(email, url);
+            setAvatarUrl(temp.avatar);
+            toast.success("Cập nhật hình ảnh thành công!")
+        } catch (e) {
+            toast.error(e.message);
         }
     }
 
@@ -46,7 +64,39 @@ export function UserInfo() {
     }
 
     const onSubmit = async (data) => {
+        try {
+            const temp = await authenticationService.updateInfo(data);
+            if (temp) {
+                setUserInfo(temp);
+                setValue("userId", temp.userId);
+                setValue("userCode", temp.userCode);
+                setValue("fullName", temp.fullName);
+                setValue("email", temp.email);
+                setValue("phoneNumber", temp.phoneNumber);
+                setValue("address", temp.address);
+                setValue("gender", temp.gender);
+                setValue("dateOfBirth", temp.dateOfBirth);
+                setValue("dateCreate", temp.dateCreate);
+                setValue("roles", temp.roles);
+                setAvatarUrl(temp.avatar);
+            }
+            toast.success("Cập nhật thông tin nguời dùng thành công!");
+        } catch (e) {
+            setValidateError(e.errors);
+        }
+    }
 
+    const triggerFileInput = (inputClass) => {
+        setIsLoading(true);
+        document.querySelector(inputClass).click();
+    };
+
+    const handleOneImageUrlChange = async (uploadedImageUrl) => {
+        await changeAvatar(userInfo.email, uploadedImageUrl);
+        setIsChangeAvatar(true);
+        setTimeout(()=> {
+            setIsLoading(false);
+        }, 2000)
     }
 
     return(
@@ -62,7 +112,7 @@ export function UserInfo() {
                         {isEdit ?
                             <div className="input-element">
                                 <input type="text" {...register("fullName")} />
-                                <span className={"validate"}></span>
+                                {validateError && <p className="validate-error">{validateError.fullName}</p>}
                             </div>
                             :
                             <p>{userInfo.fullName}</p>
@@ -73,7 +123,7 @@ export function UserInfo() {
                         {isEdit ?
                             <div className="input-element">
                                 <input type="text" disabled {...register("userCode")} />
-                                <span className={"validate"}></span>
+                                {validateError && <p className="validate-error">{validateError.userCode}</p>}
                             </div>
                             :
                             <p>{userInfo.userCode}</p>
@@ -84,7 +134,7 @@ export function UserInfo() {
                         {isEdit ?
                             <div className="input-element">
                                 <input type="date" {...register("dateOfBirth")} />
-                                <span className={"validate"}></span>
+                                {validateError && <p className="validate-error">{validateError.dateOfBirth}</p>}
                             </div>
                             :
                             <p>{Moment(userInfo.dateOfBirth).format("DD/MM/yyyy")}</p>
@@ -131,7 +181,7 @@ export function UserInfo() {
                         {isEdit ?
                             <div className="input-element">
                                 <input type="datetime-local" disabled {...register("dateCreate")} />
-                                <span className={"validate"}></span>
+                                {validateError && <p className="validate-error">{validateError.dateCreate}</p>}
                             </div>
                             :
                             <p>{Moment(userInfo.dateCreate).format("DD/MM/yyyy")}</p>
@@ -142,7 +192,7 @@ export function UserInfo() {
                         {isEdit ?
                             <div className="input-element">
                                 <input type="email" disabled {...register("email")} />
-                                <span className={"validate"}></span>
+                                {validateError && <p className="validate-error">{validateError.email}</p>}
                             </div>
                             :
                             <p>{userInfo.email}</p>
@@ -153,7 +203,7 @@ export function UserInfo() {
                         {isEdit ?
                             <div className="input-element">
                                 <input type="text" {...register("phoneNumber")} />
-                                <span className={"validate"}></span>
+                                {validateError && <p className="validate-error">{validateError.phoneNumber}</p>}
                             </div>
                             :
                             <p>{userInfo.phoneNumber}</p>
@@ -164,7 +214,7 @@ export function UserInfo() {
                         {isEdit ?
                             <div className="input-element">
                                 <input type="text" {...register("address")} />
-                                <span className={"validate"}></span>
+                                {validateError && <p className="validate-error">{validateError.address}</p>}
                             </div>
                             :
                             <p>{userInfo.address}</p>
@@ -178,16 +228,23 @@ export function UserInfo() {
                 </form>
                 <div className="function-right">
                     <div className="avatar">
-                        {userInfo.avatar ?
-                            <img src={userInfo.avatar} alt="avatar"/>
+                        {avatarUrl ?
+                            <img src={avatarUrl} alt="avatar"/>
                             :
                             <img src={avatar} alt="avatar"/>
                         }
-                        <button>Chọn ảnh</button>
+                        <button onClick={() => triggerFileInput(".addAvatar")}>
+                            {isLoading ? <img src={spinner} alt="spinner"/> : "Chọn ảnh"}
+                        </button>
+                        <div className="post-ad">
+                            <UploadOneImage className='addAvatar'
+                                            onImageUrlChange={(url) => handleOneImageUrlChange(url)}
+                            />
+                        </div>
                     </div>
                     <Link to="/my-info/bill" className="bill">
                         <div className="purchased-order">
-                            <TbReport />
+                            <TbReport/>
                         </div>
                         <span>Đơn hàng</span>
                     </Link>

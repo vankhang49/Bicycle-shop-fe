@@ -25,7 +25,7 @@
   }
 
   .darkMode{
-    background-color: var(--color-light);
+    background-color: var(--color-dark-variant);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -77,95 +77,33 @@
       box-shadow: none;
     }
   }
+}
 
-  .reminders{
-    margin-top: 2rem;
+@media screen and (max-width: 992px) {
+  #rightSection{
+    width: 20%;
+    height: 50px;
+    margin: 0 auto 4rem;
+    position: absolute;
 
-    .header{
-      display: flex;
+    .nav{
+      position: fixed;
+      top: 0;
+      left: 0;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 0.8rem;
+      padding: 0 var(--padding-1);
+      height: 4.6rem;
+      width: 100%;
+      z-index: 2;
+      margin: 0;
 
-      svg{
-        width: 1.2rem;
-        height: 1.2rem;
-        box-shadow: var(--box-shadow);
-        background-color: var(--color-white);
-        border-radius: 50%;
+      .darkMode{
+        width: 4.4rem;
       }
     }
 
-    .notification{
-      background-color: var(--color-white);
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 0.7rem;
-      padding: 1.4rem var(--card-padding);
-      border-radius: var(--border-radius-2);
-      box-shadow: var(--box-shadow);
-      cursor: pointer;
-      transition: all 0.3s ease;
-
-      .content{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 0;
-        width: 100%;
-
-        svg {
-          width: 1.2rem;
-          height: 1.2rem;
-        }
-      }
-
-      .icon{
-        padding: 0.6rem;
-        color: var(--color-white);
-        background-color: var(--color-success);
-        border-radius: 20%;
-        display: flex;
-        svg {
-          width: 1.2rem;
-          height: 1.2rem;
-        }
-      }
-
-      &:hover{
-        box-shadow: none;
-      }
-      &.deactive .icon{
-        background-color: var(--color-danger);
-      }
-    }
-
-    .addReminder{
-      background-color: var(--color-white);
-      border: 2px dashed var(--color-primary);
-      color: var(--color-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-
-      div{
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-
-        svg {
-          width: 1.6rem;
-          height: 1.6rem;
-        }
-      }
-
-      &:hover{
-        background-color: var(--color-primary);
-        color: white;
-      }
-
+    .userProfile{
+      display: none;
     }
   }
 }
@@ -174,6 +112,7 @@
   #rightSection{
     width: 94%;
     margin: 0 auto 4rem;
+    position: relative;
 
     .nav{
       position: fixed;
@@ -212,6 +151,9 @@
       .info {
         display: none;
       }
+    }
+    .userProfile{
+      display: block;
     }
   }
 }

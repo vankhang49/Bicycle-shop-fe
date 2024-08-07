@@ -25,6 +25,7 @@
       justify-content: flex-start;
       align-items: center;
       flex-wrap: wrap;
+      max-height: 100px;
 
       p {
         font-size: 1.2rem;
@@ -49,12 +50,13 @@
           border-radius: 10px;
 
         }
-        .validate {
-          width: 100%;
-          height: 20px;
-          color: #fb0024;
-          padding: 10px 20px;
-        }
+      }
+      .validate-error {
+        width: 100%;
+        height: 20px;
+        color: #fb0024;
+        padding: 5px 10px;
+        font-size: 0.9rem;
       }
 
       .form-gender {
@@ -144,9 +146,18 @@
         height: 40px;
         border-radius: 10px;
 
+        img {
+          width: 24px;
+          height: 24px;
+        }
+
         &:hover {
           background-color: #cfc8c8;
         }
+      }
+
+      .post-ad {
+        display: none;
       }
     }
     .bill {
