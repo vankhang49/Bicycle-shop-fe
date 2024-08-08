@@ -52,6 +52,7 @@ export function LoginForm() {
                     dispatch(loginSuccess(userData));
                     localStorage.setItem("id", userData.userId);
                     localStorage.setItem('fullName', userData.fullName);
+                    localStorage.setItem('avatar', userData.avatar);
                     localStorage.setItem('isAuthenticated', 'true');
                     localStorage.setItem('lastTime', new Date().toISOString());
                     if (remember) {
