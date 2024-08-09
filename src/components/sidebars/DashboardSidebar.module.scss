@@ -183,3 +183,42 @@
   //  }
   //}
 }
+
+@media screen and (max-width: 400px) {
+  #sidebarDashboard {
+    .logo{
+      margin-left: 1rem;
+      h2{
+        display: inline;
+        font-size: 1.2rem;
+      }
+    }
+
+    .sidebar {
+      h3{
+        display: inline;
+        font-size: 0.8rem;
+      }
+
+      a{
+        width: 100%;
+        height: 3.4rem;
+        font-size: 0.8rem;
+
+        svg {
+          width: 1.2rem;
+          height: 1.2rem;
+        }
+
+        &:last-child{
+          position: absolute;
+          bottom: 5rem;
+        }
+      }
+    }
+    .toggle .close{
+      display: inline-block;
+      cursor: pointer;
+    }
+  }
+}

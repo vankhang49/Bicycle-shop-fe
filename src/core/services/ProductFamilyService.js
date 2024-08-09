@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080/api/public";
+const BASE_URL = "https://bicycle-shop-be.onrender.com/api/public";
 axios.defaults.withCredentials = true;
 
 export const getAllProductFamilies = async () => {

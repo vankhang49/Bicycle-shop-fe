@@ -15,8 +15,9 @@ const Modal = ({ isOpen, onClose, children }) => {
                     className="modal"
                     style={{
                         background: "white",
+                        maxWidth: "90%", /* Thay đổi max-width để phù hợp với thiết bị nhỏ hơn */
+                        width: 550, /* Kích thước mặc định cho modal */
                         height: 300,
-                        width: 500,
                         margin: "auto",
                         padding: "2%",
                         border: "2px solid #000",

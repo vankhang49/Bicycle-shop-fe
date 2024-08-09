@@ -181,3 +181,226 @@
     }
   }
 }
+@media screen and (max-width: 992px) {
+  #customer {
+    margin-top: 5rem;
+    .content-element {
+      width: 100%;
+      padding: 10px;
+      .header-content{
+        padding: 16px 20px;
+
+        .search-bar {
+          font-size: 0.8rem;
+          padding: 0 10px 0 32px;
+          height: 35px;
+        }
+
+        .btn-search {
+          width: 60px;
+          height: 35px;
+          font-size: 0.8rem;
+        }
+
+        .link-move {
+          font-size: 0.8rem;
+          height: 35px;
+        }
+      }
+
+      .box-content {
+        padding: 5px;
+        p {
+          font-size: 1.3rem;
+        }
+
+        .table {
+          padding: 5px;
+          font-size: 0.8rem;
+
+          .status {
+            width: 20%;
+          }
+
+          .gender {
+            display: none;
+          }
+
+          .edit-customer {
+            width: 20%;
+            a {
+              padding: 0;
+            }
+          }
+        }
+
+      }
+
+      .page {
+        .page-a{
+          font-size: 0.8rem;
+        }
+      }
+    }
+
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #customer {
+    margin-top: 5rem;
+    .content-element {
+      width: 100%;
+      padding: 10px;
+      .header-content{
+        padding: 16px 20px;
+
+        .search-bar {
+          font-size: 0.8rem;
+          padding: 0 10px 0 32px;
+          height: 35px;
+        }
+
+        .btn-search {
+          width: 60px;
+          height: 35px;
+          font-size: 0.8rem;
+        }
+
+        .link-move {
+          font-size: 0.8rem;
+          height: 35px;
+        }
+      }
+
+      .box-content {
+        padding: 5px;
+        p {
+          font-size: 1.3rem;
+        }
+
+        .table {
+          padding: 5px;
+          font-size: 0.8rem;
+
+          .status {
+            width: 20%;
+          }
+
+          .gender {
+            display: none;
+          }
+
+          .phone-number {
+            display: none;
+          }
+
+          .edit-customer {
+            width: 20%;
+            a {
+              padding: 0;
+            }
+          }
+        }
+
+      }
+
+      .page {
+        .page-a{
+          font-size: 0.8rem;
+        }
+      }
+    }
+
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #customer {
+    margin-top: 5rem;
+    .content-element {
+      width: 100%;
+      padding: 10px;
+      .header-content{
+        padding: 16px 20px;
+
+        .search-bar {
+          font-size: 0.8rem;
+          padding: 0 10px 0 32px;
+          height: 35px;
+        }
+
+        .btn-search {
+          width: 60px;
+          height: 35px;
+          font-size: 0.8rem;
+        }
+
+        .link-move {
+          font-size: 0.8rem;
+          height: 35px;
+        }
+      }
+
+      .box-content {
+        padding: 5px;
+        p {
+          font-size: 1.3rem;
+        }
+
+        .table {
+          padding: 5px;
+          font-size: 0.8rem;
+
+          .no {
+            display: none;
+          }
+          .customer-code{
+            width: 30%;
+          }
+          .customer-name {
+            width: 27%;
+          }
+          .status {
+            width: 20%;
+          }
+          .email {
+            display: none;
+          }
+          .gender {
+            display: none;
+          }
+          .phone-number {
+            display: none;
+          }
+          .edit-customer {
+            width: 20%;
+            a {
+              padding: 0;
+            }
+          }
+        }
+
+      }
+
+      .page {
+        .page-a{
+          font-size: 0.8rem;
+        }
+      }
+    }
+
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #customer {
+    margin-top: 5rem;
+    .content-element {
+      width: 100%;
+      border-radius: 0;
+      padding: 10px;
+    }
+
+  }
+}

@@ -297,10 +297,11 @@
 @media screen and (max-width: 768px) {
 
   #dashboard {
-    .new-users {
-      .user-list {
-        .user{
-          flex-basis: 35%;
+    margin-top: 6rem;
+    .analyse {
+      .info {
+        h1 {
+          font-size: 1.2rem!important;
         }
       }
     }
@@ -308,6 +309,32 @@
       position: relative;
       margin: 3rem 0 0 0;
       width: 100%;
+    }
+
+    table{
+      width: 100%;
+      margin: 0;
+    }
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+
+  #dashboard {
+    margin-top: 6rem;
+
+    .analyse {
+      .growth {
+        border-radius: 0;
+        box-shadow: 0 0.1rem 0.1rem var(--color-light);
+      }
+    }
+    .recent-orders{
+
+      .bill-content {
+        border-radius: 0;
+      }
     }
 
     table{

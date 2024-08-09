@@ -54,7 +54,7 @@
 @media screen and (max-width: 992px) {
   #dashboard-container{
     width: 95%;
-    grid-template-columns: 7rem 50rem 23rem;
+    grid-template-columns: 7rem 55rem 23rem;
   }
 }
 
@@ -63,5 +63,15 @@
     width: 100%;
     grid-template-columns: 1fr;
     padding: 0 var(--padding-1);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #dashboard-container {
+    width: 100%;
+    grid-template-columns: 1fr;
+    background-color: var(--color-white);
+    padding: 0;
+    gap: 0;
   }
 }

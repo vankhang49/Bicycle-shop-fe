@@ -191,3 +191,170 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  #bill {
+    margin-top: 5rem;
+    .content-element {
+      width: 100%;
+      padding: 10px;
+      .header-content{
+        padding: 16px 20px;
+
+        .search-bar {
+          font-size: 0.8rem;
+          padding: 0 10px 0 32px;
+          height: 35px;
+        }
+
+        .btn-search {
+          width: 60px;
+          height: 35px;
+          font-size: 0.8rem;
+        }
+
+        .link-move {
+          font-size: 0.8rem;
+          height: 35px;
+        }
+      }
+
+      .box-content {
+        padding: 5px;
+        p {
+          font-size: 1.3rem;
+        }
+
+        .table {
+          padding: 5px;
+          font-size: 0.8rem;
+
+          .no {
+            display: none;
+          }
+          .bill-code{
+            width: 30%;
+          }
+          .customer {
+            width: 27%;
+          }
+          .status {
+            width: 20%;
+          }
+          //.date-create {
+          //  display: none;
+          //}
+          //.phone-number {
+          //  display: none;
+          //}
+          .edit-customer {
+            width: 20%;
+            a {
+              padding: 0;
+            }
+          }
+        }
+
+      }
+
+      .page {
+        .page-a{
+          font-size: 0.8rem;
+        }
+      }
+    }
+
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #bill {
+    margin-top: 5rem;
+    .content-element {
+      width: 100%;
+      padding: 10px;
+      .header-content{
+        padding: 16px 20px;
+
+        .search-bar {
+          font-size: 0.8rem;
+          padding: 0 10px 0 32px;
+          height: 35px;
+        }
+
+        .btn-search {
+          width: 60px;
+          height: 35px;
+          font-size: 0.8rem;
+        }
+
+        .link-move {
+          font-size: 0.8rem;
+          height: 35px;
+        }
+      }
+
+      .box-content {
+        padding: 5px;
+        p {
+          font-size: 1.3rem;
+        }
+
+        .table {
+          padding: 5px;
+          font-size: 0.8rem;
+
+          .no {
+            display: none;
+          }
+          .bill-code{
+            width: 30%;
+          }
+          .customer {
+            width: 27%;
+          }
+          .status {
+            width: 20%;
+          }
+          .date-create {
+            display: none;
+          }
+          .phone-number {
+            display: none;
+          }
+          .edit-customer {
+            width: 20%;
+            a {
+              padding: 0;
+            }
+          }
+        }
+
+      }
+
+      .page {
+        .page-a{
+          font-size: 0.8rem;
+        }
+      }
+    }
+
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #bill {
+    margin-top: 5rem;
+    .content-element {
+      width: 100%;
+      border-radius: 0;
+      padding: 10px;
+    }
+    .page {
+      padding: 10px!important;
+      .page-a{
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

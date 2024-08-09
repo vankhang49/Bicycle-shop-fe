@@ -162,3 +162,16 @@
     }
   }
 }
+
+@media screen and (max-width: 400px) {
+  #rightSection{
+    width: 100%;
+    margin: 0;
+
+    .userProfile{
+      border-radius: 0;
+      display: block;
+      margin: 0;
+    }
+  }
+}

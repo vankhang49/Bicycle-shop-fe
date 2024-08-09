@@ -367,6 +367,127 @@
   }
 }
 
+@media screen and (max-width: 768px) {
+  .login-header {
+
+    .left {
+      width: 50%;
+      .logo {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 80px;
+          height: auto;
+        }
+      }
+    }
+
+    .middle {
+      display: none;
+    }
+
+    .right {
+      width: 50%;
+      .link-back {
+        a {
+          color: var(--color-white);
+          font-weight: 450;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  .login-header {
+
+    .left {
+      width: 50%;
+      .logo {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 70px;
+          height: auto;
+        }
+      }
+    }
+
+    .middle {
+      display: none;
+    }
+
+    .right {
+      width: 50%;
+      .link-back {
+        a {
+          color: var(--color-white);
+          font-weight: 450;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+  .login-page {
+    .form-box {
+      .form-value {
+        form {
+          h2 {
+            font-size: 1.5em;
+          }
+          .input-box {
+            label {
+              font-size: 0.9em;
+            }
+            input {
+              font-size: 0.9em;
+            }
+
+            .icon{
+              font-size: 1em;
+            }
+          }
+          .validate {
+            font-size: 0.8rem;
+          }
+
+          .popup {
+
+            .validate-error {
+              font-size: 0.8rem;
+            }
+          }
+
+          .forget {
+            font-size: 0.8em;
+          }
+          button {
+            width: 80%;
+            height: 40px;
+            font-size: 0.9em;
+
+            img {
+              width: 30px;
+              height: 30px;
+            }
+          }
+          .register {
+            font-size: .8em;
+          }
+        }
+      }
+    }
+  }
+}
 
 @keyframes rotation_481 {
   0% {

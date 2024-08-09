@@ -69,9 +69,9 @@ export function BillModal({isOpen, onClose, billId}) {
                         <table className={styles.table}>
                             <thead>
                             <tr>
-                                <th>STT</th>
+                                <th className={styles.no}>STT</th>
                                 <th>Mã sản phẩm</th>
-                                <th>Hình ảnh</th>
+                                <th className={styles.itemImage}>Hình ảnh</th>
                                 <th>Màu sắc</th>
                                 <th>Khuyễn mãi</th>
                                 <th>Số lượng</th>
@@ -81,9 +81,9 @@ export function BillModal({isOpen, onClose, billId}) {
                             <tbody>
                             {bill.billItems?.map((item, index) => (
                                 <tr key={index}>
-                                    <td>{index + 1}</td>
+                                    <td className={styles.no}>{index + 1}</td>
                                     <td>{item.pricing.priceCode}</td>
-                                    <td>
+                                    <td className={styles.itemImage}>
                                         <img src={item.pricing.imgColor} alt="imgPrice"/>
                                     </td>
                                     <td>{item.pricing.color.colorName}</td>

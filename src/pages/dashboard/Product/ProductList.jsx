@@ -9,18 +9,20 @@ import * as productsService from "../../../core/services/ProductService";
 import warning from "../../../assets/images/warning.png";
 import Modal from "../../../components/modal/Modal";
 import {useForm} from "react-hook-form";
+import {DeleteProductModal} from "./DeleteProductModal/DeleteProductModal";
 
 export function ProductList() {
     const [products, setProducts] = useState([]);
     const [totalPages, setTotalPages] = useState({});
     const [pageNumber, setPageNumber] = useState(0);
     const [message, setMessage] = useState(null);
-    const [open, setOpen] = useState();
+    const [open, setOpen] = useState(false);
 
     const {register, handleSubmit, setValue, formState: {errors}} = useForm({
         criteriaMode: "all"
     });
     const [productDelete, setProductDelete] = useState({
+        productId : null,
         productCode: "",
         productName: ""
     });
@@ -43,8 +45,9 @@ export function ProductList() {
         setOpen(false);
     };
 
-    const handleOpen = (productName, productCode) => {
+    const handleOpen = (productId, productName, productCode) => {
         setProductDelete({
+            productId: productId,
             productCode: productCode,
             productName: productName
         })
@@ -73,6 +76,11 @@ export function ProductList() {
             setProducts([]);
             setMessage(e);
         }
+    }
+
+    const handleUpdateProductFlag = async () => {
+        setOpen(false);
+        await getProductsList('' , pageNumber);
     }
 
     return (
@@ -132,7 +140,7 @@ export function ProductList() {
                                             <MdOutlineModeEdit fill="#00a762"/>
                                         </Link>
                                         <a>
-                                            <IoTrashSharp fill="red" onClick={() => handleOpen(product.productName, product.productCode)}/>
+                                            <IoTrashSharp fill="red" onClick={() => handleOpen(product.productId ,product.productName, product.productCode)}/>
                                         </a>
                                     </td>
                                 </tr>
@@ -155,27 +163,12 @@ export function ProductList() {
                         </div>
                     </div>
                 </div>
-                <Modal isOpen={open}>
-                    <div className="head-modal">
-                        <img src={warning} alt="warning"/>
-                    </div>
-                    <div>
-                        <input id="productIdDelete" name="productIdDelete" type="hidden"/>
-                        <h2>Bạn có chắc muốn xoá sản phẩm <span id="productName">{productDelete.productName}</span>?
-                        </h2>
-                        <p>Mã sản phẩm: <span id="productId">{productDelete.productCode}</span></p>
-                        <svg className="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
-                             preserveAspectRatio="none">
-                            <rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
-                        </svg>
-                        <div className="modal-footer">
-                            <button type="button" className="btn-accept">Accept</button>
-                            <button type="button" className="btn-accept btn-cancel" onClick={handleClose}>Cancel
-                            </button>
-                        </div>
-                    </div>
-
-                </Modal>
+                <DeleteProductModal
+                    isOpen={open}
+                    onClose={handleClose}
+                    productDelete={productDelete}
+                    onDeleteSuccess={handleUpdateProductFlag}
+                />
             </main>
         }/>
     );

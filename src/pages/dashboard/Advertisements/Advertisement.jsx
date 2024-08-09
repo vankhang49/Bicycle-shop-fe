@@ -126,9 +126,11 @@ export function Advertisements() {
                             <img src={advertisements.length > 0 ? advertisements[2]?.img : ''} alt="Advertisement"/>
                         </div>
                     </div>
+                    { isChangeAd &&
                     <div className="change-advertisement">
                         <button disabled={isChangeAd === false} type={"submit"}>Lưu thay đổi</button>
                     </div>
+                    }
                 </form>
             </main>
         }/>

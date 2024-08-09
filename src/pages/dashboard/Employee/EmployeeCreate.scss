@@ -1,10 +1,11 @@
 #create-edit-user {
   width: 100%;
+  margin-top: 4rem;
   .content-element {
     background-color: var(--color-white);
     width: 96%;
     position: relative;
-    border-radius: 10px;
+    border-radius: var(--card-border-radius);
     box-shadow: var(--box-shadow);
     margin: 2%;
 
@@ -13,7 +14,7 @@
       text-align: center;
       padding: 16px;
       background-color: var(--color-primary);
-      border-radius: 10px 10px 0 0;
+      border-radius: var(--card-border-radius) var(--card-border-radius) 0 0;
       p {
         font-size: 1.5rem;
         font-weight: 600;
@@ -302,6 +303,14 @@
 
 @media screen and (max-width: 992px) {
   #create-edit-user {
+    margin-top: 4rem;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  #create-edit-user {
+    margin-top: 5rem;
     .content-element {
       .flex-content {
         display: block;
@@ -311,6 +320,88 @@
         .form-operation {
           width: 100%;
           margin-left: 20px;
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+  #create-edit-user {
+    margin-top: 5rem;
+
+    .content-element {
+      width: 100%;
+      margin: 0;
+      .form-title {
+
+        .title {
+          font-size: 1.2rem;
+        }
+      }
+      .flex-content {
+        display: block;
+        .form-operation {
+          margin: 0;
+          .form-element {
+            label {
+              font-size: 1.1rem;
+            }
+            input, select, textarea {
+              width: 100%;
+              font-size: 1.1rem;
+            }
+          }
+        }
+      }
+      .button-save {
+        .btn-submit {
+          width: 100px;
+          height: 40px;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+  #create-edit-user {
+    margin-top: 4rem;
+
+    .content-element {
+      border-radius: 0;
+      width: 100%;
+      margin: 0;
+      .form-title {
+        border-radius: 0;
+
+        .title {
+          font-size: 1.2rem;
+        }
+      }
+      .flex-content {
+        display: block;
+        .form-operation {
+          margin: 0;
+          .form-element {
+            label {
+              font-size: 1rem;
+            }
+            input, select, textarea {
+              width: 100%;
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+      .button-save {
+        .btn-submit {
+          width: 100px;
+          height: 40px;
+          font-size: 0.9rem;
         }
       }
     }

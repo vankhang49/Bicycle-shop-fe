@@ -1,7 +1,7 @@
 import axios from "axios";
 import axiosInstance from "../../utils/axiosInstance";
 
-const BASE_URL = "http://localhost:8080/api/public";
+const BASE_URL = "https://bicycle-shop-be.onrender.com/api/public";
 axios.defaults.withCredentials = true;
 
 export async function getAllProducts(page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter) {
@@ -72,7 +72,7 @@ export async function getProductAndPricingById(productId) {
 
 export const saveProduct= async (product) => {
     try {
-        const temp = await axios.post(`${BASE_URL}/products`, product);
+        const temp = await axiosInstance.post(`products`, product);
         console.log(temp.data)
         return temp.data;
     } catch (e) {
@@ -83,7 +83,7 @@ export const saveProduct= async (product) => {
 
 export const updateProduct= async (product) => {
     try {
-        const temp = await axios.put(`${BASE_URL}/products`, product);
+        const temp = await axiosInstance.put(`products`, product);
         console.log(temp.data)
         return temp.data;
     } catch (e) {
@@ -94,6 +94,16 @@ export const updateProduct= async (product) => {
 export const findProductById = async (id) => {
     try {
         const temp = await axios.get(`${BASE_URL}/products/${id}`);
+        console.log(temp.data)
+        return temp.data;
+    } catch (e) {
+        throw new Error("Không tìm thấy kết quả!")
+    }
+}
+
+export const deleteProductById = async (id) => {
+    try {
+        const temp = await axiosInstance.delete(`products/${id}`);
         console.log(temp.data)
         return temp.data;
     } catch (e) {

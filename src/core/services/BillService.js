@@ -1,7 +1,7 @@
 import axios from "axios";
 import axiosInstance from "../../utils/axiosInstance";
 
-const BASE_URL = "http://localhost:8080/api/auth";
+const BASE_URL = "https://bicycle-shop-be.onrender.com/api/auth";
 axios.defaults.withCredentials = true;
 
 export const pay = async (bill) => {

@@ -124,3 +124,25 @@
     }
   }
 }
+
+@media screen and (max-width: 480px) {
+  .modal {
+    .modalContent {
+      .boxInfo {
+        .info {
+          div {
+            .title {
+              font-size: 0.9rem;
+            }
+            span {
+              font-size: 0.9rem;
+            }
+          }
+        }
+        .button {
+          margin-top: 80px;
+        }
+      }
+    }
+  }
+}
