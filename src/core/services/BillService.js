@@ -6,7 +6,10 @@ axios.defaults.withCredentials = true;
 
 export const pay = async (bill) => {
     try {
-        const userId = localStorage.getItem("id");
+        let userId = localStorage.getItem("id");
+        if (userId === null) {
+            userId = '';
+        }
         await axios.post(`${BASE_URL}/shopping-cart/pay?userId=${userId}`, bill);
     }catch (e) {
         throw new Error("Lỗi, không thể thanh toán!")
