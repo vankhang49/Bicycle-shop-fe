@@ -1,7 +1,7 @@
 import axios from "axios";
 import axiosInstance from "../../utils/axiosInstance";
 
-const baseURL = "http://localhost:8080";
+const baseURL = "https://bicycle-shop-be.onrender.com";
 axios.defaults.withCredentials = true;
 
 export const getAllAdvertisements = async () => {

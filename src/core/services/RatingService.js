@@ -1,7 +1,7 @@
 import axiosInstance from "../../utils/axiosInstance";
 import axios from "axios";
 
-const baseURL = "http://localhost:8080/api/auth/rating";
+const baseURL = "https://bicycle-shop-be.onrender.com/api/auth/rating";
 axios.defaults.withCredentials = true;
 
 export const saveRatingList = async (ratings) => {
