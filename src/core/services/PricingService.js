@@ -9,7 +9,6 @@ export async function getAllPricingByProductId(productId) {
             = await axios.get(`${BASE_URL}/products/detail/${productId}`);
         return temp.data.pricingList;
     } catch (e) {
-        console.log(e)
         return [];
     }
 }

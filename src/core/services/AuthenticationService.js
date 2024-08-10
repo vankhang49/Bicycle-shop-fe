@@ -11,7 +11,6 @@ export const login = async (data) => {
             password: data.password,
         }
         const response = await axios.post(`${baseURL}/api/auth/authenticate`, loginData)
-        console.log(response.data)
         return response.data;
     } catch (e) {
         throw e.response.data.message;
@@ -25,11 +24,10 @@ export const register = async (userData) => {
             newPassword: userData.newPassword,
             confirmPassword: userData.confirmPassword
         }
-        console.log(registerData)
         const response = await axios.post(`${baseURL}/api/auth/register`, registerData)
         return response.data;
     }catch(err){
-        throw err.response.data;
+        throw err.response.data.errors;
     }
 }
 
@@ -45,21 +43,19 @@ export const logout = async () => {
 export const getYourProfile = async () => {
     try{
         const response = await axiosInstance.get(`get-profile`);
-        console.log(response.data)
         return response.data;
     }catch(err){
         console.log(err);
     }
 }
 
-export const updatePasswordUser = async (userData, token) => {
+export const updatePasswordUser = async (userData) => {
     try{
-        const response = await axiosInstance.put(`update-password`, userData);
+        const userId = localStorage.getItem("id");
+        const response = await axiosInstance.put(`update-password/${userId}`, userData);
         return response.data;
     }catch(err){
-        console.log(err)
-        err.message = "Vui lòng nhập đúng mật khẩu!"
-        throw err;
+        throw err.response.data.errors;
     }
 }
 
@@ -70,7 +66,6 @@ export const updateAvatar = async (email, avatar) => {
             avatar: avatar
         }
         const resp = await axiosInstance.patch(`update-image`, request);
-        console.log(resp.data);
         return resp.data;
     } catch (e) {
         throw e.response.data;
@@ -80,11 +75,9 @@ export const updateAvatar = async (email, avatar) => {
 export const updateInfo = async (userData) => {
     try {
         const resp = await axiosInstance.put(`update-info`, userData);
-        console.log(resp.data);
         return resp.data;
     } catch (e) {
-        console.log(e)
-        throw e.response.data;
+        throw e.response.data.errors;
     }
 }
 
@@ -93,7 +86,6 @@ export const updateInfo = async (userData) => {
 export const getRoles = async () => {
     try {
         const response = await axiosInstance.get(`${baseURL}/api/auth/user-role`)
-        console.log(response.data)
         return response.data;
     } catch (e) {
         return [];

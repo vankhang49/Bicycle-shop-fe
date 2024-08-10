@@ -15,6 +15,7 @@ import {fetchCount} from "../../core/redux/actions/CartActions";
 import {logoutAction} from "../../core/redux/actions/AuthenticationActions";
 import { IoIosLogIn } from "react-icons/io";
 import { IoMdCart } from "react-icons/io";
+import { MdLock } from "react-icons/md";
 
 export function Header(props){
     const dispatch = useDispatch();
@@ -151,6 +152,10 @@ export function Header(props){
                         <Link to={`/my-info`}>
                             <FaRegUserCircle/>
                             Thông tin cá nhân
+                        </Link>
+                        <Link to='/account-and-password'>
+                            <MdLock />
+                            Tài khoản và mật khẩu
                         </Link>
                         <a onClick={handleLogout}>
                             <IoIosLogOut/>

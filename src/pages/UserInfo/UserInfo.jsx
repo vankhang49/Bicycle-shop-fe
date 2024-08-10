@@ -1,7 +1,6 @@
 import "./UserInfo.scss";
 import {Main} from "../../components/Main/Main";
 import {useEffect, useState} from "react";
-import {getYourProfile} from "../../core/services/AuthenticationService";
 import * as authenticationService from "../../core/services/AuthenticationService";
 import avatar from "../../assets/images/avatar.jpg";
 import { TbReport } from "react-icons/tb";

@@ -9,7 +9,6 @@ export const getAllCategories = async () => {
             = await axios.get(`${BASE_URL}/categories`);
         return temp.data;
     } catch (e) {
-        console.log(e)
         return [];
     }
 }

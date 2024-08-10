@@ -15,7 +15,6 @@ export const getAllBrand = async () => {
 export const getAllBrandByCategoryName = async (categoryName) => {
     try {
         const response = await axios.get(`${BASE_URL}/brands/${categoryName}`);
-        console.log(response.data);
         return response.data;
     } catch (e) {
         return [];
@@ -25,7 +24,6 @@ export const getAllBrandByCategoryName = async (categoryName) => {
 export const saveBrand = async (brand) => {
     try {
         const response = await axios.post(`${BASE_URL}/brands`, brand);
-        console.log(response.data);
         return response.data;
     } catch (e) {
         e.message = "Không thể thêm mới thương hiệu!";

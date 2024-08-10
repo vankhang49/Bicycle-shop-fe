@@ -18,6 +18,7 @@ import {EmployeeCreate} from "../pages/dashboard/Employee/EmployeeCreate";
 import {Advertisements} from "../pages/dashboard/Advertisements/Advertisement";
 import {LoginForm} from "../pages/login/LoginForm";
 import {RegisterForm} from "../pages/login/RegisterForm";
+import {AccountAndPassword} from "../pages/UserInfo/AccountAndPassword";
 
 export const projectRouter = [
     {
@@ -56,6 +57,10 @@ export const projectRouter = [
     {
         path: '/my-info/bill',
         element: <UserBill/>,
+    },
+    {
+        path: '/account-and-password',
+        element: <AccountAndPassword/>,
     },
     {
         path: '/cart',

@@ -14,6 +14,7 @@ import {Rating} from "../../components/Rating/Rating";
 
 export function ProductDetail() {
     const [product, setProduct] = useState({});
+    const [categoryName, setCategoryName] = useState('');
     const [pricing, setPricing] = useState({});
     const [pricingList, setPricingList] = useState([]);
     const { productId } = useParams();
@@ -47,6 +48,8 @@ export function ProductDetail() {
     const getProductByProductId = async (productId) => {
         const temp = await productService.getProductAndPricingById(productId);
         setProduct(temp);
+        console.log(temp?.productFamily?.category?.categoryName)
+        await setCategoryName(temp?.productFamily?.category?.categoryName);
         setImgElement(temp.productImages[0].imageUrl);
     }
 
@@ -211,7 +214,7 @@ export function ProductDetail() {
                 </div>
                 <RelatedProducts
                     product = {product}
-                    categoryName = {"Xe đạp"}
+                    categoryName = {categoryName}
                 >
                 </RelatedProducts>
             </div>

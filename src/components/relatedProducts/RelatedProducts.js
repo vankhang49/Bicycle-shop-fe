@@ -17,7 +17,7 @@ export function RelatedProducts(props) {
 
     const getAllProductRelated = async () => {
         try {
-            const temp = await productsService.getRelatedProducts(props.product?.brand?.category?.categoryName);
+            const temp = await productsService.getRelatedProducts(`${props.categoryName}`);
             setProducts(temp);
         } catch (e) {
             setProducts([]);

@@ -17,7 +17,6 @@ export const saveRatingList = async (ratings) => {
 export const getAllRatings = async (productId, page, size) => {
     try {
         const temp = await axios.get(`${baseURL}/public?productId=${productId}&page=${page}&size=${size}`);
-        console.log(temp.data);
         return temp.data;
     } catch (e) {
         throw e.response.data;
@@ -28,7 +27,6 @@ export const getAllRatingsByUserId = async (productId, page, size) => {
     try {
         const userId = localStorage.getItem("id");
         const temp = await axiosInstance.get(`rating/user/${userId}?productId=${productId}&page=${page}&size=${size}`);
-        console.log(temp.data);
         return temp.data;
     } catch (e) {
         throw e.response.data;

@@ -9,7 +9,6 @@ export const getAllPromotions = async () => {
             = await axios.get(`${BASE_URL}/promotions`);
         return temp.data;
     } catch (e) {
-        console.log(e)
         return [];
     }
 }

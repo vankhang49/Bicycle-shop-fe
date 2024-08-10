@@ -9,7 +9,6 @@ export const getAllColors = async () => {
             = await axios.get(`${BASE_URL}/colors`);
         return temp.data;
     } catch (e) {
-        console.log(e)
         return [];
     }
 }

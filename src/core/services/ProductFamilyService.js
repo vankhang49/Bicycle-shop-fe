@@ -9,7 +9,6 @@ export const getAllProductFamilies = async () => {
             = await axios.get(`${BASE_URL}/product-families`);
         return temp.data;
     } catch (e) {
-        console.log(e)
         return [];
     }
 }

@@ -5,7 +5,6 @@ export const getTotalCustomer = async () => {
         const temp = await axiosInstance.get(`/dashboard/total-customer`)
         return temp.data;
     } catch (e) {
-        console.log(e)
         return {};
     }
 }
@@ -15,7 +14,6 @@ export const getTotalBills = async () => {
         const temp = await axiosInstance.get(`/dashboard/total-bill`)
         return temp.data;
     } catch (e) {
-        console.log(e)
         return {};
     }
 }
@@ -25,7 +23,6 @@ export const getRevenues = async (option) => {
         const temp = await axiosInstance.get(`/dashboard/revenues/${option}`)
         return temp.data;
     } catch (e) {
-        console.log(e)
         return {};
     }
 }
@@ -35,7 +32,6 @@ export const getNewBills = async () => {
         const temp = await axiosInstance.get(`/dashboard/new-bills`)
         return temp.data;
     } catch (e) {
-        console.log(e)
         return [];
     }
 }
