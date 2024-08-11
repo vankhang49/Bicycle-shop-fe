@@ -123,7 +123,7 @@ export function LoginForm() {
                         <label htmlFor="">
                             <input type="checkbox" {...register("rememberMe")}/>
                             Ghi nhớ đăng nhập
-                            <a href="#">Quên mật khẩu</a>
+                            <Link to='/check-email'>Quên mật khẩu</Link>
                         </label>
                     </div>
                     <button type={"submit"} disabled={isLoading}

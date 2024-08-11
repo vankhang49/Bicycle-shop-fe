@@ -98,6 +98,18 @@ export function UserInfo() {
         }, 2000)
     }
 
+    const calculateDays = (value) => {
+        const birthDate = new Date(value);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        const dayDiff = today.getDate() - birthDate.getDate();
+        if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+            age--;
+        }
+        return age >= 18 || "Ngày sinh phải lớn hơn ngày hiện tại 18 năm!";
+    }
+
     return(
         <Main content={
             <div className="info-content">
@@ -110,8 +122,16 @@ export function UserInfo() {
                         <p className="title-element">Họ và tên:</p>
                         {isEdit ?
                             <div className="input-element">
-                                <input type="text" {...register("fullName")} />
+                                <input type="text" {...register("fullName", {
+                                    required: "Tên không được để trống!",
+                                    maxLength: {value: 50, message: "Tên nhân viên được quá 50 Ký tự!"},
+                                    pattern: {
+                                        value: /^[A-Za-zÀ-ỹà-ỹĂăÂâÊêÔôƠơƯưĐđ\s]+$/,
+                                        message: "Tên không được chứa ký tự số và không được chứa ký tự đặc biệt!"
+                                    }
+                                })} />
                                 {validateError && <p className="validate-error">{validateError.fullName}</p>}
+                                {errors.fullName && <p className="validate-error">{errors.fullName.message}</p>}
                             </div>
                             :
                             <p>{userInfo.fullName}</p>
@@ -132,7 +152,11 @@ export function UserInfo() {
                         <p className="title-element">Ngày sinh:</p>
                         {isEdit ?
                             <div className="input-element">
-                                <input type="date" {...register("dateOfBirth")} />
+                                <input type="date" {...register("dateOfBirth", {
+                                    required: "Ngày sinh không được để trống!",
+                                    validate : value => calculateDays(value)
+                                })} />
+                                {errors.dateOfBirth && <p className="validate-error">{errors.dateOfBirth.message}</p>}
                                 {validateError && <p className="validate-error">{validateError.dateOfBirth}</p>}
                             </div>
                             :
@@ -190,7 +214,9 @@ export function UserInfo() {
                         <p className="title-element">Địa chỉ email:</p>
                         {isEdit ?
                             <div className="input-element">
-                                <input type="email" disabled {...register("email")} />
+                                <input type="email" disabled {...register("email", {
+                                    required: "Email không được để trống!"
+                                })} />
                                 {validateError && <p className="validate-error">{validateError.email}</p>}
                             </div>
                             :
@@ -201,7 +227,11 @@ export function UserInfo() {
                         <p className="title-element">Số điện thoại:</p>
                         {isEdit ?
                             <div className="input-element">
-                                <input type="text" {...register("phoneNumber")} />
+                                <input type="text" {...register("phoneNumber", {
+                                    required : "Số điện thoại không được để trống!",
+                                    pattern : {value: /^(?:\+84|0)\d{9}/, message: "Số điện thoại phải bắt đầu bằng +84 hoặc 0 và kết thúc với 9 số!"}
+                                })} />
+                                {errors.phoneNumber && <p className="validate-error">{errors.phoneNumber.message}</p>}
                                 {validateError && <p className="validate-error">{validateError.phoneNumber}</p>}
                             </div>
                             :
@@ -212,7 +242,10 @@ export function UserInfo() {
                         <p className="title-element">Địa chỉ:</p>
                         {isEdit ?
                             <div className="input-element">
-                                <input type="text" {...register("address")} />
+                                <input type="text" {...register("address", {
+                                    required : "Địa chỉ không được để trống!"
+                                })} />
+                                {errors.address && <p className="validate-error">{errors.address.message}</p>}
                                 {validateError && <p className="validate-error">{validateError.address}</p>}
                             </div>
                             :

@@ -19,6 +19,8 @@ import {Advertisements} from "../pages/dashboard/Advertisements/Advertisement";
 import {LoginForm} from "../pages/login/LoginForm";
 import {RegisterForm} from "../pages/login/RegisterForm";
 import {AccountAndPassword} from "../pages/UserInfo/AccountAndPassword";
+import {ForgotPassword} from "../pages/login/ForgotPassword/ForgotPassword";
+import {CheckEmail} from "../pages/login/ForgotPassword/CheckEmail";
 
 export const projectRouter = [
     {
@@ -77,6 +79,14 @@ export const projectRouter = [
     {
         path: '/register',
         element: <RegisterForm/>,
+    },
+    {
+        path: '/check-email',
+        element: <CheckEmail/>,
+    },
+    {
+        path: '/forgot-password',
+        element: <ForgotPassword/>,
     },
     {
         path: '/dashboard',

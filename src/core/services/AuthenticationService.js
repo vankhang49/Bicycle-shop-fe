@@ -81,6 +81,25 @@ export const updateInfo = async (userData) => {
     }
 }
 
+export const checkEmail = async (data) => {
+    try {
+        const resp = await axios.post(`${baseURL}/api/auth/check-email`, data);
+        return resp.data;
+    } catch (e) {
+        throw e.response;
+    }
+}
+
+export const forgotPassword = async (data) => {
+    try {
+        const resp = await axios.post(`${baseURL}/api/auth/forgot-password`, data);
+        return resp.data;
+    } catch (e) {
+        console.log(e);
+        throw e.response.data;
+    }
+}
+
 /**AUTHENTICATION CHECKER */
 
 export const getRoles = async () => {

@@ -83,7 +83,7 @@ export function RegisterForm() {
                             minLength: {value: 8, message: "Mật khẩu phải từ 8 đến 50 chữ!"},
                             maxLength: {value: 50, message: "Mật khẩu phải từ 8 đến 50 chữ!"},
                             pattern: {
-                                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&/_])[A-Z][A-Za-z\d@$!%*?&]{7,49}$/,
+                                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&/_])[A-Z][A-Za-z\d@$!%*?/&]{7,49}$/,
                                 message: "Mật khẩu phải bắt đầu bằng một chữ hoa, chứa ít nhất một chữ thường, một chữ số, ký tự đặc biệt (@$!%*?&/_), và phải dài từ 8 đến 50 ký tự!"
                             }
                         })}

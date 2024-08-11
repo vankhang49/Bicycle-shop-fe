@@ -13,12 +13,19 @@
 
   .info-left {
     width: 60%;
-    min-height: 70vh;
-    max-height: 100vh;
+    min-height: 90vh;
+    max-height: 120vh;
     position: relative;
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+
+    .full-name {
+      min-height: 100px;
+    }
+    .gender {
+      min-height: 100px;
+    }
 
     div {
       display: flex;
@@ -136,7 +143,7 @@
 
       img {
         width: 150px;
-        height: auto;
+        height: 150px;
         border-radius: 50%;
       }
 
@@ -243,7 +250,7 @@
 
         img {
           width: 100px;
-          height: auto;
+          height: 100px;
           border-radius: 50%;
         }
       }
@@ -290,7 +297,7 @@
         border-radius: 0;
         img {
           width: 100px;
-          height: auto;
+          height: 100px;
           border-radius: 50%;
         }
       }
@@ -313,7 +320,9 @@
       order: 2;
       border-radius: 0;
       box-shadow: none;
+      max-height: 200vh;
       div {
+        display: block;
         p {
           font-size: 0.9rem;
           padding: 10px;
@@ -322,6 +331,20 @@
           max-width: 200px;
           min-width: 150px;
           padding-left: 20px;
+        }
+        .input-element {
+          width: 100%;
+          height: 60px;
+          padding: 0 10px;
+
+          input {
+            padding: 0 10px;
+            width: 100%;
+            height: 40px;
+            border: 1px solid black;
+            border-radius: 10px;
+
+          }
         }
       }
       .title {
@@ -340,7 +363,7 @@
         box-shadow: none;
         img {
           width: 100px;
-          height: auto;
+          height: 100px;
           border-radius: 50%;
         }
       }
