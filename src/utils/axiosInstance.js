@@ -11,6 +11,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
     (config) => {
       config.headers.Authorization = `Bearer`;
+      config.headers.userId = localStorage.getItem("id");
       return config;
     },
   (error) => {

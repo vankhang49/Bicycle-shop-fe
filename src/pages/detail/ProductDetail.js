@@ -154,9 +154,9 @@ export function ProductDetail() {
                                     }
                                 </span>
                                 </label>
-                                {product.pricingList && product.pricingList[0].size ?
-                                    ((product.pricingList[0].size !== "" && pricingList[0].size !== null) && (
-                                        <div className="select-size">
+                                {product.pricingList && product.pricingList[0]?.size ?
+                                    ((product.pricingList[0]?.size !== "" && pricingList[0]?.size !== null) && (
+                                        <div className="select-color">
                                             <label>Chọn kich thước: </label>
                                             {product.pricingList.map((pricing, index) => (
                                                 <div className="btn-select" key={index}>

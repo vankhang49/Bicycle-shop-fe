@@ -59,6 +59,14 @@
         }
         .size {
           height: 33.33%;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          p {
+            color: #171616;
+            font-size: 1rem;
+            padding-right: 10px;
+          }
           select{
             border-radius: 25px;
             width: 100px;

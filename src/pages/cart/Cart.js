@@ -63,12 +63,8 @@ export function Cart() {
                                     </div>
                                     { item[0].size !== '' ?
                                     <div className="size">
-                                        <select>
-                                            <option value="">--Chọn size--</option>
-                                            <option value="S">S</option>
-                                            <option value="M">M</option>
-                                            <option value="L">L</option>
-                                        </select>
+                                       <p>Kích thước: </p>
+                                        <p>{item[0].size}</p>
                                     </div>
                                     : null}
                                     <div className="amount-price">
