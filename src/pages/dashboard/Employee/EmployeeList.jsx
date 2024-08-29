@@ -1,4 +1,3 @@
-import {DashboardMain} from "../../../components/DashboardMain/DashboardMain";
 import {TiArrowUnsorted} from "react-icons/ti";
 import {BiSolidShow} from "react-icons/bi";
 import {MdCancel, MdOutlineModeEdit} from "react-icons/md";
@@ -11,7 +10,6 @@ import {DisableUserModal} from "../DisableUserModal/DisableUserModal";
 import {DeleteUserModal} from "../DeleteUserModal/DeleteUserModal";
 import {UserDetailModal} from "../userDetailModal/userDetailModal";
 import {Link} from "react-router-dom";
-
 
 export function EmployeeList() {
     const [employees, setEmployees] = useState([]);
@@ -120,8 +118,7 @@ export function EmployeeList() {
     }
 
     return(
-        <DashboardMain path={'employees'} content={
-            <main id='employee'>
+        <main id='employee'>
                 <div className="content-element">
                     <div className="header-content">
                         <form className="form-search" onSubmit={handleSubmit(onSubmit)}>
@@ -242,6 +239,5 @@ export function EmployeeList() {
                 >
                 </DeleteUserModal>
             </main>
-        }/>
     );
 }

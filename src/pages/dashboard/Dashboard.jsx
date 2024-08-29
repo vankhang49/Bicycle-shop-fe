@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import "./Dashboard.scss";
-import {DashboardMain} from "../../components/DashboardMain/DashboardMain";
 import * as dashboardService from "../../core/services/DashboardService";
 import {fCurrency} from "../../utils/format-number";
 import Moment from "moment";
@@ -48,7 +47,6 @@ export function Dashboard() {
         }catch(error) {
             toast.error("Không tìm thấy đơn hàng!");
         }
-
     }
 
     const handleGetRevenues = async (option) => {
@@ -77,8 +75,7 @@ export function Dashboard() {
         setIsOpenModal(false);
     }
     return (
-        <DashboardMain path={'dashboard'} content={
-            <main id='dashboard'>
+        <main id='dashboard'>
                 <h1>Dashboard</h1>
                 {/* Analyses */}
                 <div className="analyse">
@@ -170,6 +167,5 @@ export function Dashboard() {
                     billId={billId}
                 />
             </main>
-        }/>
     );
 }

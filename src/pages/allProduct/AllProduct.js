@@ -4,7 +4,6 @@ import {useEffect, useState} from "react";
 import * as productsService from "../../core/services/ProductService";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {Filter} from "../../components/filter/Filter";
-import {Main} from "../../components/Main/Main";
 import {CiFilter} from "react-icons/ci";
 import {fCurrency} from "../../utils/format-number";
 import Loading from "../../components/Loading/Loading";
@@ -18,6 +17,8 @@ export function AllProduct() {
     const [priceBefore, setPriceBefore] = useState(0);
     const [priceAfter, setPriceAfter] = useState(9999999999);
     const [products, setProducts] = useState([]);
+    const [totalPages, setTotalPages] = useState(0);
+    const [pageNumber, setPageNumber] = useState(0);
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
     const [hoveredProductIndex, setHoveredProductIndex] = useState(null);
@@ -28,8 +29,8 @@ export function AllProduct() {
     // const {state} = useLocation();
     // const dispatch = useDispatch();
 
-    useEffect(()=> {
-        setTimeout(()=>{
+    useEffect(() => {
+        setTimeout(() => {
             setDelay(false);
         }, 3000)
     }, [isLoading === false])
@@ -39,22 +40,23 @@ export function AllProduct() {
         setIsLoading(true);
         const fetchProducts = async () => {
             setDelay(true);
-            await getProductsList("", "", familyName, categoryName, brandName, priceBefore, priceAfter);
+            await getProductsList(pageNumber, "", familyName, categoryName, brandName, priceBefore, priceAfter);
         }
         fetchProducts().then().catch(console.error);
-    }, [categoryName, familyName, brandName, priceBefore, priceAfter]);
+    }, [pageNumber, categoryName, familyName, brandName, priceBefore, priceAfter]);
 
     const getProductsList = async (page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter) => {
         try {
             const temp = await productsService.getAllProducts(page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter);
             setProducts(temp.content);
+            setTotalPages(temp.totalPages)
             setMessage(null);
-            setTimeout(()=> {
+            setTimeout(() => {
                 setIsLoading(false);
             }, 2000);
         } catch (e) {
             setProducts([]);
-            setTimeout(()=> {
+            setTimeout(() => {
                 setIsLoading(false);
             }, 2000);
             setMessage(e);
@@ -110,31 +112,43 @@ export function AllProduct() {
         setHoveredProductIndex(null);
     }
 
+    const showPageNo = () => {
+        let pageNoTags = [];
+        for (let i = 0; i < totalPages; i++) {
+            pageNoTags.push(<a key={i} className="page-a" onClick={() => handlePage(i)}>{i + 1}</a>);
+        }
+        return pageNoTags;
+    }
+
+    const handlePage = (pageNo) => {
+        setPageNumber(pageNo);
+    }
+
     return (
-        <Main content={
-            <div className="content">
-                <div className="button-show-filter">
-                    <button onClick={handleOpenFilter}><CiFilter/></button>
-                </div>
-                <div className="content-body">
-                    <Filter
-                        categoryName={categoryName}
-                        onBrandNameChange={updateBrandName}
-                        onFamilyNameChange={updateFamilyName}
-                        onPriceChange={updatePrice}
-                        isOpenFilter={isOpenFilter}
-                        closeFilter={handleCloseFilter}
-                    >
-                    </Filter>
-                    {isLoading ? (
-                       <div className="loading">
-                           <Loading/>
-                       </div>
-                    ) : (
+        <div className="content">
+            <div className="button-show-filter">
+                <button onClick={handleOpenFilter}><CiFilter/></button>
+            </div>
+            <div className="content-body">
+                <Filter
+                    categoryName={categoryName}
+                    onBrandNameChange={updateBrandName}
+                    onFamilyNameChange={updateFamilyName}
+                    onPriceChange={updatePrice}
+                    isOpenFilter={isOpenFilter}
+                    closeFilter={handleCloseFilter}
+                >
+                </Filter>
+                {isLoading ? (
+                    <div className="loading">
+                        <Loading/>
+                    </div>
+                ) : (
                     <div className="product-list">
                         <ul className="products">
                             {products && products.map((product, index) => (
-                                <li key={index} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}>
+                                <li key={index} onMouseEnter={() => handleMouseEnter(index)}
+                                    onMouseLeave={handleMouseLeave}>
                                     <div className="products-top">
                                         <Link to={`/products/detail/${product.productId}`}
                                               className={`product-thumb ${hoveredProductIndex === index ? 'hover' : ''}`}>
@@ -151,7 +165,7 @@ export function AllProduct() {
                                                 )
                                             }
                                         </Link>
-                                        { product.pricingList[0].promotion.discount > 0 &&
+                                        {product.pricingList[0].promotion.discount > 0 &&
                                             <span
                                                 className="promotion">{product.pricingList[0].promotion.promotionName}</span>
                                         }
@@ -184,7 +198,7 @@ export function AllProduct() {
                                                             !== product.pricingList[product.pricingList.length - 1].price) ?
                                                             (fCurrency(Math.round((product.pricingList[0].price * (1 - product.pricingList[0].promotion.discount)))) + " - "
                                                                 + (fCurrency(Math.round(product.pricingList[product.pricingList.length - 1].price * (1 - product.pricingList[product.pricingList.length - 1].promotion.discount)))) + " VNĐ")
-                                                            : (fCurrency(Math.round((product.pricingList[0].price * (1 - product.pricingList[0].promotion.discount))))  + " VNĐ")
+                                                            : (fCurrency(Math.round((product.pricingList[0].price * (1 - product.pricingList[0].promotion.discount)))) + " VNĐ")
                                                     ) : ""}
                                             </span>
                                         </div>
@@ -193,10 +207,22 @@ export function AllProduct() {
                             ))}
                             {message !== null && <p className="message">{message}</p>}
                         </ul>
+                        <div className="page">
+                            <div className="page-box">
+                                {pageNumber !== 0 &&
+                                    <a className="page-a" onClick={() => handlePage(pageNumber - 1)}>Trang trước</a>
+                                }
+                                <span>
+                                    {showPageNo()}
+                                </span>
+                                {pageNumber < (totalPages - 1) &&
+                                    <a className="page-a" onClick={() => handlePage(pageNumber + 1)}>Trang sau</a>
+                                }
+                            </div>
+                        </div>
                     </div>
-                        )}
-                </div>
+                )}
             </div>
-        }/>
+        </div>
     );
 }

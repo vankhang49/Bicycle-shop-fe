@@ -10,7 +10,7 @@ import { TbLogout } from "react-icons/tb";
 import { IoCloseSharp } from "react-icons/io5";
 import { AiOutlineProduct } from "react-icons/ai";
 import { FaHome } from "react-icons/fa";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {logoutAction} from "../../core/redux/actions/AuthenticationActions";
 import {toast} from "react-toastify";
 import {useDispatch} from "react-redux";
@@ -25,7 +25,8 @@ export function DashboardSidebar(props) {
     const [isAdmin, setIsAdmin] = useState(false);
     const [functionActive, setFunctionActive] = useState("");
     const [sidebarActive, setSidebarActive] = useState(props.OpenSidebar);
-    const [path, setPath] = useState(props.path);
+    const location = useLocation();
+    const path = location.pathname;
 
     useEffect(() => {
         setSidebarActive(props.OpenSidebar);
@@ -36,7 +37,7 @@ export function DashboardSidebar(props) {
             await getRoles();
         }
         fetchData();
-    }, []);
+    }, [props.path]);
 
     const getRoles = async () => {
         const temp = authenticationService.getRoles();
@@ -83,43 +84,43 @@ export function DashboardSidebar(props) {
                 </div>
             </div>
             <div className={styles.sidebar}>
-                <Link className={path === 'dashboard' ? `${styles.active}` : ``}
+                <Link className={path === '/dashboard' ? `${styles.active}` : ``}
                       to="/dashboard">
                     <MdDashboard />
                     <h3>Dashboard</h3>
                 </Link>
-                <Link className={path === 'products' ? `${styles.active}` : ``}
+                <Link className={path === '/dashboard/products' ? `${styles.active}` : ``}
                     to="/dashboard/products">
                     <AiOutlineProduct />
                     <h3>Sản phẩm</h3>
                 </Link>
                 { (isAdmin || isManager) &&
-                    <Link className={path === 'employees' ? `${styles.active}` : ``}
+                    <Link className={path === '/dashboard/employees' ? `${styles.active}` : ``}
                         to='/dashboard/employees'>
                         <TbUserSquareRounded />
                         <h3>Nhân viên</h3>
                     </Link>
                 }
-                <Link className={path === 'customers' ? `${styles.active}` : ``}
+                <Link className={path === '/dashboard/customers' ? `${styles.active}` : ``}
                     to='/dashboard/customers'>
                     <TbUserSquareRounded />
                     <h3>Khách hàng</h3>
                 </Link>
-                <Link className={path === 'bills' ? `${styles.active}` : ``}
+                <Link className={path === '/dashboard/bills' ? `${styles.active}` : ``}
                     to="/dashboard/bills">
                     <RiFilePaper2Line />
                     <h3>Đơn hàng</h3>
                 </Link>
-                <Link className={path === 'advertisements' ? `${styles.active}` : ``}
+                <Link className={path === '/dashboard/advertisements' ? `${styles.active}` : ``}
                       to="/dashboard/advertisements">
                     <RiAdvertisementFill />
                     <h3>Quảng cáo</h3>
                 </Link>
-                <a href="#" className={path === 'reports' ? `${styles.active}` : ``}>
+                <a href="#" className={path === '/dashboard/reports' ? `${styles.active}` : ``}>
                     <PiCloudWarning />
                     <h3>Reports</h3>
                 </a>
-                <Link className={path === 'setting' ? `${styles.active}` : ``}
+                <Link className={path === '/dashboard/setting' ? `${styles.active}` : ``}
                     to='/dashboard/setting'>
                     <MdOutlineSettings />
                     <h3>Settings</h3>

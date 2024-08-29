@@ -10,6 +10,7 @@ export async function getAllProducts(page, nameSearch, familyName, categoryName,
             = await axios.get(`${BASE_URL}/products?page=${page}&nameSearch=${nameSearch}` +
             `&familyName=${familyName}&categoryName=${categoryName}&brandName=${brandName}` +
             `&priceBefore=${priceBefore}&priceAfter=${priceAfter}`);
+        console.log(temp.data);
         return temp.data;
     } catch (e) {
         throw e.response.data;

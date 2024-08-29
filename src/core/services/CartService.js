@@ -18,6 +18,10 @@ export const deleteFromCartService = async (cartItem) => {
     cart.delete(cartItem);
 }
 
+export const clearCart = async () => {
+    cart.clear();
+}
+
 export const getCountProductByProductInCart = async () => {
     return cart.size;
 }
@@ -27,14 +31,16 @@ export const getCartFromServer = async () => {
     try {
         const userId = localStorage.getItem("id");
         const temp = await axiosInstance.get(`shopping-cart?userId=${userId}`);
-        const data = temp.data;
 
-        cart.clear(); // Clear local cart before syncing
+        cart.clear();// Clear local cart before syncing
 
-        await temp.data.map(async (cartItem) => (
-            await addCart(cartItem.pricing, cartItem.quantity)
-        ));
-        return data;
+        if (temp.data !== ''){
+            console.log('call')
+            await temp.data.map(async (cartItem) => (
+                await addCart(cartItem.pricing, cartItem.quantity)
+            ));
+            return temp.data;
+        }
     } catch (e) {
         return [];
     }

@@ -1,12 +1,8 @@
-import {TiArrowUnsorted} from "react-icons/ti";
 import {BiSolidShow} from "react-icons/bi";
-import {MdOutlineModeEdit} from "react-icons/md";
 import {IoTrashSharp} from "react-icons/io5";
-import {DashboardMain} from "../../../components/DashboardMain/DashboardMain";
 import "./Bill.scss";
 import {useEffect, useState} from "react";
 import * as billService from "../../../core/services/BillService";
-import * as userService from "../../../core/services/UserService";
 import {useForm} from "react-hook-form";
 import {BillModal} from "../BillModal/BillModal";
 
@@ -82,8 +78,7 @@ export function Bills() {
     }
 
     return(
-        <DashboardMain path={'bills'} content={
-            <main id='bill'>
+        <main id='bill'>
                 <div className="content-element">
                     <div className="header-content">
                         <form className="form-search" onSubmit={handleSubmit(onSubmit)}>
@@ -162,6 +157,5 @@ export function Bills() {
                     billId={billId}
                 />
             </main>
-        }/>
     );
 }

@@ -8,6 +8,7 @@ import {toast} from "react-toastify";
 import {FaEye, FaEyeSlash} from "react-icons/fa";
 import spinner from "../../assets/icons/Spinner.gif";
 import {LoginMain} from "./LoginMain";
+import {fetchCartFromServer, fetchCount} from "../../core/redux/actions/CartActions";
 
 export function LoginForm() {
     const dispatch = useDispatch();
@@ -55,6 +56,8 @@ export function LoginForm() {
                     localStorage.setItem('avatar', userData.avatar);
                     localStorage.setItem('isAuthenticated', 'true');
                     localStorage.setItem('lastTime', new Date().toISOString());
+                    await dispatch(fetchCartFromServer());
+                    await dispatch(fetchCount());
                     if (remember) {
                         localStorage.setItem("rememberMe", "true")
                         localStorage.setItem("rememberMeEmail", data.email);

@@ -22,118 +22,111 @@ import {AccountAndPassword} from "../pages/UserInfo/AccountAndPassword";
 import {ForgotPassword} from "../pages/login/ForgotPassword/ForgotPassword";
 import {CheckEmail} from "../pages/login/ForgotPassword/CheckEmail";
 
-export const projectRouter = [
+export const publicRouter = [
     {
         path: '',
-        element: <HomePage/>,
+        component: <HomePage/>,
         exact: true,
     },
     {
         path: '/products',
-        element: <AllProduct/>,
+        component: <AllProduct/>,
     },
     {
         path: '/products/:categoryName',
-        element: <AllProduct/>,
+        component: <AllProduct/>,
     },
     {
         path: '/products/:categoryName/:familyName',
-        element: <AllProduct/>,
+        component: <AllProduct/>,
     },
     {
         path: '/products/detail/:productId',
-        element: <ProductDetail/>,
-    },
-    {
-        path: '/products/create',
-        element: <CreateProduct/>,
+        component: <ProductDetail/>,
     },
     {
         path: '/about-us',
-        element: <AboutUs/>,
+        component: <AboutUs/>,
     },
     {
         path: '/my-info',
-        element: <UserInfo/>,
+        component: <UserInfo/>,
+        private: true,
     },
     {
         path: '/my-info/bill',
-        element: <UserBill/>,
+        component: <UserBill/>,
+        private: true,
     },
     {
         path: '/account-and-password',
-        element: <AccountAndPassword/>,
+        component: <AccountAndPassword/>,
+        private: true,
     },
     {
         path: '/cart',
-        element: <Cart/>,
+        component: <Cart/>,
     },
     {
         path: '/pay',
-        element: <Pay/>,
-    },
-    {
-        path: '/login',
-        element: <LoginForm/>,
-    },
-    {
-        path: '/register',
-        element: <RegisterForm/>,
-    },
-    {
-        path: '/check-email',
-        element: <CheckEmail/>,
-    },
-    {
-        path: '/forgot-password',
-        element: <ForgotPassword/>,
-    },
+        component: <Pay/>,
+    }
+];
+
+export const adminRouter = [
     {
         path: '/dashboard',
-        element: <Dashboard/>,
+        component: <Dashboard/>,
+        private: true,
     },
     {
         path: '/dashboard/products',
-        element: <ProductList/>,
+        component: <ProductList/>,
+        private: true,
     },
     {
         path: '/dashboard/products/create',
-        element: <CreateProduct/>,
+        component: <CreateProduct/>,
+        private: true,
     },
     {
         path: '/dashboard/products/create/:id',
-        element: <CreateProduct/>,
+        component: <CreateProduct/>,
+        private: true,
     },
     {
         path: '/dashboard/employees',
-        element: <EmployeeList/>,
+        component: <EmployeeList/>,
+        private: true,
     },
     {
         path: '/dashboard/employees/create',
-        element: <EmployeeCreate/>,
+        component: <EmployeeCreate/>,
+        private: true,
     },
     {
         path: '/dashboard/employees/edit/:id',
-        element: <EmployeeCreate/>,
+        component: <EmployeeCreate/>,
+        private: true,
     },
     {
         path: '/dashboard/customers',
-        element: <Customer/>,
+        component: <Customer/>,
+        private: true,
     },
     {
         path: '/dashboard/advertisements',
-        element: <Advertisements/>,
+        component: <Advertisements/>,
+        private: true,
     },
     {
         path: '/dashboard/bills',
-        element: <Bills/>,
+        component: <Bills/>,
+        private: true,
     },
     {
-      path: '/dashboard/setting',
-      element: <Setting/>,
-    },
-    {
-        path: '*',
-        element: <NotFound/>,
+        path: '/dashboard/setting',
+        component: <Setting/>,
+        private: true,
     },
 ];

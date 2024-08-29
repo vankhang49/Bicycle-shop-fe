@@ -1,5 +1,4 @@
 import "./UserInfo.scss";
-import {Main} from "../../components/Main/Main";
 import {useEffect, useState} from "react";
 import * as authenticationService from "../../core/services/AuthenticationService";
 import avatar from "../../assets/images/avatar.jpg";
@@ -111,8 +110,7 @@ export function UserInfo() {
     }
 
     return(
-        <Main content={
-            <div className="info-content">
+        <div className="info-content">
                 <form className="info-left" onSubmit={handleSubmit(onSubmit)}>
                     <div className="title">
                         <h2>Hồ sơ của tôi</h2>
@@ -282,6 +280,5 @@ export function UserInfo() {
                     </Link>
                 </div>
             </div>
-        }/>
     );
 }

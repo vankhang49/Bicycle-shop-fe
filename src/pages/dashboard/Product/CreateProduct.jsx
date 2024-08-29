@@ -1,4 +1,3 @@
-import {DashboardMain} from "../../../components/DashboardMain/DashboardMain";
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useFieldArray, useForm} from "react-hook-form";
@@ -230,8 +229,7 @@ export function CreateProduct() {
     }
 
     return(
-        <DashboardMain path={'products'} content={
-            <main id='create-product'>
+        <main id='create-product'>
                 <div className="content-element">
                     <div className="form-title">
                         <p className="title">{id === undefined ? "Thêm mới" : "Cập nhật"} sản phẩm</p>
@@ -400,6 +398,5 @@ export function CreateProduct() {
                     </form>
                 </div>
             </main>
-        }/>
     );
 }

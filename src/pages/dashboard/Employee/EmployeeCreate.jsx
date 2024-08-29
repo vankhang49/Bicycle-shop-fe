@@ -3,15 +3,12 @@ import {useForm} from "react-hook-form";
 import {toast} from "react-toastify";
 import * as userService from "../../../core/services/UserService";
 import {useParams} from "react-router-dom";
-import spinner from "../../../assets/icons/Spinner.gif";
-import {DashboardMain} from "../../../components/DashboardMain/DashboardMain";
 import * as roleService from "../../../core/services/RoleService";
 import "./EmployeeCreate.scss";
 
 export function EmployeeCreate() {
     const {id} = useParams();
     const [employee, setEmployee] = useState(null);
-    const [isShowSidebar, setIsShowSidebar] = useState(false);
     const [isLoading, setIsLoading] = useState(false); // Add loading state
     const [roles, setRoles] = useState([]);
     const [rolesError, setRolesError] = useState(null);
@@ -130,8 +127,7 @@ export function EmployeeCreate() {
     }
 
     return (
-        <DashboardMain path={'employees'} content={
-            <div id="create-edit-user">
+        <div id="create-edit-user">
                 <form className="content-element" onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-title">
                         <p className="title">{id === undefined ? "Thêm mới" : "Cập nhật"} nhân viên</p>
@@ -314,6 +310,5 @@ export function EmployeeCreate() {
                     </div>
                 </form>
             </div>
-        }/>
     );
 }

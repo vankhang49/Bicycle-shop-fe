@@ -258,6 +258,24 @@ a {
       }
     }
 
+    .page {
+      padding: 20px 40px 40px 40px;
+      display: flex;
+      justify-content: right;
+      align-items: center;
+
+      .page-a{
+        margin-right: 10px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.2rem;
+        padding: 7px;
+        background-color: #8ab3dc;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+    }
+
     .message {
       font-size: 1.2rem;
       font-weight: 450;

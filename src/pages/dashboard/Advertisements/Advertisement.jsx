@@ -1,4 +1,3 @@
-import {DashboardMain} from "../../../components/DashboardMain/DashboardMain";
 import "./Advertisement.scss";
 import {useEffect, useState} from "react";
 import * as advertisementService from "../../../core/services/AdvertisementService";
@@ -63,8 +62,7 @@ export function Advertisements() {
     }
 
     return(
-        <DashboardMain path={'advertisements'} content={
-            <main id="advertisement">
+        <main id="advertisement">
                 <form className="content-element" onSubmit={handleSubmit(onSubmit)}>
                     <div className="title">
                         <h2>Danh sách quảng cáo</h2>
@@ -133,6 +131,5 @@ export function Advertisements() {
                     }
                 </form>
             </main>
-        }/>
     );
 }

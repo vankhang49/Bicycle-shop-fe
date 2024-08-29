@@ -1,4 +1,3 @@
-import {Main} from "../../../components/Main/Main";
 import {useEffect, useState} from "react";
 import * as billService from "../../../core/services/BillService";
 import "./UserBill.scss";
@@ -64,8 +63,7 @@ export function UserBill(props) {
     }
 
     return(
-        <Main content={
-            <div id="userBill">
+        <div id="userBill">
                 <div className="bills">
                     {bills && bills.map((item, index) => (
                         <div className="bill" key={item.id}>
@@ -140,6 +138,5 @@ export function UserBill(props) {
                     bill = {bill}
                 />
             </div>
-        }/>
     );
 }

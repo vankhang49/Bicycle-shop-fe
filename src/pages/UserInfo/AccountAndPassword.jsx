@@ -1,4 +1,3 @@
-import {Main} from "../../components/Main/Main";
 import {MdModeEdit} from "react-icons/md";
 import "./AccountAndPassword.scss";
 import * as authenticationService from "../../core/services/AuthenticationService";
@@ -74,8 +73,7 @@ export function AccountAndPassword() {
     }
 
     return(
-        <Main content={
-            <div id="accountAndPassword">
+        <div id="accountAndPassword">
                 <div className="account-content">
                     <form className="form-operation" onSubmit={handleSubmit(onSubmit)}>
                         <div className="title form-element">
@@ -152,6 +150,5 @@ export function AccountAndPassword() {
                     </form>
                 </div>
             </div>
-        }/>
     );
 }

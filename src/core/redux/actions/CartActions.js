@@ -35,6 +35,12 @@ export const deleteFromCart = (cartItem) => async dispatch => {
     dispatch(fetchCartFromService());
 };
 
+export const clearCart = () => async dispatch => {
+    await cartService.clearCart();
+    dispatch(fetchCartFromService());
+    dispatch(fetchCount());
+}
+
 export const updateQuantityInCart = (pricing, quantity) => async (dispatch) => {
     try {
         await cartService.setQuantityForPriceOfProduct(pricing, quantity);

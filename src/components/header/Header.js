@@ -11,7 +11,7 @@ import avatar from "./avatar.jpg";
 import * as authenticationService from "../../core/services/AuthenticationService";
 import {toast} from "react-toastify";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchCount} from "../../core/redux/actions/CartActions";
+import {clearCart, fetchCount} from "../../core/redux/actions/CartActions";
 import {logoutAction} from "../../core/redux/actions/AuthenticationActions";
 import { IoIosLogIn } from "react-icons/io";
 import { IoMdCart } from "react-icons/io";
@@ -32,6 +32,17 @@ export function Header(props){
     const {register, handleSubmit} = useForm({
         criteriaMode: "all"
     });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (isAuthenticated) {
+                await getRoleName();
+                getFullName();
+                getAvatar();
+            }
+        };
+        fetchData();
+    }, []);
 
     useEffect(() => {
         dispatch(fetchCount()); // Fetch the count of products
@@ -97,6 +108,7 @@ export function Header(props){
     const handleLogout = async () => {
         try {
             await dispatch(logoutAction());
+            await dispatch(clearCart());
             toast.success("Đăng xuất thành công!");
             navigate("/login");
         } catch (e) {

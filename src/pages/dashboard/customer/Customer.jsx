@@ -1,4 +1,3 @@
-import {DashboardMain} from "../../../components/DashboardMain/DashboardMain";
 import {TiArrowUnsorted} from "react-icons/ti";
 import {BiSolidShow} from "react-icons/bi";
 import {MdCancel, MdOutlineModeEdit} from "react-icons/md";
@@ -7,7 +6,6 @@ import "./Customer.scss";
 import {useEffect, useState} from "react";
 import * as userService from "../../../core/services/UserService";
 import {useForm} from "react-hook-form";
-import * as productsService from "../../../core/services/ProductService";
 import {UserDetailModal} from "../userDetailModal/userDetailModal";
 import {DisableUserModal} from "../DisableUserModal/DisableUserModal";
 import {DeleteUserModal} from "../DeleteUserModal/DeleteUserModal";
@@ -111,8 +109,7 @@ export function Customer() {
     }
 
     return(
-        <DashboardMain path={'customers'} content={
-            <main id='customer'>
+        <main id='customer'>
                 <div className="content-element">
                     <div className="header-content">
                         <form className="form-search" onSubmit={handleSubmit(onSubmit)}>
@@ -225,6 +222,5 @@ export function Customer() {
                 >
                 </DeleteUserModal>
             </main>
-        }/>
     );
 }

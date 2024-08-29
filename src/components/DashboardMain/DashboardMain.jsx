@@ -4,10 +4,10 @@ import {DashboardSidebar} from "../sidebars/DashboardSidebar";
 import "../../assets/css/global.scss";
 import "./DashboardMain.scss";
 import * as authenticationService from "../../core/services/AuthenticationService";
-import {Link} from "react-router-dom";
+import {Link, Outlet, useParams} from "react-router-dom";
 import { RiArrowGoBackFill } from "react-icons/ri";
 
-export function DashboardMain({ path ,content}) {
+export function DashboardMain() {
     const [isEmployee, setIsEmployee] = useState(false);
     const [isManager, setIsManager] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
@@ -50,8 +50,8 @@ export function DashboardMain({ path ,content}) {
     if (isEmployee || isManager || isAdmin) {
         return(
             <div id='dashboard-container'>
-                <DashboardSidebar path = {path} OpenSidebar={isShowSidebar} CloseSidebar= {callbackSidebarFunction} />
-                {content}
+                <DashboardSidebar OpenSidebar={isShowSidebar} CloseSidebar= {callbackSidebarFunction} />
+                <Outlet/>
                 <DashboardNavbar parentCallback={callbackNavbarFunction} CloseSidebar={closeSidebar} />
             </div>
         );

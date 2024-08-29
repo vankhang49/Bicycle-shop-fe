@@ -5,9 +5,11 @@ import {useEffect, useState} from "react";
 import * as cartService from "../../core/services/CartService";
 import {logoutAction} from "../../core/redux/actions/AuthenticationActions";
 import {useDispatch} from "react-redux";
+import {Outlet} from "react-router-dom";
+import {fetchCount} from "../../core/redux/actions/CartActions";
 
 
-export const Main = ({ content }) => {
+export const Main = () => {
     const dispatch = useDispatch();
     const [isShowSidebar, setIsShowSidebar] = useState(false);
     const [countProduct, setCountProduct] = useState(0);
@@ -32,6 +34,10 @@ export const Main = ({ content }) => {
 
         return () => clearInterval(interval);
     }, []);
+
+    useEffect(() => {
+        dispatch(fetchCount());
+    }, [dispatch]);
 
     const checkMidnightLogout = () => {
         const now = new Date();
@@ -66,7 +72,7 @@ export const Main = ({ content }) => {
                 closeSidebar={isShowSidebar}
             ></Header>
             <NavBar showSidebar={isShowSidebar} callBackMain={callbackFunction}></NavBar>
-            {content}
+            <Outlet/>
             <FooterHome></FooterHome>
         </div>
     );

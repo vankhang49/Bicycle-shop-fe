@@ -1,13 +1,10 @@
-import {DashboardMain} from "../../../components/DashboardMain/DashboardMain";
 import {TiArrowUnsorted} from "react-icons/ti";
 import {MdOutlineModeEdit} from "react-icons/md";
 import {IoTrashSharp} from "react-icons/io5";
 import "./ProductList.scss";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import * as productsService from "../../../core/services/ProductService";
-import warning from "../../../assets/images/warning.png";
-import Modal from "../../../components/modal/Modal";
 import {useForm} from "react-hook-form";
 import {DeleteProductModal} from "./DeleteProductModal/DeleteProductModal";
 
@@ -84,8 +81,7 @@ export function ProductList() {
     }
 
     return (
-        <DashboardMain path={'products'} content={
-            <main id='product'>
+        <main id='product'>
                 <div className="content-element">
                     <div className="header-content">
                         <form className="form-search" onSubmit={handleSubmit(onSubmit)}>
@@ -170,6 +166,5 @@ export function ProductList() {
                     onDeleteSuccess={handleUpdateProductFlag}
                 />
             </main>
-        }/>
     );
 }

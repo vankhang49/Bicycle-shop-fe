@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import {useDispatch} from "react-redux";
 import * as billService from "../../../core/services/BillService";
-import {fetchCartFromServer, fetchCount} from "../../../core/redux/actions/CartActions";
+import {clearCart} from "../../../core/redux/actions/CartActions";
 
 export function BillModal({isOpen, onClose, billData}) {
     const navigate = useNavigate();
@@ -20,8 +20,7 @@ export function BillModal({isOpen, onClose, billData}) {
                 billData.dateCreate = JSON.parse(billData.dateCreate);
                 await billService.pay(billData);
                 toast.success("Thanh toán thành công!")
-                dispatch(fetchCartFromServer());
-                dispatch(fetchCount());
+                await dispatch(clearCart());
             } catch (error) {
                 toast.error(error);
                 onClose();

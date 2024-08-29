@@ -1,15 +1,12 @@
 import {Why} from "./Why";
 import {Store} from "./Store";
-import {Main} from "../../components/Main/Main";
 
-export function AboutUs(){
+export function AboutUs() {
 
-    return(
-        <Main content={
-            <div className="content">
-                <Why></Why>
-                <Store></Store>
-            </div>
-        }/>
+    return (
+        <div className="content">
+            <Why></Why>
+            <Store></Store>
+        </div>
     );
 }

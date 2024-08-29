@@ -1,4 +1,3 @@
-import {DashboardMain} from "../../../components/DashboardMain/DashboardMain";
 import "./Setting.scss";
 import {useEffect, useState} from "react";
 import * as categoryService from "../../../core/services/CategoryService";
@@ -146,8 +145,7 @@ export function Setting() {
     }
 
     return (
-        <DashboardMain path={'setting'} content={
-            <main id='setting'>
+        <main id='setting'>
                 <div className="content-element">
                     <div className="box-content">
                         <p>Cài đặt</p>
@@ -258,7 +256,5 @@ export function Setting() {
                     onDeleteSuccess={handleUpdateEmployeeFlag}
                 />
             </main>
-
-        }/>
     );
 }

@@ -1,11 +1,9 @@
-import bicycle from "../../assets/images/DomaneAL2Disc_23_33083_A_Primary.jpg";
 import "./detail.scss"
 import {useEffect, useState} from "react";
 import * as productService from "../../core/services/ProductService";
-import {useLocation, useParams} from "react-router-dom";
+import { useParams} from "react-router-dom";
 import * as pricingService from "../../core/services/PricingService";
 import {RelatedProducts} from "../../components/relatedProducts/RelatedProducts";
-import {Main} from "../../components/Main/Main";
 import {useDispatch} from "react-redux";
 import {addToCart, fetchCartFromService, fetchCount} from "../../core/redux/actions/CartActions";
 import {toast} from "react-toastify";
@@ -17,7 +15,7 @@ export function ProductDetail() {
     const [categoryName, setCategoryName] = useState('');
     const [pricing, setPricing] = useState({});
     const [pricingList, setPricingList] = useState([]);
-    const { productId } = useParams();
+    const {productId} = useParams();
     const [amount, setAmount] = useState(1);
     const [size, setSize] = useState('');
     const [color, setColor] = useState(null);
@@ -58,6 +56,18 @@ export function ProductDetail() {
         setPricingList(temp);
     }
 
+    const uniqueColorPricing = Array.from(
+        new Set(pricingList.map(pricing => pricing.color.colorName))
+    ).map(colorName => {
+        return pricingList.find(pricing => pricing.color.colorName === colorName);
+    });
+
+    const uniqueSizePricing = Array.from(
+        new Set(pricingList.map(pricing => pricing.size))
+    ).map(size => {
+        return pricingList.find(pricing => pricing.size === size);
+    });
+
     const changeImgUrl = (url) => {
         setImgElement(url);
     }
@@ -94,38 +104,37 @@ export function ProductDetail() {
     }
 
     return (
-        <Main content={
-            <div className="container">
-                <div className="content-view">
-                    <div className="product-card">
-                        <div className="products-top">
+        <div className="container">
+            <div className="content-view">
+                <div className="product-card">
+                    <div className="products-top">
                   <span className="product-thumb">
                     <img id="main-img" src={imgElement} alt="image"/>
                   </span>
-                            <div className="small-img">
-                                {product.productImages && product.productImages.map((image, index) => (
-                                    <div className="small-img-col" key={image.imageId}>
-                                        <img className="img-element" onMouseOver={() => changeImgUrl(image.imageUrl)}
-                                             src={image.imageUrl} alt={image.imageUrl}/>
-                                    </div>
-                                ))}
-                            </div>
+                        <div className="small-img">
+                            {product.productImages && product.productImages.map((image, index) => (
+                                <div className="small-img-col" key={image.imageId}>
+                                    <img className="img-element" onMouseOver={() => changeImgUrl(image.imageUrl)}
+                                         src={image.imageUrl} alt={image.imageUrl}/>
+                                </div>
+                            ))}
                         </div>
-                        <div className="product-info">
-                            <div>
-                                <label className='name'>
-                                    Tên sản phẩm:
-                                    <span className="product-name">{product.productName}</span>
-                                </label>
-                                <label className='code'>
-                                    Mã sản phẩm:
-                                    <span className="product-code">
+                    </div>
+                    <div className="product-info">
+                        <div>
+                            <label className='name'>
+                                Tên sản phẩm:
+                                <span className="product-name">{product.productName}</span>
+                            </label>
+                            <label className='code'>
+                                Mã sản phẩm:
+                                <span className="product-code">
                                         {pricing ? pricing.priceCode : product.productCode}
                                     </span>
-                                </label>
-                                <label className='price-old'>
+                            </label>
+                            <label className='price-old'>
                                 <span className="product-price-old">
-                                    { pricing ?
+                                    {pricing ?
                                         (fCurrency(pricing.price) + " VNĐ")
                                         :
                                         product.pricingList &&
@@ -137,13 +146,13 @@ export function ProductDetail() {
                                         )
                                     }
                                 </span>
-                                </label>
-                                <label className='price-new'>
+                            </label>
+                            <label className='price-new'>
                                 <span className="product-price">
-                                    { pricing ?
+                                    {pricing ?
                                         (fCurrency(Math.round(pricing.price * (1 - pricing.promotion?.discount))) + " VNĐ")
                                         :
-                                    product.pricingList &&
+                                        product.pricingList &&
                                         (product.pricingList.length > 1 && (product.pricingList[0].price
                                                 !== product.pricingList[product.pricingList.length - 1].price) ?
                                                 (fCurrency(Math.round(product.pricingList[0].price * (1 - product.pricingList[0].promotion.discount))))
@@ -153,71 +162,70 @@ export function ProductDetail() {
                                         )
                                     }
                                 </span>
-                                </label>
-                                {product.pricingList && product.pricingList[0]?.size ?
-                                    ((product.pricingList[0]?.size !== "" && pricingList[0]?.size !== null) && (
-                                        <div className="select-color">
-                                            <label>Chọn kich thước: </label>
-                                            {product.pricingList.map((pricing, index) => (
-                                                <div className="btn-select" key={index}>
-                                                    <button className="btn-color"
-                                                            onClick={() => handleChangeSize(pricing.size)}
-                                                            onBlur={() => setSelectedButton(null)}
-                                                            style={selectedButton === pricing.color.colorName ? {
-                                                                border: '1px solid #ff0000',
-                                                                color: '#ff0000'
-                                                            } : {}}
-                                                            type="button">{pricing.size}
-                                                    </button>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ))
-                                    : null}
-                                <div className="select-color">
-                                    <label>Màu sắc:</label>
-                                    {product.pricingList && product.pricingList.map((pricing, index) => (
-                                        <div className="btn-select" key={index}>
-                                            <button className="btn-color"
-                                                    onClick={() => changeColorAndImgUrl(pricing.imgColor, pricing.color.colorName)}
-                                                    onBlur={() => setSelectedButton(null)}
-                                                    style={selectedButton === pricing.color.colorName ? {
-                                                        border: '1px solid #ff0000',
-                                                        color: '#ff0000'
-                                                    } : {}}
-                                                    type="button">{pricing.color.colorName}
-                                            </button>
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="btn-ud">
-                                    <label>Số lượng: </label>
-                                    {amount !== 1 ?
-                                        <button id="decrease_button" onClick={() => changeAmount("-")}>-</button>
-                                        : <button id="decrease_button" disabled>-</button>}
-                                    <input type="text" id="amount" name="amount" value={amount} className="symbol"/>
-                                    <button id="increase_button" onClick={() => changeAmount("+")}>+</button>
-                                </div>
-                                <div className="button-add-cart">
-                                    <button className="content-button" type="button" onClick={handleAddToCart}>
-                                        THÊM VÀO GIỎ HÀNG
-                                    </button>
-                                </div>
+                            </label>
+                            {product.pricingList && product.pricingList[0]?.size ?
+                                ((product.pricingList[0]?.size !== "" && pricingList[0]?.size !== null) && (
+                                    <div className="select-color">
+                                        <label>Chọn kich thước: </label>
+                                        {uniqueSizePricing && uniqueSizePricing.map((pricing, index) => (
+                                            <div className="btn-select" key={index}>
+                                                <button className="btn-color"
+                                                        onClick={() => handleChangeSize(pricing.size)}
+                                                        onBlur={() => setSelectedButton(null)}
+                                                        style={selectedButton === pricing.color.colorName ? {
+                                                            border: '1px solid #ff0000',
+                                                            color: '#ff0000'
+                                                        } : {}}
+                                                        type="button">{pricing.size}
+                                                </button>
+                                            </div>
+                                       ))}
+                                    </div>
+                                ))
+                                : null}
+                            <div className="select-color">
+                                <label>Màu sắc:</label>
+                                {uniqueColorPricing && uniqueColorPricing.map((pricing, index) => (
+                                    <div className="btn-select" key={index}>
+                                        <button className="btn-color"
+                                                onClick={() => changeColorAndImgUrl(pricing.imgColor, pricing.color.colorName)}
+                                                onBlur={() => setSelectedButton(null)}
+                                                style={selectedButton === pricing.color.colorName ? {
+                                                    border: '1px solid #ff0000',
+                                                    color: '#ff0000'
+                                                } : {}}
+                                                type="button">{pricing.color.colorName}
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="btn-ud">
+                                <label>Số lượng: </label>
+                                {amount !== 1 ?
+                                    <button id="decrease_button" onClick={() => changeAmount("-")}>-</button>
+                                    : <button id="decrease_button" disabled>-</button>}
+                                <input type="text" id="amount" name="amount" value={amount} className="symbol"/>
+                                <button id="increase_button" onClick={() => changeAmount("+")}>+</button>
+                            </div>
+                            <div className="button-add-cart">
+                                <button className="content-button" type="button" onClick={handleAddToCart}>
+                                    THÊM VÀO GIỎ HÀNG
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <div className="product-description">
-                        <div className="title"><h2>Mô tả sản phẩm</h2></div>
-                        <div className="description" dangerouslySetInnerHTML={{__html: product?.content}}></div>
-                    </div>
-                    <Rating productId={productId}/>
                 </div>
-                <RelatedProducts
-                    product = {product}
-                    categoryName = {categoryName}
-                >
-                </RelatedProducts>
+                <div className="product-description">
+                    <div className="title"><h2>Mô tả sản phẩm</h2></div>
+                    <div className="description" dangerouslySetInnerHTML={{__html: product?.content}}></div>
+                </div>
+                <Rating productId={productId}/>
             </div>
-        }/>
+            <RelatedProducts
+                product={product}
+                categoryName={categoryName}
+            >
+            </RelatedProducts>
+        </div>
     );
 }
