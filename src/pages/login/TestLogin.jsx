@@ -21,8 +21,21 @@ export function Test() {
     const [loginError, setLoginError] = useState('');
     const [isLoading, setIsLoading] = useState(false); // Add loading state
     const [isShowRegister, setIsShowRegister] = useState(false);
+    const {
+        register: registerLogin,
+        handleSubmit: handleSubmitLogin,
+        formState: {errors: loginErrors},
+        setValue: setLoginValue,
+        getValues: getLoginValue
+    } = useForm();
 
-    const {register, handleSubmit, formState: {errors}, setValue, getValues} = useForm({
+    const {
+        register: registerForm,
+        handleSubmit: handleSubmitRegister,
+        formState: {errors: registerError},
+        setValue: setRegisterValue,
+        getValues: getRegisterValue
+    } = useForm({
         criteriaMode: "all"
     });
     const [showPopupElement, setShowPopupElement] = useState(false);
@@ -39,12 +52,12 @@ export function Test() {
 
     const checkRememberMe = () => {
         if (rememberMe) {
-            setValue("email", localStorage.getItem("rememberMeEmail"));
-            setValue("rememberMe", rememberMe);
+            setLoginValue("email", localStorage.getItem("rememberMeEmail"));
+            setLoginValue("rememberMe", rememberMe);
         }
     }
 
-    const onSubmit = async (data) => {
+    const onSubmitLogin = async (data) => {
         const remember = data.rememberMe;
         setIsLoading(true);
         console.log(data)
@@ -131,7 +144,7 @@ export function Test() {
                 <div className={isShowRegister ? "form-box show-register" : "form-box"}>
                     <div className="content">
                         <div className="form-value back">
-                            <form onSubmit={handleSubmit(onSubmit)} id="form_input" className={"back-content"}>
+                            <form onSubmit={handleSubmitLogin(onSubmitLogin)} id="form_input" className={"back-content"}>
                                 <h2>Đăng nhập</h2>
                                 {showPopupElement &&
                                     <div className="popup">
@@ -142,7 +155,7 @@ export function Test() {
                                 }
                                 <div className="input-box">
                                     <i className="fa-regular fa-envelope icon"/>
-                                    <input type="email" {...register("email", {
+                                    <input type="email" {...registerLogin("email", {
                                         required: "Email không được để trống!"
                                     })}
                                            className="login-input"
@@ -152,10 +165,10 @@ export function Test() {
                                     />
                                     <label>Email</label>
                                 </div>
-                                <p className={'validate'}>{errors.email ? errors.email.message : ""}</p>
+                                <p className={'validate'}>{loginError.email ? loginError.email.message : ""}</p>
                                 <div className="input-box">
                                     <i className="fa-solid fa-lock icon"/>
-                                    <input type={openEye ? "text" : "password"} {...register("password", {
+                                    <input type={openEye ? "text" : "password"} {...registerLogin("password", {
                                         required: "Mật khẩu không được để trống!"
                                     })}
                                            className="login-input"
@@ -167,10 +180,10 @@ export function Test() {
                                         <FaEyeSlash onClick={() => setOpenEye(!openEye)}></FaEyeSlash>}
                                     <label>Mật khẩu</label>
                                 </div>
-                                <p className={'validate'}>{errors.password ? errors.password.message : ""}</p>
+                                <p className={'validate'}>{loginError.password ? loginError.password.message : ""}</p>
                                 <div className="forget">
                                     <label htmlFor="">
-                                        <input type="checkbox" {...register("rememberMe")}/>
+                                        <input type="checkbox" {...registerLogin("rememberMe")}/>
                                         Ghi nhớ đăng nhập
                                         <a href="#">Quên mật khẩu</a>
                                     </label>
@@ -200,11 +213,11 @@ export function Test() {
                                 <div className="circle" id="bottom">
                                 </div>
                             </div>
-                            <form onSubmit={handleSubmit(onSubmitRegister)} id="form_input" className={"front-content"}>
+                            <form onSubmit={handleSubmitRegister(onSubmitRegister)} id="form_input" className={"front-content"}>
                                 <h2>Đăng ký</h2>
                                 <div className="input-box">
                                     <i className="fa-regular fa-envelope icon"/>
-                                    <input type="email" {...register("newEmail", {
+                                    <input type="email" {...registerForm("newEmail", {
                                         required: "Email không được để trống!"
                                     })}
                                            className="login-input"
@@ -214,10 +227,10 @@ export function Test() {
                                     />
                                     <label>Email</label>
                                 </div>
-                                <p className={'validate'}>{errors.newEmail ? errors.newEmail.message : ""}</p>
+                                <p className={'validate'}>{registerError.newEmail ? registerError.newEmail.message : ""}</p>
                                 <div className="input-box">
                                     <i className="fa-solid fa-lock icon"/>
-                                    <input type={openEye ? "text" : "password"} {...register("newPassword", {
+                                    <input type={openEye ? "text" : "password"} {...registerForm("newPassword", {
                                         required: "Mật khẩu không được để trống!",
                                         minLength: {value: 8, message: "Mật khẩu phải từ 8 đến 50 chữ!"},
                                         maxLength: {value: 50, message: "Mật khẩu phải từ 8 đến 50 chữ!"},
@@ -235,11 +248,11 @@ export function Test() {
                                         <FaEyeSlash onClick={() => setOpenEye(!openEye)}></FaEyeSlash>}
                                     <label>Mật khẩu</label>
                                 </div>
-                                <p className={'validate'}>{errors.newPassword ? errors.newPassword.message : ""}</p>
+                                <p className={'validate'}>{registerError.newPassword ? registerError.newPassword.message : ""}</p>
                                 <div className="input-box">
                                     <i className="fa-solid fa-lock icon"/>
-                                    <input type={openEye ? "text" : "password"} {...register("confirmPassword", {
-                                        validate: value => value === getValues('newPassword') || "Mật khẩu không trùng khớp!"
+                                    <input type={openEye ? "text" : "password"} {...registerForm("confirmPassword", {
+                                        validate: value => value === getRegisterValue('newPassword') || "Mật khẩu không trùng khớp!"
                                     })}
                                            className="login-input"
                                            placeholder="Nhập lại mật khẩu"
@@ -251,7 +264,7 @@ export function Test() {
                                         <FaEyeSlash onClick={() => setOpenEyeConfirm(!openEyeConfirm)}></FaEyeSlash>}
                                     <label>Xác nhận mật khẩu</label>
                                 </div>
-                                <p className={'validate'}>{errors.confirmPassword ? errors.confirmPassword.message : ""}</p>
+                                <p className={'validate'}>{registerError.confirmPassword ? registerError.confirmPassword.message : ""}</p>
                                 <button type={"submit"} disabled={isLoading}
                                         style={isLoading ? {background: "#ccc"} : null} className="btn bkg">
                                     {isLoading ?
