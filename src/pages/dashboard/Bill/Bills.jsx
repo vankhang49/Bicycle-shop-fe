@@ -138,18 +138,21 @@ export function Bills() {
                         </table>
                         {message !== null && <p>{message}</p>}
                     </div>
-                    <div className="page">
-                        <div className="page-box">
-                            <a className="page-a">Trang trước</a>
-                            <span>
-                                    <a className="page-a">1</a>
-                                    <a className="page-a">2</a>
-                                    <a className="page-a">3</a>
-                                    <a className="page-a">4</a>
+                    {message === null &&
+                        <div className="page">
+                            <div className="page-box">
+                                {pageNumber !== 0 &&
+                                    <a className="page-a" onClick={() => handlePage(pageNumber - 1)}>Trang trước</a>
+                                }
+                                <span>
+                                    {showPageNo()}
                                 </span>
-                            <a className="page-a">Trang sau</a>
+                                {pageNumber < (totalPages - 1) &&
+                                    <a className="page-a" onClick={() => handlePage(pageNumber + 1)}>Trang sau</a>
+                                }
+                            </div>
                         </div>
-                    </div>
+                    }
                 </div>
                 <BillModal
                     isOpen={isOpenModal}
