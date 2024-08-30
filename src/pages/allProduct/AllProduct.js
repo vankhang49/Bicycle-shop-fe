@@ -2,7 +2,7 @@ import "../../assets/css/style.scss"
 import "../../components/modal/modal.scss"
 import {useEffect, useState} from "react";
 import * as productsService from "../../core/services/ProductService";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import {Filter} from "../../components/filter/Filter";
 import {CiFilter} from "react-icons/ci";
 import {fCurrency} from "../../utils/format-number";
@@ -11,9 +11,12 @@ import spinner from "../../assets/icons/Spinner.gif";
 
 export function AllProduct() {
     // const products = useSelector(state => state.products);
-    let {categoryName} = useParams();
-    const [familyName, setFamilyName] = useState(useParams().familyName || "");
+    const { categoryName: paramCategoryName, familyName: paramFamilyName } = useParams();
+    const [categoryName, setCategoryName] = useState(paramCategoryName || '');
+    const [familyName, setFamilyName] = useState(paramFamilyName || '');
     const [brandName, setBrandName] = useState("");
+    const [nameSearch, setNameSearch] = useState("");
+    const [priceFilter, setPriceFilter] = useState("");
     const [priceBefore, setPriceBefore] = useState(0);
     const [priceAfter, setPriceAfter] = useState(9999999999);
     const [products, setProducts] = useState([]);
@@ -26,7 +29,7 @@ export function AllProduct() {
     const [delay, setDelay] = useState(false);
     const [message, setMessage] = useState(null);
 
-    // const {state} = useLocation();
+    const {state} = useLocation();
     // const dispatch = useDispatch();
 
     useEffect(() => {
@@ -36,14 +39,35 @@ export function AllProduct() {
     }, [isLoading === false])
 
     useEffect(() => {
-        if (categoryName === undefined) categoryName = "";
-        setIsLoading(true);
         const fetchProducts = async () => {
-            setDelay(true);
-            await getProductsList(pageNumber, "", familyName, categoryName, brandName, priceBefore, priceAfter);
+            try {
+                setIsLoading(true);
+                setDelay(true);
+                await getProductsList(pageNumber, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter);
+            } catch (error) {
+                console.error("Failed to fetch products:", error);
+            }
+        };
+
+        fetchProducts();
+
+        // Cleanup function to prevent setting state after unmount
+        return () => {
+            setIsLoading(false);
+            setDelay(false);
+        };
+    }, [pageNumber, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter]);
+
+    useEffect(() => {
+        setCategoryName(paramCategoryName || '');
+        setFamilyName(paramFamilyName || '');
+    }, [paramCategoryName, paramFamilyName]);
+
+    useEffect(() => {
+        if (state !== null) {
+            setNameSearch(state.productName);
         }
-        fetchProducts().then().catch(console.error);
-    }, [pageNumber, categoryName, familyName, brandName, priceBefore, priceAfter]);
+    }, [state]);
 
     const getProductsList = async (page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter) => {
         try {
@@ -73,6 +97,7 @@ export function AllProduct() {
     }
 
     const updatePrice = (newPrice) => {
+        setPriceFilter(newPrice);
         switch (newPrice) {
             case "Giá dưới 500.000đ":
                 setPriceBefore(0);
@@ -132,6 +157,9 @@ export function AllProduct() {
             <div className="content-body">
                 <Filter
                     categoryName={categoryName}
+                    familyName={familyName}
+                    brandName={brandName}
+                    priceFilter={priceFilter}
                     onBrandNameChange={updateBrandName}
                     onFamilyNameChange={updateFamilyName}
                     onPriceChange={updatePrice}
@@ -207,6 +235,7 @@ export function AllProduct() {
                             ))}
                             {message !== null && <p className="message">{message}</p>}
                         </ul>
+                        {message === null &&
                         <div className="page">
                             <div className="page-box">
                                 {pageNumber !== 0 &&
@@ -220,6 +249,7 @@ export function AllProduct() {
                                 }
                             </div>
                         </div>
+                        }
                     </div>
                 )}
             </div>

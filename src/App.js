@@ -12,6 +12,7 @@ import {RegisterForm} from "./pages/login/RegisterForm";
 import NotFound from "./pages/ErrorPage/NotFound";
 import {CheckEmail} from "./pages/login/ForgotPassword/CheckEmail";
 import {ForgotPassword} from "./pages/login/ForgotPassword/ForgotPassword";
+import {TestLogin} from "./pages/login/TestLogin";
 
 function App() {
     const dispatch = useDispatch();
@@ -69,8 +70,8 @@ function App() {
                       );
                   })}
               </Route>
-              <Route path={"/login"} element={<LoginForm/>}/>
-              <Route path={"/register"} element={<RegisterForm/>}/>
+              <Route path={"/login"} element={<TestLogin/>}/>
+              <Route path={"/register"} element={<TestLogin/>}/>
               <Route path={"/check-email"} element={<CheckEmail/>}/>
               <Route path={"/forgot-password"} element={<ForgotPassword/>}/>
               <Route path={"*"} element={<NotFound />}/>

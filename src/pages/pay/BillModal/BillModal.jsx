@@ -64,7 +64,7 @@ export function BillModal({isOpen, onClose, billData}) {
                     .wrapper {
                         width: 80%;
                     }
-                    .BillModal_modalHeader__pfgoq {
+                    .BillModal_modalHeader__ob4iG {
                         width: 100%;
                         text-align: center;
                         
@@ -73,7 +73,7 @@ export function BillModal({isOpen, onClose, billData}) {
                         }
                     }
                     
-                    .BillModal_textLeft__v53T1 {
+                    .BillModal_textLeft__cJET4 {
                         width: 100%;
                         position: relative;
                         height: auto;
@@ -81,14 +81,14 @@ export function BillModal({isOpen, onClose, billData}) {
                             display: flex;
                             justify-content: flex-start;
                             
-                            .BillModal_contentTitle__JGFx- {
+                            .BillModal_contentTitle__RRv-G {
                                 max-width: 200px;
                                 min-width: 170px;
                                 font-weight: 500;
                             }
                         }
                         
-                        .BillModal_table__7sdhF {
+                        .BillModal_table__tEu4z {
                             border-collapse: collapse;
                             font-size: 0.8rem;
                             width: 100%;
@@ -99,7 +99,7 @@ export function BillModal({isOpen, onClose, billData}) {
                             }
                         }
                         
-                        .BillModal_intoMoney__2ucZh {
+                        .BillModal_intoMoney__IaE68 {
                             display: block;
                             width: 100%;
                             height: 200px;
@@ -116,17 +116,17 @@ export function BillModal({isOpen, onClose, billData}) {
                                 min-width: 150px;
                               }
                     
-                              .BillModal_totalPrice__FoecD {
+                              .BillModal_totalPrice__DAJkp {
                                 font-size: 1.1rem;
                               }
                             
-                              .BillModal_totalPayPrice__5Rgkc {
+                              .BillModal_totalPayPrice__yb9K0 {
                                 font-size: 1.2rem;
                               }
                             }
                         }
                     }
-                    .BillModal_modalFooter__Nzlef {
+                    .BillModal_modalFooter__SFtX3 {
                         display: none;
                     }
                 </style>

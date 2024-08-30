@@ -1,6 +1,6 @@
 import "./login.scss"
 import {useEffect, useState} from "react";
-import {Link, Navigate, useNavigate} from "react-router-dom";
+import {Link, Navigate, useLocation, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import * as authenticationService from "../../core/services/AuthenticationService";
 import {toast} from "react-toastify";
@@ -11,8 +11,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {loginSuccess, setRemember} from "../../core/redux/actions/AuthenticationActions";
 import logo from "../../assets/images/logo-bike.png";
 
-export function Test() {
+export function TestLogin() {
     const dispatch = useDispatch();
+    const path = useLocation();
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const rememberMe = useSelector(state => state.auth.rememberMe);
     const [openEye, setOpenEye] = useState(false);
@@ -20,7 +21,9 @@ export function Test() {
     const navigate = useNavigate();
     const [loginError, setLoginError] = useState('');
     const [isLoading, setIsLoading] = useState(false); // Add loading state
-    const [isShowRegister, setIsShowRegister] = useState(false);
+    const [isShowRegister, setIsShowRegister] = useState(path.pathname === "/register");
+    const [validateError, setValidateError] = useState([])
+
     const {
         register: registerLogin,
         handleSubmit: handleSubmitLogin,
@@ -50,6 +53,15 @@ export function Test() {
         }, 3000);
     }, [showPopupElement]);
 
+    useEffect(() => {
+        if (isShowRegister) {
+            navigate('/register');
+        } else {
+            navigate('/login')
+        }
+
+    }, [isShowRegister])
+
     const checkRememberMe = () => {
         if (rememberMe) {
             setLoginValue("email", localStorage.getItem("rememberMeEmail"));
@@ -60,7 +72,6 @@ export function Test() {
     const onSubmitLogin = async (data) => {
         const remember = data.rememberMe;
         setIsLoading(true);
-        console.log(data)
         setTimeout(async () => {
             try {
                 const userData = await authenticationService.login(data);
@@ -87,7 +98,8 @@ export function Test() {
                     setShowPopupElement(true);
                 }
             } catch (error) {
-                toast.error(error.message);
+                setLoginError(error);
+                setShowPopupElement(true);
                 setIsLoading(false);
             }
         }, 2000)
@@ -95,7 +107,6 @@ export function Test() {
 
     const onSubmitRegister = async (data) => {
         setIsLoading(true);
-        console.log(data)
         setTimeout(async () => {
             try {
                 const userData = await authenticationService.register(data);
@@ -110,10 +121,12 @@ export function Test() {
                     toast.success("Đăng ký thành công!");
                 } else {
                     setLoginError(userData.message);
-                    setShowPopupElement(true);
                 }
             } catch (error) {
-                toast.error(error.message);
+                setValidateError(error.errors);
+                if (error.statusCode === 400) {
+                    toast.error(error.message);
+                }
                 setIsLoading(false);
             }
         }, 2000)
@@ -228,6 +241,8 @@ export function Test() {
                                     <label>Email</label>
                                 </div>
                                 <p className={'validate'}>{registerError.newEmail ? registerError.newEmail.message : ""}</p>
+                                {validateError && <p className="validate-error">{validateError.email}</p>}
+
                                 <div className="input-box">
                                     <i className="fa-solid fa-lock icon"/>
                                     <input type={openEye ? "text" : "password"} {...registerForm("newPassword", {
@@ -235,7 +250,7 @@ export function Test() {
                                         minLength: {value: 8, message: "Mật khẩu phải từ 8 đến 50 chữ!"},
                                         maxLength: {value: 50, message: "Mật khẩu phải từ 8 đến 50 chữ!"},
                                         pattern: {
-                                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&/_])[A-Z][A-Za-z\d@$!%*?&]{7,49}$/,
+                                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&/_])[A-Z][A-Za-z\d@$!/%*?&]{7,49}$/,
                                             message: "Mật khẩu phải bắt đầu bằng một chữ hoa, chứa ít nhất một chữ thường, một chữ số, ký tự đặc biệt (@$!%*?&/_), và phải dài từ 8 đến 50 ký tự!"
                                         }
                                     })}
@@ -249,6 +264,8 @@ export function Test() {
                                     <label>Mật khẩu</label>
                                 </div>
                                 <p className={'validate'}>{registerError.newPassword ? registerError.newPassword.message : ""}</p>
+                                {validateError && <p className="validate-error">{validateError.newPassword}</p>}
+
                                 <div className="input-box">
                                     <i className="fa-solid fa-lock icon"/>
                                     <input type={openEye ? "text" : "password"} {...registerForm("confirmPassword", {
@@ -265,6 +282,8 @@ export function Test() {
                                     <label>Xác nhận mật khẩu</label>
                                 </div>
                                 <p className={'validate'}>{registerError.confirmPassword ? registerError.confirmPassword.message : ""}</p>
+                                {validateError && <p className="validate-error">{validateError.confirmPassword}</p>}
+
                                 <button type={"submit"} disabled={isLoading}
                                         style={isLoading ? {background: "#ccc"} : null} className="btn bkg">
                                     {isLoading ?

@@ -90,7 +90,7 @@ export function Header(props){
     }
 
     const searchProductByName = (productName) => {
-        navigate("/products/", {state:{nameSearch: productName}});
+        navigate("/products/", {state:{ productName: productName}});
     }
 
     const handleShowSidebar = () => {

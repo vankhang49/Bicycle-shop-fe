@@ -33,11 +33,11 @@ export const publicRouter = [
         component: <AllProduct/>,
     },
     {
-        path: '/products/:categoryName',
+        path: '/products/:categoryName/:familyName',
         component: <AllProduct/>,
     },
     {
-        path: '/products/:categoryName/:familyName',
+        path: '/products/:categoryName',
         component: <AllProduct/>,
     },
     {

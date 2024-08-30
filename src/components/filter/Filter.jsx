@@ -12,9 +12,9 @@ export function Filter(props) {
     const [productFamilies, setProductFamilies] = useState([]);
     const [brands, setBrands] = useState([]);
     const categoryName = props.categoryName;
-    const [brandName, setBrandName] = useState("");
-    const [familyName, setFamilyName] = useState("");
-    const [priceFilter, setPriceFilter] = useState("");
+    const [familyName, setFamilyName] = useState(props.familyName || '');
+    const [brandName, setBrandName] = useState(props.brandName || "");
+    const [priceFilter, setPriceFilter] = useState(props.priceFilter || "");
     const [isOpenFilter, setIsOpenFilter] = useState(props.isOpenFilter);
 
     useEffect(() => {
@@ -24,12 +24,6 @@ export function Filter(props) {
         }
         fetchData().then().catch(console.error);
     }, [categoryName])
-
-    useEffect(() => {
-        props.onBrandNameChange(brandName);
-        props.onFamilyNameChange(familyName);
-        props.onPriceChange(priceFilter);
-    }, [brandName, familyName, priceFilter, props]);
 
     useEffect(() => {
         setIsOpenFilter(props.isOpenFilter);
@@ -49,10 +43,36 @@ export function Filter(props) {
         setBrandName("");
         setFamilyName("");
         setPriceFilter("");
+        props.onBrandNameChange('');
+        props.onFamilyNameChange('');
+        props.onPriceChange('');
     }
 
     const handleChangeFamily = (family) => {
         setFamilyName(family);
+    }
+
+    const handleRemoveBrand = () => {
+        setBrandName("");
+        props.onBrandNameChange('');
+    }
+    const handleRemoveFamily = () => {
+        setFamilyName("");
+        props.onFamilyNameChange('');
+    }
+
+    const handleRemovePrice = () => {
+        setPriceFilter("");
+        props.onPriceChange('');
+    }
+
+    const handleSearchByBrand = () => {props.onBrandNameChange(brandName);}
+    const handleSearchByFamily = () => {props.onFamilyNameChange(familyName);}
+
+    const handleSearchByFilter = ()  => {
+        props.onBrandNameChange(brandName);
+        props.onFamilyNameChange(familyName);
+        props.onPriceChange(priceFilter);
     }
 
     const handleCloseFilter = () => {
@@ -87,19 +107,19 @@ export function Filter(props) {
                                         {brandName &&
                                             <li className={styles.selectedFilterItem}>
                                                 {brandName}
-                                                <div className={styles.buttonCancel} onClick={()=>setBrandName("")}>x</div>
+                                                <div className={styles.buttonCancel} onClick={handleRemoveBrand}>x</div>
                                             </li>
                                         }
                                         {familyName &&
                                             <li className={styles.selectedFilterItem}>
                                                 {familyName}
-                                                <div className={styles.buttonCancel} onClick={()=>setFamilyName("")}>x</div>
+                                                <div className={styles.buttonCancel} onClick={handleRemoveFamily}>x</div>
                                             </li>
                                         }
                                         {priceFilter &&
                                             <li className={styles.selectedFilterItem}>
                                                 {priceFilter}
-                                                <div className={styles.buttonCancel} onClick={()=>setPriceFilter("")}>x</div>
+                                                <div className={styles.buttonCancel} onClick={handleRemovePrice}>x</div>
                                             </li>
                                         }
                                     </ul>
@@ -113,9 +133,14 @@ export function Filter(props) {
                             </div>
                             <div className={`${styles.asideContent} ${styles.filterGroup}`}>
                                 <div className={styles.fieldSearch}>
-                                    <input type="text" placeholder="Tìm Thương hiệu" className={styles.formControl}/>
+                                    <input type="text"
+                                           onChange={(e)=>setBrandName(e.target.value)}
+                                           placeholder="Tìm Thương hiệu"
+                                           className={styles.formControl}/>
                                     <span className={styles.inputGroupBtn}>
-                                        <button className={`${styles.btn} ${styles.btnDefault}`}>
+                                        <button className={`${styles.btn} ${styles.btnDefault}`}
+                                            onClick={handleSearchByBrand}
+                                        >
                                             <CiSearch />
                                         </button>
                                     </span>
@@ -125,9 +150,9 @@ export function Filter(props) {
                                     {brands && brands.map((brand) => (
                                         <li key={brand.brandId}
                                             className={`${styles.filterItem} ${styles.filterItemCheckBox} ${styles.filterItemGreen}`}>
-                                            <label data-filter="california" htmlFor="filter-california"
+                                            <label data-filter="california" htmlFor={brand.brandName}
                                                    className={styles.california}>
-                                                <input type="checkbox" id="filter-california" checked={brand.brandName === brandName}
+                                                <input type="checkbox" id={brand.brandName} checked={brand.brandName === brandName}
                                                        onChange={() => setBrandName(brand.brandName)}/>
                                                 <i className="fa"></i>
                                                 {brand.brandName}
@@ -144,9 +169,12 @@ export function Filter(props) {
                             </div>
                             <div className={styles.asideContent}>
                                 <div className={styles.fieldSearch}>
-                                    <input type="text" placeholder="Tìm Thương hiệu" className={styles.formControl}/>
+                                    <input type="text"
+                                           onChange={(e)=>setFamilyName(e.target.value)}
+                                           placeholder="Tìm loại sản phẩm"
+                                           className={styles.formControl}/>
                                     <span className={styles.inputGroupBtn}>
-                                    <button className="btn btn-default"><CiSearch /></button>
+                                    <button className="btn btn-default" onClick={handleSearchByFamily}><CiSearch /></button>
                                 </span>
                                 </div>
                                 <ul className={styles.filterVendor}>
@@ -155,9 +183,9 @@ export function Filter(props) {
                                     ).map((family) => (
                                         <li key={family.familyId}
                                             className={`${styles.filterItem} ${styles.filterItemCheckBox} ${styles.filterItemGreen}`}>
-                                            <label data-filter="california" htmlFor="familyName"
+                                            <label data-filter="california" htmlFor={family.familyName}
                                                    className={styles.california}>
-                                                <input type="checkbox" id="familyName" checked={family.familyName === familyName}
+                                                <input type="checkbox" id={family.familyName} checked={family.familyName === familyName}
                                                        onChange={() => handleChangeFamily(family.familyName)} />
                                                 <i className={styles.fa}></i>
                                                 {family.familyName}
@@ -175,12 +203,6 @@ export function Filter(props) {
                                 </h2>
                             </div>
                             <div className={styles.asideContent}>
-                                <div className={styles.fieldSearch}>
-                                    <input type="text" placeholder="Tìm Thương hiệu" className={styles.formControl}/>
-                                    <span className={styles.inputGroupBtn}>
-                                    <button className="btn btn-default"><CiSearch /></button>
-                                </span>
-                                </div>
                                 <ul className={styles.filterVendor}>
                                     <li className={`${styles.filterItem} ${styles.filterItemCheckBox} ${styles.filterItemGreen}`}>
                                         <label data-filter="california" htmlFor="filter-below-fivehu"
@@ -230,6 +252,10 @@ export function Filter(props) {
                             </div>
                         </aside>
                     </div>
+                </div>
+
+                <div className={styles.searchByFilter}>
+                    <button onClick={handleSearchByFilter}>Tìm kiếm</button>
                 </div>
             </div>
         </aside>
