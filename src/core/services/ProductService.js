@@ -1,13 +1,13 @@
 import axios from "axios";
 import axiosInstance from "../../utils/axiosInstance";
 
-const BASE_URL = "https://bicycle-shop-be.onrender.com/api/public";
+const BASE_URL = process.env.REACT_APP_API_URL;
 axios.defaults.withCredentials = true;
 
 export async function getAllProducts(page, nameSearch, familyName, categoryName, brandName, priceBefore, priceAfter) {
     try {
         const temp
-            = await axios.get(`${BASE_URL}/products?page=${page}&nameSearch=${nameSearch}` +
+            = await axios.get(`${BASE_URL}/api/public/products?page=${page}&nameSearch=${nameSearch}` +
             `&familyName=${familyName}&categoryName=${categoryName}&brandName=${brandName}` +
             `&priceBefore=${priceBefore}&priceAfter=${priceAfter}`);
         console.log(temp.data);
@@ -20,7 +20,7 @@ export async function getAllProducts(page, nameSearch, familyName, categoryName,
 export const getNewProducts = async () => {
     try {
         const temp
-            = await axios.get(`${BASE_URL}/products/new-products`);
+            = await axios.get(`${BASE_URL}/api/public/products/new-products`);
         return temp.data.content;
     } catch (e) {
         throw e.response.data;
@@ -30,7 +30,7 @@ export const getNewProducts = async () => {
 export const getRelatedProducts = async (categoryName) => {
     try {
         const temp
-            = await axios.get(`${BASE_URL}/products/related-products?categoryName=${categoryName}`);
+            = await axios.get(`${BASE_URL}/api/public/products/related-products?categoryName=${categoryName}`);
         return temp.data.content;
     } catch (e) {
         throw e.response.data;
@@ -58,7 +58,7 @@ export const getProductByPriceId = async (priceId) => {
 
 export async function getProductAndPricingById(productId) {
     try {
-        const temp = await axios.get(`${BASE_URL}/products/detail/${productId}`);
+        const temp = await axios.get(`${BASE_URL}/api/public/products/detail/${productId}`);
         console.log(temp.data.product)
         return temp.data.product;
     } catch (e) {
@@ -87,7 +87,7 @@ export const updateProduct= async (product) => {
 
 export const findProductById = async (id) => {
     try {
-        const temp = await axios.get(`${BASE_URL}/products/${id}`);
+        const temp = await axios.get(`${BASE_URL}/api/public/products/${id}`);
         return temp.data;
     } catch (e) {
         throw new Error("Không tìm thấy kết quả!")

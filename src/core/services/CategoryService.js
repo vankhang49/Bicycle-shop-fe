@@ -1,12 +1,13 @@
 import axios from "axios";
+import axiosInstance from "../../utils/axiosInstance";
 
-const BASE_URL = "https://bicycle-shop-be.onrender.com/api/public";
+const BASE_URL = process.env.REACT_APP_API_URL;
 axios.defaults.withCredentials = true;
 
 export const getAllCategories = async () => {
     try {
         const temp
-            = await axios.get(`${BASE_URL}/categories`);
+            = await axios.get(`${BASE_URL}/api/public/categories`);
         return temp.data;
     } catch (e) {
         return [];
@@ -15,7 +16,7 @@ export const getAllCategories = async () => {
 
 export const saveCategory = async (category) => {
     try {
-        const temp = await axios.post(`${BASE_URL}/categories`, category);
+        const temp = await axiosInstance.post(`categories`, category);
         return temp.data;
     } catch (e) {
         e.message = "Không thể thêm mới danh mục!";
@@ -25,7 +26,7 @@ export const saveCategory = async (category) => {
 
 export const deleteCategory = async (id) => {
     try {
-        const temp = await axios.delete(`${BASE_URL}/categories/${id}`);
+        const temp = await axiosInstance.delete(`categories/${id}`);
         return temp.data;
     } catch (e) {
         e.message = "Không thể xóa danh mục!";

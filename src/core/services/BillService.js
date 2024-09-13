@@ -1,7 +1,7 @@
 import axios from "axios";
 import axiosInstance from "../../utils/axiosInstance";
 
-const BASE_URL = "https://bicycle-shop-be.onrender.com/api/auth";
+const BASE_URL = process.env.REACT_APP_API_URL;
 axios.defaults.withCredentials = true;
 
 export const pay = async (bill) => {
@@ -10,7 +10,7 @@ export const pay = async (bill) => {
         if (userId === null) {
             userId = '';
         }
-        await axios.post(`${BASE_URL}/shopping-cart/pay?userId=${userId}`, bill);
+        await axios.post(`${BASE_URL}/api/auth/shopping-cart/pay?userId=${userId}`, bill);
     }catch (e) {
         throw new Error("Lỗi, không thể thanh toán!")
     }

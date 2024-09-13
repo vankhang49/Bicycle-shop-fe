@@ -1,12 +1,13 @@
 import axios from "axios";
+import axiosInstance from "../../utils/axiosInstance";
 
-const BASE_URL = "https://bicycle-shop-be.onrender.com/api/public";
+const BASE_URL = process.env.REACT_APP_API_URL;
 axios.defaults.withCredentials = true;
 
 export const getAllProductFamilies = async () => {
     try {
         const temp
-            = await axios.get(`${BASE_URL}/product-families`);
+            = await axios.get(`${BASE_URL}/api/public/product-families`);
         return temp.data;
     } catch (e) {
         return [];
@@ -15,7 +16,7 @@ export const getAllProductFamilies = async () => {
 
 export const saveProductFamilies = async (productFamilies) => {
     try {
-        const temp = await axios.post(`${BASE_URL}/product-families`, productFamilies);
+        const temp = await axiosInstance.post(`product-families`, productFamilies);
         return temp.data;
     } catch (e) {
         e.message = "Không thể thêm mới loại sản phẩm";
@@ -25,7 +26,7 @@ export const saveProductFamilies = async (productFamilies) => {
 
 export const deleteProductFamilies = async (id) => {
     try {
-        const temp = await axios.delete(`${BASE_URL}/product-families/${id}`);
+        const temp = await axiosInstance.delete(`product-families/${id}`);
         return temp.data;
     } catch (e) {
         e.message = "Không thể xóa loại sản phẩm!";

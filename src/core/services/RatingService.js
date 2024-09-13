@@ -1,7 +1,7 @@
 import axiosInstance from "../../utils/axiosInstance";
 import axios from "axios";
 
-const baseURL = "https://bicycle-shop-be.onrender.com/api/auth/rating";
+const baseURL = process.env.REACT_APP_API_URL;
 axios.defaults.withCredentials = true;
 
 export const saveRatingList = async (ratings) => {
@@ -16,7 +16,7 @@ export const saveRatingList = async (ratings) => {
 
 export const getAllRatings = async (productId, page, size) => {
     try {
-        const temp = await axios.get(`${baseURL}/public?productId=${productId}&page=${page}&size=${size}`);
+        const temp = await axios.get(`${baseURL}/api/auth/rating/public?productId=${productId}&page=${page}&size=${size}`);
         return temp.data;
     } catch (e) {
         throw e.response.data;

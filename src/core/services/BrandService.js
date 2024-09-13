@@ -1,11 +1,12 @@
 import axios from "axios";
+import axiosInstance from "../../utils/axiosInstance";
 
-const BASE_URL = "https://bicycle-shop-be.onrender.com/api/public";
+const BASE_URL = process.env.REACT_APP_API_URL;
 axios.defaults.withCredentials = true;
 
 export const getAllBrand = async () => {
     try {
-        const response = await axios.get(`${BASE_URL}/brands`);
+        const response = await axios.get(`${BASE_URL}/api/public/brands`);
         return response.data;
     } catch (e) {
         return [];
@@ -14,7 +15,7 @@ export const getAllBrand = async () => {
 
 export const getAllBrandByCategoryName = async (categoryName) => {
     try {
-        const response = await axios.get(`${BASE_URL}/brands/${categoryName}`);
+        const response = await axios.get(`${BASE_URL}/api/public/brands/${categoryName}`);
         return response.data;
     } catch (e) {
         return [];
@@ -23,7 +24,7 @@ export const getAllBrandByCategoryName = async (categoryName) => {
 
 export const saveBrand = async (brand) => {
     try {
-        const response = await axios.post(`${BASE_URL}/brands`, brand);
+        const response = await axiosInstance.post(`brands`, brand);
         return response.data;
     } catch (e) {
         e.message = "Không thể thêm mới thương hiệu!";
@@ -33,7 +34,7 @@ export const saveBrand = async (brand) => {
 
 export const deleteBrand = async (id) => {
     try {
-        const response = await axios.delete(`${BASE_URL}/brands/${id}`);
+        const response = await axiosInstance.delete(`brands/${id}`);
         return response.data;
     } catch (e) {
         e.message = "Không thể xóa thương hiệu!";

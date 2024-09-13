@@ -1,7 +1,7 @@
 import axios from "axios";
 import axiosInstance from "../../utils/axiosInstance";
 
-const baseURL = "https://bicycle-shop-be.onrender.com";
+const baseURL = process.env.REACT_APP_API_URL;
 axios.defaults.withCredentials = true;
 
 export const login = async (data) => {
