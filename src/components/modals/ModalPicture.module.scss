@@ -1,0 +1,73 @@
+.modalPicture {
+  background-color: rgba(0, 0, 0, 0.71);
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+
+  &.open {
+    opacity: 1;
+    z-index: 2000;
+    pointer-events: auto;
+  }
+
+  .modalContent {
+    width: 80%;
+    max-width: 1000px;
+    height: 100%;
+    max-height: 80%;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+
+    .pictureContent {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .action {
+      position: absolute;
+      top: 50%;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+      button {
+        margin: 5px;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        border: none;
+        background-color: rgba(0, 0, 0, 0.55);
+
+        svg {
+          color: #fff;
+          width: 20px;
+          height: 20px;
+        }
+
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+}
+

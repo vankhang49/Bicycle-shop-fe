@@ -56,6 +56,16 @@ export const getProductByPriceId = async (priceId) => {
     }
 }
 
+export const getOneNewProduct = async () => {
+    try {
+        const temp = await axios.get(`${BASE_URL}/api/public/products/one-new-product`);
+        console.log(temp.data)
+        return temp.data;
+    } catch (e) {
+        throw e.response.data;
+    }
+}
+
 export async function getProductAndPricingById(productId) {
     try {
         const temp = await axios.get(`${BASE_URL}/api/public/products/detail/${productId}`);

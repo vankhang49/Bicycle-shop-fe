@@ -13,6 +13,7 @@ import NotFound from "./pages/ErrorPage/NotFound";
 import {CheckEmail} from "./pages/login/ForgotPassword/CheckEmail";
 import {ForgotPassword} from "./pages/login/ForgotPassword/ForgotPassword";
 import {TestLogin} from "./pages/login/TestLogin";
+import {ModalPicturesProvider} from "./core/contexts/ModalPicturesContext";
 
 function App() {
     const dispatch = useDispatch();
@@ -25,59 +26,61 @@ function App() {
     //     }
     // }, [dispatch]);
 
-  return (
-      <Router>
-          <Routes>
-              <Route path="/" element={<Main/>}>
-                  {publicRouter.map((route, index) => {
-                      if (route.private) {
-                          return (
-                              <Route
-                                  key={index}
-                                  path={route.path}
-                                  element={<PrivateRoute element={route.component}/>}
-                              />
-                          );
-                      }
+    return (
+        <ModalPicturesProvider>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Main/>}>
+                        {publicRouter.map((route, index) => {
+                            if (route.private) {
+                                return (
+                                    <Route
+                                        key={index}
+                                        path={route.path}
+                                        element={<PrivateRoute element={route.component}/>}
+                                    />
+                                );
+                            }
 
-                      return (
-                          <Route
-                              key={index}
-                              path={route.path}
-                              element={route.component}
-                          />
-                      );
-                  })}
-              </Route>
-              <Route path="/dashboard" element={<DashboardMain/>}>
-                  {adminRouter.map((route, index) => {
-                      if (route.private) {
-                          return (
-                              <Route
-                                  key={index}
-                                  path={route.path}
-                                  element={<PrivateRoute element={route.component}/>}
-                              />
-                          );
-                      }
+                            return (
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    element={route.component}
+                                />
+                            );
+                        })}
+                    </Route>
+                    <Route path="/dashboard" element={<DashboardMain/>}>
+                        {adminRouter.map((route, index) => {
+                            if (route.private) {
+                                return (
+                                    <Route
+                                        key={index}
+                                        path={route.path}
+                                        element={<PrivateRoute element={route.component}/>}
+                                    />
+                                );
+                            }
 
-                      return (
-                          <Route
-                              key={index}
-                              path={route.path}
-                              element={route.component}
-                          />
-                      );
-                  })}
-              </Route>
-              <Route path={"/login"} element={<TestLogin/>}/>
-              <Route path={"/register"} element={<TestLogin/>}/>
-              <Route path={"/check-email"} element={<CheckEmail/>}/>
-              <Route path={"/forgot-password"} element={<ForgotPassword/>}/>
-              <Route path={"*"} element={<NotFound />}/>
-          </Routes>
-      </Router>
-  );
+                            return (
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    element={route.component}
+                                />
+                            );
+                        })}
+                    </Route>
+                    <Route path={"/login"} element={<TestLogin/>}/>
+                    <Route path={"/register"} element={<TestLogin/>}/>
+                    <Route path={"/check-email"} element={<CheckEmail/>}/>
+                    <Route path={"/forgot-password"} element={<ForgotPassword/>}/>
+                    <Route path={"*"} element={<NotFound/>}/>
+                </Routes>
+            </Router>
+        </ModalPicturesProvider>
+    );
 }
 
 export default App;

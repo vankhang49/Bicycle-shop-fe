@@ -1,5 +1,5 @@
 import "../../assets/css/style.scss"
-import "../../components/modal/modal.scss"
+import "../../components/modals/modal.scss"
 import {useEffect, useState} from "react";
 import * as productsService from "../../core/services/ProductService";
 import {Link, useLocation, useNavigate, useParams} from "react-router-dom";

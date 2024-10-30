@@ -9,6 +9,8 @@ import {addToCart, fetchCartFromService, fetchCount} from "../../core/redux/acti
 import {toast} from "react-toastify";
 import {fCurrency} from "../../utils/format-number";
 import {Rating} from "../../components/Rating/Rating";
+import {ModalsPictures} from "../../components/modals/ModalsPictures";
+import {usePictures} from "../../core/contexts/ModalPicturesContext";
 
 export function ProductDetail() {
     const [product, setProduct] = useState({});
@@ -21,6 +23,12 @@ export function ProductDetail() {
     const [color, setColor] = useState(null);
     const [imgElement, setImgElement] = useState(null);
     const [selectedButton, setSelectedButton] = useState(null);
+    const {
+        isOpen,
+        pictures,
+        changePictures,
+        toggleIsOpenModal,
+    } = usePictures();
 
     const dispatch = useDispatch();
 
@@ -103,18 +111,24 @@ export function ProductDetail() {
         }
     }
 
+    const handleOpenPictureModal = () => {
+        changePictures(product.productImages);
+        toggleIsOpenModal(true);
+    }
+
     return (
         <div className="container">
             <div className="content-view">
                 <div className="product-card">
                     <div className="products-top">
                   <span className="product-thumb">
-                    <img id="main-img" src={imgElement} alt="image"/>
+                    <img id="main-img" src={imgElement} alt="image" onClick={handleOpenPictureModal}/>
                   </span>
                         <div className="small-img">
                             {product.productImages && product.productImages.map((image, index) => (
                                 <div className="small-img-col" key={image.imageId}>
                                     <img className="img-element" onMouseOver={() => changeImgUrl(image.imageUrl)}
+                                         onClick={handleOpenPictureModal}
                                          src={image.imageUrl} alt={image.imageUrl}/>
                                 </div>
                             ))}
@@ -226,6 +240,11 @@ export function ProductDetail() {
                 categoryName={categoryName}
             >
             </RelatedProducts>
+            <ModalsPictures
+                isOpen={isOpen}
+                onClose={() => toggleIsOpenModal(false)}
+                listPictures={pictures}
+            />
         </div>
     );
 }

@@ -28,7 +28,7 @@ export function CreateProduct() {
     const navigate = useNavigate();
     const {register, handleSubmit, formState: {errors}, setValue, control} = useForm({
         defaultValues: {
-            pricingList: [],
+            pricingList: [{}],
             productImages: [],
         }
     });

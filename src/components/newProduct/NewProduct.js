@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import {fCurrency} from "../../utils/format-number";
 
 export function NewProduct() {
-    const [newProducts, setNewProducts] = React.useState([]);
+    const [newProducts, setNewProducts] = useState([]);
     const [message, setMessage] = useState(null);
 
     useEffect(() => {

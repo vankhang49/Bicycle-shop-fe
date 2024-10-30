@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import * as categoryService from "../../../core/services/CategoryService";
 import * as brandService from "../../../core/services/BrandService";
 import * as productFamilyService from "../../../core/services/ProductFamilyService";
-import {DeleteSettingModal} from "../../../components/modal/DeleteSettingModal";
+import {DeleteSettingModal} from "../../../components/modals/DeleteSettingModal";
 import {toast} from "react-toastify";
 
 export function Setting() {

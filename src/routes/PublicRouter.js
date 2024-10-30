@@ -5,7 +5,6 @@ import {ProductDetail} from "../pages/detail/ProductDetail";
 import {Pay} from "../pages/pay/Pay";
 import {AllProduct} from "../pages/allProduct/AllProduct";
 import {Dashboard} from "../pages/dashboard/Dashboard";
-import NotFound from "../pages/ErrorPage/NotFound";
 import {ProductList} from "../pages/dashboard/Product/ProductList";
 import {Customer} from "../pages/dashboard/customer/Customer";
 import {CreateProduct} from "../pages/dashboard/Product/CreateProduct";
@@ -16,11 +15,7 @@ import {UserBill} from "../pages/UserInfo/UserBill/UserBill";
 import {EmployeeList} from "../pages/dashboard/Employee/EmployeeList";
 import {EmployeeCreate} from "../pages/dashboard/Employee/EmployeeCreate";
 import {Advertisements} from "../pages/dashboard/Advertisements/Advertisement";
-import {LoginForm} from "../pages/login/LoginForm";
-import {RegisterForm} from "../pages/login/RegisterForm";
 import {AccountAndPassword} from "../pages/UserInfo/AccountAndPassword";
-import {ForgotPassword} from "../pages/login/ForgotPassword/ForgotPassword";
-import {CheckEmail} from "../pages/login/ForgotPassword/CheckEmail";
 
 export const publicRouter = [
     {
