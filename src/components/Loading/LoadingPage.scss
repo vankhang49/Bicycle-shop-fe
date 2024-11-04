@@ -1,0 +1,25 @@
+#loadingPage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(
+                  60deg,
+                  #24d8df 0%,
+                  #74ecce 30%,
+                  rgba(199, 239, 208, 0.71) 70%
+  );
+
+  p {
+    font-size: 2rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+}

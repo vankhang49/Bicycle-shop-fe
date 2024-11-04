@@ -1,4 +1,4 @@
-import styles from "./BillModal.module.scss";
+import "./BillModal.scss";
 import {useEffect, useState} from "react";
 import spinner from "../../../assets/icons/Spinner.gif";
 import {useNavigate} from "react-router-dom";
@@ -64,7 +64,7 @@ export function BillModal({isOpen, onClose, billData}) {
                     .wrapper {
                         width: 80%;
                     }
-                    .BillModal_modalHeader__ob4iG {
+                    .modalHeader {
                         width: 100%;
                         text-align: center;
                         
@@ -73,7 +73,7 @@ export function BillModal({isOpen, onClose, billData}) {
                         }
                     }
                     
-                    .BillModal_textLeft__cJET4 {
+                    .textLeft {
                         width: 100%;
                         position: relative;
                         height: auto;
@@ -81,14 +81,14 @@ export function BillModal({isOpen, onClose, billData}) {
                             display: flex;
                             justify-content: flex-start;
                             
-                            .BillModal_contentTitle__RRv-G {
+                            .contentTitle {
                                 max-width: 200px;
                                 min-width: 170px;
                                 font-weight: 500;
                             }
                         }
                         
-                        .BillModal_table__tEu4z {
+                        .table {
                             border-collapse: collapse;
                             font-size: 0.8rem;
                             width: 100%;
@@ -99,7 +99,7 @@ export function BillModal({isOpen, onClose, billData}) {
                             }
                         }
                         
-                        .BillModal_intoMoney__IaE68 {
+                        .intoMoney {
                             display: block;
                             width: 100%;
                             height: 200px;
@@ -116,17 +116,17 @@ export function BillModal({isOpen, onClose, billData}) {
                                 min-width: 150px;
                               }
                     
-                              .BillModal_totalPrice__DAJkp {
+                              .totalPrice {
                                 font-size: 1.1rem;
                               }
                             
-                              .BillModal_totalPayPrice__yb9K0 {
+                              .totalPayPrice {
                                 font-size: 1.2rem;
                               }
                             }
                         }
                     }
-                    .BillModal_modalFooter__SFtX3 {
+                    .modalFooter {
                         display: none;
                     }
                 </style>
@@ -151,54 +151,54 @@ export function BillModal({isOpen, onClose, billData}) {
     }
 
     return (
-        <div className={`${styles.modal} ${isOpen ? styles.open : ''}`}>
-            <div className={styles.modalContent} id="billContent">
-                <div className={styles.modalHeader}>
+        <div id={'billModal'} className={`modal ${isOpen ? 'open' : ''}`}>
+            <div className={'modalContent'} id="billContent">
+                <div className={'modalHeader'}>
                     <h2>HÓA ĐƠN THANH TOÁN</h2>
-                    <p className={styles.logo}>DVKBicycle</p>
+                    <p className={'logo'}>DVKBicycle</p>
                 </div>
                 {waiting ?
-                    <div className={styles.modalBody}>
-                        <div className={styles.delayImg}>
+                    <div className={'modalBody'}>
+                        <div className={'delayImg'}>
                             <img src={spinner} alt="spinner"/>
                         </div>
                         <h3>Đang xử lý ...</h3>
-                        <div className={styles.wait}>Vui lòng đợi trong giây lát</div>
+                        <div className={'wait'}>Vui lòng đợi trong giây lát</div>
                     </div>
                     :
                     billData &&
-                    <div className={styles.textLeft}>
-                        <div className={styles.billCode}>
-                            <p className={styles.contentTitle}>Mã đơn hàng: </p>
+                    <div className={'textLeft'}>
+                        <div className={'billCode'}>
+                            <p className={'contentTitle'}>Mã đơn hàng: </p>
                             <p>{billData.billCode}</p>
                         </div>
-                        <div className={styles.dateCreate}>
-                            <p className={styles.contentTitle}>Ngày tạo: </p>
-                            <p>{(billData.dateCreate)}</p>
+                        <div className={'dateCreate'}>
+                            <p className={'contentTitle'}>Ngày tạo: </p>
+                            <p>{(billData.dateCreate).toLocaleString("DD/MM/yyyy")}</p>
                         </div>
-                        <div className={styles.customer}>
-                            <p className={styles.contentTitle}>Tên khách hàng: </p>
+                        <div className={'customer'}>
+                            <p className={'contentTitle'}>Tên khách hàng: </p>
                             <p>{billData.customerName}</p>
                         </div>
-                        <div className={styles.email}>
-                            <p className={styles.contentTitle}>Địa chỉ email: </p>
+                        <div className={'email'}>
+                            <p className={'contentTitle'}>Địa chỉ email: </p>
                             <p>{billData.email}</p>
                         </div>
-                        <div className={styles.phoneNumber}>
-                            <p className={styles.contentTitle}>Số điện thoại: </p>
+                        <div className={'phoneNumber'}>
+                            <p className={'contentTitle'}>Số điện thoại: </p>
                             <p>{billData.phoneNumber}</p>
                         </div>
-                        <div className={styles.address}>
-                            <p className={styles.contentTitle}>Địa chỉ: </p>
+                        <div className={'address'}>
+                            <p className={'contentTitle'}>Địa chỉ: </p>
                             <p>{billData.address}</p>
                         </div>
-                        <div className={styles.payment}>
-                            <p className={styles.contentTitle}>Hình thức thanh toán: </p>
+                        <div className={'payment'}>
+                            <p className={'contentTitle'}>Hình thức thanh toán: </p>
                             <p>
                                 {billData.payment ? "Thanh toán qua ngân hàng" : "Thanh toán trực tiếp bằng tiền mặt"}
                             </p>
                         </div>
-                        <table className={styles.table}>
+                        <table className={'table'}>
                             <thead>
                             <tr>
                                 <th>STT</th>
@@ -220,23 +220,23 @@ export function BillModal({isOpen, onClose, billData}) {
                             ))}
                             </tbody>
                         </table>
-                        <div className={styles.intoMoney}>
-                            <div className={styles.total}>
-                                <p className={styles.contentTitle}>Tổng tiền: </p>
-                                <p className={styles.totalPrice}>{calculateTotalPrice().toLocaleString()} VNĐ</p>
+                        <div className={'intoMoney'}>
+                            <div className={'total'}>
+                                <p className={'contentTitle'}>Tổng tiền: </p>
+                                <p className={'totalPrice'}>{calculateTotalPrice().toLocaleString()} VNĐ</p>
                             </div>
-                            <div className={styles.totalPay}>
-                                <p className={styles.contentTitle}>Thành tiền: </p>
-                                <p className={styles.totalPayPrice}>{calculateTotalPrice().toLocaleString()} VNĐ</p>
+                            <div className={'totalPay'}>
+                                <p className={'contentTitle'}>Thành tiền: </p>
+                                <p className={'totalPayPrice'}>{calculateTotalPrice().toLocaleString()} VNĐ</p>
                             </div>
                         </div>
                     </div>
                 }
 
-                <div className={styles.modalFooter}>
-                    <button className={styles.acceptDelete} onClick={handleBillPerson}>Xác nhận</button>
-                    <button className={styles.printBill} onClick={handlePrint}>In hóa đơn</button>
-                    <button className={styles.cancel} onClick={onClose}>Huỷ bỏ</button>
+                <div className={'modalFooter'}>
+                    <button className={'acceptDelete'} onClick={handleBillPerson}>Xác nhận</button>
+                    <button className={'printBill'} onClick={handlePrint}>In hóa đơn</button>
+                    <button className={'cancel'} onClick={onClose}>Huỷ bỏ</button>
                 </div>
             </div>
         </div>

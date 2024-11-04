@@ -41,6 +41,7 @@
           width: 100%;
           max-height: 350px;
           display: flex;
+          flex-wrap: wrap;
           justify-content: flex-start;
           align-items: flex-start;
 
@@ -145,6 +146,43 @@
         &:hover {
           background-color: #aca6a6;
           transition: 0.3s ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .modal {
+
+    .modalContent {
+      width: 90%;
+      .formRating {
+        .formElement {
+          padding: 5px;
+
+          .titleElement {
+            font-size: 1rem;
+            font-weight: 450;
+            padding: 0 10px;
+          }
+
+          .formLabel {
+            width: 100%;
+            max-height: 350px;
+            overflow: auto;
+
+            &::-webkit-scrollbar{
+              width: 5px;
+              height: 5px;
+            }
+            &::-webkit-scrollbar-thumb{
+              background-color: black;
+            }
+            &::-webkit-scrollbar-track{
+              background-color: #ccc;
+            }
+          }
         }
       }
     }

@@ -7,7 +7,7 @@ import {Main} from "./components/Main/Main";
 import {DashboardMain} from "./components/DashboardMain/DashboardMain";
 import {ModalPicturesProvider} from "./core/contexts/ModalPicturesContext";
 import {Suspense} from "react";
-import Loading from "./components/Loading/Loading";
+import LoadingPage from "./components/Loading/LoadingPage";
 
 const NotFound = React.lazy(() => import("./pages/ErrorPage/NotFound"));
 const CheckEmail = React.lazy(() => import("./pages/login/ForgotPassword/CheckEmail"));
@@ -18,7 +18,7 @@ function App() {
 
     return (
         <ModalPicturesProvider>
-            <Suspense fallback={<Loading/>}>
+            <Suspense fallback={<LoadingPage/>}>
                 <Router>
                     <Routes>
                         <Route path="/" element={<Main/>}>
