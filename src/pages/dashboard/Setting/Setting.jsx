@@ -6,7 +6,7 @@ import * as productFamilyService from "../../../core/services/ProductFamilyServi
 import {DeleteSettingModal} from "../../../components/modals/DeleteSettingModal";
 import {toast} from "react-toastify";
 
-export function Setting() {
+export default function Setting() {
     const [categories, setCategories] = useState([]);
     const [brands, setBrands] = useState([]);
     const [productFamilies, setProductFamilies] = useState([]);

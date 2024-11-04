@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import {fetchCount} from "../../core/redux/actions/CartActions";
 import * as cartService from "../../core/services/CartService";
 
-export function Cart() {
+export default function Cart() {
     const dispatch = useDispatch();
     const [cart, setCart] = useState([]);
 

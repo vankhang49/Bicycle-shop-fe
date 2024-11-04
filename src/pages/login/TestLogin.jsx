@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {loginSuccess, setRemember} from "../../core/redux/actions/AuthenticationActions";
 import logo from "../../assets/images/logo-bike.png";
 
-export function TestLogin() {
+export default function TestLogin() {
     const dispatch = useDispatch();
     const path = useLocation();
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);

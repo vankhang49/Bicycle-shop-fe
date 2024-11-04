@@ -5,7 +5,7 @@ import {UpdateBillModal} from "./UpdateBillModal/UpdateBillModal";
 import {toast} from "react-toastify";
 import {RatingModal} from "../RatingModal/RatingModal";
 
-export function UserBill(props) {
+export default function UserBill(props) {
     const [bills, setBills] = useState([]);
     const [billId, setBillId] = useState(null);
     const [bill, setBill] = useState(null);

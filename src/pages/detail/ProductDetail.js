@@ -12,7 +12,7 @@ import {Rating} from "../../components/Rating/Rating";
 import {ModalsPictures} from "../../components/modals/ModalsPictures";
 import {usePictures} from "../../core/contexts/ModalPicturesContext";
 
-export function ProductDetail() {
+export default function ProductDetail() {
     const [product, setProduct] = useState({});
     const [categoryName, setCategoryName] = useState('');
     const [pricing, setPricing] = useState({});

@@ -11,7 +11,7 @@ import {DeleteUserModal} from "../DeleteUserModal/DeleteUserModal";
 import {UserDetailModal} from "../userDetailModal/userDetailModal";
 import {Link} from "react-router-dom";
 
-export function EmployeeList() {
+export default function EmployeeList() {
     const [employees, setEmployees] = useState([]);
     const [totalPages, setTotalPages] = useState({});
     const [pageNumber, setPageNumber] = useState(0);

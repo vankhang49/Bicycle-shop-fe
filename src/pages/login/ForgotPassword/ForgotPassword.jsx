@@ -2,7 +2,6 @@ import logo from "../../../assets/images/logo-bike.png";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import FooterHome from "../../../components/Footer/FooterHome";
 import "./ForgotPassword.scss";
-import {MdModeEdit} from "react-icons/md";
 import {FaEye, FaEyeSlash} from "react-icons/fa";
 import spinner from "../../../assets/icons/Spinner.gif";
 import {useForm} from "react-hook-form";
@@ -10,7 +9,7 @@ import {useEffect, useState} from "react";
 import * as authenticationService from "../../../core/services/AuthenticationService";
 import {toast} from "react-toastify";
 
-export function ForgotPassword() {
+export default function ForgotPassword() {
     const [validateError, setValidateError] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [openEyeOne, setOpenEyeOne] = useState(false);

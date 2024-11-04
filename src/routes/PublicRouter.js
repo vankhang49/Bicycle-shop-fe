@@ -1,21 +1,22 @@
-import {HomePage} from "../pages/homePage/HomePage";
-import {AboutUs} from "../pages/aboutUs/AboutUs";
-import {Cart} from "../pages/cart/Cart";
-import {ProductDetail} from "../pages/detail/ProductDetail";
-import {Pay} from "../pages/pay/Pay";
-import {AllProduct} from "../pages/allProduct/AllProduct";
-import {Dashboard} from "../pages/dashboard/Dashboard";
-import {ProductList} from "../pages/dashboard/Product/ProductList";
-import {Customer} from "../pages/dashboard/customer/Customer";
-import {CreateProduct} from "../pages/dashboard/Product/CreateProduct";
-import {Setting} from "../pages/dashboard/Setting/Setting";
-import {Bills} from "../pages/dashboard/Bill/Bills";
-import {UserInfo} from "../pages/UserInfo/UserInfo";
-import {UserBill} from "../pages/UserInfo/UserBill/UserBill";
-import {EmployeeList} from "../pages/dashboard/Employee/EmployeeList";
-import {EmployeeCreate} from "../pages/dashboard/Employee/EmployeeCreate";
-import {Advertisements} from "../pages/dashboard/Advertisements/Advertisement";
-import {AccountAndPassword} from "../pages/UserInfo/AccountAndPassword";
+import React from "react";
+const HomePage = React.lazy(()=> import("../pages/homePage/HomePage"));
+const AboutUs = React.lazy(()=> import("../pages/aboutUs/AboutUs"));
+const Cart = React.lazy(()=> import("../pages/cart/Cart"));
+const ProductDetail = React.lazy(()=> import("../pages/detail/ProductDetail"));
+const Pay = React.lazy(()=> import("../pages/pay/Pay"));
+const AllProduct = React.lazy(()=> import("../pages/allProduct/AllProduct"));
+const Dashboard = React.lazy(()=> import("../pages/dashboard/Dashboard"));
+const ProductList = React.lazy(()=> import("../pages/dashboard/Product/ProductList"));
+const CreateProduct = React.lazy(()=> import("../pages/dashboard/Product/CreateProduct"));
+const Customer = React.lazy(()=> import("../pages/dashboard/customer/Customer"));
+const Setting = React.lazy(()=> import("../pages/dashboard/Setting/Setting"));
+const Bills = React.lazy(()=> import("../pages/dashboard/Bill/Bills"));
+const UserInfo = React.lazy(()=> import("../pages/UserInfo/UserInfo"));
+const UserBill = React.lazy(()=> import("../pages/UserInfo/UserBill/UserBill"));
+const EmployeeList = React.lazy(()=> import("../pages/dashboard/Employee/EmployeeList"));
+const EmployeeCreate = React.lazy(()=> import("../pages/dashboard/Employee/EmployeeCreate"));
+const Advertisements = React.lazy(()=> import("../pages/dashboard/Advertisements/Advertisement"));
+const AccountAndPassword = React.lazy(()=> import("../pages/UserInfo/AccountAndPassword"));
 
 export const publicRouter = [
     {

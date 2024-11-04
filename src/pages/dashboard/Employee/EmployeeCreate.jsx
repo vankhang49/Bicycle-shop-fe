@@ -6,7 +6,7 @@ import {useParams} from "react-router-dom";
 import * as roleService from "../../../core/services/RoleService";
 import "./EmployeeCreate.scss";
 
-export function EmployeeCreate() {
+export default function EmployeeCreate() {
     const {id} = useParams();
     const [employee, setEmployee] = useState(null);
     const [isLoading, setIsLoading] = useState(false); // Add loading state

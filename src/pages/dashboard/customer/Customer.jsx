@@ -10,7 +10,7 @@ import {UserDetailModal} from "../userDetailModal/userDetailModal";
 import {DisableUserModal} from "../DisableUserModal/DisableUserModal";
 import {DeleteUserModal} from "../DeleteUserModal/DeleteUserModal";
 
-export function Customer() {
+export default function Customer() {
     const [customers, setCustomers] = useState([]);
     const [totalPages, setTotalPages] = useState({});
     const [pageNumber, setPageNumber] = useState(0);

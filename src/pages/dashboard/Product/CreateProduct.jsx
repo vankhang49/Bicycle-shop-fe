@@ -13,7 +13,7 @@ import Editor from "../../../components/Editer";
 import {toast} from "react-toastify";
 import { FaArrowsRotate } from "react-icons/fa6";
 
-export function CreateProduct() {
+export default function CreateProduct() {
     const {id} = useParams();
     const [description, setDescription] = useState('');
     const [content, setContent] = useState('');

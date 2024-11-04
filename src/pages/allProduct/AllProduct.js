@@ -2,15 +2,14 @@ import "../../assets/css/style.scss"
 import "../../components/modals/modal.scss"
 import {useEffect, useState} from "react";
 import * as productsService from "../../core/services/ProductService";
-import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
+import {Link, useLocation, useParams} from "react-router-dom";
 import {Filter} from "../../components/filter/Filter";
 import {CiFilter} from "react-icons/ci";
 import {fCurrency} from "../../utils/format-number";
 import Loading from "../../components/Loading/Loading";
 import spinner from "../../assets/icons/Spinner.gif";
 
-export function AllProduct() {
-    // const products = useSelector(state => state.products);
+export default function AllProduct() {
     const { categoryName: paramCategoryName, familyName: paramFamilyName } = useParams();
     const [categoryName, setCategoryName] = useState(paramCategoryName || '');
     const [familyName, setFamilyName] = useState(paramFamilyName || '');
@@ -22,7 +21,6 @@ export function AllProduct() {
     const [products, setProducts] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
     const [pageNumber, setPageNumber] = useState(0);
-    const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
     const [hoveredProductIndex, setHoveredProductIndex] = useState(null);
     const [isOpenFilter, setIsOpenFilter] = useState(false);
@@ -30,7 +28,6 @@ export function AllProduct() {
     const [message, setMessage] = useState(null);
 
     const {state} = useLocation();
-    // const dispatch = useDispatch();
 
     useEffect(() => {
         setTimeout(() => {

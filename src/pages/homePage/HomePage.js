@@ -2,7 +2,7 @@ import Slideshow from "../../components/slideshow/Slideshow";
 import {BestSale} from "../../components/bestSale/BestSale";
 import {NewProduct} from "../../components/newProduct/NewProduct";
 
-export function HomePage() {
+export default function HomePage() {
 
     return (
         <div>

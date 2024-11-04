@@ -8,7 +8,7 @@ import * as authenticationService from "../../core/services/AuthenticationServic
 import {useDispatch} from "react-redux";
 import {BillModal} from "./BillModal/BillModal";
 
-export function Pay() {
+export default function Pay() {
     const isAuthenticated = !!localStorage.getItem("isAuthenticated");
     const [cart, setCart] = useState([]);
     const [user, setUser] = useState({});

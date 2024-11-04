@@ -11,7 +11,7 @@ import {UploadOneImage} from "../../firebase/UploadImage";
 import {toast} from "react-toastify";
 import spinner from "../../assets/icons/Spinner.gif";
 
-export function UserInfo() {
+export default function UserInfo() {
     const [userInfo, setUserInfo] = useState({});
     const [isEdit, setIsEdit] = useState(false);
     const [isChangeAvatar, setIsChangeAvatar] = useState(false);

@@ -4,12 +4,11 @@ import * as authenticationService from "../../../core/services/AuthenticationSer
 import {toast} from "react-toastify";
 import logo from "../../../assets/images/logo-bike.png";
 import {Link, useNavigate} from "react-router-dom";
-import {FaEye, FaEyeSlash} from "react-icons/fa";
 import spinner from "../../../assets/icons/Spinner.gif";
 import FooterHome from "../../../components/Footer/FooterHome";
 
 
-export function CheckEmail() {
+export default function CheckEmail() {
     const [validateError, setValidateError] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();

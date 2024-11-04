@@ -6,7 +6,7 @@ import * as billService from "../../../core/services/BillService";
 import {useForm} from "react-hook-form";
 import {BillModal} from "../BillModal/BillModal";
 
-export function Bills() {
+export default function Bills() {
     const [bills, setBills] = useState([]);
     const [totalPages, setTotalPages] = useState({});
     const [pageNumber, setPageNumber] = useState(0);

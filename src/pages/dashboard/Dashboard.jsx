@@ -7,7 +7,7 @@ import {BillModal} from "./BillModal/BillModal";
 import {toast} from "react-toastify";
 import {Link} from "react-router-dom";
 
-export function Dashboard() {
+export default function Dashboard() {
     const [totalCustomers, setTotalCustomers] = useState(null);
     const [totalBills, setTotalBills] = useState(null);
     const [revenues, setRevenues] = useState(null);

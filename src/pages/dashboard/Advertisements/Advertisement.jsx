@@ -6,7 +6,7 @@ import { FaEdit } from "react-icons/fa";
 import {UploadOneImage} from "../../../firebase/UploadImage";
 import {toast} from "react-toastify";
 
-export function Advertisements() {
+export default function Advertisements() {
     const [advertisements, setAdvertisements] = useState([]);
     const [isChangeAd, setIsChangeAd] = useState(false);
     const [isLoading, setIsLoading] = useState(false);

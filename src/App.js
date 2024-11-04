@@ -1,84 +1,76 @@
+import React from "react";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import "./assets/css/global.scss";
 import {adminRouter, publicRouter} from "./routes/PublicRouter";
 import PrivateRoute from './utils/PrivateRoute';
-import {useDispatch, useSelector} from "react-redux";
-import {fetchCartFromServer, fetchCount} from "./core/redux/actions/CartActions";
-import {useEffect} from "react";
 import {Main} from "./components/Main/Main";
 import {DashboardMain} from "./components/DashboardMain/DashboardMain";
-import {LoginForm} from "./pages/login/LoginForm";
-import {RegisterForm} from "./pages/login/RegisterForm";
-import NotFound from "./pages/ErrorPage/NotFound";
-import {CheckEmail} from "./pages/login/ForgotPassword/CheckEmail";
-import {ForgotPassword} from "./pages/login/ForgotPassword/ForgotPassword";
-import {TestLogin} from "./pages/login/TestLogin";
 import {ModalPicturesProvider} from "./core/contexts/ModalPicturesContext";
+import {Suspense} from "react";
+import Loading from "./components/Loading/Loading";
+
+const NotFound = React.lazy(() => import("./pages/ErrorPage/NotFound"));
+const CheckEmail = React.lazy(() => import("./pages/login/ForgotPassword/CheckEmail"));
+const ForgotPassword = React.lazy(() => import("./pages/login/ForgotPassword/ForgotPassword"));
+const TestLogin = React.lazy(() => import("./pages/login/TestLogin"));
 
 function App() {
-    const dispatch = useDispatch();
-    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-
-    // useEffect(() => {
-    //     if (isAuthenticated) {
-    //         dispatch(fetchCartFromServer());
-    //         dispatch(fetchCount());
-    //     }
-    // }, [dispatch]);
 
     return (
         <ModalPicturesProvider>
-            <Router>
-                <Routes>
-                    <Route path="/" element={<Main/>}>
-                        {publicRouter.map((route, index) => {
-                            if (route.private) {
+            <Suspense fallback={<Loading/>}>
+                <Router>
+                    <Routes>
+                        <Route path="/" element={<Main/>}>
+                            {publicRouter.map((route, index) => {
+                                if (route.private) {
+                                    return (
+                                        <Route
+                                            key={index}
+                                            path={route.path}
+                                            element={<PrivateRoute element={route.component}/>}
+                                        />
+                                    );
+                                }
+
                                 return (
                                     <Route
                                         key={index}
                                         path={route.path}
-                                        element={<PrivateRoute element={route.component}/>}
+                                        element={route.component}
                                     />
                                 );
-                            }
+                            })}
+                        </Route>
+                        <Route path="/dashboard" element={<DashboardMain/>}>
+                            {adminRouter.map((route, index) => {
+                                if (route.private) {
+                                    return (
+                                        <Route
+                                            key={index}
+                                            path={route.path}
+                                            element={<PrivateRoute element={route.component}/>}
+                                        />
+                                    );
+                                }
 
-                            return (
-                                <Route
-                                    key={index}
-                                    path={route.path}
-                                    element={route.component}
-                                />
-                            );
-                        })}
-                    </Route>
-                    <Route path="/dashboard" element={<DashboardMain/>}>
-                        {adminRouter.map((route, index) => {
-                            if (route.private) {
                                 return (
                                     <Route
                                         key={index}
                                         path={route.path}
-                                        element={<PrivateRoute element={route.component}/>}
+                                        element={route.component}
                                     />
                                 );
-                            }
-
-                            return (
-                                <Route
-                                    key={index}
-                                    path={route.path}
-                                    element={route.component}
-                                />
-                            );
-                        })}
-                    </Route>
-                    <Route path={"/login"} element={<TestLogin/>}/>
-                    <Route path={"/register"} element={<TestLogin/>}/>
-                    <Route path={"/check-email"} element={<CheckEmail/>}/>
-                    <Route path={"/forgot-password"} element={<ForgotPassword/>}/>
-                    <Route path={"*"} element={<NotFound/>}/>
-                </Routes>
-            </Router>
+                            })}
+                        </Route>
+                        <Route path={"/login"} element={<TestLogin/>}/>
+                        <Route path={"/register"} element={<TestLogin/>}/>
+                        <Route path={"/check-email"} element={<CheckEmail/>}/>
+                        <Route path={"/forgot-password"} element={<ForgotPassword/>}/>
+                        <Route path={"*"} element={<NotFound/>}/>
+                    </Routes>
+                </Router>
+            </Suspense>
         </ModalPicturesProvider>
     );
 }

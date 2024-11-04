@@ -7,7 +7,7 @@ import {useEffect, useState} from "react";
 import {FaEye, FaEyeSlash} from "react-icons/fa";
 import spinner from "../../assets/icons/Spinner.gif";
 
-export function AccountAndPassword() {
+export default function AccountAndPassword() {
     const [email, setEmail] = useState("");
     const [validateError, setValidateError] = useState([]);
     const [openEyeOne, setOpenEyeOne] = useState(false);

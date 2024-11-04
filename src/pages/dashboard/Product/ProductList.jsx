@@ -8,7 +8,7 @@ import * as productsService from "../../../core/services/ProductService";
 import {useForm} from "react-hook-form";
 import {DeleteProductModal} from "./DeleteProductModal/DeleteProductModal";
 
-export function ProductList() {
+export default function ProductList() {
     const [products, setProducts] = useState([]);
     const [totalPages, setTotalPages] = useState({});
     const [pageNumber, setPageNumber] = useState(0);

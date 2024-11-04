@@ -1,7 +1,7 @@
 import {Why} from "./Why";
 import {Store} from "./Store";
 
-export function AboutUs() {
+export default function AboutUs() {
 
     return (
         <div className="content">
