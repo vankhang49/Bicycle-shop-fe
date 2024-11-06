@@ -1,10 +1,33 @@
 import bikePng from "../../assets/images/bike-png.png";
 import "./BestSale.scss";
+import {useEffect, useRef} from "react";
 
 export function BestSale() {
+    const bestSalesRef = useRef(null);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const bestSalesPosition = bestSalesRef.current.getBoundingClientRect();
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+            // Kiểm tra nếu bestSales vào trong viewport
+            if (bestSalesPosition.top <= windowHeight && bestSalesPosition.bottom >= 0) {
+                // Thêm lớp fadeIn vào các phần tử .polygon khi BestSale vào viewport
+                const polygons = bestSalesRef.current.querySelectorAll('.polygon');
+                polygons.forEach((polygon, index) => {
+                    polygon.classList.add(index % 2 === 0 ? 'fadeInRight' : 'fadeInLeft');
+                });
+                // Ngừng lắng nghe sự kiện scroll sau khi thêm lớp fadeIn
+                window.removeEventListener('scroll', handleScroll);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
-        <div className="bestSales">
+        <div className="bestSales" ref={bestSalesRef}>
             <div className="sale polygon">
                 <div className="sale-element">
                     <div className="imageProduct">

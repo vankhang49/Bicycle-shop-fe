@@ -173,7 +173,7 @@ export default function AllProduct() {
                         <ul className="products">
                             {products && products.map((product, index) => (
                                 <li key={index} onMouseEnter={() => handleMouseEnter(index)}
-                                    onMouseLeave={handleMouseLeave}>
+                                    onMouseLeave={handleMouseLeave} className="product-element">
                                     <div className="products-top">
                                         <Link to={`/products/detail/${product.productId}`}
                                               className={`product-thumb ${hoveredProductIndex === index ? 'hover' : ''}`}>

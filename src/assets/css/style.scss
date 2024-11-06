@@ -256,6 +256,11 @@ a {
           }
         }
       }
+
+      //li.product-element {
+      //  animation: fade-in auto linear;
+      //  animation-timeLine: view(500px 0);
+      //}
     }
 
     .page {
@@ -482,5 +487,16 @@ a {
         }
       }
     }
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: .3;
+    transform: scale(.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
