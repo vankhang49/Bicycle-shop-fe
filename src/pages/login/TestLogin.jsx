@@ -81,6 +81,7 @@ export default function TestLogin() {
                     localStorage.setItem("id", userData.userId);
                     localStorage.setItem('fullName', userData.fullName);
                     localStorage.setItem('isAuthenticated', 'true');
+                    localStorage.setItem('avatar', userData.avatar);
                     localStorage.setItem('lastTime', new Date().toISOString());
                     if (remember) {
                         localStorage.setItem("rememberMe", "true")

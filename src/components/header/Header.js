@@ -149,7 +149,7 @@ export function Header(props){
                         <div className="avatar">
                             {avatarUrl ? <img src={avatarUrl} alt="avatar"/> : <img src={avatar} alt="avatar"/>}
                         </div>
-                        <div className="username">{fullName}</div>
+                        <div className="username">{fullName !== 'null' ? fullName : 'User'}</div>
                         <TiArrowSortedDown/>
                     </div>
                 }
@@ -159,7 +159,7 @@ export function Header(props){
                             <div className="avatar">
                                 {avatarUrl ? <img src={avatarUrl} alt="avatar"/> : <img src={avatar} alt="avatar"/>}
                             </div>
-                            {fullName}
+                            {fullName !== 'null' ? fullName : 'User'}
                         </div>
                         <Link to={`/my-info`}>
                             <FaRegUserCircle/>
